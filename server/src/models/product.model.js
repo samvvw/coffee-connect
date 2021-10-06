@@ -1,46 +1,39 @@
 const mongoose = require('mongoose')
 // const validator = require('validator')
 
+const mediaSchema = new mongoose.Schema({
+    mediaName: {
+        type: String,
+    },
 
-const mediaSchema = new mongoose.Schema(
-    {
-        mediaName: {
-            type: String,
-        },
+    mediaUrl: {
+        type: String,
+    },
 
-        mediaUrl: {
-            type: String,
-        },
+    mediaType: {
+        type: String,
+    },
+})
 
-        mediaType: {
-            type: String,
-        },
-    }
-)
+const productVariationSchema = new mongoose.Schema({
+    price: {
+        type: Number,
+        min: 0,
+    },
 
+    weight: {
+        type: Number,
+        min: 0,
+    },
 
-const productVariationSchema = new mongoose.Schema(
-    {
-        price: {
-            type: Number,
-            min: 0,
-        },
-
-        weight: {
-            type: Number,
-            min: 0,
-        },
-
-        unit: {
-            type: String,
-            enum: {
-                values: ['g', 'kg', 'lb', 'oz'],
-                message: '{VALUE} is not supported',
-            },
+    unit: {
+        type: String,
+        enum: {
+            values: ['g', 'kg', 'lb', 'oz'],
+            message: '{VALUE} is not supported',
         },
     },
-)
-
+})
 
 const productSchema = new mongoose.Schema(
     {
@@ -100,6 +93,5 @@ const productSchema = new mongoose.Schema(
     }
 )
 
-
-const Product = model('Product', productSchema);
-module.exports = Product;
+const Product = mongoose.model('Product', productSchema)
+module.exports = Product
