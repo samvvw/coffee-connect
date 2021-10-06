@@ -24,24 +24,24 @@ const userSchema = new mongoose.Schema(
                 {
                     //if the email passed the validation, it will return true
                     //if the email didn't pass the validation, it will goes to message
-                    validator: function(email){
+                    validator: function (email) {
                         return validator.isEmail(email)
-
                     },
-                    messages: `Please input a valid email`
+                    messages: `Please input a valid email`,
                 },
-                
+
                 {
                     //if the count returns 0 (=false), will return !false = true, and it passes the validation
-                    //if the count returns 1 (=true), will return !true = false, and it fails the validation and return message 
-                    validator: async function(email){
-                    const exists = await mongoose.models.User.countDocuments({ email }) 
-                    return !exists 
+                    //if the count returns 1 (=true), will return !true = false, and it fails the validation and return message
+                    validator: async function (email) {
+                        const exists =
+                            await mongoose.models.User.countDocuments({ email })
+                        return !exists
                     },
-            
-                    messages: (props) => `${props.value} already exist`
-                }
-            ]
+
+                    messages: (props) => `${props.value} already exist`,
+                },
+            ],
         },
 
         userName: {
@@ -72,13 +72,13 @@ const userSchema = new mongoose.Schema(
 
         farms: {
             type: [String],
-        } 
+        },
     },
 
     {
-    timestamps: true,
+        timestamps: true,
     }
-);
+)
 
-const User = model('User', userSchema);
-module.exports = User;
+const User = mongoose.model('User', userSchema)
+module.exports = User
