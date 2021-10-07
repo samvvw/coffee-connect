@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema(
     {
@@ -27,7 +28,7 @@ const userSchema = new mongoose.Schema(
                     validator: function (email) {
                         return validator.isEmail(email)
                     },
-                    messages: `Please input a valid email`,
+                    message: `Please input a valid email`,
                 },
 
                 {
@@ -39,7 +40,7 @@ const userSchema = new mongoose.Schema(
                         return !exists
                     },
 
-                    messages: (props) => `${props.value} already exist`,
+                    message: (props) => `${props.value} already exist`,
                 },
             ],
         },
@@ -79,6 +80,35 @@ const userSchema = new mongoose.Schema(
         timestamps: true,
     }
 )
+
+userSchema.pre('save', function (next) {
+    if(!this.isModified('password')){
+        return next()
+    }
+
+    bcrypt.hash(this.password, 10, (err, hash) => {
+        if (err) {
+            return next (err)
+        }
+
+        this.password = hash
+        next()
+    })
+})
+
+
+userSchema.methods.validatePassword = function (password) {
+    const passwordHash = this.password //password from database 
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(password, passwordHash, (err, isSame) => {
+            if (err) {
+                return reject (err)
+            }
+            resolve (isSame)
+        })
+    })
+}
+
 
 const User = mongoose.model('User', userSchema)
 module.exports = User
