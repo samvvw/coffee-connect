@@ -103,3 +103,6 @@ const farmSchema = new mongoose.Schema(
         timestamps: true,
     }
 )
+
+const farm = mongoose.model('farm', farmSchema)
+module.exports = farm
