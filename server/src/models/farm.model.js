@@ -104,5 +104,5 @@ const farmSchema = new mongoose.Schema(
     }
 )
 
-const farm = mongoose.model('farm', farmSchema)
-module.exports = farm
+const Farm = mongoose.model('farm', farmSchema)
+module.exports = Farm
