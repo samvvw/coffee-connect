@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom'
-import Button from '../components/button'
+import Button from '../components/button/button'
 
 const SignIn = (props) => {
     let history = useHistory()
