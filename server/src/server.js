@@ -7,8 +7,6 @@ const apiRouter = require('./api')
 
 const PORT = process.env.PORT || 8080
 
-connectDB()
-
 app.use(express.json())
 
 app.get('/', (req, res) => {
@@ -17,8 +15,10 @@ app.get('/', (req, res) => {
 
 app.use('/api', apiRouter)
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`)
+connectDB()
+const server = app.listen(PORT, () => {
+    if (process.env.NODE_ENV === 'development') {
+        console.log(`Server running on http://localhost:${PORT}`)
+    }
 })
-
-module.exports = app
+module.exports = server

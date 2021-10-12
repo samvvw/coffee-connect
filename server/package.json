@@ -7,7 +7,7 @@
         "dev": "npm run updatedev && concurrently \"npm run server\" \"npm run client\"",
         "client": "npm start --prefix ../client",
         "server": "nodemon src/server.js",
-        "test": "mocha src/server.test.js --exit",
+        "test": "jest src/server.test.js",
         "updatedev": "npm i && cd ../client && npm i && cd ../server"
     },
     "repository": {
@@ -29,9 +29,8 @@
         "validator": "^13.6.0"
     },
     "devDependencies": {
-        "chai": "^4.3.4",
         "concurrently": "^6.2.1",
-        "mocha": "^9.1.2",
+        "jest": "^27.2.5",
         "morgan": "^1.10.0",
         "nodemon": "^2.0.13",
         "supertest": "^6.1.6"
