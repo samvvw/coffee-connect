@@ -1,9 +1,9 @@
-import Header from './components/header'
+import Header from './components/header/header'
 import { Switch, Route } from 'react-router-dom'
-import SignUp from './pages/sign-up'
-import SignIn from './pages/sign-in'
-import Welcome from './pages/welcome'
-import WelcomeUser from './pages/welcome-user'
+import SignUp from './views/sign-up'
+import SignIn from './views/sign-in'
+import Welcome from './views/welcome'
+import WelcomeUser from './views/welcome-user'
 
 function App() {
     return (

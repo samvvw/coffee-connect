@@ -1,8 +1,21 @@
-const Button = ({ title, onClick, type = 'button' }) => {
+import { StyledButton } from './button.styles'
+
+const Button = ({
+    title,
+    onClick,
+    type = 'button',
+    backgroundColor,
+    textColor,
+}) => {
     return (
-        <button type={type} onClick={onClick}>
+        <StyledButton
+            type={type}
+            onClick={onClick}
+            backgroundColor={backgroundColor}
+            textColor={textColor}
+        >
             {title}
-        </button>
+        </StyledButton>
     )
 }
 
