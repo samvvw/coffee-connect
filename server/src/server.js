@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 8080
 connectDB()
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
     res.status(200).send('Hello Team Welcome to Javalimos')
