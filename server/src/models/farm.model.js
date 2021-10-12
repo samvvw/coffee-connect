@@ -52,11 +52,24 @@ const farmSchema = new mongoose.Schema(
             type: String,
             required: [true, "Please enter farm's name"],
             minLength: 2,
-            maxLength: 15,
+            maxLength: 30,
         },
         country: {
             type: String,
             required: [true, 'Country is required.'],
+        },
+        region: {
+            type: String,
+            enum: [
+                'South America',
+                'Central America',
+                'North America',
+                'Asia',
+                'Africa',
+                'Europe',
+                'Oceania',
+            ],
+            required: [true, 'Region is required.'],
         },
         address: {
             type: String,
@@ -85,6 +98,7 @@ const farmSchema = new mongoose.Schema(
         },
         logo: {
             type: String,
+            default: 'Default Picture URL',
         },
         about: {
             type: String,
@@ -94,7 +108,7 @@ const farmSchema = new mongoose.Schema(
         },
         location: {
             type: { type: String, default: 'Point' },
-            coordinates: { type: [Number], default: [0, 0] },
+            coordinates: { type: [Number], default: undefined },
         },
         media: [mediaSchema],
         certificates: [certificateSchema],
@@ -104,5 +118,5 @@ const farmSchema = new mongoose.Schema(
     }
 )
 
-const Farm = mongoose.model('farm', farmSchema)
+const Farm = mongoose.model('Farm', farmSchema)
 module.exports = Farm
