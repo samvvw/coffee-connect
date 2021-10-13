@@ -54,6 +54,8 @@ exports.getFarms = (req, res) => {
 
 
 exports.getFarmById = (req, res) => {
+    //As of now, returning all fields, as it's details of the farm, it must show most of the data? 
+    //Can limit the fields to return later on if needed in the same way of getFarms
     Farm.findOne({'_id': req.params.id}).exec()
     .then(result => {
         res.json(result);
