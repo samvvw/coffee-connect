@@ -1,5 +1,5 @@
-import Header from './components/header/header'
 import { Switch, Route } from 'react-router-dom'
+import Header from './components/header/header'
 import SignUp from './views/sign-up'
 import SignIn from './views/sign-in'
 import Welcome from './views/welcome'
