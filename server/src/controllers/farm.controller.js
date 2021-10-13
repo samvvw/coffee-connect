@@ -37,3 +37,31 @@ exports.createFarm = async (req, res) => {
         res.status(500).send(error)
     }
 }
+
+
+exports.getFarms = (req, res) => {
+    //Need to consider how we should work with score(rate)
+    //Also can add more fields to return if needed
+    Farm.find({},{"name":1, "region":1, "country":1, "about":1}).exec()
+    .then(result => {
+        res.json(result);
+    })
+    .catch(error => {
+        console.log(error)
+        res.status(500).send(error)
+    });
+};
+
+
+exports.getFarmById = (req, res) => {
+    //As of now, returning all fields, as it's details of the farm, it must show most of the data? 
+    //Can limit the fields to return later on if needed in the same way of getFarms
+    Farm.findOne({'_id': req.params.id}).exec()
+    .then(result => {
+        res.json(result);
+    })
+    .catch(error => {
+        console.log(error)
+        res.status(500).send(error)
+    });
+};
