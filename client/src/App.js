@@ -8,7 +8,8 @@ import WelcomeUser from './views/welcome-user'
 function App() {
     return (
         <>
-            <Header />
+            <Header></Header>
+
             <main>
                 <Switch>
                     <Route path="/sign-up" component={SignUp} />
