@@ -8,6 +8,7 @@ import WelcomeUser from './views/welcome-user'
 import placeHolder from './assets/images/placeholder.png'
 import TriCardHolder from './components/TriCardHolder/triCardHolder'
 import WhatsQafa from './components/WhatSQafa/whatsQafa'
+import Footer from './components/footer/footer'
 
 function App() {
     return (
@@ -40,6 +41,7 @@ function App() {
                 // for image component
                 urlImg3={placeHolder}
             />
+
             <main>
                 <Switch>
                     <Route path="/sign-up" component={SignUp} />
@@ -48,6 +50,8 @@ function App() {
                     <Route path="/" component={Welcome} />
                 </Switch>
             </main>
+
+            <Footer />
         </>
     )
 }
