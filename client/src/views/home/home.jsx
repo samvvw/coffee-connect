@@ -1,4 +1,5 @@
 import Hero from '../../components/hero/hero'
+import WhatsQafa from '../../components/WhatSQafa/whatsQafa'
 import TriCardHolder from '../../components/TriCardHolder/triCardHolder'
 import SearchHome from '../../components/searchHome/searchHome'
 import HowQafaWorks from '../../components/howQafaWorks/howQafaWorks'
@@ -23,6 +24,7 @@ const Home = (props) => {
                 buttonBackgroundColor="Black"
                 buttonTextColor="White"
             />
+            <WhatsQafa />
             <TriCardHolder
                 width1="30%"
                 height1="auto"

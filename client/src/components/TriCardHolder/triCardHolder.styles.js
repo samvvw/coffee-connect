@@ -14,9 +14,3 @@ export const StyleTriCardHolder = styled.div`
         align-items: center;
     }
 `
-
-export const StyleButtonHolder = styled.div`
-    width: 80%;
-    display: flex;
-    justify-content: center;
-`
