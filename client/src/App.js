@@ -1,5 +1,6 @@
 import { Switch, Route } from 'react-router-dom'
 import Header from './components/header/header'
+import Footer from './components/footer/footer'
 import SignUp from './views/sign-up'
 import SignIn from './views/sign-in'
 import Welcome from './views/welcome'
@@ -18,6 +19,7 @@ function App() {
                     <Route path="/" component={Home} />
                 </Switch>
             </main>
+            <Footer />
         </>
     )
 }
