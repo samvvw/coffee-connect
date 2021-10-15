@@ -4,6 +4,8 @@ import Button from '../button/button'
 import Grid from '../grid/grid'
 import GridColumnRow from '../gridColumnRow/gridColumnRow'
 
+import imgPlaceholder from '../../assets/images/placeholder.png'
+
 import {
     StyledHero,
     StyleParagrahHero,
@@ -19,7 +21,7 @@ const Hero = ({
     titleFontSize,
     titleTextColor,
     //for image
-    urlImg,
+    urlImg = imgPlaceholder,
     //for paragraph
     paragraphText,
     pTextColor,
