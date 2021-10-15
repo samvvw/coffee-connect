@@ -7,11 +7,13 @@ import WelcomeUser from './views/welcome-user'
 
 import placeHolder from './assets/images/placeholder.png'
 import TriCardHolder from './components/TriCardHolder/triCardHolder'
+import WhatsQafa from './components/WhatSQafa/whatsQafa'
 
 function App() {
     return (
         <>
             <Header />
+            <WhatsQafa />
             <TriCardHolder
                 width1="30%"
                 height1="auto"
