@@ -1,4 +1,4 @@
-Project 2: Coffee Connect
+TO DO SERVER SIDE:
 
 missing routes:
 
