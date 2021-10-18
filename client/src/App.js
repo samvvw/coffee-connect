@@ -9,6 +9,7 @@ import SignIn from './views/sign-in'
 // import Welcome from './views/welcome'
 import WelcomeUser from './views/welcome-user'
 import Home from './views/home/home'
+import FarmDashboard from './views/farmDashboard/farmDashboard'
 
 // import ProductDetailDescription from './components/productDetail/productDescription/productDetailDescription'
 
@@ -30,13 +31,14 @@ function App() {
     return (
         <>
             <Header />
-            <ProductDetailImages urlsArray={urlsArray} />
+            {/* <ProductDetailImages urlsArray={urlsArray} /> */}
 
             <main>
                 <Switch>
                     <Route path="/sign-up" component={SignUp} />
                     <Route path="/sign-in" component={SignIn} />
                     <Route path="/welcome-user" component={WelcomeUser} />
+                    <Route path="/my-farm" component={FarmDashboard} />
                     <Route path="/" component={Home} />
                 </Switch>
             </main>
