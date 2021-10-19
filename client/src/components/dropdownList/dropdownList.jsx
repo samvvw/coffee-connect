@@ -6,6 +6,7 @@ const DropdownList = ({
     selectName,
     selectId,
     objArrayValues,
+    onChange,
 }) => {
     // objArrayValues = [
     //     {
@@ -28,6 +29,7 @@ const DropdownList = ({
 
     return (
         <SelectContainer
+            onChange={onChange}
             name={selectName}
             id={selectId}
             width={width}
