@@ -1,5 +1,5 @@
 import { FarmMyProductsWrapper } from './farmDashboardMyProducts.styles'
-import Button from '../button/button'
+import Button from '../../button/button'
 
 export default function FarmDashboardMyProducts() {
     return (
