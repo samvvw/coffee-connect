@@ -13,7 +13,6 @@ function App() {
     return (
         <>
             <Header />
-
             <main>
                 <Switch>
                     <Route path="/sign-up" component={SignUp} />
