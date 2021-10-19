@@ -5,6 +5,7 @@ import {
     HeaderMainContainer,
     HeaderChildContainer,
     HeaderOriginLocationAtitudContainer,
+    HeaderChildContainerExtended,
 } from './productDetailHeader.styles'
 
 const ProductDetailHeader = ({
@@ -21,13 +22,14 @@ const ProductDetailHeader = ({
                     gridColumn="1/2"
                     gridRow="1/2"
                     flexDirection="column"
+                    order="2"
                 >
                     <h4>{productName}</h4>
                     <p>{farmName}</p>
                 </HeaderChildContainer>
-                <HeaderChildContainer gridColumn="2/3" gridRow="1/2">
+                <HeaderChildContainer gridColumn="2/3" gridRow="1/2" order="3">
                     <HeaderOriginLocationAtitudContainer>
-                        <HeaderChildContainer
+                        <HeaderChildContainerExtended
                             gridColumn="1/2"
                             gridRow="1/2"
                             flexDirection="column"
@@ -36,8 +38,8 @@ const ProductDetailHeader = ({
                         >
                             <p>Origin:</p>
                             <h5>{origin}</h5>
-                        </HeaderChildContainer>
-                        <HeaderChildContainer
+                        </HeaderChildContainerExtended>
+                        <HeaderChildContainerExtended
                             gridColumn="2/3"
                             gridRow="1/2"
                             flexDirection="column"
@@ -46,8 +48,8 @@ const ProductDetailHeader = ({
                         >
                             <p>Location:</p>
                             <h5>{location}</h5>
-                        </HeaderChildContainer>
-                        <HeaderChildContainer
+                        </HeaderChildContainerExtended>
+                        <HeaderChildContainerExtended
                             gridColumn="3/4"
                             gridRow="1/2"
                             flexDirection="column"
@@ -56,16 +58,18 @@ const ProductDetailHeader = ({
                         >
                             <p>Altitude</p>
                             <h5>{altitude}</h5>
-                        </HeaderChildContainer>
+                        </HeaderChildContainerExtended>
                     </HeaderOriginLocationAtitudContainer>
                 </HeaderChildContainer>
                 <HeaderChildContainer
                     gridColumn="3/4"
                     gridRow="1/2"
                     alignItems="center"
+                    gap="1rem"
+                    order="1"
                 >
-                    {/* <CircleButton IconName="FavoriteEmptyIcon" onClick="" />
-                    <CircleButton IconName="ShareIcon" onClick="" /> */}
+                    <CircleButton IconName="FavoriteEmpty" onClick="" />
+                    <CircleButton IconName="Share" onClick="" />
                 </HeaderChildContainer>
             </HeaderMainContainer>
         </HeaderContainer>
