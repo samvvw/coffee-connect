@@ -12,4 +12,8 @@ export const Menu = styled.ul`
 
 export const MenuItem = styled.li`
     margin: auto 1rem;
+    & > * {
+        text-decoration: none;
+        color: #000000;
+    }
 `

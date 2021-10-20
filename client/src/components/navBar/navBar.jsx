@@ -5,7 +5,9 @@ const NavBar = (props) => {
     return (
         <Nav>
             <Menu>
-                <MenuItem>Coffee Marketplace</MenuItem>
+                <MenuItem>
+                    <Link to="/marketplace">Coffee Marketplace</Link>
+                </MenuItem>
                 <MenuItem>Farm Directory</MenuItem>
                 <MenuItem>About Us</MenuItem>
                 <MenuItem>Contact Us</MenuItem>

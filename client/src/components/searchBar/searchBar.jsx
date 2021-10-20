@@ -1,7 +1,7 @@
 import { Input, FieldContainer, IconContainer } from './searchBar.styles'
 import SearchIcon from '@material-ui/icons/Search'
 
-const SearchBar = ({ onClick, onKeyUp, width, height }) => {
+const SearchBar = ({ onClick, onKeyUp, width, height, placeholder = '' }) => {
     return (
         <FieldContainer>
             <Input
@@ -11,6 +11,7 @@ const SearchBar = ({ onClick, onKeyUp, width, height }) => {
                 onKeyUp={onKeyUp}
                 width={width}
                 height={height}
+                placeholder={placeholder}
             />
             <IconContainer onClick={onClick}>
                 <SearchIcon fontSize="medium" style={{ fill: 'white' }} />
