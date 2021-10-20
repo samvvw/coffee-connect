@@ -9,6 +9,7 @@ import {
 } from './productDetailHeader.styles'
 
 const ProductDetailHeader = ({
+    backgroundColor,
     productName,
     farmName,
     origin,
@@ -16,7 +17,7 @@ const ProductDetailHeader = ({
     altitude,
 }) => {
     return (
-        <HeaderContainer>
+        <HeaderContainer backgroundColor={backgroundColor}>
             <HeaderMainContainer>
                 <HeaderChildContainer
                     gridColumn="1/2"

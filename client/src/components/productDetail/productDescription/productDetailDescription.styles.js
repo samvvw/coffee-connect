@@ -11,6 +11,7 @@ export const Heading = styled.h2`
     font-weight: bold;
     font-size: 1.5rem;
     margin-bottom: 0;
+    padding-bottom: 1rem;
     @media only screen and (max-width: 400px) {
         font-size: 1rem;
     }

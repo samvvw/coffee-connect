@@ -8,9 +8,8 @@ import SignUp from './views/sign-up'
 import SignIn from './views/sign-in'
 import WelcomeUser from './views/welcome-user'
 import Home from './views/home/home'
+import Product from './views/Product/product'
 
-import DropdownList from './components/dropdownList/dropdownList'
-import ProductDetailCard from './components/productDetail/productDetailCard/productDetailCard'
 function App() {
     const objArrayValues = [
         {
@@ -68,18 +67,13 @@ function App() {
     return (
         <>
             <Header />
-            <ProductDetailCard
-                width="300px"
-                productName="Product Name"
-                objProductValues={objProductValues}
-                objArraySizes={objArraySizes}
-                objArrayQty={objArrayValues}
-            />
+
             <main>
                 <Switch>
                     <Route path="/sign-up" component={SignUp} />
                     <Route path="/sign-in" component={SignIn} />
                     <Route path="/welcome-user" component={WelcomeUser} />
+                    <Route path="/product" component={Product} />
                     <Route path="/" component={Home} />
                 </Switch>
             </main>

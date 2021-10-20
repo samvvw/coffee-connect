@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const HeaderContainer = styled.div`
-    background-color: #f2f2f2;
+    background-color: ${(props) => props.backgroundColor || '#f2f2f2'};
     color: #000000;
     display: flex;
     justify-content: center;
@@ -9,6 +9,7 @@ export const HeaderContainer = styled.div`
     /* gap: 233px; */
     padding-top: 1rem;
     padding-bottom: 1rem;
+    /* width: 100%; */
 `
 export const HeaderMainContainer = styled.div`
     display: grid;
