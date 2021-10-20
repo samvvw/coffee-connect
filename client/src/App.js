@@ -11,6 +11,8 @@ import Home from './views/home/home'
 
 import DropdownList from './components/dropdownList/dropdownList'
 import ProductDetailCard from './components/productDetail/productDetailCard/productDetailCard'
+import RoastLevel from './components/productDetail/roastLevel/roastLevel'
+
 function App() {
     const objArrayValues = [
         {
@@ -75,6 +77,8 @@ function App() {
                 objArraySizes={objArraySizes}
                 objArrayQty={objArrayValues}
             />
+            {/* borrar */}
+            <RoastLevel roastLevelText="Medium Roast" roastLevelValue="5" />
             <main>
                 <Switch>
                     <Route path="/sign-up" component={SignUp} />
