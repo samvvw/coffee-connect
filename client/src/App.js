@@ -8,6 +8,7 @@ import SignUp from './views/sign-up'
 import SignIn from './views/sign-in'
 import WelcomeUser from './views/welcome-user'
 import Home from './views/home/home'
+import FarmDashboard from './views/farmDashboard/farmDashboard'
 
 import DropdownList from './components/dropdownList/dropdownList'
 import ProductDetailCard from './components/productDetail/productDetailCard/productDetailCard'
@@ -80,6 +81,7 @@ function App() {
                     <Route path="/sign-up" component={SignUp} />
                     <Route path="/sign-in" component={SignIn} />
                     <Route path="/welcome-user" component={WelcomeUser} />
+                    <Route path="/my-farm" component={FarmDashboard} />
                     <Route path="/" component={Home} />
                 </Switch>
             </main>
