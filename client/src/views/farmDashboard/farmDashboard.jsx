@@ -2,6 +2,7 @@ import FarmDashboardHeader from '../../components/farmDashboardComponents/farmDa
 import FarmDashboardMyProducts from '../../components/farmDashboardComponents/farmDashboardMyProducts/farmDashboardMyProducts'
 import FarmDashboardProductCardSection from '../../components/farmDashboardComponents/farmDashboardProductCardSection/farmDashboardProductCardSection'
 import FarmDashboardProductCard from '../../components/farmDashboardComponents/farmDashboardProductCard/farmDashboardProductCard'
+import ConnectWithFarmerCard from '../../components/connectWithFarmerCard/connectWithFarmerCard'
 
 export default function FarmDashboard() {
     const SAMPLE_PRODUCTS = [
@@ -39,6 +40,7 @@ export default function FarmDashboard() {
     }
     return (
         <>
+            <ConnectWithFarmerCard />
             <FarmDashboardHeader />
             <FarmDashboardMyProducts />
             <FarmDashboardProductCardSection>
