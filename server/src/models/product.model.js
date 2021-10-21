@@ -1,25 +1,42 @@
 const mongoose = require('mongoose')
 // const validator = require('validator')
 
-const mediaSchema = new mongoose.Schema({
-    mediaName: {
-        type: String,
-    },
+// const mediaSchema = new mongoose.Schema({
+//     mediaName: {
+//         type: String,
+//     },
 
-    mediaUrl: {
-        type: String,
-    },
+//     mediaUrl: {
+//         type: String,
+//     },
 
-    mediaType: {
-        type: String,
-    },
-})
+//     mediaType: {
+//         type: String,
+//     },
+// })
 
-const productVariationSchema = new mongoose.Schema({
-    price: {
-        type: Number,
-        min: 0,
-    },
+// const productVariationSchema = new mongoose.Schema({
+//     price: {
+//         type: Number,
+//         min: 0,
+//     },
+
+//     weight: {
+//         type: Number,
+//         min: 0,
+//     },
+
+//     unit: {
+//         type: String,
+//         enum: {
+//             values: ['g', 'kg', 'lb', 'oz'],
+//             message: '{VALUE} is not supported',
+//         },
+//     },
+// })
+
+
+const sizeSchema = new mongoose.Schema({
 
     weight: {
         type: Number,
@@ -37,43 +54,65 @@ const productVariationSchema = new mongoose.Schema({
 
 const productSchema = new mongoose.Schema(
     {
-        name: {
-            type: String,
-            required: [true, 'Please input your farm name'],
-            minLength: 2,
-            maxLength: 15,
-        },
-
-        description: {
-            type: String,
-            required: [true, 'Please input description of your farm'],
-            maxLength: 1000,
-        },
-
         farmId: {
             type: String,
             required: [true, 'Missing farm ID'],
         },
 
-        media: [mediaSchema],
+        name: {
+            type: String,
+            required: [true, 'Please input product name'],
+            minLength: 2,
+            maxLength: 50,
+        },
 
-        variety: {
+        description: {
+            type: String,
+            required: [true, 'Please input description of the product'],
+            maxLength: 1000,
+        },
+
+        taste: {
             type: String,
         },
 
-        coffeeProcess: {
-            type: String,
+        price: {
+            type: Number,
         },
 
-        flavorNotes: {
+        aroma: {
             type: [String],
+        },
+
+        coffeeStock: {
+            type: String,
+        },
+
+        roastLevel: {
+            type: String,
         },
 
         roastDate: {
             type: Date,
         },
 
-        productVariations: [productVariationSchema],
+        coffeeVariety: {
+            type: String,
+        },
+
+        size: [sizeSchema],
+
+        coffeeProcess: {
+            type: String,
+        },
+    
+        type: {
+            type: String,
+            enum: [
+                'Whole Bean',
+                'Grounded',
+            ],
+        },
 
         reviews: {
             type: [String],
@@ -83,9 +122,10 @@ const productSchema = new mongoose.Schema(
             type: Number,
         },
 
-        aroma: {
-            type: String,
-        },
+        picture: {
+            type: [String],
+            maxItems: 5,
+        }
     },
 
     {
