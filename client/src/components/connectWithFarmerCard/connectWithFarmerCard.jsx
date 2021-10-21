@@ -1,8 +1,6 @@
 import Button from '../button/button'
-// import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder'
-// import BookmarkIcon from '@material-ui/icons/Bookmark'
-import { ReactComponent as tagIconOn } from '../../assets/tagIconOn.svg'
-import { ReactComponent as tagIconOff } from '../../assets/tagIconOff.svg'
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder'
+import BookmarkIcon from '@material-ui/icons/Bookmark'
 import { useState } from 'react'
 
 import {
@@ -14,10 +12,6 @@ import {
 } from './connectWithFarmerCard.styles'
 
 const ConnectWithFarmerCard = ({ farmersName, urlImgProfile }) => {
-    const clicked = tagIconOn
-    // "<BookmarkIcon fontSize='medium' style={{ fill: 'black' }}/>"
-    const unClicked = tagIconOff
-    // "<BookmarkBorderIcon fontSize='medium' style={{ fill: 'black' }}/>"
     const [iconClicked, setIconClicked] = useState(true)
 
     const handleClick = () => {
@@ -51,9 +45,18 @@ const ConnectWithFarmerCard = ({ farmersName, urlImgProfile }) => {
                     alignSelf="center"
                     justifySelf="center"
                 >
-                    <tagIconOff className="eseve" />
                     <ButtonContainer type="button" onClick={handleClick}>
-                        {iconClicked ? <tagIconOn /> : <tagIconOff />}
+                        {iconClicked ? (
+                            <BookmarkIcon
+                                fontSize="medium"
+                                style={{ fill: 'black' }}
+                            />
+                        ) : (
+                            <BookmarkBorderIcon
+                                fontSize="medium"
+                                style={{ fill: 'black' }}
+                            />
+                        )}
                     </ButtonContainer>
                 </InfoContainerChild>
                 <InfoContainerChild gridColumn="1/5" gridRow="2/3">
