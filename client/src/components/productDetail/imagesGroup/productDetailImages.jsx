@@ -4,7 +4,7 @@ import { StyledProductDetailImages } from './productDetailImages.styles'
 
 import { useEffect, useState } from 'react'
 
-const ProductDetailImages = (urlsArray) => {
+const ProductDetailImages = ({ urlsArray, width }) => {
     const [matches, setMatches] = useState(
         window.matchMedia('(min-width: 401px)').matches
     )
@@ -15,7 +15,7 @@ const ProductDetailImages = (urlsArray) => {
     }, [])
 
     return (
-        <StyledProductDetailImages width="60%">
+        <StyledProductDetailImages width={width}>
             {!matches && <ProductDetailImagesCarousel urlsArray={urlsArray} />}
             {matches && <ProductDetailImageGroup urlsArray={urlsArray} />}
         </StyledProductDetailImages>

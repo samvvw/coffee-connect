@@ -20,8 +20,8 @@ const ConnectWithFarmerCard = ({ farmersName, urlImgProfile }) => {
     // "<BookmarkBorderIcon fontSize='medium' style={{ fill: 'black' }}/>"
     const [iconClicked, setIconClicked] = useState(clicked)
 
-    onclick = () => {
-        if (iconClicked == clicked) setIconClicked(unClicked)
+    const handleClick = () => {
+        if (iconClicked === clicked) setIconClicked(unClicked)
         else setIconClicked(clicked)
     }
 
@@ -52,7 +52,7 @@ const ConnectWithFarmerCard = ({ farmersName, urlImgProfile }) => {
                     alignSelf="center"
                     justifySelf="center"
                 >
-                    <ButtonContainer type="button" conclick={onclick}>
+                    <ButtonContainer type="button" onclick={handleClick}>
                         <span
                             dangerouslySetInnerHTML={{ __html: iconClicked }}
                         />

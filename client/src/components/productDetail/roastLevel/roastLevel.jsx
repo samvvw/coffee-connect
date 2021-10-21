@@ -22,7 +22,7 @@ const RoastLevel = ({ roastLevelText, roastLevelValue }) => {
 
     const image = roastLevelImgs[roastLevelValue].src
 
-    console.log('imagen', image)
+    // console.log('imagen', image)
     return (
         <RoastLevelContainer>
             <h5>Product information</h5>

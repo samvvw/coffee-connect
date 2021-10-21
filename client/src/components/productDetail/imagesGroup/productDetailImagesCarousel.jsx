@@ -24,35 +24,35 @@ const ProductDetailImagesCarousel = ({ urlsArray }) => {
                 <Carousel.Item>
                     <img
                         className="d-block w-100 h-100"
-                        src={urlsArray.urlsArray[0]}
+                        src={urlsArray[0]}
                         alt=""
                     />
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
                         className="d-block w-100 h-100"
-                        src={urlsArray.urlsArray[1]}
+                        src={urlsArray[1]}
                         alt=""
                     />
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
                         className="d-block w-100 h-100"
-                        src={urlsArray.urlsArray[2]}
+                        src={urlsArray[2]}
                         alt=""
                     />
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
                         className="d-block w-100 h-100"
-                        src={urlsArray.urlsArray[3]}
+                        src={urlsArray[3]}
                         alt=""
                     />
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
                         className="d-block w-100 h-100"
-                        src={urlsArray.urlsArray[4]}
+                        src={urlsArray[4]}
                         alt=""
                     />
                 </Carousel.Item>
