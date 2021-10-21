@@ -4,8 +4,9 @@ import ProductDetailHeader from '../../components/productDetail/header/productDe
 import ProductDetailImages from '../../components/productDetail/imagesGroup/productDetailImages'
 import ProductDetailCard from '../../components/productDetail/productDetailCard/productDetailCard'
 import ProductDescription from '../../components/productDetail/productDescription/productDetailDescription'
-import ConnectWithFarmer from '../../components/connectWithFarmerCard/connectWithFarmer'
+import ConnectWithFarmer from '../../components/connectWithFarmerCard/connectWithFarmerCard'
 import OtherProducts from '../../components/productDetail/otherProducts/otherProducts'
+import RoastLevel from '../../components/productDetail/roastLevel/roastLevel'
 
 import placeHolder from '../../assets/images/placeholder.png'
 import videoPlaceHolder from '../../assets/images/video-placeholder.png'
@@ -168,6 +169,10 @@ const Product = (props) => {
                 {/* 7 Product information */}
                 <ContainerChild gridColumn="1/4" gridRow="5/6">
                     {/* Product Information */}
+                    <RoastLevel
+                        roastLevelText="Medium roast"
+                        roastLevelValue="3"
+                    />
                 </ContainerChild>
                 {/* 8 Map */}
                 <ContainerChild gridColumn="1/4" gridRow="6/7">

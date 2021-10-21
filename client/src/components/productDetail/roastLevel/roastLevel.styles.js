@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const RoastLevelContainer = styled.div`
     display: flex;
     flex-direction: column;
-
+    padding-top: 2rem;
     h5 {
         font-size: 1.5rem;
     }

@@ -51,6 +51,11 @@ export const ContainerChild = styled.div`
             grid-row: 2/3;
             padding-left: 2rem;
             padding-right: 2rem;
+
+            h4 {
+                border-top: none;
+                padding-top: 0;
+            }
         }
         //product detail
         :nth-child(3) {
@@ -70,26 +75,39 @@ export const ContainerChild = styled.div`
             padding-right: 2rem;
             padding-bottom: 2rem;
         }
+        //product information
+        :nth-child(7) {
+            grid-column: 1/2;
+            grid-row: 5/6;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            padding-bottom: 2rem;
+        }
         //map
         :nth-child(8) {
             grid-column: 1/2;
-            grid-row: 5/6;
+            grid-row: 6/7;
             padding-left: 2rem;
             padding-right: 2rem;
         }
         //connect with farmer
         :nth-child(4) {
             grid-column: 1/2;
-            grid-row: 6/7;
+            grid-row: 7/8;
             padding-top: 2rem;
             padding-left: 2rem;
             padding-right: 2rem;
-            border-top: 1px solid black;
+
+            & > :nth-child(1) {
+                border-top: 1px solid black;
+                padding-top: 2rem;
+            }
         }
+
         //Other products from this farmer
         :nth-child(9) {
             grid-column: 1/2;
-            grid-row: 7/8;
+            grid-row: 8/9;
             padding-left: 2rem;
             padding-right: 2rem;
         }
