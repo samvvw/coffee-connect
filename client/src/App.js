@@ -10,6 +10,7 @@ import WelcomeUser from './views/welcome-user'
 import Home from './views/home/home'
 import Product from './views/Product/product'
 import FarmDashboard from './views/farmDashboard/farmDashboard'
+import CoffeeMarketplace from './views/coffeeMarketplace/coffeeMarketplace'
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/welcome-user" component={WelcomeUser} />
                     <Route path="/product" component={Product} />
                     <Route path="/my-farm" component={FarmDashboard} />
+                    <Route path="/marketplace" component={CoffeeMarketplace} />
                     <Route path="/" component={Home} />
                 </Switch>
             </main>
