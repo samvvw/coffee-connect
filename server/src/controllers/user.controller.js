@@ -1,5 +1,12 @@
+const fs = require('fs')
 const User = require('../models/user.model')
 const jwt = require('jsonwebtoken')
+const { s3Client } = require('../config/s3Client')
+const { PutObjectCommand } = require('@aws-sdk/client-s3')
+const formidable = require('formidable')
+
+const BUCKET_NAME = process.env.AWS_BUCKET_NAME
+const REGION = process.env.AWS_REGION
 
 function createToken(user) {
     return jwt.sign(user, process.env.JWT_SECRET, {
@@ -24,6 +31,7 @@ exports.userSignUp = async (req, res) => {
 
         //To issue token
         const payload = {
+            id: createUser._id,
             firstName: firstName,
             lastName: lastName,
             userName: userName,
@@ -58,8 +66,9 @@ exports.userSignIn = async (req, res) => {
             res.status(401).json({ error: 'Password does not match' })
         } else {
             //When validation is successful, give them token
-            const { firstName, lastName, userName } = user
+            const { firstName, lastName, userName, _id } = user
             const payload = {
+                id: _id,
                 firstName: firstName,
                 lastName: lastName,
                 userName: userName,
@@ -74,3 +83,50 @@ exports.userSignIn = async (req, res) => {
         res.status(400).send(error)
     }
 }
+
+exports.uploadProfilePicture = async (req, res) => {
+    try {
+        const form = formidable({ multiples: true })
+        // console.log(files)
+
+        form.parse(req, async (error, fields, files) => {
+            const fileName = `profile-picture/${req.files.profilePicture.name}`
+
+            const filePath = req.files.profilePicture.path
+
+            const fileStream = fs.createReadStream(filePath)
+            console.log(req.files)
+
+            const bucketParam = {
+                Bucket: BUCKET_NAME,
+                Key: fileName,
+                Body: fileStream,
+                ACL: 'public-read',
+            }
+
+            const uploadPicture = await s3Client.send(
+                new PutObjectCommand(bucketParam)
+            )
+            const updateUrl = {
+                profilePicture: `https://${BUCKET_NAME}.s3.${REGION}.amazonaws.com/${fileName}`,
+            }
+
+            const currentUser = await User.findOneAndUpdate(
+                { _id: req.currentUser.id },
+                updateUrl
+            )
+
+            const actualCurrentUser = await User.findById(req.currentUser.id)
+
+            // console.log(`Success`, uploadPicture)
+            res.json(actualCurrentUser)
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500).send(error)
+    }
+}
+
+exports.modifyProfilePicture = async () => {}
+
+exports.deleteProfilePicture = async () => {}
