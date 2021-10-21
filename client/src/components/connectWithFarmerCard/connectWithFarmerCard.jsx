@@ -15,7 +15,9 @@ const ConnectWithFarmerCard = ({ farmersName, urlImgProfile }) => {
     const [iconClicked, setIconClicked] = useState(true)
 
     const handleClick = () => {
+
         setIconClicked((prev) => (prev ? false : true))
+
     }
 
     return (
@@ -57,6 +59,7 @@ const ConnectWithFarmerCard = ({ farmersName, urlImgProfile }) => {
                                 style={{ fill: 'black' }}
                             />
                         )}
+
                     </ButtonContainer>
                 </InfoContainerChild>
                 <InfoContainerChild gridColumn="1/5" gridRow="2/3">
