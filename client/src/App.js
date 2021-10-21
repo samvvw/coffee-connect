@@ -11,6 +11,7 @@ import Home from './views/home/home'
 import Product from './views/Product/product'
 import FarmDashboard from './views/farmDashboard/farmDashboard'
 import CoffeeMarketplace from './views/coffeeMarketplace/coffeeMarketplace'
+import AboutUs from './views/aboutUs/aboutUs'
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                     <Route path="/product" component={Product} />
                     <Route path="/my-farm" component={FarmDashboard} />
                     <Route path="/marketplace" component={CoffeeMarketplace} />
+                    <Route path="/aboutus" component={AboutUs} />
                     <Route path="/" component={Home} />
                 </Switch>
             </main>
