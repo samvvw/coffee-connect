@@ -52,6 +52,11 @@ const userSchema = new mongoose.Schema(
             maxLength: 15,
         },
 
+        profilePicture: {
+            type: String,
+            default: 'profilepictureurl',
+        },
+
         password: {
             type: String,
             required: [true, 'Please input password'],

@@ -2,8 +2,8 @@ TO DO SERVER SIDE:
 
 missing routes:
 
--   Contact us (schema, POST route (/api/contactUs) 
--   Newsletter subscription (schema, POST route (/api/newsletterSubscription) 
+-   Contact us (schema, POST route (/api/contactUs) - Done
+-   Newsletter subscription (schema, POST route (/api/newsletterSubscription) - Done
 -   Upload user profile picture
 -   Edit farm routes:
     -   Edit (origin, location, altitude)
