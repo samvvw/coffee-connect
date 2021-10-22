@@ -9,7 +9,9 @@ const NavBar = (props) => {
                     <Link to="/marketplace">Coffee Marketplace</Link>
                 </MenuItem>
                 <MenuItem>Farm Directory</MenuItem>
-                <MenuItem>About Us</MenuItem>
+                <MenuItem>
+                    <Link to="/about-us">About Us</Link>
+                </MenuItem>
                 <MenuItem>Contact Us</MenuItem>
             </Menu>
         </Nav>
