@@ -7,6 +7,7 @@ import ProductDescription from '../../components/productDetail/productDescriptio
 import ConnectWithFarmer from '../../components/connectWithFarmerCard/connectWithFarmerCard'
 import OtherProducts from '../../components/productDetail/otherProducts/otherProducts'
 import RoastLevel from '../../components/productDetail/roastLevel/roastLevel'
+import Map from '../../components/map/map'
 
 import placeHolder from '../../assets/images/placeholder.png'
 import videoPlaceHolder from '../../assets/images/video-placeholder.png'
@@ -102,6 +103,12 @@ const Product = (props) => {
             productRoastLevel: '70% cacao',
         },
     ]
+
+    const data = [
+        {
+            coordinates: [4.11, -72.93],
+        },
+    ]
     // *******************************************************
 
     const [matches, setMatches] = useState(
@@ -177,6 +184,10 @@ const Product = (props) => {
                 {/* 8 Map */}
                 <ContainerChild gridColumn="1/4" gridRow="6/7">
                     {/* Map */}
+                    <Map
+                        data={data}
+                        style={{ width: '600px', height: '400px' }}
+                    />
                 </ContainerChild>
                 {/* 9 Other products from TITLE */}
                 <ContainerChild gridColumn="1/5" gridRow="7/8">
