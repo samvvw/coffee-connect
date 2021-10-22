@@ -109,7 +109,7 @@ exports.modifyProduct = (req, res) => {
         "picture": picture,
     }
 
-    Product.findOneAndReplace({'_id': req.params.id},replacement).exec()
+    Product.findOneAndReplace({'_id': req.params.id},replacement, {new: true}).exec()
     .then(result => {
         res.json(result);
         //Updating the contents, but returning the old one. Need to fix
