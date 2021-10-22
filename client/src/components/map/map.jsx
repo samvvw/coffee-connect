@@ -12,9 +12,10 @@ const Map = ({ data, style }) => {
     return (
         <MapContainer
             bounds={allCountriesBounds}
-            zoom={5}
             scrollWheelZoom={true}
             style={style}
+            center={data.length === 1 ? [4.11, -72.93] : undefined}
+            zoom={5}
         >
             <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
