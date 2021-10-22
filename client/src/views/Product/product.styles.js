@@ -4,9 +4,6 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    /* align-items: stretch; */
-    /* gap: 60px;
-    margin-top: 2rem; */
 `
 
 export const ContainerMain = styled.div`
@@ -38,8 +35,9 @@ export const ContainerChild = styled.div`
     grid-column: ${(props) => props.gridColumn};
     grid-row: ${(props) => props.gridRow};
     width: ${(props) => props.width || '100%'};
-    max-width: 400px;
+
     @media only screen and (max-width: 400px) {
+        max-width: 400px;
         //group of images
         :nth-child(2) {
             grid-column: 1/2;

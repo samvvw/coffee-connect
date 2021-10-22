@@ -179,11 +179,11 @@ const Product = (props) => {
                     {/* Map */}
                 </ContainerChild>
                 {/* 9 Other products from TITLE */}
-                <ContainerChild gridColumn="1/4" gridRow="7/8">
+                <ContainerChild gridColumn="1/5" gridRow="7/8">
                     <h4>Other products from this farmer</h4>
                 </ContainerChild>
                 {/* 10 Other products card */}
-                <ContainerChild gridColumn="1/4" gridRow="8/9">
+                <ContainerChild gridColumn="1/5" gridRow="8/9">
                     {/* Other products from this farmer */}
                     <OtherProducts
                         arrUrlImage={urlsArray}
