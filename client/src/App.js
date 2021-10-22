@@ -25,7 +25,7 @@ function App() {
                     <Route path="/product" component={Product} />
                     <Route path="/my-farm" component={FarmDashboard} />
                     <Route path="/marketplace" component={CoffeeMarketplace} />
-                    <Route path="/aboutus" component={AboutUs} />
+                    <Route path="/about-us" component={AboutUs} />
                     <Route path="/" component={Home} />
                 </Switch>
             </main>
