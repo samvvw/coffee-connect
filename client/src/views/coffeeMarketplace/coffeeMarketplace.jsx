@@ -1,6 +1,8 @@
 import ProductCard from '../../components/coffeeMarketplaceComponents/productCard/productCard'
 import SortBy from '../../components/coffeeMarketplaceComponents/sortBy/sortBy'
+import Map from '../../components/map/map'
 import SearchBar from '../../components/searchBar/searchBar'
+import { Row } from './coffeeMarketplace.styles'
 
 const products = [
     {
@@ -29,15 +31,36 @@ const products = [
     },
 ]
 
+const countries = [
+    {
+        name: 'Colombia',
+        coordinates: [4.1156735, -72.9301367],
+    },
+    {
+        name: 'Vancouver',
+        coordinates: [49.246292, -123.116226],
+    },
+]
+
 const CoffeeMarketplace = (props) => {
     return (
         <>
             <h1>Coffee Marketplace</h1>
             <SearchBar placeholder="Search" />
             <SortBy />
-            {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-            ))}
+            <Row>
+                <div className="products">
+                    {products.map((product) => (
+                        <ProductCard key={product.id} product={product} />
+                    ))}
+                </div>
+                <div className="map">
+                    <Map
+                        data={countries}
+                        style={{ width: '50vw', height: '100%' }}
+                    />
+                </div>
+            </Row>
         </>
     )
 }
