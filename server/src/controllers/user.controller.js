@@ -2,7 +2,7 @@ const fs = require('fs')
 const User = require('../models/user.model')
 const jwt = require('jsonwebtoken')
 const { s3Client } = require('../config/s3Client')
-const { PutObjectCommand } = require('@aws-sdk/client-s3')
+const { PutObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3')
 const formidable = require('formidable')
 
 const BUCKET_NAME = process.env.AWS_BUCKET_NAME
@@ -66,13 +66,14 @@ exports.userSignIn = async (req, res) => {
             res.status(401).json({ error: 'Password does not match' })
         } else {
             //When validation is successful, give them token
-            const { firstName, lastName, userName, _id } = user
+            const { firstName, lastName, userName, _id, profilePicture } = user
             const payload = {
                 id: _id,
                 firstName: firstName,
                 lastName: lastName,
                 userName: userName,
                 email: email,
+                profilePicture: profilePicture,
             }
 
             const token = createToken(payload)
@@ -86,16 +87,18 @@ exports.userSignIn = async (req, res) => {
 
 exports.uploadProfilePicture = async (req, res) => {
     try {
-        const form = formidable({ multiples: true })
-        // console.log(files)
+        const fileName = `profile-picture/${req.files.profilePicture.name}`
 
-        form.parse(req, async (error, fields, files) => {
-            const fileName = `profile-picture/${req.files.profilePicture.name}`
+        const filePath = req.files.profilePicture.path
 
-            const filePath = req.files.profilePicture.path
-
+        if (
+            !/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(
+                req.files.profilePicture.name
+            )
+        ) {
+            res.status(404).send('Wrong file format')
+        } else {
             const fileStream = fs.createReadStream(filePath)
-            console.log(req.files)
 
             const bucketParam = {
                 Bucket: BUCKET_NAME,
@@ -118,15 +121,44 @@ exports.uploadProfilePicture = async (req, res) => {
 
             const actualCurrentUser = await User.findById(req.currentUser.id)
 
-            // console.log(`Success`, uploadPicture)
             res.json(actualCurrentUser)
-        })
+        }
     } catch (error) {
         console.error(error)
         res.status(500).send(error)
     }
 }
 
-exports.modifyProfilePicture = async () => {}
+exports.deleteProfilePicture = async (req, res, next) => {
+    try {
+        const currentUserDB = await User.findById(req.currentUser.id).exec()
 
-exports.deleteProfilePicture = async () => {}
+        if (
+            currentUserDB.profilePicture &&
+            currentUserDB.profilePicture !== 'DefaultUrl'
+        ) {
+            const fileName = req.currentUser.profilePicture
+                .split('/')
+                .slice(-1)[0]
+            const bucketParams = {
+                Bucket: BUCKET_NAME,
+                Key: fileName,
+            }
+            await s3Client.send(new DeleteObjectCommand(bucketParams))
+
+            const updatedUser = await currentUserDB.updateOne({
+                profilePicture: 'DefaultUrl',
+            })
+            if (req.method === 'PUT') {
+                next()
+            } else {
+                res.json(updatedUser)
+            }
+        } else {
+            res.status(404).send('No profile picture found')
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).send(error)
+    }
+}

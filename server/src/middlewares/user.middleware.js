@@ -3,16 +3,13 @@ const formidable = require('formidable')
 
 exports.validateToken = async (req, res, next) => {
     try {
-        console.log(
-            req.headers['content-type'].startsWith('multipart/form-data;')
-        )
         if (!req.headers['content-type'].startsWith('multipart/form-data;')) {
             const currentUser = jwt.verify(
                 req.body.token,
                 process.env.JWT_SECRET
             )
 
-            console.log(currentUser)
+            // console.log(currentUser)
             req.currentUser = currentUser
             if (currentUser) {
                 next()
