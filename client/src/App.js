@@ -12,6 +12,7 @@ import Product from './views/Product/product'
 import FarmDashboard from './views/farmDashboard/farmDashboard'
 import CoffeeMarketplace from './views/coffeeMarketplace/coffeeMarketplace'
 import AboutUs from './views/aboutUs/aboutUs'
+import ContactUs from './views/contactUs/contactUs'
 import PrivateRouteFarmer from './components/PrivateRoute/privateRouteFarmer'
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                     <Route path="/product" component={Product} />
                     <Route path="/marketplace" component={CoffeeMarketplace} />
                     <Route path="/about-us" component={AboutUs} />
+                    <Route path="/contact-us" component={ContactUs} />
                     <PrivateRouteFarmer path="/my-farm">
                         <FarmDashboard />
                     </PrivateRouteFarmer>
