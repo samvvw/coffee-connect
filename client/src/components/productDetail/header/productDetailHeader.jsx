@@ -69,8 +69,8 @@ const ProductDetailHeader = ({
                     gap="1rem"
                     order="1"
                 >
-                    <CircleButton IconName="FavoriteEmpty" onClick="" />
-                    <CircleButton IconName="Share" onClick="" />
+                    <CircleButton IconName="FavoriteEmpty" />
+                    <CircleButton IconName="Share" />
                 </HeaderChildContainer>
             </HeaderMainContainer>
         </HeaderContainer>

@@ -1,30 +1,23 @@
-import { useHistory } from 'react-router-dom'
+import { useContext } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
+import { UserContext } from '../context/userContext/userContext'
 import Button from '../components/button/button'
 
 const SignIn = (props) => {
-    let history = useHistory()
+    const history = useHistory()
+    const location = useLocation()
+    const { signIn, loading, error } = useContext(UserContext)
+
+    const { from } = location.state || { from: { pathname: '/' } }
 
     const handleSubmit = async (e) => {
-        //Prevent refresh the page
         e.preventDefault()
-
-        const body = {
+        const user = {
             email: e.target.email.value,
             password: e.target.password.value,
         }
-        try {
-            const response = await fetch('/api/user/sign-in', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body),
-            })
-
-            const data = await response.json()
-            sessionStorage.setItem('token', data)
-            history.push('/welcome-user')
-        } catch (err) {
-            console.log('User cannot be authenticated', err)
-        }
+        await signIn(user)
+        if (!Object.keys(error).length) history.replace(from)
     }
 
     return (
@@ -37,7 +30,9 @@ const SignIn = (props) => {
                 <label htmlFor="password">Password:</label>
                 <input type="password" name="password" id="password" />
 
-                <Button title="Login" type="submit" />
+                {!loading && <Button title="Login" type="submit" />}
+                {loading && <small>Loading...</small>}
+                {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
             </form>
         </>
     )

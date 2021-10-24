@@ -10,6 +10,9 @@ const NavBar = (props) => {
                 </MenuItem>
                 <MenuItem>Farm Directory</MenuItem>
                 <MenuItem>
+                    <Link to="/my-farm">My Farm</Link>
+                </MenuItem>
+                <MenuItem>
                     <Link to="/about-us">About Us</Link>
                 </MenuItem>
                 <MenuItem>Contact Us</MenuItem>
