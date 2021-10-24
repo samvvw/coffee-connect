@@ -36,6 +36,7 @@ exports.userSignUp = async (req, res) => {
             lastName: lastName,
             userName: userName,
             email: email,
+            userType: userType,
         }
 
         const token = createToken(payload)
@@ -66,7 +67,14 @@ exports.userSignIn = async (req, res) => {
             res.status(401).json({ error: 'Password does not match' })
         } else {
             //When validation is successful, give them token
-            const { firstName, lastName, userName, _id, profilePicture } = user
+            const {
+                firstName,
+                lastName,
+                userName,
+                _id,
+                profilePicture,
+                userType,
+            } = user
             const payload = {
                 id: _id,
                 firstName: firstName,
@@ -74,6 +82,7 @@ exports.userSignIn = async (req, res) => {
                 userName: userName,
                 email: email,
                 profilePicture: profilePicture,
+                userType: userType,
             }
 
             const token = createToken(payload)
