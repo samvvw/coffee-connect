@@ -20,7 +20,6 @@ const Home = (props) => {
                 pFontSize="1rem"
                 paragraphText="Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ut. Eget dapibus eros, ullamcorper vestibulum vel congue proin."
                 buttonTitle="Get Started"
-                onClick=""
                 buttonBackgroundColor="Black"
                 buttonTextColor="White"
             />

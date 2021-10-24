@@ -12,6 +12,7 @@ import Product from './views/Product/product'
 import FarmDashboard from './views/farmDashboard/farmDashboard'
 import CoffeeMarketplace from './views/coffeeMarketplace/coffeeMarketplace'
 import AboutUs from './views/aboutUs/aboutUs'
+import PrivateRouteFarmer from './components/PrivateRoute/privateRouteFarmer'
 
 function App() {
     return (
@@ -23,9 +24,11 @@ function App() {
                     <Route path="/sign-in" component={SignIn} />
                     <Route path="/welcome-user" component={WelcomeUser} />
                     <Route path="/product" component={Product} />
-                    <Route path="/my-farm" component={FarmDashboard} />
                     <Route path="/marketplace" component={CoffeeMarketplace} />
                     <Route path="/about-us" component={AboutUs} />
+                    <PrivateRouteFarmer path="/my-farm">
+                        <FarmDashboard />
+                    </PrivateRouteFarmer>
                     <Route path="/" component={Home} />
                 </Switch>
             </main>
