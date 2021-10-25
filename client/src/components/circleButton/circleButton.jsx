@@ -3,6 +3,9 @@ import FavoriteEmptyIcon from '@material-ui/icons/FavoriteBorder'
 
 import ShareIcon from '@material-ui/icons/Share'
 
+import BookmarkIcon from '@material-ui/icons/Bookmark'
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder'
+
 import { Button } from './circleButton.style'
 
 const CircleButon = ({ IconName, onClick }) => {
@@ -25,10 +28,25 @@ const CircleButon = ({ IconName, onClick }) => {
                     />
                 </Button>
             )
+        case 'BookmarkBorderIcon':
+            return (
+                <Button onClick={onClick}>
+                    <BookmarkBorderIcon
+                        fontSize="medium"
+                        style={{ fill: 'black' }}
+                    />
+                </Button>
+            )
+        case 'BookmarkIcon':
+            return (
+                <Button onClick={onClick}>
+                    <BookmarkIcon fontSize="medium" style={{ fill: 'black' }} />
+                </Button>
+            )
         case 'Share':
             return (
                 <Button onClick={onClick}>
-                    <ShareIcon fontSize="medium" style={{ fill: 'white' }} />
+                    <ShareIcon fontSize="medium" style={{ fill: 'black' }} />
                 </Button>
             )
         default:
