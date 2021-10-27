@@ -15,6 +15,7 @@ import AboutUs from './views/aboutUs/aboutUs'
 import ContactUs from './views/contactUs/contactUs'
 import FarmProfile from './views/farmProfile/farmProfile'
 import PrivateRouteFarmer from './components/PrivateRoute/privateRouteFarmer'
+import FarmDirectory from './views/farmDirectory/farmDirectory'
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                     <Route path="/about-us" component={AboutUs} />
                     <Route path="/contact-us" component={ContactUs} />
                     <Route path="/farmProfile" component={FarmProfile} />
+                    <Route path="/farm-directory" component={FarmDirectory} />
                     <PrivateRouteFarmer path="/my-farm">
                         <FarmDashboard />
                     </PrivateRouteFarmer>
