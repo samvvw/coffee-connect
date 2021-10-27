@@ -56,8 +56,20 @@ exports.createProduct = async (req, res) => {
 
 exports.getProducts = (req, res) => {
     Product.find({}).exec()
-    .then(result => {
-        res.json(result)
+    .then(result => {  
+
+        let data = [];
+        for(i=0; i<result.length; i++){
+            let url = `/api/farm/${result[i].farmId}/product/${result[i]._id}`;
+            
+            let newData = {
+                data: result[i],
+                url: url
+            }
+            
+            data.push(newData);
+        }
+        res.json(data)
     })
     .catch(error => {
         console.log(error)
