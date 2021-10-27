@@ -67,7 +67,7 @@ exports.getProducts = (req, res) => {
 
 
 exports.getProductById = (req, res) => {
-    Product.findOne({'_id': req.params.id}).exec()
+    Product.findOne({'_id': req.params.productId}).exec()
     .then(result => {
         res.json({
             data: result,
@@ -118,7 +118,7 @@ exports.modifyProduct = (req, res) => {
         "picture": picture,
     }
 
-    Product.findOneAndReplace({'_id': req.params.id},replacement, {new: true}).exec()
+    Product.findOneAndReplace({'_id': req.params.productId},replacement, {new: true}).exec()
     .then(result => {
         res.json(result);
     })
@@ -130,7 +130,7 @@ exports.modifyProduct = (req, res) => {
 
 
 exports.deleteProduct = (req, res) => {
-    Product.deleteOne({'_id': req.params.id}).exec()
+    Product.deleteOne({'_id': req.params.productId}).exec()
     .then(result => {
         res.json(result);
     })

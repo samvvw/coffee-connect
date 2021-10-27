@@ -10,14 +10,13 @@ productRouter.post('/', createProduct)
 allProductRouter.get('/', getProducts)
 
 // GET Product - Gets a single product
-productRouter.get('/:id', getProductById)
+productRouter.get('/:productId', getProductById)
 
 // PUT Product - Modify a single product
-productRouter.put('/:id', modifyProduct)
+productRouter.put('/:productId', modifyProduct)
 
 // DELETE Product - Delete a single product
-productRouter.delete('/:id', deleteProduct)
+productRouter.delete('/:productId', deleteProduct)
 
 
-module.exports = productRouter
-module.exports = allProductRouter
+module.exports = {productRouter, allProductRouter}
