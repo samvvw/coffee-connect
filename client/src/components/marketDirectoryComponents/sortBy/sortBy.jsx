@@ -1,25 +1,7 @@
 import RadioButton from '../radioButton/radioButton'
 import { Container, Small } from './sortBy.styles'
 
-const SortBy = (props) => {
-    const filters = [
-        {
-            id: 'roast',
-            value: 1,
-            label: 'Roast Level',
-        },
-        {
-            id: 'origin',
-            value: 2,
-            label: 'Origin',
-        },
-        {
-            id: 'price',
-            value: 3,
-            label: 'Price',
-        },
-    ]
-
+const SortBy = ({ filters }) => {
     return (
         <Container>
             <Small>Sort by: </Small>

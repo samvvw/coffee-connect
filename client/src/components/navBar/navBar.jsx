@@ -8,7 +8,9 @@ const NavBar = (props) => {
                 <MenuItem>
                     <Link to="/marketplace">Coffee Marketplace</Link>
                 </MenuItem>
-                <MenuItem>Farm Directory</MenuItem>
+                <MenuItem>
+                    <Link to="/farm-directory">Farm Directory</Link>
+                </MenuItem>
                 <MenuItem>
                     <Link to="/my-farm">My Farm</Link>
                 </MenuItem>
