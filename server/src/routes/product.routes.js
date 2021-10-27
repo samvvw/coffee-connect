@@ -1,12 +1,13 @@
 const express = require('express')
 const productRouter = express.Router()
+const allProductRouter = express.Router()
 const { createProduct, getProducts, getProductById, modifyProduct, deleteProduct } = require('../controllers/product.controller')
 
 // POST Product - Create a new product
 productRouter.post('/', createProduct)
 
 // GET Products - Gets all products
-productRouter.get('/', getProducts)
+allProductRouter.get('/', getProducts)
 
 // GET Product - Gets a single product
 productRouter.get('/:id', getProductById)
@@ -19,3 +20,4 @@ productRouter.delete('/:id', deleteProduct)
 
 
 module.exports = productRouter
+module.exports = allProductRouter

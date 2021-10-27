@@ -40,7 +40,13 @@ exports.createProduct = async (req, res) => {
 
         const createProduct = await Product.create(data)
 
-        res.status(201).json(createProduct)
+        res.set('content-location', `/api/farm/${createProduct.farmId}/product/${createProduct._id}`);
+
+        res.status(201).json({
+            data: createProduct,
+            url: `/api/farm/${createProduct.farmId}/product/${createProduct._id}`
+        })
+
     } catch (error) {
         console.log(error)
         res.status(500).send(error)
@@ -51,7 +57,7 @@ exports.createProduct = async (req, res) => {
 exports.getProducts = (req, res) => {
     Product.find({}).exec()
     .then(result => {
-        res.json(result);
+        res.json(result)
     })
     .catch(error => {
         console.log(error)
@@ -63,7 +69,10 @@ exports.getProducts = (req, res) => {
 exports.getProductById = (req, res) => {
     Product.findOne({'_id': req.params.id}).exec()
     .then(result => {
-        res.json(result);
+        res.json({
+            data: result,
+            url: `/api/farm/${result.farmId}/product/${result._id}`
+        })
     })
     .catch(error => {
         console.log(error)
@@ -112,7 +121,6 @@ exports.modifyProduct = (req, res) => {
     Product.findOneAndReplace({'_id': req.params.id},replacement, {new: true}).exec()
     .then(result => {
         res.json(result);
-        //Updating the contents, but returning the old one. Need to fix
     })
     .catch(error => {
         console.log(error)
