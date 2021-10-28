@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 
 export const StyledFooter = styled.footer`
-    background-color: #c4c4c4;
-    color: #000000;
+    background-color: #006a6b;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 233px;
     height: 4rem;
+    margin-top: 3rem;
 `

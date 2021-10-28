@@ -8,7 +8,7 @@ const SearchHome = (props) => {
         <SearchHomeContainer>
             <Heading>Start Looking for your coffee farmer</Heading>
             <SearchBar />
-            <Image urlImg={image} width="1149px" />
+            <Image urlImg={image} width="100%" />
         </SearchHomeContainer>
     )
 }

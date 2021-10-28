@@ -1,10 +1,14 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr
+    grid-template-rows: 1fr 1fr;
     justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
+    justify-items: center;
+    row-gap: 0.5rem;
+    max-width: 100%;
+    width: 100%;
 `
 
 export const TextContainer = styled.div`
@@ -21,5 +25,5 @@ export const Heading = styled.h2`
 
 export const Paragraph = styled.p`
     font-size: 1.1rem;
-    width: 55ch;
+    max-width: 55ch;
 `
