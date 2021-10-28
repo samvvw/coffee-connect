@@ -5,6 +5,8 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
+    max-width: 100%;
+    width: 100%;
 `
 
 export const Heading = styled.h2`
@@ -14,7 +16,7 @@ export const Heading = styled.h2`
 `
 export const StyledParagraph = styled.p`
     font-size: 1.1rem;
-    width: 55ch;
+    max-width: 55ch;
 `
 
 export const HorizontalContainer = styled.div`

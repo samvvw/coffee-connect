@@ -5,3 +5,7 @@ export const Row = styled.div`
     gap: 1.5rem;
     margin-bottom: 1rem;
 `
+
+export const Container = styled.div`
+    margin-top: 2rem;
+`

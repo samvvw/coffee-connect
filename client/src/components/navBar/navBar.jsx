@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Menu, MenuItem, Nav } from './navBar.styles'
 
 const NavBar = (props) => {
@@ -6,16 +6,28 @@ const NavBar = (props) => {
         <Nav>
             <Menu>
                 <MenuItem>
-                    <Link to="/marketplace">Coffee Marketplace</Link>
+                    <NavLink
+                        to="/marketplace"
+                        activeStyle={{ fontWeight: 'bold' }}
+                    >
+                        Coffee Marketplace
+                    </NavLink>
                 </MenuItem>
                 <MenuItem>
-                    <Link to="/farm-directory">Farm Directory</Link>
+                    <NavLink
+                        to="/farm-directory"
+                        activeStyle={{ fontWeight: 'bold' }}
+                    >
+                        Farm Directory
+                    </NavLink>
                 </MenuItem>
                 <MenuItem>
-                    <Link to="/my-farm">My Farm</Link>
-                </MenuItem>
-                <MenuItem>
-                    <Link to="/about-us">About Us</Link>
+                    <NavLink
+                        to="/about-us"
+                        activeStyle={{ fontWeight: 'bold' }}
+                    >
+                        About Us
+                    </NavLink>
                 </MenuItem>
                 <MenuItem>Contact Us</MenuItem>
             </Menu>
