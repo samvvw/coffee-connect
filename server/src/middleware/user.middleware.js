@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const formidable = require('formidable')
+const User = require('../models/user.model')
 
 exports.validateToken = async (req, res, next) => {
     try {
@@ -9,9 +10,10 @@ exports.validateToken = async (req, res, next) => {
                 process.env.JWT_SECRET
             )
 
-            // console.log(currentUser)
-            req.currentUser = currentUser
-            if (currentUser) {
+            const userDb = await User.findById(currentUser.id)
+            req.currentUser = userDb
+            if (userDb) {
+                // console.log(req.currentUser.id)
                 next()
             } else {
                 res.status(403).send('Access forbidden')

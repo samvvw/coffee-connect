@@ -6,7 +6,7 @@ const {
     uploadProfilePicture,
     deleteProfilePicture,
 } = require('../controllers/user.controller')
-const { validateToken } = require('../middlewares/user.middleware')
+const { validateToken } = require('../middleware/user.middleware')
 
 userRouter.post('/sign-up', userSignUp)
 userRouter.post('/sign-in', userSignIn)
