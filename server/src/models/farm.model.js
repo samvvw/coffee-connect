@@ -1,66 +1,70 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 
-const mediaSchema = new mongoose.Schema(
-    {
-        mediaName: {
-            type: String,
-            required: [true, 'Please enter media title'],
-        },
+// const mediaSchema = new mongoose.Schema(
+//     {
+//         mediaName: {
+//             type: String,
+//             required: [true, 'Please enter media title'],
+//         },
 
-        mediaUrl: {
-            type: String,
-        },
+//         mediaUrl: {
+//             type: String,
+//         },
 
-        mediaType: {
-            type: String,
-        },
-    },
-    {
-        timestamps: true,
-    }
-)
+//         mediaType: {
+//             type: String,
+//         },
+//     },
+//     {
+//         timestamps: true,
+//     }
+// )
 
-const certificateSchema = new mongoose.Schema(
-    {
-        name: {
-            type: String,
-            required: [true, 'Please enter certificate name.'],
-        },
-        imageUrl: {
-            type: String,
-        },
-        issueDate: {
-            type: Date,
-            required: [
-                true,
-                'Please enter the date of issuance of the certificate.',
-            ],
-        },
-        expirationDate: {
-            type: Date,
-        },
-    },
-    {
-        timestamps: true,
-    }
-)
+// const certificationSchema = new mongoose.Schema(
+//     {
+//         name: {
+//             type: String,
+//             required: [true, 'Please enter certificate name.'],
+//         },
+//         imageUrl: {
+//             type: String,
+//         },
+//         issueDate: {
+//             type: Date,
+//             required: [
+//                 true,
+//                 'Please enter the date of issuance of the certificate.',
+//             ],
+//         },
+//         expirationDate: {
+//             type: Date,
+//         },
+//     },
+//     {
+//         timestamps: true,
+//     }
+// )
 
 const farmSchema = new mongoose.Schema(
     {
+        logo: {
+            type: String,
+            default: 'Default Picture URL',
+        },
         name: {
             type: String,
             required: [true, "Please enter farm's name"],
             minLength: 2,
-            maxLength: 30,
+            maxLength: 50,
         },
-        country: {
+        location: {
             type: String,
             required: [true, 'Country is required.'],
         },
         region: {
             type: String,
-            enum: [
+            enum: [  //temporal sets, and depends on API
                 'South America',
                 'Central America',
                 'North America',
@@ -69,49 +73,51 @@ const farmSchema = new mongoose.Schema(
                 'Europe',
                 'Oceania',
             ],
-            required: [true, 'Region is required.'],
         },
-        address: {
-            type: String,
-            required: [true, "Please enter farm's address"],
-        },
-        contactName: {
-            type: String,
-            required: [true, 'Please enter contact name'],
-            minLength: 4,
-            maxLength: 30,
-        },
-        phoneNumber: {
-            type: String,
-        },
-        email: {
-            type: String,
-            required: [true, 'Please input your email'],
-            validate: [
-                {
-                    validator: function (email) {
-                        return validator.isEmail(email)
-                    },
-                    messages: `Please input a valid email`,
-                },
-            ],
-        },
-        logo: {
-            type: String,
-            default: 'Default Picture URL',
-        },
-        about: {
-            type: String,
-        },
-        farmElevation: {
+        altitude: {
             type: Number,
+            // required: [true, "Please enter altitude"],
         },
-        location: {
-            type: { type: String, default: 'Point' },
-            coordinates: { type: [Number], default: undefined },
+        farmSize: {
+            type: Number,
+            // required: [true, "Please enter farm size"],
         },
-        media: [mediaSchema],
-        certificates: [certificateSchema],
+        description: {
+            type: String,
+            maxLength: 500,
+            // minLength: 2,
+            // required: [true, "Please enter farm description"],
+        },
+        coordinate: {
+            type: [Number],
+            maxItems: 2,
+            // minItems: 2,
+            // required: [true, "Please enter coordinate"],
+        },
+        farmPicture: {
+            type: String,  //As of now, picture only based on the hi-fi, if needed, use mediaSchema later
+            // required: [true, "Please enter coordinate"],
+        },
+        certification: {
+            type: [String],  //As of now, pictures only based on the hi-fi, if needed, use certificationSchema later
+            // maxItems: 3,
+        },
+        gallery: {
+            type: [String],  //As of now, pictures only based on the hi-fi, if needed, use mediaSchema later
+            // maxItems: 10, 
+        },
+        // email: {
+        //     type: String,
+        //     required: [true, 'Please input your email'],
+        //     validate: [
+        //         {
+        //             validator: function (email) {
+        //                 return validator.isEmail(email)
+        //             },
+        //             messages: `Please input a valid email`,
+        //         },
+        //     ],
+        // },
     },
     {
         timestamps: true,
