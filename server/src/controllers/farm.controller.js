@@ -1,4 +1,5 @@
 const Farm = require('../models/farm.model')
+const User = require('../models/user.model')
 
 exports.createFarm = async (req, res) => {
     try {
@@ -30,6 +31,10 @@ exports.createFarm = async (req, res) => {
         }
 
         const createFarm = await Farm.create(data)
+
+        await User.findByIdAndUpdate(req.currentUser._id, {
+            $push: { farms: createFarm._id },
+        })
 
         res.status(201).json(createFarm)
     } catch (error) {

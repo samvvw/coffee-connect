@@ -1,22 +1,28 @@
 const express = require('express')
-const productRouter = express.Router()
+const farmProductRouter = express.Router()
 const allProductRouter = express.Router()
-const { createProduct, getProducts, getProductById, modifyProduct, deleteProduct } = require('../controllers/product.controller')
+const {
+    createProduct,
+    getProducts,
+    getProductById,
+    modifyProduct,
+    deleteProduct,
+} = require('../controllers/product.controller')
+const { validateToken } = require('../middleware/user.middleware')
 
 // POST Product - Create a new product
-productRouter.post('/', createProduct)
+farmProductRouter.post('/', validateToken, createProduct)
 
 // GET Products - Gets all products
 allProductRouter.get('/', getProducts)
 
 // GET Product - Gets a single product
-productRouter.get('/:productId', getProductById)
+farmProductRouter.get('/:productId', getProductById)
 
 // PUT Product - Modify a single product
-productRouter.put('/:productId', modifyProduct)
+farmProductRouter.put('/:productId', validateToken, modifyProduct)
 
 // DELETE Product - Delete a single product
-productRouter.delete('/:productId', deleteProduct)
+farmProductRouter.delete('/:productId', validateToken, deleteProduct)
 
-
-module.exports = {productRouter, allProductRouter}
+module.exports = { farmProductRouter, allProductRouter }
