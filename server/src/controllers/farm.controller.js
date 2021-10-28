@@ -1,33 +1,36 @@
 const Farm = require('../models/farm.model')
 const User = require('../models/user.model')
+const Product = require('../models/product.model')
 
 exports.createFarm = async (req, res) => {
     try {
         const {
+            logo,
             name,
-            email,
-            country,
-            region,
-            address,
-            contactName,
-            phoneNumber,
-            about,
-            farmElevation,
             location,
+            origin,
+            altitude,
+            farmSize,
+            description,
+            coordinate,
+            farmPicture,
+            certification,
+            gallery,
         } = req.body
 
-        // we need to save logo in S3 to generate URL before saving data into MongoDB
+        // logo, farmPicture, certification and gallery: Need to save logo in S3 to generate URL before saving data into MongoDB
         const data = {
+            logo: logo,
             name: name,
-            email: email,
-            country: country,
-            region: region,
-            address: address,
-            contactName: contactName,
-            phoneNumber: phoneNumber,
-            about: about,
-            farmElevation: farmElevation,
             location: location,
+            origin: origin,
+            altitude: altitude,
+            farmSize: farmSize,
+            description: description,
+            coordinate: coordinate,
+            farmPicture: farmPicture,
+            certification: certification,
+            gallery: gallery,
         }
 
         const createFarm = await Farm.create(data)
@@ -44,29 +47,55 @@ exports.createFarm = async (req, res) => {
 }
 
 exports.getFarms = (req, res) => {
-    //Need to consider how we should work with score(rate)
-    //Also can add more fields to return if needed
-    Farm.find({}, { name: 1, region: 1, country: 1, about: 1 })
-        .exec()
-        .then((result) => {
-            res.json(result)
-        })
-        .catch((error) => {
-            console.log(error)
-            res.status(500).send(error)
-        })
+    //The field returning is temporal as there is no hi-fi yet
+    Farm.find({}, { name: 1, farmPicture: 1, location: 1, origin: 1, description: 1 }).exec()
+    .then((result) => {
+        //need to add Save based on User  
+        res.json(result)
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(500).send(error)
+    })
 }
 
 exports.getFarmById = (req, res) => {
-    //As of now, returning all fields, as it's details of the farm, it must show most of the data?
-    //Can limit the fields to return later on if needed in the same way of getFarms
-    Farm.findOne({ _id: req.params.id })
-        .exec()
+    //need to add Save based on User, too
+    
+    //Adding all products which belongs to this farm
+    //Search all products which have this farmId and return Array of belonging product object
+    //Will modify the field to return after fixing product schema
+    let getProducts;
+    Product.find({farmId: req.params.farmId}, { _id: 1, name: 1 }).exec()
+    .then(result => {  
+        
+        getProducts = result;
+    })
+    .then(result => {
+
+        Farm.findOne({ '_id': req.params.farmId }).exec()
         .then((result) => {
-            res.json(result)
+            
+            let newData = {
+                data: result,
+                allProducts: getProducts,
+            }
+            res.json(newData);
         })
-        .catch((error) => {
-            console.log(error)
-            res.status(500).send(error)
-        })
+    })
+    .catch(error => {
+        console.log(error)
+        res.status(500).send(error)
+    });
+}
+
+exports.deleteFarm = (req, res) => {
+    Farm.deleteOne({'_id': req.params.farmId}).exec()
+    .then((result) => {
+        res.json(result);
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(500).send(error)
+    })
 }
