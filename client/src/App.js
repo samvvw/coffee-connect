@@ -19,7 +19,7 @@ import PrivateRouteFarmer from './components/PrivateRoute/privateRouteFarmer'
 function App() {
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <main>
                 <Switch>
                     <Route path="/sign-up" component={SignUp} />
@@ -36,7 +36,7 @@ function App() {
                     <Route path="/" component={Home} />
                 </Switch>
             </main>
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }

@@ -1,13 +1,15 @@
-import { Container, ContainerMain, ContainerChild } from './product.styles'
+import { Container } from './product.styles'
 
 import ProductDetailHeader from '../../components/productDetail/header/productDetailHeader'
+
 import ProductDetailImages from '../../components/productDetail/imagesGroup/productDetailImages'
 import ProductDetailCard from '../../components/productDetail/productDetailCard/productDetailCard'
 import ProductDescription from '../../components/productDetail/productDescription/productDetailDescription'
-import ConnectWithFarmer from '../../components/connectWithFarmerCard/connectWithFarmerCard'
+import ConnectWithFarmer from '../../components/productDetail/connectWithFarmerCard/connectWithFarmerCard'
 import OtherProducts from '../../components/productDetail/otherProducts/otherProducts'
-import RoastLevel from '../../components/productDetail/roastLevel/roastLevel'
+
 import Map from '../../components/map/map'
+import CircleButton from '../../components/circleButton/circleButton'
 
 import placeHolder from '../../assets/images/placeholder.png'
 import videoPlaceHolder from '../../assets/images/video-placeholder.png'
@@ -15,28 +17,16 @@ import { useEffect, useState } from 'react'
 
 const Product = (props) => {
     /*Remove after connect to db*/
-    const urlsArray = [
-        placeHolder,
-        placeHolder,
-        placeHolder,
-        placeHolder,
-        videoPlaceHolder,
-    ]
+    const headerDetails = {
+        productName: 'Balcon de la Montaña',
+        farmName: 'Pan de Azucar, Caldas',
+        origin: 'South America',
+        location: 'Colombia',
+        altitude: '1200masl',
+    }
+    //no more than 4 images
+    const urlsArray = [placeHolder, placeHolder, placeHolder, placeHolder]
 
-    const objArrayValues = [
-        {
-            id: '1',
-            option: 'Qty 1',
-        },
-        {
-            id: '2',
-            option: 'Qty 2',
-        },
-        {
-            id: '3',
-            option: 'Qty 3',
-        },
-    ]
     const objArraySizes = [
         {
             id: '1',
@@ -77,30 +67,43 @@ const Product = (props) => {
         ],
     }
 
+    const objProductDescription = {
+        process: 'Red Honey',
+        aroma: 'Red Apple, Chocolate Bar',
+        fermentation: 'Anaerobic Fermentation 72 Hrs. , 6 Hrs, Aerobic',
+        drying: 'Canopy',
+        roast: 'Scandinavian',
+        profile: 'Milk Chocolate, Caramel, Tamarind, Kiwi, Red Apple',
+        residuals: 'Sweet, Prolonged',
+        acidity: 'Juicy',
+        body: 'Creamy',
+        description:
+            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto perferendis tempora animi eveniet ipsam minima quia provident eligendi delectus mollitia aliquam atque ea hic laudantium nesciunt, saepe error voluptatem quidem officia numquam dolores aspernatur ullam, ducimus porro! Minima, at. Ipsa eos reprehenderit obcaecati nam possimus minima odit amet mollitia porro non vel, sit rerum explicabo molestias totam deserunt dolore officia quidem tempora beatae vero! Illum quos eligendi voluptas incidunt omnis.',
+    }
     const arrObjProductDetails = [
         {
-            productName: 'Cafecito',
-            productPrice: '50',
-            productUnit: 'lb',
-            productLocation: 'Colombia',
-            productTaste: 'Sweet',
-            productRoastLevel: 'Medium - dark',
+            productName: 'Whirlwind Coffe Co. Ethiopia',
+            productPrice: '18.99 CAD',
+            productUnit: '100gr',
+            productDescription: 'Yirgacheffe',
         },
         {
-            productName: 'Tecito',
-            productPrice: '40',
-            productUnit: 'lb',
-            productLocation: 'Ingland',
-            productTaste: 'Citric',
-            productRoastLevel: 'Medium',
+            productName: 'Fire Dept. Coffe Original',
+            productPrice: '18.99 CAD',
+            productUnit: '100g',
+            productDescription: 'Medium Roast',
         },
         {
-            productName: 'Cocholatito',
-            productPrice: '30',
-            productUnit: 'lb',
-            productLocation: 'Mexico',
-            productTaste: 'Unsweet',
-            productRoastLevel: '70% cacao',
+            productName: 'Howler Coffee Co. Bucksaw',
+            productPrice: '18.99 CAD',
+            productUnit: '100g',
+            productDescription: 'Blend',
+        },
+        {
+            productName: 'Onyx Coffee Lab Colombia',
+            productPrice: '18.99',
+            productUnit: '100g',
+            productDescription: 'Aponte Village',
         },
     ]
 
@@ -109,6 +112,12 @@ const Product = (props) => {
             coordinates: [4.11, -72.93],
         },
     ]
+    const objMemberSince = {
+        imgUrl: placeHolder,
+        farmName: 'Finca LomaVerde',
+        memberSince: '2018',
+    }
+
     // *******************************************************
 
     const [matches, setMatches] = useState(
@@ -122,87 +131,93 @@ const Product = (props) => {
 
     return (
         <Container>
-            {matches && (
-                <ProductDetailHeader
-                    productName="Product Name"
-                    farmName="Farm Name"
-                    origin="South America"
-                    location="Colombia"
-                    altitude="1200masl"
-                />
-            )}
-            <ContainerMain>
+            <div id="subContainer">
+                <div id="headerDesktop">
+                    {matches && (
+                        <ProductDetailHeader
+                            backgroundColor="white"
+                            productName={headerDetails.productName}
+                            farmName={headerDetails.farmName}
+                            origin={headerDetails.origin}
+                            location={headerDetails.location}
+                            altitude={headerDetails.altitude}
+                        />
+                    )}
+                </div>
+                {/* 2 Group of images */}
+                <div id="images">
+                    <div>
+                        <ProductDetailImages
+                            urlsArray={urlsArray}
+                            width="100%"
+                        />
+                    </div>
+                    <div>
+                        <CircleButton IconName="FavoriteFull" onClick="" />
+                        <CircleButton IconName="Share" onClick="" />
+                    </div>
+                </div>
                 {/* 1 header */}
-                <ContainerChild gridColumn="1/5" gridRow="1/2">
+                <div id="header">
                     {!matches && (
                         <ProductDetailHeader
                             backgroundColor="white"
-                            productName="Product Name"
-                            farmName="Farm Name"
-                            origin="South America"
-                            location="Colombia"
-                            altitude="1200masl"
+                            productName={headerDetails.productName}
+                            farmName={headerDetails.farmName}
+                            origin={headerDetails.origin}
+                            location={headerDetails.location}
+                            altitude={headerDetails.altitude}
                         />
                     )}
-                </ContainerChild>
-                {/* 2 Group of images */}
-                <ContainerChild gridColumn="1/4" gridRow="2/4">
-                    <ProductDetailImages urlsArray={urlsArray} width="100%" />
-                </ContainerChild>
+                </div>
                 {/* 3 Product detail card */}
-                <ContainerChild gridColumn="4/5" gridRow="2/3">
+                <div id="detailCard">
                     <ProductDetailCard
                         width="300px"
-                        productName="Product Name"
+                        productName={
+                            headerDetails.productName +
+                            ', ' +
+                            headerDetails.farmName
+                        }
                         objProductValues={objProductValues}
                         objArraySizes={objArraySizes}
-                        objArrayQty={objArrayValues}
                     />
-                </ContainerChild>
-                {/* 4 Connect with farmer */}
-                <ContainerChild gridColumn="4/5" gridRow="3/4">
-                    {/* connect with this farmer */}
-                    <ConnectWithFarmer
-                        farmersName="Cafe Colombiano"
-                        urlImgProfile={placeHolder}
-                    />
-                </ContainerChild>
+                </div>
                 {/* 5 Product description */}
-                <ContainerChild gridColumn="1/4" gridRow="4/5">
-                    <ProductDescription href="http://google.com" />
-                </ContainerChild>
-                {/* 6 Empty space */}
-                <ContainerChild gridColumn="4/5" gridRow="4/5"></ContainerChild>
-                {/* 7 Product information */}
-                <ContainerChild gridColumn="1/4" gridRow="5/6">
-                    {/* Product Information */}
-                    <RoastLevel
-                        roastLevelText="Medium roast"
-                        roastLevelValue="3"
+                <div id="description">
+                    <ProductDescription
+                        objProductDescription={objProductDescription}
                     />
-                </ContainerChild>
+                </div>
                 {/* 8 Map */}
-                <ContainerChild gridColumn="1/4" gridRow="6/7">
+                <div id="map">
                     {/* Map */}
+                    <div>
+                        <p>Location</p>
+                    </div>
                     <Map
                         data={data}
-                        style={{ width: '600px', height: '400px' }}
+                        style={{ width: '100%', height: '300px' }}
                     />
-                </ContainerChild>
-                {/* 9 Other products from TITLE */}
-                <ContainerChild gridColumn="1/5" gridRow="7/8">
-                    <h4>Other products from this farmer</h4>
-                </ContainerChild>
-                {/* 10 Other products card */}
-                <ContainerChild gridColumn="1/5" gridRow="8/9">
-                    {/* Other products from this farmer */}
-                    <OtherProducts
-                        arrUrlImage={urlsArray}
-                        imageWidth="100%"
-                        arrObjProductDetails={arrObjProductDetails}
+                </div>
+                {/* 4 Connect with farmer */}
+                <div id="connectWFarmer">
+                    <ConnectWithFarmer
+                        objMemberSince={objMemberSince}
+                        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto perferendis tempora animi eveniet ipsam minima quia provident eligendi delectus "
                     />
-                </ContainerChild>
-            </ContainerMain>
+                </div>
+            </div>
+            {/* 10 Other products card */}
+            <div id="otherProducts">
+                {/* Other products from this farmer */}
+                <h4>Other products from this farmer</h4>
+                <OtherProducts
+                    arrUrlImage={urlsArray}
+                    imageWidth="100%"
+                    arrObjProductDetails={arrObjProductDetails}
+                />
+            </div>
         </Container>
     )
 }
