@@ -1,12 +1,12 @@
 import { Container } from './otherProductsBanner.styles'
-import ProductCard from '../../productCard/productCard'
+import ProductCard from '../productCard/productCard'
 
 const OtherProductsBanner = ({
     arrUrlImage,
     imageWidth,
     arrObjProductDetails,
 }) => {
-    const cardWidth = '33%'
+    const cardWidth = '20%'
 
     return (
         <Container>
@@ -33,6 +33,14 @@ const OtherProductsBanner = ({
                 width={cardWidth}
                 height="auto"
                 objProductDetails={arrObjProductDetails[2]}
+            />
+            <ProductCard
+                urlImage={arrUrlImage[3]}
+                imageWidth={imageWidth}
+                imageHeight="auto"
+                width={cardWidth}
+                height="auto"
+                objProductDetails={arrObjProductDetails[3]}
             />
         </Container>
     )

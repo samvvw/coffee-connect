@@ -1,19 +1,62 @@
-import { Description, Heading, Link } from './productDetailDescription.styles'
+import { Container } from './productDetailDescription.styles'
 
-const ProductDetailDescription = (href) => {
+const ProductDetailDescription = ({ objProductDescription }) => {
     return (
-        <div>
-            <Heading>Product Description</Heading>
-            <Description>
-                Tellus sit ipsum sit iaculis tortor aliquet egestas. Tempus hac
-                fames sagittis felis curabitur ultricies. Enim at adipiscing
-                gravida diam venenatis, pellentesque metus montes. Mollis
-                bibendum leo, pulvinar blandit gravida nec. Adipiscing sed
-                pellentesque cras massa urna lectus leo, ut. Eget dapibus eros,
-                ullamcorper vestibulum vel congue proin.
-            </Description>
-            <Link href={href.href}>More Info</Link>
-        </div>
+        <Container>
+            <h2>Product Description</h2>
+            <div>
+                <p>
+                    Process: <span>{objProductDescription.process}</span>
+                </p>
+            </div>
+            {/* <div>
+                <p>
+                    Fermentation:{' '}
+                    <span>{objProductDescription.fermentation}</span>
+                </p>
+            </div>
+            <div>
+                <p>
+                    Drying: <span>{objProductDescription.drying}</span>
+                </p>
+            </div>
+            <div>
+                <p>
+                    Roast: <span>{objProductDescription.roast}</span>
+                </p>
+            </div> */}
+            <div>
+                <p>
+                    Profile: <span>{objProductDescription.profile}</span>
+                </p>
+            </div>
+            <div>
+                <p>
+                    Aroma: <span>{objProductDescription.aroma}</span>
+                </p>
+            </div>
+            {/* <div>
+                <p>
+                    Flavor: <span>{objProductDescription.flavor}</span>
+                </p>
+            </div> */}
+            <div>
+                <p>
+                    Acitidy: <span>{objProductDescription.acidity}</span>
+                </p>
+            </div>
+            <div>
+                <p>
+                    Body: <span>{objProductDescription.body}</span>
+                </p>
+            </div>
+            <div>
+                <p>
+                    Process: <span>{objProductDescription.process}</span>
+                </p>
+            </div>
+            <div id="description">{objProductDescription.description}</div>
+        </Container>
     )
 }
 

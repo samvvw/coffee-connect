@@ -5,6 +5,7 @@ export const ImageGroupParent = styled.div`
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     gap: 0.5rem;
+    height: 600px;
 `
 
 export const ImageGroupChild = styled.div`

@@ -1,22 +1,16 @@
 import DropdownList from '../../dropdownList/dropdownList'
 import Button from '../../button/button'
-import {
-    CardContainer,
-    CardChildContainer,
-    PPrice,
-} from './productDetailCard.styles'
+import { CardContainer } from './productDetailCard.styles'
 
 const ProductDetailCard = ({
-    width,
-    height,
-    objProductValues,
+    productName,
+    farmName,
+    objProductSizesPrices,
     objArraySizes,
-    objArrayQty,
+    objProductValues,
 }) => {
     /*
-    Object Product values
-        productName
-        taste
+    Object Product values            
         roastLevel
         process
         variety
@@ -25,53 +19,47 @@ const ProductDetailCard = ({
     */
 
     return (
-        <CardContainer width={width} height={height}>
-            <CardChildContainer gridColumn="1/2" gridRow="1/2">
-                <h3>{objProductValues.productName}</h3>
-            </CardChildContainer>
-            <CardChildContainer gridColumn="1/2" gridRow="2/3">
-                <div>
-                    <p>Taste:</p>
-                </div>
-                <div>
-                    <p>{objProductValues.taste}</p>
-                </div>
-            </CardChildContainer>
-            <CardChildContainer gridColumn="1/2" gridRow="3/4">
+        <CardContainer>
+            <div id="farmProduct">
+                <h2>
+                    {productName},{farmName}
+                </h2>
+            </div>
+            <div id="roastLevel">
                 <div>
                     <p>Roast level:</p>
                 </div>
                 <div>
                     <p>{objProductValues.roastLevel}</p>
                 </div>
-            </CardChildContainer>
-            <CardChildContainer gridColumn="1/2" gridRow="4/5">
+            </div>
+            <div id="process">
                 <div>
                     <p>Process:</p>
                 </div>
                 <div>
                     <p>{objProductValues.process}</p>
                 </div>
-            </CardChildContainer>
-            <CardChildContainer gridColumn="1/2" gridRow="5/6">
+            </div>
+            <div id="variety">
                 <div>
                     <p>Variety:</p>
                 </div>
                 <div>
                     <p>{objProductValues.variety}</p>
                 </div>
-            </CardChildContainer>
-            <CardChildContainer gridColumn="1/2" gridRow="6/7">
+            </div>
+            <div id="roastDate">
                 <div>
                     <p>Roast date:</p>
                 </div>
                 <div>
                     <p>{objProductValues.roastDate}</p>
                 </div>
-            </CardChildContainer>
-            <CardChildContainer gridColumn="1/2" gridRow="7/8">
+            </div>
+            <div id="size">
                 <div>
-                    <p>Size:</p>
+                    <p>Select size:</p>
                 </div>
                 <div>
                     <DropdownList
@@ -81,34 +69,26 @@ const ProductDetailCard = ({
                         objArrayValues={objArraySizes}
                     />
                 </div>
-            </CardChildContainer>
-            <CardChildContainer gridColumn="1/2" gridRow="8/9">
+            </div>
+            <div id="price">
                 <div>
-                    <DropdownList
-                        width="90%"
-                        selectName="ddlQty"
-                        selectId="ddlIDQty"
-                        objArrayValues={objArrayQty}
-                    />
+                    <p>Price:</p>
                 </div>
                 <div>
-                    <PPrice fontSize="1rem">
-                        $10
-                        {/* ${objProductValues.objPriceUnitSize.price} */}
-                        <span>
-                            /100gr{' '}
-                            {/* /{objProductValues.objPriceUnitSize.unit} */}
-                        </span>
-                    </PPrice>
+                    $10
+                    {/* ${objProductValues.objPriceUnitSize.price} */}
+                    <span>
+                        /100gr {/* /{objProductValues.objPriceUnitSize.unit} */}
+                    </span>
                 </div>
-            </CardChildContainer>
-            <CardChildContainer gridColumn="1/2" gridRow="9/10">
+            </div>
+            <div id="button">
                 <Button
-                    title="Add to basquet"
+                    title="Available"
                     backgroundColor="#C4C4C4"
                     textColor="Black"
                 ></Button>
-            </CardChildContainer>
+            </div>
         </CardContainer>
     )
 }
