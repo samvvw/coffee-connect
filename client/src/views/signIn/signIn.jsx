@@ -1,7 +1,8 @@
 import { useContext } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { UserContext } from '../context/userContext/userContext'
-import Button from '../components/button/button'
+import { UserContext } from '../../context/userContext/userContext'
+import Button from '../../components/button/button'
+import { Container } from './signIn.styles'
 
 const SignIn = (props) => {
     const history = useHistory()
@@ -21,20 +22,23 @@ const SignIn = (props) => {
     }
 
     return (
-        <>
-            <h1>Sign In</h1>
+        <Container>
+            <h1>Login</h1>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email:</label>
-                <input type="email" name="email" id="email" />
+                <label>
+                    Email: <input type="email" name="email" />
+                </label>
 
-                <label htmlFor="password">Password:</label>
-                <input type="password" name="password" id="password" />
+                <label>
+                    Password:
+                    <input type="password" name="password" />
+                </label>
 
                 {!loading && <Button title="Login" type="submit" />}
                 {loading && <small>Loading...</small>}
-                {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
+                {/* {error.ob && <pre>{JSON.stringify(error, null, 2)}</pre>} */}
             </form>
-        </>
+        </Container>
     )
 }
 
