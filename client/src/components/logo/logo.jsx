@@ -4,7 +4,7 @@ import { StyledLogo } from './logo.styles'
 const Logo = (props) => {
     return (
         <StyledLogo>
-            <Link to="/">QAFA</Link>
+            <Link to="/">Qafa</Link>
         </StyledLogo>
     )
 }

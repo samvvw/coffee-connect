@@ -1,25 +1,26 @@
-import imgPlaceholder from '../../assets/images/placeholder.png'
 import { Container } from './farmProfileDescription.styles'
+import { useToggle } from '../../assets/functions'
 
-const FarmProfileDescription = ({ farmSize, farmDescription }) => {
+const FarmProfileDescription = ({ objFarmProfile }) => {
+    const [isDescriptionShort, toggleDescription] = useToggle()
+
     return (
         <Container>
             <div id="description">
-                <h5>Farm Description</h5>
+                <h5>About this farm</h5>
                 <div>
-                    <p>Farm Size: {farmSize}</p>
+                    <p>Farm Size: {objFarmProfile.farmSize}</p>
                 </div>
-                <p>{farmDescription}</p>
-            </div>
-            <div id="certificates">
-                <div>
-                    <h5>Certificates</h5>
-                    <a href="#">See All</a>
-                </div>
-                <div>
-                    <img src={imgPlaceholder} alt="" />
-                    <img src={imgPlaceholder} alt="" />
-                </div>
+                <p>
+                    {isDescriptionShort
+                        ? objFarmProfile.farmDescriptionLong
+                        : objFarmProfile.farmDescriptionShort}
+                    <span>
+                        <button type="button" onClick={toggleDescription}>
+                            {isDescriptionShort ? 'Read less' : 'Read more'}
+                        </button>
+                    </span>
+                </p>
             </div>
         </Container>
     )

@@ -8,11 +8,11 @@ import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder'
 
 import { Button } from './circleButton.style'
 
-const CircleButon = ({ IconName, onClick }) => {
+const CircleButon = ({ IconName, onClick, buttonBgc }) => {
     switch (IconName) {
         case 'FavoriteFull':
             return (
-                <Button onClick={onClick}>
+                <Button onClick={onClick} buttonBgc={buttonBgc}>
                     <FavoriteFullIcon
                         fontSize="medium"
                         style={{ fill: 'white' }}
@@ -21,7 +21,7 @@ const CircleButon = ({ IconName, onClick }) => {
             )
         case 'FavoriteEmpty':
             return (
-                <Button onClick={onClick}>
+                <Button onClick={onClick} buttonBgc={buttonBgc}>
                     <FavoriteEmptyIcon
                         fontSize="medium"
                         style={{ fill: 'black' }}
@@ -30,7 +30,7 @@ const CircleButon = ({ IconName, onClick }) => {
             )
         case 'BookmarkBorderIcon':
             return (
-                <Button onClick={onClick}>
+                <Button onClick={onClick} buttonBgc={buttonBgc}>
                     <BookmarkBorderIcon
                         fontSize="medium"
                         style={{ fill: 'black' }}
@@ -39,13 +39,13 @@ const CircleButon = ({ IconName, onClick }) => {
             )
         case 'BookmarkIcon':
             return (
-                <Button onClick={onClick}>
+                <Button onClick={onClick} buttonBgc={buttonBgc}>
                     <BookmarkIcon fontSize="medium" style={{ fill: 'black' }} />
                 </Button>
             )
         case 'Share':
             return (
-                <Button onClick={onClick}>
+                <Button onClick={onClick} buttonBgc={buttonBgc}>
                     <ShareIcon fontSize="medium" style={{ fill: 'black' }} />
                 </Button>
             )

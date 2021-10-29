@@ -2,7 +2,7 @@ import ProductCard from '../../components/marketDirectoryComponents/productCard/
 import SortBy from '../../components/marketDirectoryComponents/sortBy/sortBy'
 import Map from '../../components/map/map'
 import SearchBar from '../../components/searchBar/searchBar'
-import { Row } from './coffeeMarketplace.styles'
+import { Row, Container } from './coffeeMarketplace.styles'
 
 const products = [
     {
@@ -62,8 +62,7 @@ const filters = [
 
 const CoffeeMarketplace = (props) => {
     return (
-        <>
-            <h1>Coffee Marketplace</h1>
+        <Container>
             <SearchBar placeholder="Search" />
             <SortBy filters={filters} />
             <Row>
@@ -79,7 +78,7 @@ const CoffeeMarketplace = (props) => {
                     />
                 </div>
             </Row>
-        </>
+        </Container>
     )
 }
 

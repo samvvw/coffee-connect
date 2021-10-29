@@ -24,7 +24,7 @@ export const UserProvider = ({ children }) => {
             })
 
             const data = await response.json()
-            sessionStorage.setItem('token', data.token)
+            localStorage.setItem('token', data.token)
             const decoded = jwt_decode(data.token)
             dispatch({
                 type: 'USER_SIGN_UP',
@@ -46,7 +46,7 @@ export const UserProvider = ({ children }) => {
             })
 
             const data = await response.json()
-            sessionStorage.setItem('token', data.token)
+            localStorage.setItem('token', data.token)
             const decoded = jwt_decode(data.token)
             dispatch({
                 type: 'USER_SIGN_IN',
