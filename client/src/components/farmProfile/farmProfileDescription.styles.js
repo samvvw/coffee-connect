@@ -14,6 +14,13 @@ export const Container = styled.div`
     a {
         color: black;
     }
+    button {
+        background-color: transparent;
+        max-width: 100px;
+        border: none;
+        cursor: pointer;
+        text-decoration: underline;
+    }
 
     #certificates {
         display: flex;

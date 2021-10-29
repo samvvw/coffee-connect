@@ -1,51 +1,56 @@
 import Button from '../button/button'
-import ProductCard from '../productCard/productCard'
+import FarmProfileProductCard from './farmProfileProductCard'
 import { Container } from './farmProfileProducts.styles'
-
+import { useEffect, useState } from 'react'
 const FarmProfileProducts = ({ imageWidth, arrObjProductDetails }) => {
     const cardWidth = '100%'
 
+    // *******************************************************
+
+    const [matches, setMatches] = useState(
+        window.matchMedia('(min-width: 401px)').matches
+    )
+
+    useEffect(() => {
+        const handler = (e) => setMatches(e.matches)
+        window.matchMedia('(min-width: 401px)').addListener(handler)
+    }, [])
+
     return (
         <Container>
-            <h5>My Products</h5>
+            <h5>Farm Products</h5>
             <div id="divProducts">
-                <ProductCard
-                    urlImage={
-                        arrObjProductDetails[0].productUrlImage.placeHolder
-                    }
-                    imageWidth={imageWidth}
-                    imageHeight="auto"
-                    width={cardWidth}
-                    height="auto"
-                    objProductDetails={arrObjProductDetails[0]}
-                />
-                <ProductCard
-                    urlImage={
-                        arrObjProductDetails[1].productUrlImage.placeHolder
-                    }
-                    imageWidth={imageWidth}
-                    imageHeight="auto"
-                    width={cardWidth}
-                    height="auto"
-                    objProductDetails={arrObjProductDetails[1]}
-                />
-                <ProductCard
-                    urlImage={
-                        arrObjProductDetails[2].productUrlImage.placeHolder
-                    }
-                    imageWidth={imageWidth}
-                    imageHeight="auto"
-                    width={cardWidth}
-                    height="auto"
-                    objProductDetails={arrObjProductDetails[2]}
-                />
+                {matches &&
+                    arrObjProductDetails.map(function (product) {
+                        return (
+                            <FarmProfileProductCard
+                                imageWidth={imageWidth}
+                                imageHeight="auto"
+                                width={cardWidth}
+                                height="auto"
+                                objProductDetails={product}
+                            />
+                        )
+                    })}
+                {!matches &&
+                    arrObjProductDetails.slice(0, 3).map(function (product) {
+                        return (
+                            <FarmProfileProductCard
+                                imageWidth={imageWidth}
+                                imageHeight="auto"
+                                width={cardWidth}
+                                height="auto"
+                                objProductDetails={product}
+                            />
+                        )
+                    })}
             </div>
             <div id="divButton">
                 <Button
                     title="See all the products"
                     onClick=""
-                    backgroundColor="black"
-                    textColor="white"
+                    backgroundColor="lightgray"
+                    textColor="Black"
                 />
             </div>
         </Container>
