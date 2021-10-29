@@ -1,6 +1,7 @@
 import { Switch, Route } from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.css'
 
 import Header from './components/header/header'
 import Footer from './components/footer/footer'
@@ -16,11 +17,13 @@ import ContactUs from './views/contactUs/contactUs'
 import FarmProfile from './views/farmProfile/farmProfile'
 import PrivateRouteFarmer from './components/PrivateRoute/privateRouteFarmer'
 import FarmDirectory from './views/farmDirectory/farmDirectory'
+import LoggedNavBar from './components/loggedNavBar/loggedNavBar'
 
 function App() {
     return (
-        <>
+        <div class="view-container">
             <Header />
+            <LoggedNavBar />
             <main>
                 <Switch>
                     <Route path="/sign-up" component={SignUp} />
@@ -39,7 +42,7 @@ function App() {
                 </Switch>
             </main>
             <Footer />
-        </>
+        </div>
     )
 }
 
