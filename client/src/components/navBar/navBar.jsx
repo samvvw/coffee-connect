@@ -29,7 +29,14 @@ const NavBar = (props) => {
                         About Us
                     </NavLink>
                 </MenuItem>
-                <MenuItem>Contact Us</MenuItem>
+                <MenuItem>
+                    <NavLink
+                        to="/contact-us"
+                        activeStyle={{ fontWeight: 'bold' }}
+                    >
+                        Contact Us
+                    </NavLink>
+                </MenuItem>
             </Menu>
         </Nav>
     )
