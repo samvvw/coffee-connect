@@ -21,7 +21,7 @@ import LoggedNavBar from './components/loggedNavBar/loggedNavBar'
 
 function App() {
     return (
-        <div class="view-container">
+        <div className="view-container">
             <Header />
             <LoggedNavBar />
             <main>

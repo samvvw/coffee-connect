@@ -10,7 +10,7 @@ const RadioButton = ({ name, id, value, label, onClick }) => {
                 value={value}
                 onClick={onClick}
             />
-            <Label for={id}>{label}</Label>
+            <Label forHtml={id}>{label}</Label>
         </>
     )
 }

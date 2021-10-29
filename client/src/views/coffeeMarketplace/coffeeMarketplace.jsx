@@ -1,10 +1,13 @@
+import { useState } from 'react'
+import { useEffect } from 'react'
+import axios from 'axios'
 import ProductCard from '../../components/marketDirectoryComponents/productCard/productCard'
 import SortBy from '../../components/marketDirectoryComponents/sortBy/sortBy'
 import Map from '../../components/map/map'
 import SearchBar from '../../components/searchBar/searchBar'
 import { Row, Container } from './coffeeMarketplace.styles'
 
-const products = [
+const products2 = [
     {
         id: 1,
         name: 'Product Name',
@@ -61,6 +64,18 @@ const filters = [
 ]
 
 const CoffeeMarketplace = (props) => {
+    const [products, setProducts] = useState([])
+
+    const getProducts = async () => {
+        const { data } = await axios.get('/api/product/')
+        console.log(data)
+        setProducts(data)
+    }
+
+    useEffect(() => {
+        getProducts()
+    }, [])
+
     return (
         <Container>
             <SearchBar placeholder="Search" />
@@ -74,7 +89,7 @@ const CoffeeMarketplace = (props) => {
                 <div className="map">
                     <Map
                         data={countries}
-                        style={{ width: '50vw', height: '100%' }}
+                        style={{ width: '50vw', height: '100vh' }}
                     />
                 </div>
             </Row>
