@@ -1,133 +1,144 @@
 const mongoose = require('mongoose')
 // const validator = require('validator')
 
-// const mediaSchema = new mongoose.Schema({
-//     mediaName: {
-//         type: String,
-//     },
-
-//     mediaUrl: {
-//         type: String,
-//     },
-
-//     mediaType: {
-//         type: String,
-//     },
-// })
-
-// const productVariationSchema = new mongoose.Schema({
-//     price: {
-//         type: Number,
-//         min: 0,
-//     },
-
-//     weight: {
-//         type: Number,
-//         min: 0,
-//     },
-
-//     unit: {
-//         type: String,
-//         enum: {
-//             values: ['g', 'kg', 'lb', 'oz'],
-//             message: '{VALUE} is not supported',
-//         },
-//     },
-// })
-
-
-const sizeSchema = new mongoose.Schema({
-
-    weight: {
-        type: Number,
-        min: 0,
-    },
-
-    unit: {
-        type: String,
-        enum: {
-            values: ['g', 'kg', 'lb', 'oz'],
-            message: '{VALUE} is not supported',
+const sizePriceSchema = new mongoose.Schema(
+    {
+        size: {
+            type: Number,
+            required: [true, 'Please input size'],
+            min: 0,
+        },
+        Price: {
+            type: Number,
+            required: [true, 'Please input price'],
+            min: 0,
         },
     },
-})
+    {
+        timestamps: true,
+    }
+)
 
 const productSchema = new mongoose.Schema(
     {
         farmId: {
             type: String,
             required: [true, 'Missing farm ID'],
+            //get from farm
         },
-
-        name: {
+        farmName: {
+            type: String,
+            required: [true, 'Missing farm name'],
+            minLength: 2,
+            maxLength: 50,
+            //get from farm
+        },
+        altitude: {
+            type: Number,
+            // required: [true, 'Please input product name'],
+            //get from farm
+        },
+        coordinate: {
+            type: [Number],
+            maxItems: 2,
+            // required: [true, "Please enter coordinate"],
+            //get from farm
+        },
+        origin: {
+            type: String,
+            enum: [  //temporal sets, and depends on API
+                'South America',
+                'Central America',
+                'North America',
+                'Asia',
+                'Africa',
+                'Europe',
+                'Oceania',
+            ],
+        },
+        location: {
+            type: String,
+            required: [true, 'Missing location'],
+        },
+        productName: {
             type: String,
             required: [true, 'Please input product name'],
             minLength: 2,
             maxLength: 50,
         },
-
         description: {
             type: String,
-            required: [true, 'Please input description of the product'],
             maxLength: 1000,
         },
-
         taste: {
-            type: String,
-        },
-
-        price: {
-            type: Number,
-        },
-
-        aroma: {
             type: [String],
-        },
-
-        coffeeStock: {
-            type: String,
-        },
-
-        roastLevel: {
-            type: String,
-        },
-
-        roastDate: {
-            type: Date,
-        },
-
-        coffeeVariety: {
-            type: String,
-        },
-
-        size: [sizeSchema],
-
-        coffeeProcess: {
-            type: String,
-        },
-    
-        type: {
-            type: String,
             enum: [
-                'Whole Bean',
-                'Grounded',
+                'Sour',
+                'Sweet',
+                'Bitter',
+                'Salty',
             ],
         },
-
-        reviews: {
+        aromas: {
             type: [String],
+            enum: [
+                'Flowery', 
+                'Fruity', 
+                'Herby', 
+                'Nutty', 
+                'Caramelly', 
+                'Chocolatey', 
+                'Resinous', 
+                'Spicy', 
+                'Carbony'
+            ],
         },
-
-        score: {
-            type: Number,
+        roastLevel: {
+            type: String,
+            enum: [
+                'Light',
+                'Medium',
+                'Medium - Dark',
+                'Dark',
+            ],
         },
-
+        coffeeProcess: {
+            type: String,
+            enum: [
+                'Natural',
+                'Honey',
+                'Pulped Natural',
+                'Washed',
+            ],
+        },
+        coffeeVariety: {
+            type: String,
+            enum: [
+                'Robusta',
+                'Arabica',
+            ],
+        },
+        roastDate: {
+            type: Date,
+            required: [true, 'Please input roast date'],    
+        },
+        coffeeType: {
+            type: String,
+            enum: [
+                'Whole Bean', 
+                'Grounded', 
+            ],
+            required: [true, 'Please select coffee type'],
+        },
+        sizePrice: {
+            type: [sizePriceSchema],
+            required: [true, 'Please input size and price'],
+        },
         picture: {
             type: [String],
             maxItems: 5,
-        }
+        },
     },
-
     {
         timestamps: true,
     }
