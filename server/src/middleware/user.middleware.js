@@ -5,6 +5,9 @@ const User = require('../models/user.model')
 exports.validateToken = async (req, res, next) => {
     try {
         if (!req.headers['content-type'].startsWith('multipart/form-data;')) {
+            if (!req.body.token) {
+                res.status(403).send('Forbidden access no token provided')
+            }
             const currentUser = jwt.verify(
                 req.body.token,
                 process.env.JWT_SECRET
@@ -13,7 +16,6 @@ exports.validateToken = async (req, res, next) => {
             const userDb = await User.findById(currentUser.id)
             req.currentUser = userDb
             if (userDb) {
-                // console.log(req.currentUser.id)
                 next()
             } else {
                 res.status(403).send('Access forbidden')
@@ -22,17 +24,29 @@ exports.validateToken = async (req, res, next) => {
             const form = formidable({ multiples: true })
 
             form.parse(req, async (error, fields, files) => {
-                const currentUser = jwt.verify(
-                    fields.token,
-                    process.env.JWT_SECRET
-                )
+                try {
+                    if (!fields.token) {
+                        res.status(403).send(
+                            'Forbidden access no token provided'
+                        )
+                    }
 
-                req.currentUser = currentUser
-                req.files = files
-                if (currentUser) {
-                    next()
-                } else {
-                    res.status(403).send('Access forbidden')
+                    const currentUser = jwt.verify(
+                        fields.token,
+                        process.env.JWT_SECRET
+                    )
+
+                    req.currentUser = currentUser
+                    req.body = fields
+                    req.files = files
+                    if (currentUser) {
+                        next()
+                    } else {
+                        res.status(403).send('Access forbidden')
+                    }
+                } catch (error) {
+                    console.log(error)
+                    res.status(500).send(error)
                 }
             })
         }
