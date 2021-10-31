@@ -215,7 +215,10 @@ exports.createProductPictures = async (req, res) => {
         const savedProduct = await req.product.save()
 
         res.json(savedProduct)
-    } catch (error) {}
+    } catch (error) {
+        console.log(error)
+        res.status(500).send(error)
+    }
 }
 
 exports.uploadProductPicture = async (req, res) => {
