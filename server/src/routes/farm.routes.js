@@ -5,6 +5,7 @@ const {
     createFarm,
     getFarms,
     getFarmById,
+    modifyFarm,
     deleteFarm,
 } = require('../controllers/farm.controller')
 const { validateToken } = require('../middleware/user.middleware')
@@ -27,6 +28,9 @@ farmRouter.get('/', getFarms)
 farmRouter.get('/:farmId', validateToken, getFarmById)
 
 farmRouter.use('/:farmId/product', farmProductRouter)
+
+// PUT Farm - Gets a single farm
+farmRouter.put('/:farmId', validateToken, modifyFarm)
 
 // DELETE Farm - Gets all farms
 farmRouter.delete('/:farmId', validateToken, deleteFarm)

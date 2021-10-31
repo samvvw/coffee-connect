@@ -1,50 +1,5 @@
 const mongoose = require('mongoose')
-const validator = require('validator')
 
-// const mediaSchema = new mongoose.Schema(
-//     {
-//         mediaName: {
-//             type: String,
-//             required: [true, 'Please enter media title'],
-//         },
-
-//         mediaUrl: {
-//             type: String,
-//         },
-
-//         mediaType: {
-//             type: String,
-//         },
-//     },
-//     {
-//         timestamps: true,
-//     }
-// )
-
-// const certificationSchema = new mongoose.Schema(
-//     {
-//         name: {
-//             type: String,
-//             required: [true, 'Please enter certificate name.'],
-//         },
-//         imageUrl: {
-//             type: String,
-//         },
-//         issueDate: {
-//             type: Date,
-//             required: [
-//                 true,
-//                 'Please enter the date of issuance of the certificate.',
-//             ],
-//         },
-//         expirationDate: {
-//             type: Date,
-//         },
-//     },
-//     {
-//         timestamps: true,
-//     }
-// )
 
 const farmSchema = new mongoose.Schema(
     {
@@ -62,7 +17,7 @@ const farmSchema = new mongoose.Schema(
             type: String,
             required: [true, 'Country is required.'],
         },
-        region: {
+        origin: {
             type: String,
             enum: [  //temporal sets, and depends on API
                 'South America',
@@ -94,6 +49,11 @@ const farmSchema = new mongoose.Schema(
             // minItems: 2,
             // required: [true, "Please enter coordinate"],
         },
+        // coordinate: {
+        //     type: Object,
+        //     //Request should be {type: "Point", coordinates: [-73.856077, 40.848447]}
+        //     // required: [true, "Please enter coordinate"],
+        // },
         farmPicture: {
             type: String,  //As of now, picture only based on the hi-fi, if needed, use mediaSchema later
             // required: [true, "Please enter coordinate"],
@@ -106,18 +66,6 @@ const farmSchema = new mongoose.Schema(
             type: [String],  //As of now, pictures only based on the hi-fi, if needed, use mediaSchema later
             // maxItems: 10, 
         },
-        // email: {
-        //     type: String,
-        //     required: [true, 'Please input your email'],
-        //     validate: [
-        //         {
-        //             validator: function (email) {
-        //                 return validator.isEmail(email)
-        //             },
-        //             messages: `Please input a valid email`,
-        //         },
-        //     ],
-        // },
     },
     {
         timestamps: true,
