@@ -2,6 +2,7 @@ const express = require('express')
 const farmProductRouter = express.Router()
 const allProductRouter = express.Router()
 const {
+    productParams,
     createProduct,
     getProducts,
     getProductById,
@@ -9,17 +10,11 @@ const {
     deleteProduct,
     uploadProductPicture,
     deleteProductPicture,
+    createProductPictures,
 } = require('../controllers/product.controller')
 const { validateToken } = require('../middleware/user.middleware')
 
-farmProductRouter.param('productId', (req, res, next, productId) => {
-    if (productId) {
-        req.productId = productId
-        next()
-    } else {
-        res.status(400).send('no product id provided')
-    }
-})
+farmProductRouter.param('productId', productParams)
 // POST Product - Create a new product
 farmProductRouter.post('/', validateToken, createProduct)
 
@@ -40,6 +35,15 @@ farmProductRouter.post(
     validateToken,
     uploadProductPicture
 )
-farmProductRouter.delete('/:productId/pictures', deleteProductPicture)
+farmProductRouter.post(
+    '/:productId/pictures-new',
+    validateToken,
+    createProductPictures
+)
+farmProductRouter.delete(
+    '/:productId/pictures',
+    validateToken,
+    deleteProductPicture
+)
 
 module.exports = { farmProductRouter, allProductRouter }
