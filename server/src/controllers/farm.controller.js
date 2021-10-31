@@ -59,6 +59,25 @@ exports.getFarms = (req, res) => {
     })
 }
 
+
+exports.modifyFarm = (req, res) => {
+    //Set fields and new data to be modified
+    //Whichever the field/s to be modified, send in body
+    const newData = {...req.body};
+    //No need to set Token, so remove from the object
+    delete newData.token;
+    // console.log(newData);
+
+    Farm.findOneAndUpdate({'_id': req.params.farmId},{$set: newData},{new: true})
+    .then((result) => {
+        res.json(result)
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(500).send(error)
+    })
+}
+
 exports.getFarmById = (req, res) => {
     //need to add Save based on User, too
     
