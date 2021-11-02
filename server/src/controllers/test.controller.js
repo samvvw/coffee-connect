@@ -15,7 +15,7 @@ exports.getAllProfilePictures = async (req, res) => {
             new ListObjectsCommand(bucketParams)
         )
 
-        console.log(bucketRequest.Contents.length)
+        console.log(bucketRequest.Contents?.length)
         res.json(bucketRequest)
     } catch (error) {
         console.log(error)

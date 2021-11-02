@@ -7,17 +7,11 @@ const {
     getFarmById,
     modifyFarm,
     deleteFarm,
+    getFarmParams,
 } = require('../controllers/farm.controller')
 const { validateToken } = require('../middleware/user.middleware')
 
-farmRouter.param('farmId', (req, res, next, farmId) => {
-    if (farmId) {
-        req.farmId = farmId
-        next()
-    } else {
-        res.status(400).send('no farm id provided')
-    }
-})
+farmRouter.param('farmId', getFarmParams)
 // POST Farm - Create a new farm
 farmRouter.post('/', validateToken, createFarm)
 
@@ -25,7 +19,7 @@ farmRouter.post('/', validateToken, createFarm)
 farmRouter.get('/', getFarms)
 
 // GET Farm - Gets a single farm
-farmRouter.get('/:farmId', validateToken, getFarmById)
+farmRouter.get('/:farmId', getFarmById)
 
 farmRouter.use('/:farmId/product', farmProductRouter)
 

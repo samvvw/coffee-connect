@@ -8,7 +8,7 @@ const sizePriceSchema = new mongoose.Schema(
             required: [true, 'Please input size'],
             min: 0,
         },
-        Price: {
+        price: {
             type: Number,
             required: [true, 'Please input price'],
             min: 0,
@@ -46,7 +46,8 @@ const productSchema = new mongoose.Schema(
         },
         origin: {
             type: String,
-            enum: [  //temporal sets, and depends on API
+            enum: [
+                //temporal sets, and depends on API
                 'South America',
                 'Central America',
                 'North America',
@@ -72,62 +73,41 @@ const productSchema = new mongoose.Schema(
         },
         taste: {
             type: [String],
-            enum: [
-                'Sour',
-                'Sweet',
-                'Bitter',
-                'Salty',
-            ],
+            enum: ['Sour', 'Sweet', 'Bitter', 'Salty'],
         },
         aromas: {
             type: [String],
             enum: [
-                'Flowery', 
-                'Fruity', 
-                'Herby', 
-                'Nutty', 
-                'Caramelly', 
-                'Chocolatey', 
-                'Resinous', 
-                'Spicy', 
-                'Carbony'
+                'Flowery',
+                'Fruity',
+                'Herby',
+                'Nutty',
+                'Caramelly',
+                'Chocolatey',
+                'Resinous',
+                'Spicy',
+                'Carbony',
             ],
         },
         roastLevel: {
             type: String,
-            enum: [
-                'Light',
-                'Medium',
-                'Medium - Dark',
-                'Dark',
-            ],
+            enum: ['Light', 'Medium', 'Medium - Dark', 'Dark'],
         },
         coffeeProcess: {
             type: String,
-            enum: [
-                'Natural',
-                'Honey',
-                'Pulped Natural',
-                'Washed',
-            ],
+            enum: ['Natural', 'Honey', 'Pulped Natural', 'Washed'],
         },
         coffeeVariety: {
             type: String,
-            enum: [
-                'Robusta',
-                'Arabica',
-            ],
+            enum: ['Robusta', 'Arabica'],
         },
         roastDate: {
             type: Date,
-            required: [true, 'Please input roast date'],    
+            required: [true, 'Please input roast date'],
         },
         coffeeType: {
             type: String,
-            enum: [
-                'Whole Bean', 
-                'Grounded', 
-            ],
+            enum: ['Whole Bean', 'Grounded'],
             required: [true, 'Please select coffee type'],
         },
         sizePrice: {
