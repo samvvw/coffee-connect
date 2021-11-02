@@ -35,8 +35,8 @@ const ProductCard = ({ data }) => {
                 </div>
                 <div className="product__price">
                     <p>
-                        <span>${data.sizePrice[0].price} CAD</span> /{' '}
-                        {data.sizePrice[0].size}g
+                        <span>${data.sizePrice[0]?.price} CAD</span> /{' '}
+                        {data.sizePrice[0]?.size}g
                     </p>
                 </div>
             </div>

@@ -35,7 +35,7 @@ const filters = [
 
 const CoffeeMarketplace = () => {
     const products = useProducts()
-    const [coordinates, setCoordinates] = useState([[4.1156735, -72.9301367]])
+    const [coordinates, setCoordinates] = useState()
 
     useEffect(() => {
         const getCoordinates = () => {
@@ -78,7 +78,7 @@ const CoffeeMarketplace = () => {
             <div className="map-container">
                 <Map
                     data={coordinates}
-                    style={{ width: '100%', height: '100vh' }}
+                    style={{ width: '100%', height: '80vh' }}
                 />
             </div>
         </Container>

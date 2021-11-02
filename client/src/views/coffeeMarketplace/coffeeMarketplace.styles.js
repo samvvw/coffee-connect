@@ -42,6 +42,12 @@ export const Container = styled.div`
             }
         }
 
+        .products {
+            height: 40vh;
+            overflow-y: scroll;
+            /* height: 545px; */
+        }
+
         &__products {
             display: flex;
             flex-direction: column;
