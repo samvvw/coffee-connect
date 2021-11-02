@@ -1,55 +1,45 @@
-import Image from '../../image/image'
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import Button from '../../button/button'
-import StarsReview from '../starsReview/starsReview'
 import placeholder from '../../../assets/images/placeholder.png'
-import {
-    CardContainer,
-    InfoContainer,
-    Metadata,
-    Description,
-    Row,
-    ProductName,
-    ProductPrice,
-} from './productCard.styles'
+import { CardContainer } from './productCard.styles'
 
 const ProductCard = ({ data }) => {
     return (
         <CardContainer>
-            <Image urlImg={placeholder} width="352px" />
-            <InfoContainer>
-                <Metadata>
-                    <Row>
-                        <ProductName>{data.name}</ProductName>
-                        {data.price && (
-                            <ProductPrice>
-                                {data.price}
-                                <span>/lb</span>
-                            </ProductPrice>
-                        )}
-                    </Row>
-                    {data.origin && <p>Origin: {data.origin}</p>}
-                    {data.taste && (
-                        <p>
-                            Location: {data.location} | Taste: {data.taste}
-                        </p>
-                    )}
-                    {!data.taste && <p>Location: {data.location}</p>}
-                    {data.roastLevel && <p>Roast Level: {data.roastLevel}</p>}
-                    {data.altitude && <p>Altitude: {data.altitude}</p>}
-                </Metadata>
-                <Description>
-                    <p>{data.description}</p>
-
-                    <Row>
-                        <p>
-                            <StarsReview review={data.review} />
-                            <span>({data.totalReviews} reviews)</span>
-                        </p>
-                        {data.price && <Button title="Learn more" />}
-                        {!data.price && <Button title="Explore Profile" />}
-                    </Row>
-                </Description>
-            </InfoContainer>
+            <div className="image-container">
+                <img src={placeholder} />
+            </div>
+            <div className="product">
+                <p className="product__title">{data.productName}</p>
+                <div className="product__metadata">
+                    <p className="product__metadata__location">
+                        Location: <span>{data.location} </span>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                    </p>
+                    <p className="product__metadata__taste">
+                        Taste: <span>{data.taste[0]} </span>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                    </p>
+                    <p className="product__metadata__roastLevel">
+                        Roast Level: <span>{data.roastLevel}</span>
+                    </p>
+                </div>
+                <div className="product__info">
+                    <p className="product__info__description">
+                        {data.description}
+                    </p>
+                    <ArrowForwardIcon
+                        className="product__info__arrow"
+                        fontSize="large"
+                    />
+                </div>
+                <div className="product__price">
+                    <p>
+                        <span>${data.sizePrice[0].price} CAD</span> /{' '}
+                        {data.sizePrice[0].size}g
+                    </p>
+                </div>
+            </div>
         </CardContainer>
     )
 }

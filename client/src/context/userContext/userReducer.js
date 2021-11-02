@@ -3,6 +3,9 @@ export const UserReducer = (state, action) => {
         case 'LOADING':
             return { ...state, loading: true }
 
+        case 'UNLOADING':
+            return { ...state, loading: false }
+
         case 'USER_SIGN_UP':
             return {
                 ...state,
@@ -41,6 +44,21 @@ export const UserReducer = (state, action) => {
                 error: {},
                 user: {},
                 token: null,
+            }
+
+        case 'REFRESH':
+            return {
+                ...state,
+                loading: false,
+                user: {
+                    userName: action.payload.user.userName,
+                    firstName: action.payload.user.firstName,
+                    lastName: action.payload.user.lastName,
+                    email: action.payload.user.email,
+                    userType: action.payload.user.userType,
+                    profilePicture: action.payload.user.profilePicture,
+                },
+                token: action.payload.token,
             }
 
         case 'ERROR':

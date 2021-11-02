@@ -4,7 +4,6 @@ import { Container, Small } from './sortBy.styles'
 const SortBy = ({ filters }) => {
     return (
         <Container>
-            <Small>Sort by: </Small>
             {filters.map((filter) => (
                 <RadioButton
                     key={filter.value}

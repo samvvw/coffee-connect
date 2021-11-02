@@ -1,47 +1,17 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
-import axios from 'axios'
+import { useEffect, useState } from 'react'
 import ProductCard from '../../components/marketDirectoryComponents/productCard/productCard'
 import SortBy from '../../components/marketDirectoryComponents/sortBy/sortBy'
 import Map from '../../components/map/map'
 import SearchBar from '../../components/searchBar/searchBar'
-import { Row, Container } from './coffeeMarketplace.styles'
-
-const products2 = [
-    {
-        id: 1,
-        name: 'Product Name',
-        price: '$50',
-        location: 'Colombia',
-        taste: 'Sweet',
-        roastLevel: 'Medium - dark',
-        description:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel eos quod similique sit ipsa, nobis corrupti!',
-        review: 3,
-        totalReviews: 45,
-    },
-    {
-        id: 2,
-        name: 'Product Name',
-        price: '$50',
-        location: 'Vancouver',
-        taste: 'Acid',
-        roastLevel: 'Medium',
-        description:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel eos quod similique sit ipsa, nobis corrupti!',
-        review: 2,
-        totalReviews: 87,
-    },
-]
+import { useProducts } from '../../hooks'
+import { Container } from './coffeeMarketplace.styles'
 
 const countries = [
     {
-        name: 'Colombia',
         coordinates: [4.1156735, -72.9301367],
     },
     {
-        name: 'Vancouver',
-        coordinates: [49.246292, -123.116226],
+        coordinates: [8.1156735, -72.9301367],
     },
 ]
 
@@ -63,36 +33,54 @@ const filters = [
     },
 ]
 
-const CoffeeMarketplace = (props) => {
-    const [products, setProducts] = useState([])
-
-    const getProducts = async () => {
-        const { data } = await axios.get('/api/product/')
-        console.log(data)
-        setProducts(data)
-    }
+const CoffeeMarketplace = () => {
+    const products = useProducts()
+    const [coordinates, setCoordinates] = useState([[4.1156735, -72.9301367]])
 
     useEffect(() => {
-        getProducts()
-    }, [])
+        const getCoordinates = () => {
+            const result = products.map(({ data }) => [
+                +data.coordinate[0],
+                +data.coordinate[1],
+            ])
+            setCoordinates(result)
+        }
+        getCoordinates()
+    }, [products])
 
     return (
         <Container>
-            <SearchBar placeholder="Search" />
-            <SortBy filters={filters} />
-            <Row>
-                <div className="products">
-                    {products.map((product) => (
-                        <ProductCard key={product.id} data={product} />
-                    ))}
-                </div>
-                <div className="map">
-                    <Map
-                        data={countries}
-                        style={{ width: '50vw', height: '100vh' }}
+            <div className="main">
+                <div className="main__search">
+                    <SearchBar
+                        placeholder="Search by product name"
+                        width="100%"
                     />
                 </div>
-            </Row>
+                <SortBy filters={filters} />
+                <div className="main__results">
+                    <div className="main__results__query">
+                        <p>Search results for:</p>
+                        <p>South America </p>
+                    </div>
+                    <div className="main__results__quantity">
+                        <p>
+                            <span>{products.length}</span>+ coffee products
+                        </p>
+                    </div>
+                </div>
+                <div className="products">
+                    {products.map(({ data }) => (
+                        <ProductCard key={data._id} data={data} />
+                    ))}
+                </div>
+            </div>
+            <div className="map-container">
+                <Map
+                    data={coordinates}
+                    style={{ width: '100%', height: '100vh' }}
+                />
+            </div>
         </Container>
     )
 }
