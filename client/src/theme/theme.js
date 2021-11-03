@@ -12,6 +12,7 @@ export const theme = {
         secondary: {
             dark: '#c66a00',
             800: ' #ffc83f',
+            c800: '#FF9933',
             light: '#ffca64',
             veryLight: '#fff2da',
         },
@@ -26,8 +27,13 @@ export const theme = {
             light: '#ed463b',
             veryLight: '#df7475',
         },
+        black: {
+            500: '#607D8B',
+            50: '#ECEFF1',
+        },
     },
     layout: {
         screenMaxWidth: '1220px',
+        desktop: '501px',
     },
 }

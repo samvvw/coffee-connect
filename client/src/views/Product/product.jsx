@@ -42,7 +42,7 @@ const Product = (props) => {
         },
     ]
     const objProductValues = {
-        productName: 'Product Name',
+        productName: 'Fire Dept. Coffe Original',
         taste: 'Sweet',
         roastLevel: 'Medium dark',
         process: 'Dry',
