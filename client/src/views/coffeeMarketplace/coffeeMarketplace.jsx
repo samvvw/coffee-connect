@@ -6,15 +6,6 @@ import SearchBar from '../../components/searchBar/searchBar'
 import { useProducts } from '../../hooks'
 import { Container } from './coffeeMarketplace.styles'
 
-const countries = [
-    {
-        coordinates: [4.1156735, -72.9301367],
-    },
-    {
-        coordinates: [8.1156735, -72.9301367],
-    },
-]
-
 const filters = [
     {
         id: 'roast',
@@ -35,7 +26,12 @@ const filters = [
 
 const CoffeeMarketplace = () => {
     const products = useProducts()
+    const [querySearch, setQuerySearch] = useState('')
     const [coordinates, setCoordinates] = useState()
+
+    const handleKeyUp = (e) => {
+        if (e.keyCode === 13) setQuerySearch(e.target.value)
+    }
 
     useEffect(() => {
         const getCoordinates = () => {
@@ -55,13 +51,14 @@ const CoffeeMarketplace = () => {
                     <SearchBar
                         placeholder="Search by product name"
                         width="100%"
+                        onKeyUp={(e) => handleKeyUp(e)}
                     />
                 </div>
                 <SortBy filters={filters} />
                 <div className="main__results">
                     <div className="main__results__query">
                         <p>Search results for:</p>
-                        <p>South America </p>
+                        <p>{querySearch}</p>
                     </div>
                     <div className="main__results__quantity">
                         <p>

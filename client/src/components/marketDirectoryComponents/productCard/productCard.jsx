@@ -1,5 +1,4 @@
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
-import Button from '../../button/button'
 import placeholder from '../../../assets/images/placeholder.png'
 import { CardContainer } from './productCard.styles'
 
@@ -7,7 +6,7 @@ const ProductCard = ({ data }) => {
     return (
         <CardContainer>
             <div className="image-container">
-                <img src={placeholder} />
+                <img src={placeholder} alt="" />
             </div>
             <div className="product">
                 <p className="product__title">{data.productName}</p>

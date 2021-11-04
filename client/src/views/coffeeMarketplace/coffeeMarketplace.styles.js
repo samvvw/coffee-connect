@@ -5,6 +5,9 @@ export const Container = styled.div`
     grid-template-columns: 1fr 1fr;
 
     .main {
+        display: flex;
+        flex-direction: column;
+
         &__search {
             padding: 0.5rem;
             background-color: #009999;
@@ -12,7 +15,7 @@ export const Container = styled.div`
 
         &__results {
             max-width: 97%;
-            margin: 0 auto;
+            /* margin: 0 auto; */
             padding: 2rem 1rem 0.5rem;
             display: flex;
             justify-content: space-between;
@@ -45,7 +48,7 @@ export const Container = styled.div`
         .products {
             height: 40vh;
             overflow-y: scroll;
-            /* height: 545px; */
+            flex-grow: 1;
         }
 
         &__products {
@@ -53,7 +56,7 @@ export const Container = styled.div`
             flex-direction: column;
             gap: 0.5rem;
             max-width: 97%;
-            height: 545px;
+            max-height: 545px;
             margin: 0 auto;
             overflow-y: scroll;
         }

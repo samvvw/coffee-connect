@@ -1,5 +1,5 @@
 import RadioButton from '../radioButton/radioButton'
-import { Container, Small } from './sortBy.styles'
+import { Container } from './sortBy.styles'
 
 const SortBy = ({ filters }) => {
     return (
