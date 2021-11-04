@@ -65,7 +65,7 @@ const OffCanvas = ({ name, handleClose, handleShow, show, ...props }) => {
                     </Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body style={styleBody}>
-                    <OffCanvasTabs />
+                    <OffCanvasTabs onHide={handleClose} />
                 </Offcanvas.Body>
             </Offcanvas>
         </CanvasContainer>
