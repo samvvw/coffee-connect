@@ -15,7 +15,8 @@ export const Container = styled.div`
 
         &__results {
             max-width: 97%;
-            /* margin: 0 auto; */
+            width: 100%;
+            margin: 0 auto;
             padding: 2rem 1rem 0.5rem;
             display: flex;
             justify-content: space-between;
@@ -49,6 +50,11 @@ export const Container = styled.div`
             height: 40vh;
             overflow-y: scroll;
             flex-grow: 1;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-left: 1rem;
         }
 
         &__products {

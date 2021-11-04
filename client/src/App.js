@@ -32,10 +32,9 @@ function App() {
                     <Route path="/contact-us" component={ContactUs} />
                     <Route path="/farm-profile" component={FarmProfile} />
                     <Route path="/farm-directory" component={FarmDirectory} />
-                    <Route path="/my-products" component={FarmDashboard} />
-                    {/* <PrivateRouteFarmer path="/my-products">
+                    <PrivateRouteFarmer path="/my-products">
                         <FarmDashboard />
-                    </PrivateRouteFarmer> */}
+                    </PrivateRouteFarmer>
                     <Route path="/" component={Home} />
                 </Switch>
             </main>
