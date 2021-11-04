@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const CardContainer = styled.div`
+export const Container = styled.div`
     max-width: 884px;
     width: 100%;
     padding-right: 10px;
@@ -9,8 +9,8 @@ export const CardContainer = styled.div`
     margin-bottom: 1rem;
 
     img {
-        width: 352px;
-        height: 240px;
+        width: 136px;
+        height: 136px;
         object-fit: cover;
         border-radius: 8px;
         cursor: pointer;
@@ -26,8 +26,8 @@ export const CardContainer = styled.div`
         }
 
         &__metadata {
+            margin-top: 0.5rem;
             margin-bottom: 0.8rem;
-            border-bottom: 1px solid #607d8b;
             padding-bottom: 0.8rem;
             display: flex;
             flex-flow: row wrap;
@@ -42,28 +42,6 @@ export const CardContainer = styled.div`
                     font-size: 1rem;
                     color: #000000;
                 }
-            }
-        }
-
-        &__info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            &__description {
-                max-width: 40ch;
-                width: 100%;
-                font-size: 0.9rem;
-            }
-
-            &__arrow {
-                cursor: pointer;
-            }
-        }
-
-        &__price {
-            span {
-                font-weight: bold;
             }
         }
     }
@@ -82,9 +60,6 @@ export const CardContainer = styled.div`
                 border-bottom: none;
                 margin-bottom: 0;
                 padding-bottom: 0;
-            }
-            &__info {
-                display: none;
             }
         }
     }

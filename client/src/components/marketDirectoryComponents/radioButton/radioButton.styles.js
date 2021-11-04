@@ -7,9 +7,10 @@ export const Input = styled.input`
 
     & + label {
         background-color: #ffffff;
-        border-color: #000000;
+        border-color: #607d8b;
         border-radius: 30px;
         margin-right: 0.5rem;
+        color: #263238;
     }
 
     &:checked + label {
@@ -17,20 +18,14 @@ export const Input = styled.input`
         color: #ffffff;
         border-radius: 30px;
     }
-
-    /* &:focus + label {
-        background-color: #000000;
-        color: #ffffff;
-    } */
 `
 
 export const Label = styled.label`
     display: inline-block;
-    background-color: #ddd;
     padding: 10px 20px;
     font-family: sans-serif, Arial;
-    font-size: 16px;
-    border: 2px solid #444;
+    font-size: 1rem;
+    border: 1px solid #607d8b;
     border-radius: 4px;
     cursor: pointer;
 `

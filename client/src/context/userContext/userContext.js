@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react'
+import { createContext, useReducer, useEffect } from 'react'
 import jwt_decode from 'jwt-decode'
 import { UserReducer } from './userReducer'
 
@@ -13,6 +13,10 @@ export const UserContext = createContext(initialState)
 
 export const UserProvider = ({ children }) => {
     const [state, dispatch] = useReducer(UserReducer, initialState)
+
+    useEffect(() => {
+        verifyTokenInStorage()
+    }, [])
 
     const signUp = async (user) => {
         try {
@@ -58,6 +62,17 @@ export const UserProvider = ({ children }) => {
         }
     }
 
+    const verifyTokenInStorage = () => {
+        dispatch({ type: 'LOADING' })
+        const token = localStorage.getItem('token')
+        if (token) {
+            const decoded = jwt_decode(token)
+            dispatch({ type: 'REFRESH', payload: { token, user: decoded } })
+        } else {
+            dispatch({ type: 'UNLOADING' })
+        }
+    }
+
     return (
         <UserContext.Provider
             value={{
@@ -67,6 +82,7 @@ export const UserProvider = ({ children }) => {
                 token: state.token,
                 signUp,
                 signIn,
+                verifyTokenInStorage,
             }}
         >
             {children}

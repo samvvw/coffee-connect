@@ -10,13 +10,13 @@ const FormContactUs = () => {
                 sed pellentesque cras massa urna lectus leo, ut.{' '}
             </p>
             <form action="onSubmit" method="POST">
-                <label for="fullName">Full Name</label>
+                <label forHtml="fullName">Full Name</label>
                 <input type="text" name="fullName" id="fullName" required />
-                <label for="email">E-mail</label>
+                <label forHtml="email">E-mail</label>
                 <input type="email" name="email" id="email" required />
-                <label for="subject">Subject</label>
+                <label forHtml="subject">Subject</label>
                 <input type="text" name="subject" id="subject" required />
-                <label for="message">Message</label>
+                <label forHtml="message">Message</label>
                 <textarea name="message" id="message" required />
                 <div>
                     <Button
