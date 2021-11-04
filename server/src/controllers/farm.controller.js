@@ -1,6 +1,12 @@
 const Farm = require('../models/farm.model')
 const User = require('../models/user.model')
 const Product = require('../models/product.model')
+const { s3Client } = require('../config/s3Client')
+const fs = require('fs')
+const { PutObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3')
+
+const BUCKET_NAME = process.env.AWS_BUCKET_NAME
+const REGION = process.env.AWS_REGION
 
 exports.getFarmParams = async (req, res, next, farmId) => {
     try {
@@ -183,4 +189,125 @@ exports.deleteFarm = (req, res) => {
             console.log(error)
             res.status(500).send(error)
         })
+}
+
+exports.postFarmPicture = async (req, res) => {
+    try {
+        const keyOptions = {
+            farmLogo: 'logo',
+            farmPicture: 'farmPicture',
+            farmCertificate: 'certification',
+        }
+        const reqKeys = Object.keys(req.files)
+        if (
+            reqKeys.length > 1 ||
+            (reqKeys[0] != 'farmLogo' &&
+                reqKeys[0] != 'farmPicture' &&
+                reqKeys[0] != 'farmCertificate')
+        ) {
+            res.sendStatus(422)
+        } else {
+            if (req.files[reqKeys[0]]) {
+                if (
+                    reqKeys[0] === 'farmCertificate' &&
+                    req.farm.certification.length > 4
+                ) {
+                    res.status(422).send(
+                        'Farm already has the max number of certificates'
+                    )
+                } else {
+                    if (
+                        !/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(
+                            req.files[reqKeys[0]].name
+                        )
+                    ) {
+                        res.status(404).send('Wrong file format')
+                    } else {
+                        const fileExtension = req.files[reqKeys[0]].name
+                            .split('.')
+                            .pop()
+                        const fileName = `${req.farm._id}/${
+                            keyOptions[reqKeys[0]]
+                        }/${req.farm.name}-${
+                            reqKeys[0]
+                        }${Date.now().toString()}.${fileExtension}`
+                        const filePath = req.files[reqKeys[0]].path
+                        const fileStream = fs.createReadStream(filePath)
+                        const bucketParams = {
+                            Bucket: BUCKET_NAME,
+                            Key: fileName,
+                            Body: fileStream,
+                            ACL: 'public-read',
+                        }
+                        const uploadPicture = await s3Client.send(
+                            new PutObjectCommand(bucketParams)
+                        )
+                        const fileUrl = `https://${BUCKET_NAME}.s3.${REGION}.amazonaws.com/${fileName}`
+                        if (reqKeys[0] === 'farmCertificate') {
+                            req.farm[keyOptions[reqKeys[0]]].push(
+                                encodeURI(fileUrl)
+                            )
+                        } else {
+                            req.farm[keyOptions[reqKeys[0]]] =
+                                encodeURI(fileUrl)
+                        }
+                        const saveFarmDB = await req.farm.save()
+                        res.status(201).json(saveFarmDB)
+                    }
+                }
+            } else {
+                res.sendStatus(404)
+            }
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).send(error)
+    }
+}
+
+exports.deleteFarmPicture = async (req, res) => {
+    try {
+        const keyOptions = {
+            farmLogo: 'logo',
+            farmPicture: 'farmPicture',
+            farmCertificate: 'certification',
+        }
+        delete req.body.token
+        const reqKeys = Object.keys(req.body)
+
+        if (
+            reqKeys.length > 1 ||
+            (reqKeys[0] != 'farmLogo' &&
+                reqKeys[0] != 'farmPicture' &&
+                reqKeys[0] != 'farmCertificate')
+        ) {
+            res.sendStatus(422)
+        } else {
+            const fileKey = decodeURI(req.body[reqKeys[0]]).split(
+                'https://qafa.s3.us-west-2.amazonaws.com/'
+            )[1]
+
+            const bucketParams = {
+                Bucket: BUCKET_NAME,
+                Key: fileKey,
+            }
+
+            const deleteFromS3 = await s3Client.send(
+                new DeleteObjectCommand(bucketParams)
+            )
+
+            if (deleteFromS3) {
+                if (reqKeys[0] === 'farmCertificate') {
+                    req.farm[keyOptions[reqKeys[0]]].pull(req.body[reqKeys[0]])
+                } else {
+                    req.farm[keyOptions[reqKeys[0]]] = 'DefaultImg'
+                }
+                const saveDB = await req.farm.save()
+                res.status(200).json(saveDB)
+            }
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).send(error)
+    }
 }
