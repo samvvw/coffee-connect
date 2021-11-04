@@ -8,6 +8,8 @@ const {
     modifyFarm,
     deleteFarm,
     getFarmParams,
+    postFarmPicture,
+    deleteFarmPicture,
 } = require('../controllers/farm.controller')
 const { validateToken } = require('../middleware/user.middleware')
 
@@ -28,5 +30,10 @@ farmRouter.put('/:farmId', validateToken, modifyFarm)
 
 // DELETE Farm - Gets all farms
 farmRouter.delete('/:farmId', validateToken, deleteFarm)
+
+// POST Farm Pictures
+farmRouter.post('/:farmId/pictures', validateToken, postFarmPicture)
+
+farmRouter.delete('/:farmId/pictures', deleteFarmPicture)
 
 module.exports = farmRouter
