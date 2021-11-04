@@ -72,7 +72,13 @@ exports.createProduct = async (req, res) => {
 }
 
 exports.getProducts = (req, res) => {
-    Product.find({})
+    // console.log(req.query);
+    // console.log(Object.keys(req.query).length);
+    // console.log(Object.keys(req.query).length == 0 && Object.values(req.query)[0] == false);
+
+    //if no query, return all
+    if(Object.keys(req.query).length == 0 || Object.values(req.query)[0] == false) {
+        Product.find({})
         .exec()
         .then((result) => {
             let data = []
@@ -92,6 +98,55 @@ exports.getProducts = (req, res) => {
             console.log(error)
             res.status(500).send(error)
         })
+
+    //if with query strings, return filtered result with the requested filters
+    } else {
+
+        //preparing filter object
+        let setQuery = {};
+
+        //if price filter requested, make filter query and set in filer object
+        if('minPrice' in req.query && 'maxPrice' in req.query){
+            setQuery["sizePrice.price"] = {
+                $gte: parseFloat(req.query.minPrice),
+                $lte: parseFloat(req.query.maxPrice)
+            }
+        }
+
+        //if roastedLevel filter requested, make the filter query and set in filter object 
+        if('roastLevel' in req.query){
+            setQuery.roastLevel = {$in: req.query.roastLevel};
+        }
+
+        //if origin filter requested, make the filter query and set in filter object 
+        if('origin' in req.query){
+            setQuery.origin = {$in: req.query.origin};
+        }
+
+        // console.log(setQuery);
+
+        //Try to get the data with the filter object prepared above, and return the data
+        Product.find(setQuery)
+        .exec()
+        .then((result) => {
+            let data = []
+            for (i = 0; i < result.length; i++) {
+                let url = `/api/farm/${result[i].farmId}/product/${result[i]._id}`
+
+                let newData = {
+                    data: result[i],
+                    url: url,
+                }
+
+                data.push(newData)
+            }
+            res.json(data)
+        })
+        .catch((error) => {
+            console.log(error)
+            res.status(500).send(error)
+        })
+    }
 }
 
 exports.getProductById = (req, res) => {
