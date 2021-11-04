@@ -12,7 +12,7 @@ import Map from '../../components/map/map'
 import CircleButton from '../../components/circleButton/circleButton'
 
 import placeHolder from '../../assets/images/placeholder.png'
-import videoPlaceHolder from '../../assets/images/video-placeholder.png'
+// import videoPlaceHolder from '../../assets/images/video-placeholder.png'
 import { useEffect, useState } from 'react'
 
 const Product = (props) => {

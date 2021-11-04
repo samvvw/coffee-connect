@@ -1,10 +1,9 @@
 import RadioButton from '../radioButton/radioButton'
-import { Container, Small } from './sortBy.styles'
+import { Container } from './sortBy.styles'
 
 const SortBy = ({ filters }) => {
     return (
         <Container>
-            <Small>Sort by: </Small>
             {filters.map((filter) => (
                 <RadioButton
                     key={filter.value}

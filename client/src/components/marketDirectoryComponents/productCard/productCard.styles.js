@@ -1,57 +1,91 @@
 import styled from 'styled-components'
 
 export const CardContainer = styled.div`
+    max-width: 884px;
+    width: 100%;
+    padding-right: 10px;
     display: flex;
     gap: 1.5rem;
     margin-bottom: 1rem;
-`
 
-export const InfoContainer = styled.div``
-
-export const Metadata = styled.div`
-    border-bottom: 1px solid #000000;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
-
-    & > p {
-        margin-bottom: 0;
+    img {
+        width: 352px;
+        height: 240px;
+        object-fit: cover;
+        border-radius: 8px;
+        cursor: pointer;
     }
-`
 
-export const Description = styled.div`
-    & > p {
-        width: 55ch;
-    }
-`
+    .product {
+        &__title {
+            font-weight: bold;
+            font-size: 1.4rem;
+            max-width: 30ch;
+            margin-bottom: 0.2rem;
+            cursor: pointer;
+        }
 
-export const Row = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+        &__metadata {
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid #607d8b;
+            padding-bottom: 0.8rem;
+            display: flex;
+            flex-flow: row wrap;
 
-    & > p {
-        margin-bottom: 0;
+            p {
+                margin-bottom: 0.2rem;
+                color: #78909c;
+                font-size: 0.9rem;
 
-        & > span {
-            margin-left: 10px;
-            position: relative;
-            top: 1px;
+                span {
+                    font-weight: 600;
+                    font-size: 1rem;
+                    color: #000000;
+                }
+            }
+        }
+
+        &__info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &__description {
+                max-width: 40ch;
+                width: 100%;
+                font-size: 0.9rem;
+            }
+
+            &__arrow {
+                cursor: pointer;
+            }
+        }
+
+        &__price {
+            span {
+                font-weight: bold;
+            }
         }
     }
-`
 
-export const ProductName = styled.p`
-    font-weight: bold;
-    font-size: 1.5rem;
-`
+    @media (max-width: 1000px) {
+        flex-direction: column;
 
-export const ProductPrice = styled.p`
-    font-weight: bold;
-    font-size: 1.5rem;
+        img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
 
-    & > span {
-        font-size: 1rem;
-        font-weight: normal;
+        .product {
+            &__metadata {
+                border-bottom: none;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+            &__info {
+                display: none;
+            }
+        }
     }
 `
