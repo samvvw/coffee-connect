@@ -7,7 +7,7 @@ import FarmDasboardTabImages from './farmDashboardTabImages/farmDashboardTabImag
 
 import { Container } from './farmDashboardTabs.styles'
 
-const OffCanvasTabs = () => {
+const OffCanvasTabs = ({ onHide }) => {
     /*this state is to control tabs if needed*/
     const [key, setKey] = useState('productInformation')
 
@@ -21,7 +21,7 @@ const OffCanvasTabs = () => {
                 id="tab"
             >
                 <Tab eventKey="productInformation" title="Product Information">
-                    <FarmDashboardTabProductInformation />
+                    <FarmDashboardTabProductInformation onHide={onHide} />
                 </Tab>
                 <Tab eventKey="images" title="Images">
                     <FarmDasboardTabImages />

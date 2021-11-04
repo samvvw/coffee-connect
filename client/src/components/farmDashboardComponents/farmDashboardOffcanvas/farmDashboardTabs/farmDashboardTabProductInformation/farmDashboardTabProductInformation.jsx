@@ -1,10 +1,66 @@
 import { Container } from './farmDashboardTabProductInformation.styles'
 import Button from '../../../../button/button'
 import { theme } from '../../../../../theme/theme'
-const FarmDashboardTabProductInformation = () => {
+import { useState } from 'react'
+import axios from 'axios'
+const FarmDashboardTabProductInformation = ({ onHide }) => {
+    const [body, setBody] = useState({
+        farmId: '61834b3e802aa4a8e981ebdc',
+        productName: '',
+        description: '',
+        taste: [],
+        aromas: [],
+        roastLevel: '',
+        coffeeProcess: '',
+        coffeeVariety: '',
+        roastDate: '',
+        coffeeType: '',
+        sizePrice: [
+            { size: 0, price: 0 },
+            { size: 0, price: 0 },
+            { size: 0, price: 0 },
+        ],
+    })
+
+    const validateOption = (prev, current) => {
+        if (current.checked) {
+            return [...prev, current.value]
+        } else {
+            const index = prev.indexOf(current.value)
+            return prev.splice(index, 1)
+        }
+    }
+
+    const getSizePrice = (prev, current, index) => {
+        prev[index] = { size: +current.size, price: +current.price }
+        return prev
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+
+        // console.log(body)
+
+        axios
+            .post('/api/farm/61834b3e802aa4a8e981ebdc/product', {
+                ...body,
+                token: localStorage.getItem('token'),
+            })
+            .then((res) => {
+                // console.log('Yey!', res)
+                onHide()
+            })
+            .catch((error) => console.log(error))
+    }
+
     return (
         <Container>
-            <form id="newProduct" method="POST">
+            <form
+                id="newProduct"
+                method="POST"
+                //action="/api/farm/61834b3e802aa4a8e981ebdc/product"
+                onSubmit={(event) => handleSubmit(event)}
+            >
                 <div id="divName">
                     <label htmlFor="productName">
                         Product Name <span>*</span>
@@ -14,6 +70,12 @@ const FarmDashboardTabProductInformation = () => {
                         name="productName"
                         placeholder="e.g. Jamaican Blue Mountain"
                         required
+                        onChange={(event) => {
+                            return setBody((prevBody) => ({
+                                ...prevBody,
+                                productName: event.target.value,
+                            }))
+                        }}
                     />
                 </div>
                 <div id="divDescription">
@@ -26,9 +88,15 @@ const FarmDashboardTabProductInformation = () => {
                     </label>
                     <input
                         type="text"
-                        name="productDescription"
+                        name="description"
                         placeholder="Description..."
                         required
+                        onChange={(event) => {
+                            return setBody((prevBody) => ({
+                                ...prevBody,
+                                description: event.target.value,
+                            }))
+                        }}
                     />
                 </div>
                 <div id="divTaste">
@@ -41,9 +109,21 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="tasteSour">Sour</label>
                             <label class="containerCheckbox">
                                 <input
+                                    value="Sour"
                                     type="checkbox"
                                     name="taste"
                                     id="tasteSour"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            taste: [
+                                                ...validateOption(
+                                                    prevBody.taste,
+                                                    event.target
+                                                ),
+                                            ],
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkCheckbox"></span>
                             </label>
@@ -52,9 +132,21 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="tasteBitter">Bitter</label>
                             <label class="containerCheckbox">
                                 <input
+                                    value="Bitter"
                                     type="checkbox"
                                     name="taste"
                                     id="tasteBitter"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            taste: [
+                                                ...validateOption(
+                                                    prevBody.taste,
+                                                    event.target
+                                                ),
+                                            ],
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkCheckbox"></span>
                             </label>
@@ -63,20 +155,44 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="tasteSweet">Sweet</label>
                             <label class="containerCheckbox">
                                 <input
+                                    value="Sweet"
                                     type="checkbox"
                                     name="taste"
                                     id="tasteSweet"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            taste: [
+                                                ...validateOption(
+                                                    prevBody.taste,
+                                                    event.target
+                                                ),
+                                            ],
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkCheckbox"></span>
                             </label>
                         </div>
                         <div>
-                            <label htmlFor="tasteSalt">Salt</label>
+                            <label htmlFor="tasteSalt">Salty</label>
                             <label class="containerCheckbox">
                                 <input
+                                    value="Salty"
                                     type="checkbox"
                                     name="taste"
                                     id="tasteSalt"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            taste: [
+                                                ...validateOption(
+                                                    prevBody.taste,
+                                                    event.target
+                                                ),
+                                            ],
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkCheckbox"></span>
                             </label>
@@ -93,9 +209,21 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="aroma1">Flowery</label>
                             <label class="containerCheckbox">
                                 <input
+                                    value="Flowery"
                                     type="checkbox"
-                                    name="aroma"
+                                    name="aromas"
                                     id="aroma1"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            aromas: [
+                                                ...validateOption(
+                                                    prevBody.aromas,
+                                                    event.target
+                                                ),
+                                            ],
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkCheckbox"></span>
                             </label>
@@ -105,9 +233,21 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="aroma2">Resinous</label>
                             <label class="containerCheckbox">
                                 <input
+                                    value="Resinous"
                                     type="checkbox"
-                                    name="aroma"
+                                    name="aromas"
                                     id="aroma2"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            aromas: [
+                                                ...validateOption(
+                                                    prevBody.aromas,
+                                                    event.target
+                                                ),
+                                            ],
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkCheckbox"></span>
                             </label>
@@ -116,9 +256,21 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="aroma3">Fruity</label>
                             <label class="containerCheckbox">
                                 <input
+                                    value="Fruity"
                                     type="checkbox"
-                                    name="aroma"
+                                    name="aromas"
                                     id="aroma3"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            aromas: [
+                                                ...validateOption(
+                                                    prevBody.aromas,
+                                                    event.target
+                                                ),
+                                            ],
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkCheckbox"></span>
                             </label>
@@ -127,9 +279,21 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="aroma4">Spicy</label>
                             <label class="containerCheckbox">
                                 <input
+                                    value="Spicy"
                                     type="checkbox"
-                                    name="aroma"
+                                    name="aromas"
                                     id="aroma4"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            aromas: [
+                                                ...validateOption(
+                                                    prevBody.aromas,
+                                                    event.target
+                                                ),
+                                            ],
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkCheckbox"></span>
                             </label>
@@ -138,9 +302,21 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="aroma5">Herby</label>
                             <label class="containerCheckbox">
                                 <input
+                                    value="Herby"
                                     type="checkbox"
-                                    name="aroma"
+                                    name="aromas"
                                     id="aroma5"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            aromas: [
+                                                ...validateOption(
+                                                    prevBody.aromas,
+                                                    event.target
+                                                ),
+                                            ],
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkCheckbox"></span>
                             </label>
@@ -149,9 +325,21 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="aroma6">Carbony</label>
                             <label class="containerCheckbox">
                                 <input
+                                    value="Carbony"
                                     type="checkbox"
-                                    name="aroma"
+                                    name="aromas"
                                     id="aroma6"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            aromas: [
+                                                ...validateOption(
+                                                    prevBody.aromas,
+                                                    event.target
+                                                ),
+                                            ],
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkCheckbox"></span>
                             </label>
@@ -160,9 +348,21 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="aroma7">Nutty</label>
                             <label class="containerCheckbox">
                                 <input
+                                    value="Nutty"
                                     type="checkbox"
-                                    name="aroma"
+                                    name="aromas"
                                     id="aroma7"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            aromas: [
+                                                ...validateOption(
+                                                    prevBody.aromas,
+                                                    event.target
+                                                ),
+                                            ],
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkCheckbox"></span>
                             </label>
@@ -171,9 +371,21 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="aroma8">Chocolatey</label>
                             <label class="containerCheckbox">
                                 <input
+                                    value="Chocolatery"
                                     type="checkbox"
-                                    name="aroma"
+                                    name="aromas"
                                     id="aroma8"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            aromas: [
+                                                ...validateOption(
+                                                    prevBody.aromas,
+                                                    event.target
+                                                ),
+                                            ],
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkCheckbox"></span>
                             </label>
@@ -182,9 +394,21 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="aroma9">Caramelly</label>
                             <label class="containerCheckbox">
                                 <input
+                                    value="Caramelly"
                                     type="checkbox"
-                                    name="aroma"
+                                    name="aromas"
                                     id="aroma9"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            aromas: [
+                                                ...validateOption(
+                                                    prevBody.aromas,
+                                                    event.target
+                                                ),
+                                            ],
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkCheckbox"></span>
                             </label>
@@ -200,9 +424,16 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="roastLevel1">Light</label>
                             <label class="containerRadio">
                                 <input
+                                    value="Light"
                                     type="radio"
                                     name="roastLevel"
                                     id="roastLevel1"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            roastLevel: event.target.value,
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkRadio"></span>
                             </label>
@@ -212,9 +443,16 @@ const FarmDashboardTabProductInformation = () => {
 
                             <label class="containerRadio">
                                 <input
+                                    value="Medium - Dark"
                                     type="radio"
                                     name="roastLevel"
                                     id="roastLevel2"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            roastLevel: event.target.value,
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkRadio"></span>
                             </label>
@@ -224,9 +462,16 @@ const FarmDashboardTabProductInformation = () => {
 
                             <label class="containerRadio">
                                 <input
+                                    value="Medium"
                                     type="radio"
                                     name="roastLevel"
                                     id="roastLevel3"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            roastLevel: event.target.value,
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkRadio"></span>
                             </label>
@@ -236,9 +481,16 @@ const FarmDashboardTabProductInformation = () => {
 
                             <label class="containerRadio">
                                 <input
+                                    value="Dark"
                                     type="radio"
                                     name="roastLevel"
                                     id="roastLevel4"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            roastLevel: event.target.value,
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkRadio"></span>
                             </label>
@@ -255,9 +507,16 @@ const FarmDashboardTabProductInformation = () => {
 
                             <label class="containerRadio">
                                 <input
+                                    value="Natural"
                                     type="radio"
-                                    name="coffeProcess"
+                                    name="coffeeProcess"
                                     id="coffeProcess1"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            coffeeProcess: event.target.value,
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkRadio"></span>
                             </label>
@@ -267,9 +526,16 @@ const FarmDashboardTabProductInformation = () => {
 
                             <label class="containerRadio">
                                 <input
+                                    value="Honey"
                                     type="radio"
-                                    name="coffeProcess"
+                                    name="coffeeProcess"
                                     id="coffeProcess2"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            coffeeProcess: event.target.value,
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkRadio"></span>
                             </label>
@@ -278,12 +544,18 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="coffeProcess3">
                                 Pulped Natural
                             </label>
-
                             <label class="containerRadio">
                                 <input
+                                    value="Pulped Natural"
                                     type="radio"
-                                    name="coffeProcess"
+                                    name="coffeeProcess"
                                     id="coffeProcess3"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            coffeeProcess: event.target.value,
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkRadio"></span>
                             </label>
@@ -293,9 +565,16 @@ const FarmDashboardTabProductInformation = () => {
 
                             <label class="containerRadio">
                                 <input
+                                    value="Washed"
                                     type="radio"
-                                    name="coffeProcess"
+                                    name="coffeeProcess"
                                     id="coffeProcess4"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            coffeeProcess: event.target.value,
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkRadio"></span>
                             </label>
@@ -312,9 +591,16 @@ const FarmDashboardTabProductInformation = () => {
 
                             <label class="containerRadio">
                                 <input
+                                    value="Robusta"
                                     type="radio"
-                                    name="variety"
+                                    name="coffeeVariety"
                                     id="variety1"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            coffeeVariety: event.target.value,
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkRadio"></span>
                             </label>
@@ -324,9 +610,16 @@ const FarmDashboardTabProductInformation = () => {
 
                             <label class="containerRadio">
                                 <input
+                                    value="Arabica"
                                     type="radio"
-                                    name="variety"
+                                    name="coffeeVariety"
                                     id="variety2"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            coffeeVariety: event.target.value,
+                                        }))
+                                    }}
                                 />
                                 <span class="checkmarkRadio"></span>
                             </label>
@@ -340,9 +633,15 @@ const FarmDashboardTabProductInformation = () => {
                     <input
                         type="date"
                         id="productRoastDate"
-                        name="RoastDate"
+                        name="roastDate"
                         placeholder="mm/dd/yyyy"
                         required
+                        onChange={(event) => {
+                            return setBody((prevBody) => ({
+                                ...prevBody,
+                                roastDate: event.target.value,
+                            }))
+                        }}
                     />
                 </div>
                 <div id="divcoffeeType">
@@ -354,7 +653,18 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="Type1">Whole Bean</label>
 
                             <label class="containerRadio">
-                                <input type="radio" name="Type" id="Type1" />
+                                <input
+                                    value="Whole Bean"
+                                    type="radio"
+                                    name="coffeeType"
+                                    id="Type1"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            coffeeType: event.target.value,
+                                        }))
+                                    }}
+                                />
                                 <span class="checkmarkRadio"></span>
                             </label>
                         </div>
@@ -362,7 +672,18 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="Type2">Grounded</label>
 
                             <label class="containerRadio">
-                                <input type="radio" name="Type" id="Type2" />
+                                <input
+                                    value="Grounded"
+                                    type="radio"
+                                    name="coffeeType"
+                                    id="Type2"
+                                    onChange={(event) => {
+                                        return setBody((prevBody) => ({
+                                            ...prevBody,
+                                            coffeeType: event.target.value,
+                                        }))
+                                    }}
+                                />
                                 <span class="checkmarkRadio"></span>
                             </label>
                         </div>
@@ -377,10 +698,26 @@ const FarmDashboardTabProductInformation = () => {
                             </label>
                             <input
                                 id="productSize1"
-                                type="text"
+                                type="number"
                                 name="size1"
-                                placeholder="0g"
+                                placeholder="0"
                                 required
+                                onChange={(event) => {
+                                    return setBody((prevBody) => ({
+                                        ...prevBody,
+                                        sizePrice: [
+                                            ...getSizePrice(
+                                                prevBody.sizePrice,
+                                                {
+                                                    size: event.target.value,
+                                                    price: prevBody.sizePrice[0]
+                                                        .price,
+                                                },
+                                                0
+                                            ),
+                                        ],
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
@@ -390,9 +727,25 @@ const FarmDashboardTabProductInformation = () => {
                             <input
                                 id="productPrice1"
                                 type="number"
-                                name="Price1"
+                                name="price1"
                                 placeholder="0.00"
                                 required
+                                onChange={(event) => {
+                                    return setBody((prevBody) => ({
+                                        ...prevBody,
+                                        sizePrice: [
+                                            ...getSizePrice(
+                                                prevBody.sizePrice,
+                                                {
+                                                    price: event.target.value,
+                                                    size: prevBody.sizePrice[0]
+                                                        .size,
+                                                },
+                                                0
+                                            ),
+                                        ],
+                                    }))
+                                }}
                             />
                         </div>
                     </div>
@@ -404,10 +757,26 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="productSize2">Size</label>
                             <input
                                 id="productSize2"
-                                type="text"
+                                type="number"
                                 name="size2"
-                                placeholder="0g"
+                                placeholder="0"
                                 required
+                                onChange={(event) => {
+                                    return setBody((prevBody) => ({
+                                        ...prevBody,
+                                        sizePrice: [
+                                            ...getSizePrice(
+                                                prevBody.sizePrice,
+                                                {
+                                                    size: event.target.value,
+                                                    price: prevBody.sizePrice[1]
+                                                        .price,
+                                                },
+                                                1
+                                            ),
+                                        ],
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
@@ -415,9 +784,25 @@ const FarmDashboardTabProductInformation = () => {
                             <input
                                 id="productPrice2"
                                 type="number"
-                                name="Price2"
+                                name="price2"
                                 placeholder="0.00"
                                 required
+                                onChange={(event) => {
+                                    return setBody((prevBody) => ({
+                                        ...prevBody,
+                                        sizePrice: [
+                                            ...getSizePrice(
+                                                prevBody.sizePrice,
+                                                {
+                                                    price: event.target.value,
+                                                    size: prevBody.sizePrice[1]
+                                                        .size,
+                                                },
+                                                1
+                                            ),
+                                        ],
+                                    }))
+                                }}
                             />
                         </div>
                     </div>
@@ -429,10 +814,26 @@ const FarmDashboardTabProductInformation = () => {
                             <label htmlFor="productSize3">Size</label>
                             <input
                                 id="productSize3"
-                                type="text"
+                                type="number"
                                 name="size3"
-                                placeholder="0g"
+                                placeholder="0"
                                 required
+                                onChange={(event) => {
+                                    return setBody((prevBody) => ({
+                                        ...prevBody,
+                                        sizePrice: [
+                                            ...getSizePrice(
+                                                prevBody.sizePrice,
+                                                {
+                                                    size: event.target.value,
+                                                    price: prevBody.sizePrice[2]
+                                                        .price,
+                                                },
+                                                2
+                                            ),
+                                        ],
+                                    }))
+                                }}
                             />
                         </div>
                         <div>
@@ -440,9 +841,25 @@ const FarmDashboardTabProductInformation = () => {
                             <input
                                 id="productPrice3"
                                 type="number"
-                                name="Price3"
+                                name="price3"
                                 placeholder="0.00"
                                 required
+                                onChange={(event) => {
+                                    return setBody((prevBody) => ({
+                                        ...prevBody,
+                                        sizePrice: [
+                                            ...getSizePrice(
+                                                prevBody.sizePrice,
+                                                {
+                                                    price: event.target.value,
+                                                    size: prevBody.sizePrice[2]
+                                                        .size,
+                                                },
+                                                2
+                                            ),
+                                        ],
+                                    }))
+                                }}
                             />
                         </div>
                     </div>
