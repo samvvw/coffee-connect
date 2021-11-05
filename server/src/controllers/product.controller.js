@@ -284,6 +284,7 @@ exports.createProductPictures = async (req, res) => {
 
 exports.uploadProductPicture = async (req, res) => {
     try {
+        console.log(req.product)
         if (req.product.picture.length >= 5) {
             res.status(422).send(
                 `Max 5 pictures per product  you have ${req.product.picture.length}`

@@ -24,7 +24,7 @@ const CircleButon = ({ IconName, onClick, buttonBgc }) => {
                 <Button onClick={onClick} buttonBgc={buttonBgc}>
                     <FavoriteEmptyIcon
                         fontSize="medium"
-                        style={{ fill: 'black' }}
+                        style={{ fill: 'red' }}
                     />
                 </Button>
             )

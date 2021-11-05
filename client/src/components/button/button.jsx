@@ -6,6 +6,7 @@ const Button = ({
     type = 'button',
     backgroundColor,
     textColor,
+    disabled = false,
 }) => {
     return (
         <StyledButton
@@ -13,6 +14,7 @@ const Button = ({
             onClick={onClick}
             backgroundColor={backgroundColor}
             textColor={textColor}
+            disabled={disabled}
         >
             {title}
         </StyledButton>
