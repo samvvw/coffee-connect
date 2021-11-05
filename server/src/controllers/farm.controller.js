@@ -68,19 +68,58 @@ exports.createFarm = async (req, res) => {
 
 exports.getFarms = (req, res) => {
     //The field returning is temporal as there is no hi-fi yet
-    Farm.find(
-        {},
-        { name: 1, farmPicture: 1, location: 1, origin: 1, description: 1 }
-    )
+
+    //if no query, return all
+    if(Object.keys(req.query).length == 0 || Object.values(req.query)[0] == false) {
+
+        Farm.find(
+            {},
+            { _id: 1, name: 1, farmPicture: 1, location: 1, origin: 1, altitude: 1 }
+        )
+            .exec()
+            .then((result) => {
+                //need to add Save based on User
+                res.json(result)
+            })
+            .catch((error) => {
+                console.log(error)
+                res.status(500).send(error)
+            })
+
+    //if with query strings, return filtered result with the requested filters
+    } else {
+        //preparing filter object
+        let setQuery = {};
+
+        //if origin filter requested, make the filter query and set in filter object 
+        if('origin' in req.query){
+            setQuery.origin = {$in: req.query.origin};
+        }
+
+        // console.log(setQuery);
+
+        //Try to get the data with the filter object prepared above, and return the data
+        Farm.find(setQuery, { _id: 1, name: 1, farmPicture: 1, location: 1, origin: 1, altitude: 1 })
         .exec()
         .then((result) => {
-            //need to add Save based on User
-            res.json(result)
+            let data = []
+            for (i = 0; i < result.length; i++) {
+                let url = `/api/farm/${result[i]._id}`
+
+                let newData = {
+                    data: result[i],
+                    url: url,
+                }
+
+                data.push(newData)
+            }
+            res.json(data)
         })
         .catch((error) => {
             console.log(error)
             res.status(500).send(error)
         })
+    }
 }
 
 exports.modifyFarm = (req, res) => {
