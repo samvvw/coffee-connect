@@ -31,6 +31,9 @@ export const theme = {
             500: '#607D8B',
             50: '#ECEFF1',
         },
+        disabledButton: {
+            light: '#E0E0E0',
+        },
     },
     layout: {
         screenMaxWidth: '1220px',

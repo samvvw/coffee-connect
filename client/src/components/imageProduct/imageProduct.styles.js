@@ -5,6 +5,7 @@ export const Container = styled.div`
     position: relative;
     width: 100%;
     margin: 0 auto;
+
     img {
         width: ${(props) => props.width || '100%'};
         height: ${(props) => props.height || 'auto'};
@@ -12,7 +13,7 @@ export const Container = styled.div`
         border-radius: 4px;
         /* padding: 5px; */
         box-sizing: border-box;
-        object-fit: fill;
+        object-fit: cover;
     }
 
     button {
