@@ -3,9 +3,15 @@ import Button from '../../../../button/button'
 import { theme } from '../../../../../theme/theme'
 import { useState } from 'react'
 import axios from 'axios'
-const FarmDashboardTabProductInformation = ({ onHide }) => {
+const FarmDashboardTabProductInformation = ({
+    setTabImagesDiabled,
+    setSubmitImagesButtonBgc,
+    setMessageDisplay,
+    setKeyTab,
+    setIdProduct,
+}) => {
     const [body, setBody] = useState({
-        farmId: '61834b3e802aa4a8e981ebdc',
+        farmId: '6184abab196df21a8eb2e8ac',
         productName: '',
         description: '',
         taste: [],
@@ -36,19 +42,42 @@ const FarmDashboardTabProductInformation = ({ onHide }) => {
         return prev
     }
 
+    //state tu disabled submit button
+    const [submitProductButtonDisabled, setSubmitProductButtonDisabled] =
+        useState(false)
+    //state de change submit color button
+    const [submitProductButtonBgc, setSubmitProductButtonBgc] = useState(
+        theme.pallette.secondary.c800
+    )
+
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        // console.log(body)
+        console.log(localStorage.getItem('token'))
 
         axios
-            .post('/api/farm/61834b3e802aa4a8e981ebdc/product', {
+            .post(`/api/farm/${body.farmId}/product`, {
                 ...body,
                 token: localStorage.getItem('token'),
             })
             .then((res) => {
-                // console.log('Yey!', res)
-                onHide()
+                // onHide()
+                //save new idProduct
+                console.log('Qui toy', res.data.data)
+                setIdProduct(res.data.data._id)
+
+                //Desable Submit Button
+                setSubmitProductButtonDisabled(true)
+                setSubmitProductButtonBgc(theme.pallette.disabledButton.light)
+
+                //Change behavior of image tab submitt button
+                setTabImagesDiabled(false)
+                //Change bgc of image tab submit button
+                setSubmitImagesButtonBgc(theme.pallette.secondary.c800)
+                //Show message on Images Tab about product information has been saved
+                setMessageDisplay('block')
+                //change selected tab to images tab
+                setKeyTab('images')
             })
             .catch((error) => console.log(error))
     }
@@ -371,7 +400,7 @@ const FarmDashboardTabProductInformation = ({ onHide }) => {
                             <label htmlFor="aroma8">Chocolatey</label>
                             <label class="containerCheckbox">
                                 <input
-                                    value="Chocolatery"
+                                    value="Chocolatey"
                                     type="checkbox"
                                     name="aromas"
                                     id="aroma8"
@@ -867,9 +896,10 @@ const FarmDashboardTabProductInformation = ({ onHide }) => {
                 <div id="divSubmit">
                     <Button
                         type="submit"
-                        backgroundColor={theme.pallette.secondary.c800}
+                        backgroundColor={submitProductButtonBgc}
                         textColor="white"
                         title=" Save Information"
+                        disabled={submitProductButtonDisabled}
                     />
                 </div>
             </form>

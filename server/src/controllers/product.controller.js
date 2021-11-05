@@ -77,75 +77,77 @@ exports.getProducts = (req, res) => {
     // console.log(Object.keys(req.query).length == 0 && Object.values(req.query)[0] == false);
 
     //if no query, return all
-    if(Object.keys(req.query).length == 0 || Object.values(req.query)[0] == false) {
+    if (
+        Object.keys(req.query).length == 0 ||
+        Object.values(req.query)[0] == false
+    ) {
         Product.find({})
-        .exec()
-        .then((result) => {
-            let data = []
-            for (i = 0; i < result.length; i++) {
-                let url = `/api/farm/${result[i].farmId}/product/${result[i]._id}`
+            .exec()
+            .then((result) => {
+                let data = []
+                for (i = 0; i < result.length; i++) {
+                    let url = `/api/farm/${result[i].farmId}/product/${result[i]._id}`
 
-                let newData = {
-                    data: result[i],
-                    url: url,
+                    let newData = {
+                        data: result[i],
+                        url: url,
+                    }
+
+                    data.push(newData)
                 }
+                res.json(data)
+            })
+            .catch((error) => {
+                console.log(error)
+                res.status(500).send(error)
+            })
 
-                data.push(newData)
-            }
-            res.json(data)
-        })
-        .catch((error) => {
-            console.log(error)
-            res.status(500).send(error)
-        })
-
-    //if with query strings, return filtered result with the requested filters
+        //if with query strings, return filtered result with the requested filters
     } else {
-
         //preparing filter object
-        let setQuery = {};
+        let setQuery = {}
 
         //if price filter requested, make filter query and set in filer object
-        if('minPrice' in req.query && 'maxPrice' in req.query){
-            setQuery["sizePrice.price"] = {
+        if ('minPrice' in req.query && 'maxPrice' in req.query) {
+            setQuery['sizePrice.price'] = {
                 $gte: parseFloat(req.query.minPrice),
-                $lte: parseFloat(req.query.maxPrice)
+                $lte: parseFloat(req.query.maxPrice),
             }
         }
 
-        //if roastedLevel filter requested, make the filter query and set in filter object 
-        if('roastLevel' in req.query){
-            setQuery.roastLevel = {$in: req.query.roastLevel};
+        //if roastedLevel filter requested, make the filter query and set in filter object
+        if ('roastLevel' in req.query) {
+            setQuery.roastLevel = { $in: req.query.roastLevel }
         }
 
-        //if origin filter requested, make the filter query and set in filter object 
-        if('origin' in req.query){
-            setQuery.origin = {$in: req.query.origin};
+        //if origin filter requested, make the filter query and set in filter object
+        if ('origin' in req.query) {
+            setQuery.origin = { $in: req.query.origin }
         }
 
         // console.log(setQuery);
 
         //Try to get the data with the filter object prepared above, and return the data
         Product.find(setQuery)
-        .exec()
-        .then((result) => {
-            let data = []
-            for (i = 0; i < result.length; i++) {
-                let url = `/api/farm/${result[i].farmId}/product/${result[i]._id}`
+            .exec()
+            .then((result) => {
+                let data = []
+                for (i = 0; i < result.length; i++) {
+                    let url = `/api/farm/${result[i].farmId}/product/${result[i]._id}`
 
-                let newData = {
-                    data: result[i],
-                    url: url,
+                    let newData = {
+                        data: result[i],
+                        url: url,
+                    }
+
+                    data.push(newData)
                 }
-
-                data.push(newData)
-            }
-            res.json(data)
-        })
-        .catch((error) => {
-            console.log(error)
-            res.status(500).send(error)
-        })
+                res.json(data)
+            })
+            .catch((error) => {
+                console.log(error)
+                res.status(500).send(error)
+            })
     }
 }
 
@@ -278,6 +280,7 @@ exports.createProductPictures = async (req, res) => {
 
 exports.uploadProductPicture = async (req, res) => {
     try {
+        console.log(req.product)
         if (req.product.picture.length >= 5) {
             res.status(422).send(
                 `Max 5 pictures per product  you have ${req.product.picture.length}`

@@ -14,7 +14,6 @@ exports.getFarmParams = async (req, res, next, farmId) => {
 
         req.farmId = farmId
         req.farm = responseDB
-        // console.log(farmId)
         next()
     } catch (error) {
         console.log(error)

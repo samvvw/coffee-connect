@@ -12,6 +12,10 @@ export const Container = styled.div`
         color: ${theme.pallette.primary[500]};
         font-size: 1rem;
     }
+    h3 {
+        font-size: 1rem;
+        color: ${theme.pallette.accent2[700]};
+    }
     p {
         margin-bottom: 1.5rem;
     }

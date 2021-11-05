@@ -6,25 +6,51 @@ import FarmDashboardTabProductInformation from './farmDashboardTabProductInforma
 import FarmDasboardTabImages from './farmDashboardTabImages/farmDashboardTabImages'
 
 import { Container } from './farmDashboardTabs.styles'
+import { theme } from '../../../../theme/theme'
 
 const OffCanvasTabs = ({ onHide }) => {
     /*this state is to control tabs if needed*/
-    const [key, setKey] = useState('productInformation')
+    const [keyTab, setKeyTab] = useState('productInformation')
+
+    //state to disable submit button for images tab
+    const [tabImagesDisabled, setTabImagesDiabled] = useState(true)
+    const [submitImagesButtonBgc, setSubmitImagesButtonBgc] = useState(
+        theme.pallette.disabledButton.light
+    )
+
+    //state to show message after product was saved.
+    const [messageDisplay, setMessageDisplay] = useState('none')
+
+    //state to keep idProduct when a new product is saved
+    const [idProduct, setIdProduct] = useState()
 
     return (
         <Container>
             <Tabs
-                activeKey={key}
-                onSelect={(k) => setKey(k)}
+                activeKey={keyTab}
+                onSelect={(k) => setKeyTab(k)}
                 className="mb-2"
                 defaultActiveKey="productInformation"
                 id="tab"
             >
                 <Tab eventKey="productInformation" title="Product Information">
-                    <FarmDashboardTabProductInformation onHide={onHide} />
+                    <FarmDashboardTabProductInformation
+                        setTabImagesDiabled={setTabImagesDiabled}
+                        setSubmitImagesButtonBgc={setSubmitImagesButtonBgc}
+                        onHide={onHide}
+                        setMessageDisplay={setMessageDisplay}
+                        setKeyTab={setKeyTab}
+                        setIdProduct={setIdProduct}
+                    />
                 </Tab>
                 <Tab eventKey="images" title="Images">
-                    <FarmDasboardTabImages />
+                    <FarmDasboardTabImages
+                        tabImagesDisabled={tabImagesDisabled}
+                        onHide={onHide}
+                        submitImagesButtonBgc={submitImagesButtonBgc}
+                        messageDisplay={messageDisplay}
+                        idProduct={idProduct}
+                    />
                 </Tab>
             </Tabs>
         </Container>
