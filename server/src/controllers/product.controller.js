@@ -107,6 +107,10 @@ exports.getProducts = (req, res) => {
         //preparing filter object
         let setQuery = {}
 
+        if ('search' in req.query) {
+            setQuery.$text = { $search: req.query.search }
+        }
+
         //if price filter requested, make filter query and set in filer object
         if ('minPrice' in req.query && 'maxPrice' in req.query) {
             setQuery['sizePrice.price'] = {

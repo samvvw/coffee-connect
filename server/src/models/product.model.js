@@ -124,5 +124,15 @@ const productSchema = new mongoose.Schema(
     }
 )
 
+productSchema.index({
+    farmName: 'text',
+    origin: 'text',
+    location: 'text',
+    productName: 'text',
+    coffeeProcess: 'text',
+})
+
 const Product = mongoose.model('Product', productSchema)
+
+Product.syncIndexes()
 module.exports = Product
