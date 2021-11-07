@@ -69,11 +69,20 @@ exports.getFarms = (req, res) => {
     //The field returning is temporal as there is no hi-fi yet
 
     //if no query, return all
-    if(Object.keys(req.query).length == 0 || Object.values(req.query)[0] == false) {
-
+    if (
+        Object.keys(req.query).length == 0 ||
+        Object.values(req.query)[0] == false
+    ) {
         Farm.find(
             {},
-            { _id: 1, name: 1, farmPicture: 1, location: 1, origin: 1, altitude: 1 }
+            {
+                _id: 1,
+                name: 1,
+                farmPicture: 1,
+                location: 1,
+                origin: 1,
+                altitude: 1,
+            }
         )
             .exec()
             .then((result) => {
@@ -85,39 +94,44 @@ exports.getFarms = (req, res) => {
                 res.status(500).send(error)
             })
 
-    //if with query strings, return filtered result with the requested filters
+        //if with query strings, return filtered result with the requested filters
     } else {
         //preparing filter object
-        let setQuery = {};
+        let setQuery = {}
 
-        //if origin filter requested, make the filter query and set in filter object 
-        if('origin' in req.query){
-            setQuery.origin = {$in: req.query.origin};
+        //if origin filter requested, make the filter query and set in filter object
+        if ('origin' in req.query) {
+            setQuery.origin = { $in: req.query.origin }
         }
 
-        // console.log(setQuery);
-
         //Try to get the data with the filter object prepared above, and return the data
-        Farm.find(setQuery, { _id: 1, name: 1, farmPicture: 1, location: 1, origin: 1, altitude: 1 })
-        .exec()
-        .then((result) => {
-            let data = []
-            for (i = 0; i < result.length; i++) {
-                let url = `/api/farm/${result[i]._id}`
+        Farm.find(setQuery, {
+            _id: 1,
+            name: 1,
+            farmPicture: 1,
+            location: 1,
+            origin: 1,
+            altitude: 1,
+        })
+            .exec()
+            .then((result) => {
+                let data = []
+                for (i = 0; i < result.length; i++) {
+                    let url = `/api/farm/${result[i]._id}`
 
-                let newData = {
-                    data: result[i],
-                    url: url,
+                    let newData = {
+                        data: result[i],
+                        url: url,
+                    }
+
+                    data.push(newData)
                 }
-
-                data.push(newData)
-            }
-            res.json(data)
-        })
-        .catch((error) => {
-            console.log(error)
-            res.status(500).send(error)
-        })
+                res.json(data)
+            })
+            .catch((error) => {
+                console.log(error)
+                res.status(500).send(error)
+            })
     }
 }
 
@@ -160,7 +174,6 @@ exports.modifyFarm = (req, res) => {
         return obj
     }
 
-    // console.log(objectReq(req.body))
     const newData = objectReq(req.body)
 
     Farm.findOneAndUpdate({ _id: req.farmId }, { $set: newData }, { new: true })
@@ -174,7 +187,6 @@ exports.modifyFarm = (req, res) => {
             }
             Product.updateMany({ farmId: req.farmId }, productUpdate)
                 .then((updateResult) => {
-                    // console.log(result)
                     res.json(updateResult)
                 })
                 .catch((error) => {

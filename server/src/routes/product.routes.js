@@ -13,10 +13,11 @@ const {
     createProductPictures,
 } = require('../controllers/product.controller')
 const { validateToken } = require('../middleware/user.middleware')
+const { validateFarmerUser } = require('../middleware/farm.middleware')
 
 farmProductRouter.param('productId', productParams)
 // POST Product - Create a new product
-farmProductRouter.post('/', validateToken, createProduct)
+farmProductRouter.post('/', validateToken, validateFarmerUser, createProduct)
 
 // GET Products - Gets all products
 allProductRouter.get('/', getProducts)
@@ -25,24 +26,37 @@ allProductRouter.get('/', getProducts)
 farmProductRouter.get('/:productId', getProductById)
 
 // PUT Product - Modify a single product
-farmProductRouter.put('/:productId', validateToken, modifyProduct)
+farmProductRouter.put(
+    '/:productId',
+    validateToken,
+    validateFarmerUser,
+    modifyProduct
+)
 
 // DELETE Product - Delete a single product
-farmProductRouter.delete('/:productId', validateToken, deleteProduct)
+farmProductRouter.delete(
+    '/:productId',
+    validateToken,
+    validateFarmerUser,
+    deleteProduct
+)
 
 farmProductRouter.post(
     '/:productId/pictures',
     validateToken,
+    validateFarmerUser,
     uploadProductPicture
 )
 farmProductRouter.post(
     '/:productId/pictures-new',
     validateToken,
+    validateFarmerUser,
     createProductPictures
 )
 farmProductRouter.delete(
     '/:productId/pictures',
     validateToken,
+    validateFarmerUser,
     deleteProductPicture
 )
 

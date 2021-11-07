@@ -19,7 +19,6 @@ exports.productParams = async (req, res, next, productId) => {
 
 exports.createProduct = async (req, res) => {
     try {
-        console.log(req.farmId)
         const {
             productName,
             description,
@@ -72,10 +71,6 @@ exports.createProduct = async (req, res) => {
 }
 
 exports.getProducts = (req, res) => {
-    // console.log(req.query);
-    // console.log(Object.keys(req.query).length);
-    // console.log(Object.keys(req.query).length == 0 && Object.values(req.query)[0] == false);
-
     //if no query, return all
     if (
         Object.keys(req.query).length == 0 ||
@@ -128,8 +123,6 @@ exports.getProducts = (req, res) => {
         if ('origin' in req.query) {
             setQuery.origin = { $in: req.query.origin }
         }
-
-        // console.log(setQuery);
 
         //Try to get the data with the filter object prepared above, and return the data
         Product.find(setQuery)
@@ -225,8 +218,6 @@ exports.deleteProduct = (req, res) => {
 
 exports.createProductPictures = async (req, res) => {
     try {
-        console.log(req.product.productName)
-
         const filesToUpload = []
         if (Array.isArray(req.files.productPictures)) {
             req.files.productPictures?.forEach((file) => {
@@ -263,11 +254,8 @@ exports.createProductPictures = async (req, res) => {
                 const uploadPicture = await s3Client.send(
                     new PutObjectCommand(bucketParam)
                 )
-                // console.log(bucketParam)
 
                 const fileUrl = `https://${BUCKET_NAME}.s3.${REGION}.amazonaws.com/${fileName}`
-
-                console.log(encodeURI(fileUrl))
 
                 req.product.picture.push(encodeURI(fileUrl))
             })
@@ -284,7 +272,6 @@ exports.createProductPictures = async (req, res) => {
 
 exports.uploadProductPicture = async (req, res) => {
     try {
-        console.log(req.product)
         if (req.product.picture.length >= 5) {
             res.status(422).send(
                 `Max 5 pictures per product  you have ${req.product.picture.length}`
