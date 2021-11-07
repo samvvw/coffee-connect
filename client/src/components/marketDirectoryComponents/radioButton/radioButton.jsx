@@ -1,16 +1,28 @@
-import { Input, Label } from './radioButton.styles'
+import { useState } from 'react'
+import ToggleButton from 'react-bootstrap/ToggleButton'
+import { checkedStyled } from './radioButton.styles'
 
-const RadioButton = ({ name, id, value, label, onClick }) => {
+const RadioButton = ({ id, value, label, onChange }) => {
+    const [checked, setChecked] = useState(false)
+
+    const handleChange = (e) => {
+        setChecked(e.currentTarget.checked)
+        onChange(e.currentTarget.value, e.currentTarget.checked)
+    }
+
     return (
         <>
-            <Input
-                type="radio"
+            <ToggleButton
                 id={id}
-                name={name}
+                type="checkbox"
+                variant={checked ? 'outline-warning' : 'outline-dark'}
+                checked={checked}
                 value={value}
-                onClick={onClick}
-            />
-            <Label forHtml={id}>{label}</Label>
+                onChange={(e) => handleChange(e)}
+                style={checked ? checkedStyled : { borderRadius: '15px' }}
+            >
+                {label}
+            </ToggleButton>
         </>
     )
 }
