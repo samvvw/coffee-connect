@@ -7,13 +7,13 @@ import { useState } from 'react'
 
 const filters = [
     {
-        id: 'roast',
-        value: 1,
+        value: 'roastLevel',
+        id: 1,
         label: 'Roast Level',
     },
     {
-        id: 'origin',
-        value: 2,
+        value: 'origin',
+        id: 2,
         label: 'Country',
     },
 ]
@@ -56,7 +56,7 @@ const FarmDirectory = (props) => {
                         onKeyUp={(e) => handleKeyUp(e)}
                     />
                 </div>
-                <SortBy filters={filters} />
+                <SortBy data={filters} />
                 <div className="main__results">
                     <div className="main__results__query">
                         <p>Search results for:</p>

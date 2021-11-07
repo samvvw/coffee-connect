@@ -8,19 +8,19 @@ import { Container } from './coffeeMarketplace.styles'
 
 const filters = [
     {
-        id: 'roast',
-        value: 1,
+        value: 'price',
+        id: 1,
+        label: 'Price',
+    },
+    {
+        value: 'roastLevel',
+        id: 2,
         label: 'Roast Level',
     },
     {
-        id: 'origin',
-        value: 2,
+        value: 'origin',
+        id: 3,
         label: 'Origin',
-    },
-    {
-        id: 'price',
-        value: 3,
-        label: 'Price',
     },
 ]
 
@@ -54,7 +54,7 @@ const CoffeeMarketplace = () => {
                         onKeyUp={(e) => handleKeyUp(e)}
                     />
                 </div>
-                <SortBy filters={filters} />
+                <SortBy data={filters} />
                 <div className="main__results">
                     <div className="main__results__query">
                         <p>Search results for:</p>
