@@ -1,34 +1,38 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import jwt_decode from 'jwt-decode'
 import { UserContext } from '../../context/userContext/userContext'
 
 const PrivateRouteFarmer = ({ children, path, ...rest }) => {
-    const { token } = useContext(UserContext)
-    let userType
-    if (token) {
-        userType = jwt_decode(token).userType
-    }
+    const { token, user } = useContext(UserContext)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        setLoading(false)
+    }, [])
 
     return (
-        <Route
-            {...rest}
-            path={path}
-            render={({ location }) => {
-                if (token && userType === 'farmer') {
-                    return children
-                } else {
-                    return (
-                        <Redirect
-                            to={{
-                                pathname: '/sign-in',
-                                state: { from: location },
-                            }}
-                        />
-                    )
-                }
-            }}
-        />
+        <>
+            {!loading && (
+                <Route
+                    {...rest}
+                    path={path}
+                    render={({ location }) => {
+                        if (token && user.userType === 'farmer') {
+                            return children
+                        } else {
+                            return (
+                                <Redirect
+                                    to={{
+                                        pathname: '/sign-in',
+                                        state: { from: location },
+                                    }}
+                                />
+                            )
+                        }
+                    }}
+                />
+            )}
+        </>
     )
 }
 
