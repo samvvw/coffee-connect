@@ -224,7 +224,17 @@ exports.getFarmById = (req, res) => {
     //Search all products which have this farmId and return Array of belonging product object
     //Will modify the field to return after fixing product schema
     let getProducts = []
-    Product.find({ farmId: req.farmId }, { productName: 1, location: 1, taste: 1, roastLevel: 1, sizePrice: 1})
+    Product.find(
+        { farmId: req.farmId },
+        {
+            productName: 1,
+            location: 1,
+            taste: 1,
+            roastLevel: 1,
+            sizePrice: 1,
+            picture: 1,
+        }
+    )
         .exec()
         .then((result) => {
             // getProducts = result
