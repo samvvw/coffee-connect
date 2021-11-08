@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken')
 const Farm = require('../models/farm.model')
 const User = require('../models/user.model')
 const Product = require('../models/product.model')
@@ -476,5 +477,83 @@ exports.removeMedia = async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).send(error)
+    }
+}
+
+exports.bookmarks = async (req, res) => {
+    if (!req.body.token) {
+        res.status(403).send('Forbidden access no token provided')
+    }
+    const currentUser = jwt.verify(
+        req.body.token,
+        process.env.JWT_SECRET
+    )
+
+    const userDb = await User.findById(currentUser.id)
+    req.currentUser = userDb
+    if (userDb) {
+
+        Farm.findOne({ _id: req.farmId }, { bookmarks: 1 })
+        .then((result) => {
+            // console.log(result.bookmarks)
+            if(result.bookmarks.includes(currentUser.id)){
+                //this object is just for the return
+                let newData = {
+                    farmDB: [],
+                    userDB: [],
+                }
+
+                //when there is already the UserId, remove the UserId from bookmarks array in Farm DB
+                Farm.findOneAndUpdate({ _id: req.farmId }, { $pull: {bookmarks: currentUser.id} }, { new: true })
+                .then((result) => {
+                    //preparing return
+                    newData.farmDB = result.bookmarks
+                })
+                .then(() => {
+                    //Also remove the FarmId from bookmarks array in User DB
+                    User.findOneAndUpdate({ _id: currentUser.id }, { $pull: {bookmarks: req.farmId} }, { new: true })
+                    .then((result) => {
+                        //preparing return
+                        newData.userDB = result.bookmarks
+                        //return the success status and result for both ofr farmDB and UserDB
+                        res.status(200).json(newData)
+                    })
+                })
+                .catch((error) => {
+                    console.log(error)
+                    res.status(500).send(error)
+                })
+
+            } else {
+                //this object is just for the return
+                let newData = {
+                    farmDB: [],
+                    userDB: [],
+                }
+                //when there is not the UserId, then push the UserId into bookmarks array in Farm DB
+                Farm.findOneAndUpdate({ _id: req.farmId }, { $push: {bookmarks: currentUser.id} }, { new: true })
+                .then((result) => {
+                    //preparing return
+                    newData.farmDB = result.bookmarks
+                })
+                .then(() => {
+                    //Also push the FarmId into bookmarks array in User DB
+                    User.findOneAndUpdate({ _id: currentUser.id }, { $push: {bookmarks: req.farmId} }, { new: true })
+                    .then((result) => {
+                        //preparing return
+                        newData.userDB = result.bookmarks
+                        //return the success status and result for both ofr farmDB and UserDB
+                        res.status(200).json(newData)
+                    })
+                })
+                .catch((error) => {
+                    console.log(error)
+                    return res.status(500).send(error)
+                })
+            }
+        })
+        
+    } else {
+        res.status(403).send('Access forbidden')
     }
 }
