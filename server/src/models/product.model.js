@@ -46,13 +46,10 @@ const productSchema = new mongoose.Schema(
         },
         origin: {
             type: String,
-            enum: [
-                //temporal sets, and depends on API
-                'South America',
-                'Central America',
-                'North America',
-                'Asia',
+            enum: [  //Based on REST countries - Region
                 'Africa',
+                'Americas',
+                'Asia',
                 'Europe',
                 'Oceania',
             ],
