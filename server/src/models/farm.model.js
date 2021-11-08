@@ -1,5 +1,19 @@
 const mongoose = require('mongoose')
 
+const mediaSchema = new mongoose.Schema(
+    {
+        caption: {
+            type: String,
+            maxLength: 150,
+        },
+        image: {
+            type: String,
+        },
+    },
+    {
+        timestamps: true,
+    }
+)
 
 const farmSchema = new mongoose.Schema(
     {
@@ -19,7 +33,8 @@ const farmSchema = new mongoose.Schema(
         },
         origin: {
             type: String,
-            enum: [  //Based on REST countries - Region
+            enum: [
+                //Based on REST countries - Region
                 'Africa',
                 'Americas',
                 'Asia',
@@ -53,16 +68,16 @@ const farmSchema = new mongoose.Schema(
         //     // required: [true, "Please enter coordinate"],
         // },
         farmPicture: {
-            type: String,  //As of now, picture only based on the hi-fi, if needed, use mediaSchema later
+            type: String, //As of now, picture only based on the hi-fi, if needed, use mediaSchema later
             // required: [true, "Please enter coordinate"],
         },
         certification: {
-            type: [String],  //As of now, pictures only based on the hi-fi, if needed, use certificationSchema later
+            type: [String], //As of now, pictures only based on the hi-fi, if needed, use certificationSchema later
             // maxItems: 3,
         },
         gallery: {
-            type: [String],  //As of now, pictures only based on the hi-fi, if needed, use mediaSchema later
-            // maxItems: 10, 
+            type: [mediaSchema], //As of now, pictures only based on the hi-fi, if needed, use mediaSchema later
+            // maxItems: 10,
         },
     },
     {

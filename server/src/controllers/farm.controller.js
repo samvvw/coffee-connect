@@ -398,3 +398,83 @@ exports.deleteFarmPicture = async (req, res) => {
         res.status(500).send(error)
     }
 }
+
+exports.uploadMedia = async (req, res) => {
+    try {
+        const imageFile = req.files.imageFile
+        const caption = req.body.caption
+
+        const fileName = `/${req.farm._id}/gallery/${encodeURIComponent(
+            imageFile.name
+        )}`
+
+        const fileStream = fs.createReadStream(imageFile.path)
+
+        const bucketParams = {
+            Bucket: BUCKET_NAME,
+            Key: fileName,
+            Body: fileStream,
+            ACL: 'public-read',
+        }
+
+        const uploadFile = await s3Client.send(
+            new PutObjectCommand(bucketParams)
+        )
+
+        const fileUrl = `https://${BUCKET_NAME}.s3.${REGION}.amazonaws.com/${fileName}`
+
+        const data = {
+            caption: caption,
+            image: fileUrl,
+        }
+
+        const updateFarm = await Farm.findByIdAndUpdate(
+            req.farm._id,
+            {
+                $push: { gallery: data },
+            },
+            {
+                new: true,
+            }
+        )
+
+        res.status(201).json(updateFarm)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send(error)
+    }
+}
+
+exports.removeMedia = async (req, res) => {
+    try {
+        const { mediaId } = req.params
+
+        const mediaIndex = req.farm.gallery.findIndex((e) => e.id === mediaId)
+        if (mediaIndex != -1) {
+            const fileName = req.farm.gallery[mediaIndex].image.split(
+                'https://qafa.s3.us-west-2.amazonaws.com/'
+            )[1]
+
+            const bucketParams = {
+                Bucket: BUCKET_NAME,
+                Key: fileName,
+            }
+
+            const deleteFileS3 = await s3Client.send(
+                new DeleteObjectCommand(bucketParams)
+            )
+
+            if (deleteFileS3) {
+                req.farm.gallery.pull({ _id: mediaId })
+
+                const saveDB = await req.farm.save()
+                res.status(204).send()
+            }
+        } else {
+            res.status(404).send('No media found')
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).send(error)
+    }
+}
