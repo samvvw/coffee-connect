@@ -5,7 +5,14 @@ import { theme } from '../../../theme/theme'
 import { CanvasContainer } from './farmDashboardOffcanvas.style'
 import OffCanvasTabs from './farmDashboardTabs/farmDashboardTabs'
 
-const OffCanvas = ({ name, handleClose, handleShow, show, ...props }) => {
+const OffCanvas = ({
+    name,
+    handleClose,
+    handleShow,
+    show,
+    setTotalProducts,
+    ...props
+}) => {
     // const [show, setShow] = useState(false)
 
     // const handleClose = () => setShow(false)
@@ -65,7 +72,10 @@ const OffCanvas = ({ name, handleClose, handleShow, show, ...props }) => {
                     </Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body style={styleBody}>
-                    <OffCanvasTabs onHide={handleClose} />
+                    <OffCanvasTabs
+                        onHide={handleClose}
+                        setTotalProducts={setTotalProducts}
+                    />
                 </Offcanvas.Body>
             </Offcanvas>
         </CanvasContainer>

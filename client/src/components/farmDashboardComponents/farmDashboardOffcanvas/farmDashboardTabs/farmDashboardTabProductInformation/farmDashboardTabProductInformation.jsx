@@ -9,6 +9,7 @@ const FarmDashboardTabProductInformation = ({
     setMessageDisplay,
     setKeyTab,
     setIdProduct,
+    setTotalProducts,
 }) => {
     const [body, setBody] = useState({
         farmId: '6184abab196df21a8eb2e8ac',
@@ -63,7 +64,7 @@ const FarmDashboardTabProductInformation = ({
             .then((res) => {
                 // onHide()
                 //save new idProduct
-                console.log('Qui toy', res.data.data)
+                // console.log('Qui toy', res.data.data)
                 setIdProduct(res.data.data._id)
 
                 //Desable Submit Button
@@ -78,6 +79,8 @@ const FarmDashboardTabProductInformation = ({
                 setMessageDisplay('block')
                 //change selected tab to images tab
                 setKeyTab('images')
+                //change the number of totalproduct variable just to rerender list of products
+                setTotalProducts((prev) => prev + 1)
             })
             .catch((error) => console.log(error))
     }
@@ -789,7 +792,6 @@ const FarmDashboardTabProductInformation = ({
                                 type="number"
                                 name="size2"
                                 placeholder="0"
-                                required
                                 onChange={(event) => {
                                     return setBody((prevBody) => ({
                                         ...prevBody,
@@ -815,7 +817,6 @@ const FarmDashboardTabProductInformation = ({
                                 type="number"
                                 name="price2"
                                 placeholder="0.00"
-                                required
                                 onChange={(event) => {
                                     return setBody((prevBody) => ({
                                         ...prevBody,
@@ -846,7 +847,6 @@ const FarmDashboardTabProductInformation = ({
                                 type="number"
                                 name="size3"
                                 placeholder="0"
-                                required
                                 onChange={(event) => {
                                     return setBody((prevBody) => ({
                                         ...prevBody,
@@ -872,7 +872,6 @@ const FarmDashboardTabProductInformation = ({
                                 type="number"
                                 name="price3"
                                 placeholder="0.00"
-                                required
                                 onChange={(event) => {
                                     return setBody((prevBody) => ({
                                         ...prevBody,
