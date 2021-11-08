@@ -24,7 +24,11 @@ const LoggedNavBar = (props) => {
                                     My Products
                                 </NavLink>
                             </li>
-                            <li>My Farm</li>
+                            <li>
+                                <NavLink exact to="/my-farm">
+                                    My Farm
+                                </NavLink>
+                            </li>
                         </ul>
                     )}
                     {user?.userType === 'consumer' && (

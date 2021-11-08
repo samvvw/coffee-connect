@@ -8,6 +8,7 @@ import AboutUs from './aboutUs/aboutUs'
 import ContactUs from './contactUs/contactUs'
 import FarmProfile from './farmProfile/farmProfile'
 import FarmDirectory from './farmDirectory/farmDirectory'
+import MyFarm from './myFarm/myFarm'
 
 export {
     SignUp,
@@ -20,4 +21,5 @@ export {
     ContactUs,
     FarmProfile,
     FarmDirectory,
+    MyFarm,
 }
