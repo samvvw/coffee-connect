@@ -15,6 +15,7 @@ import {
     ContactUs,
     FarmProfile,
     FarmDirectory,
+    MyFarm,
 } from './views'
 
 function App() {
@@ -31,8 +32,12 @@ function App() {
                     <Route path="/contact-us" component={ContactUs} />
                     <Route path="/farm-profile" component={FarmProfile} />
                     <Route path="/farm-directory" component={FarmDirectory} />
+
                     <PrivateRouteFarmer path="/my-products">
                         <FarmDashboard />
+                    </PrivateRouteFarmer>
+                    <PrivateRouteFarmer path="/my-farm">
+                        <MyFarm />
                     </PrivateRouteFarmer>
                     <Route path="/" component={Home} />
                 </Switch>
