@@ -36,7 +36,8 @@ exports.validateToken = async (req, res, next) => {
                         process.env.JWT_SECRET
                     )
 
-                    req.currentUser = currentUser
+                    const userDb = await User.findById(currentUser.id)
+                    req.currentUser = userDb
                     req.body = fields
                     req.files = files
                     if (currentUser) {

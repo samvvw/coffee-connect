@@ -10,6 +10,8 @@ const {
     getFarmParams,
     postFarmPicture,
     deleteFarmPicture,
+    uploadMedia,
+    removeMedia,
 } = require('../controllers/farm.controller')
 const { validateToken } = require('../middleware/user.middleware')
 const { validateFarmerUser } = require('../middleware/farm.middleware')
@@ -31,6 +33,20 @@ farmRouter.put('/:farmId', validateToken, validateFarmerUser, modifyFarm)
 
 // DELETE Farm - Gets all farms
 farmRouter.delete('/:farmId', validateToken, validateFarmerUser, deleteFarm)
+
+farmRouter.post(
+    '/:farmId/gallery',
+    validateToken,
+    validateFarmerUser,
+    uploadMedia
+)
+
+farmRouter.delete(
+    '/:farmId/gallery/:mediaId',
+    validateToken,
+    validateFarmerUser,
+    removeMedia
+)
 
 // POST Farm Pictures
 farmRouter.post(
