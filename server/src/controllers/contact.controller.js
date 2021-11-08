@@ -14,34 +14,32 @@ exports.createContact = async (req, res) => {
 
         const createContact = await Contact.create(data)
         res.status(201).json(createContact)
-
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }
 
-
-
 exports.getContacts = (req, res) => {
-    Contact.find({},{"name":1, "email":1, "subject":1, "message":1}).exec()
-    .then(result => {
-        res.json(result);
-    })
-    .catch(error => {
-        console.log(error)
-        res.status(500).send(error)
-    });
-};
-
+    Contact.find({}, { name: 1, email: 1, subject: 1, message: 1 })
+        .exec()
+        .then((result) => {
+            res.json(result)
+        })
+        .catch((error) => {
+            console.log(error)
+            res.status(500).json({ error: error })
+        })
+}
 
 exports.getContactById = (req, res) => {
-    Contact.findOne({'_id': req.params.id}).exec()
-    .then(result => {
-        res.json(result);
-    })
-    .catch(error => {
-        console.log(error)
-        res.status(500).send(error)
-    });
-};
+    Contact.findOne({ _id: req.params.id })
+        .exec()
+        .then((result) => {
+            res.json(result)
+        })
+        .catch((error) => {
+            console.log(error)
+            res.status(500).json({ error: error })
+        })
+}

@@ -44,7 +44,7 @@ exports.userSignUp = async (req, res) => {
         res.status(201).json({ token: token })
     } catch (error) {
         console.log(error)
-        res.status(400).send(error)
+        res.status(500).json({ error: error })
     }
 }
 
@@ -54,43 +54,44 @@ exports.userSignIn = async (req, res) => {
 
         //Check if PW from client is in DB
         const user = await User.findOne({ email: email }).exec()
+
         if (!user) {
             //if not in the db, send error msg
             res.status(404).json({ error: `${email} not found` })
-        }
-
-        //When PW from client is in DB, validate
-        const isPasswordValid = await user.validatePassword(password)
-
-        //If validation fail, send error msg
-        if (!isPasswordValid) {
-            res.status(401).json({ error: 'Password does not match' })
         } else {
-            //When validation is successful, give them token
-            const {
-                firstName,
-                lastName,
-                userName,
-                _id,
-                profilePicture,
-                userType,
-            } = user
-            const payload = {
-                id: _id,
-                firstName: firstName,
-                lastName: lastName,
-                userName: userName,
-                email: email,
-                profilePicture: profilePicture,
-                userType: userType,
-            }
+            //When PW from client is in DB, validate
+            const isPasswordValid = await user.validatePassword(password)
 
-            const token = createToken(payload)
-            res.status(200).json({ token: token })
+            //If validation fail, send error msg
+            if (!isPasswordValid) {
+                res.status(401).json({ error: 'Password does not match' })
+            } else {
+                //When validation is successful, give them token
+                const {
+                    firstName,
+                    lastName,
+                    userName,
+                    _id,
+                    profilePicture,
+                    userType,
+                } = user
+                const payload = {
+                    id: _id,
+                    firstName: firstName,
+                    lastName: lastName,
+                    userName: userName,
+                    email: email,
+                    profilePicture: profilePicture,
+                    userType: userType,
+                }
+
+                const token = createToken(payload)
+                res.status(200).json({ token: token })
+            }
         }
     } catch (error) {
         console.log(error)
-        res.status(400).send(error)
+        res.status(500).json({ error: error })
     }
 }
 
@@ -105,7 +106,7 @@ exports.uploadProfilePicture = async (req, res) => {
                 req.files.profilePicture.name
             )
         ) {
-            res.status(404).send('Wrong file format')
+            res.status(404).json({ error: 'Wrong file format' })
         } else {
             const fileStream = fs.createReadStream(filePath)
 
@@ -134,7 +135,7 @@ exports.uploadProfilePicture = async (req, res) => {
         }
     } catch (error) {
         console.error(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }
 
@@ -164,10 +165,10 @@ exports.deleteProfilePicture = async (req, res, next) => {
                 res.json(updatedUser)
             }
         } else {
-            res.status(404).send('No profile picture found')
+            res.status(404).json({ error: 'No profile picture found' })
         }
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }

@@ -13,12 +13,16 @@ exports.getFarmParams = async (req, res, next, farmId) => {
     try {
         const responseDB = await Farm.findById(farmId)
 
-        req.farmId = farmId
-        req.farm = responseDB
-        next()
+        if (!responseDB) {
+            res.status(404).json({ error: 'Farm not found' })
+        } else {
+            req.farmId = farmId
+            req.farm = responseDB
+            next()
+        }
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }
 
@@ -62,7 +66,7 @@ exports.createFarm = async (req, res) => {
         res.status(201).json(createFarm)
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }
 
@@ -104,7 +108,7 @@ exports.getFarms = (req, res) => {
             })
             .catch((error) => {
                 console.log(error)
-                res.status(500).send(error)
+                res.status(500).json({ error: error })
             })
 
         //if with query strings, return filtered result with the requested filters
@@ -148,7 +152,7 @@ exports.getFarms = (req, res) => {
             })
             .catch((error) => {
                 console.log(error)
-                res.status(500).send(error)
+                res.status(500).json({ error: error })
             })
     }
 }
@@ -209,12 +213,12 @@ exports.modifyFarm = (req, res) => {
                 })
                 .catch((error) => {
                     console.log(error)
-                    res.status(500).send(error)
+                    res.status(500).json({ error: error })
                 })
         })
         .catch((error) => {
             console.log(error)
-            res.status(500).send(error)
+            res.status(500).json({ error: error })
         })
 }
 
@@ -263,7 +267,7 @@ exports.getFarmById = (req, res) => {
         })
         .catch((error) => {
             console.log(error)
-            res.status(500).send(error)
+            res.status(500).json({ error: error })
         })
 }
 
@@ -275,7 +279,7 @@ exports.deleteFarm = (req, res) => {
         })
         .catch((error) => {
             console.log(error)
-            res.status(500).send(error)
+            res.status(500).json({ error: error })
         })
 }
 
@@ -300,16 +304,16 @@ exports.postFarmPicture = async (req, res) => {
                     reqKeys[0] === 'farmCertificate' &&
                     req.farm.certification.length > 4
                 ) {
-                    res.status(422).send(
-                        'Farm already has the max number of certificates'
-                    )
+                    res.status(422).json({
+                        error: 'Farm already has the max number of certificates',
+                    })
                 } else {
                     if (
                         !/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(
                             req.files[reqKeys[0]].name
                         )
                     ) {
-                        res.status(404).send('Wrong file format')
+                        res.status(404).json({ error: 'Wrong file format' })
                     } else {
                         const fileExtension = req.files[reqKeys[0]].name
                             .split('.')
@@ -349,7 +353,7 @@ exports.postFarmPicture = async (req, res) => {
         }
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }
 
@@ -396,7 +400,7 @@ exports.deleteFarmPicture = async (req, res) => {
         }
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }
 
@@ -442,7 +446,7 @@ exports.uploadMedia = async (req, res) => {
         res.status(201).json(updateFarm)
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }
 
@@ -469,34 +473,31 @@ exports.removeMedia = async (req, res) => {
                 req.farm.gallery.pull({ _id: mediaId })
 
                 const saveDB = await req.farm.save()
-                res.status(204).send()
+                res.status(204).json({
+                    success: saveDB,
+                })
             }
         } else {
-            res.status(404).send('No media found')
+            res.status(404).json({ error: 'No media found' })
         }
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }
 
 exports.bookmarks = async (req, res) => {
     if (!req.body.token) {
-        res.status(403).send('Forbidden access no token provided')
+        res.status(403).json({ error: 'Forbidden access no token provided' })
     }
-    const currentUser = jwt.verify(
-        req.body.token,
-        process.env.JWT_SECRET
-    )
+    const currentUser = jwt.verify(req.body.token, process.env.JWT_SECRET)
 
     const userDb = await User.findById(currentUser.id)
     req.currentUser = userDb
     if (userDb) {
-
-        Farm.findOne({ _id: req.farmId }, { bookmarks: 1 })
-        .then((result) => {
+        Farm.findOne({ _id: req.farmId }, { bookmarks: 1 }).then((result) => {
             // console.log(result.bookmarks)
-            if(result.bookmarks.includes(currentUser.id)){
+            if (result.bookmarks.includes(currentUser.id)) {
                 //this object is just for the return
                 let newData = {
                     farmDB: [],
@@ -504,26 +505,32 @@ exports.bookmarks = async (req, res) => {
                 }
 
                 //when there is already the UserId, remove the UserId from bookmarks array in Farm DB
-                Farm.findOneAndUpdate({ _id: req.farmId }, { $pull: {bookmarks: currentUser.id} }, { new: true })
-                .then((result) => {
-                    //preparing return
-                    newData.farmDB = result.bookmarks
-                })
-                .then(() => {
-                    //Also remove the FarmId from bookmarks array in User DB
-                    User.findOneAndUpdate({ _id: currentUser.id }, { $pull: {bookmarks: req.farmId} }, { new: true })
+                Farm.findOneAndUpdate(
+                    { _id: req.farmId },
+                    { $pull: { bookmarks: currentUser.id } },
+                    { new: true }
+                )
                     .then((result) => {
                         //preparing return
-                        newData.userDB = result.bookmarks
-                        //return the success status and result for both ofr farmDB and UserDB
-                        res.status(200).json(newData)
+                        newData.farmDB = result.bookmarks
                     })
-                })
-                .catch((error) => {
-                    console.log(error)
-                    res.status(500).send(error)
-                })
-
+                    .then(() => {
+                        //Also remove the FarmId from bookmarks array in User DB
+                        User.findOneAndUpdate(
+                            { _id: currentUser.id },
+                            { $pull: { bookmarks: req.farmId } },
+                            { new: true }
+                        ).then((result) => {
+                            //preparing return
+                            newData.userDB = result.bookmarks
+                            //return the success status and result for both ofr farmDB and UserDB
+                            res.status(200).json(newData)
+                        })
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                        res.status(500).json({ error: error })
+                    })
             } else {
                 //this object is just for the return
                 let newData = {
@@ -531,29 +538,35 @@ exports.bookmarks = async (req, res) => {
                     userDB: [],
                 }
                 //when there is not the UserId, then push the UserId into bookmarks array in Farm DB
-                Farm.findOneAndUpdate({ _id: req.farmId }, { $push: {bookmarks: currentUser.id} }, { new: true })
-                .then((result) => {
-                    //preparing return
-                    newData.farmDB = result.bookmarks
-                })
-                .then(() => {
-                    //Also push the FarmId into bookmarks array in User DB
-                    User.findOneAndUpdate({ _id: currentUser.id }, { $push: {bookmarks: req.farmId} }, { new: true })
+                Farm.findOneAndUpdate(
+                    { _id: req.farmId },
+                    { $push: { bookmarks: currentUser.id } },
+                    { new: true }
+                )
                     .then((result) => {
                         //preparing return
-                        newData.userDB = result.bookmarks
-                        //return the success status and result for both ofr farmDB and UserDB
-                        res.status(200).json(newData)
+                        newData.farmDB = result.bookmarks
                     })
-                })
-                .catch((error) => {
-                    console.log(error)
-                    return res.status(500).send(error)
-                })
+                    .then(() => {
+                        //Also push the FarmId into bookmarks array in User DB
+                        User.findOneAndUpdate(
+                            { _id: currentUser.id },
+                            { $push: { bookmarks: req.farmId } },
+                            { new: true }
+                        ).then((result) => {
+                            //preparing return
+                            newData.userDB = result.bookmarks
+                            //return the success status and result for both ofr farmDB and UserDB
+                            res.status(200).json(newData)
+                        })
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                        return res.status(500).json({ error: error })
+                    })
             }
         })
-        
     } else {
-        res.status(403).send('Access forbidden')
+        res.status(403).json({ error: 'Access forbidden' })
     }
 }

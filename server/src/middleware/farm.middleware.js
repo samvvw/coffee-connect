@@ -6,11 +6,13 @@ exports.validateFarmerUser = (req, res, next) => {
         if (userHasFarm != -1 || !req.farm) {
             next()
         } else {
-            res.status(403).send(
-                "Forbidden access, user doesn't have permissions to access this farm."
-            )
+            res.status(403).json({
+                error: "Forbidden access, user doesn't have permissions to access this farm.",
+            })
         }
     } else {
-        res.status(403).send('Forbidden access, user is not farmer type')
+        res.status(403).json({
+            error: 'Forbidden access, user is not farmer type',
+        })
     }
 }

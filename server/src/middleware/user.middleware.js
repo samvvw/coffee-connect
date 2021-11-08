@@ -6,7 +6,9 @@ exports.validateToken = async (req, res, next) => {
     try {
         if (!req.headers['content-type'].startsWith('multipart/form-data;')) {
             if (!req.body.token) {
-                res.status(403).send('Forbidden access no token provided')
+                res.status(403).json({
+                    error: 'Forbidden access no token provided',
+                })
             }
             const currentUser = jwt.verify(
                 req.body.token,
@@ -18,7 +20,7 @@ exports.validateToken = async (req, res, next) => {
             if (userDb) {
                 next()
             } else {
-                res.status(403).send('Access forbidden')
+                res.status(403).json({ error: 'Access forbidden' })
             }
         } else {
             const form = formidable({ multiples: true })
@@ -26,9 +28,9 @@ exports.validateToken = async (req, res, next) => {
             form.parse(req, async (error, fields, files) => {
                 try {
                     if (!fields.token) {
-                        res.status(403).send(
-                            'Forbidden access no token provided'
-                        )
+                        res.status(403).json({
+                            error: 'Forbidden access no token provided',
+                        })
                     }
 
                     const currentUser = jwt.verify(
@@ -43,16 +45,16 @@ exports.validateToken = async (req, res, next) => {
                     if (currentUser) {
                         next()
                     } else {
-                        res.status(403).send('Access forbidden')
+                        res.status(403).json({ error: 'Access forbidden' })
                     }
                 } catch (error) {
                     console.log(error)
-                    res.status(500).send(error)
+                    res.status(500).json({ error: error })
                 }
             })
         }
     } catch (error) {
         console.error(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }
