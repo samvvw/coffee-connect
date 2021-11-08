@@ -79,6 +79,9 @@ const farmSchema = new mongoose.Schema(
             type: [mediaSchema], //As of now, pictures only based on the hi-fi, if needed, use mediaSchema later
             // maxItems: 10,
         },
+        bookmarks: {
+            type: [String], //Store UserId who liked the farm
+        },
     },
     {
         timestamps: true,

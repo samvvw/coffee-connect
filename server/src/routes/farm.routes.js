@@ -12,6 +12,7 @@ const {
     deleteFarmPicture,
     uploadMedia,
     removeMedia,
+    bookmarks,
 } = require('../controllers/farm.controller')
 const { validateToken } = require('../middleware/user.middleware')
 const { validateFarmerUser } = require('../middleware/farm.middleware')
@@ -62,5 +63,8 @@ farmRouter.delete(
     validateFarmerUser,
     deleteFarmPicture
 )
+
+// Bookmark Farm
+farmRouter.put('/:farmId/bookmarks', bookmarks)
 
 module.exports = farmRouter
