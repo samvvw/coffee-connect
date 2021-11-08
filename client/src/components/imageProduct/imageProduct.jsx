@@ -12,6 +12,7 @@ const ImageProduct = ({
     tabImagesDisabled,
     idContainer,
     idProduct,
+    setTotalProducts,
 }) => {
     const [bgImage, setBgImage] = useState()
     const importFiles = (idContainer) => {
@@ -20,23 +21,29 @@ const ImageProduct = ({
         input.onchange = (_) => {
             // you can use this method to get file and perform respective operations
             let files = Array.from(input.files)
-            const farmId = '61834b3e802aa4a8e981ebdc'
-
+            const farmId = '6184abab196df21a8eb2e8ac'
             const productId = idProduct
             const token = localStorage.getItem('token')
             const form = new FormData()
             form.append('productFile', files[0])
             form.append('token', token)
             const data = { method: 'post', body: form }
-
+            console.log(`/api/farm/${farmId}/product/${productId}/pictures`)
             fetch(`/api/farm/${farmId}/product/${productId}/pictures`, data)
-                .then((res) => res.json())
-                .then((data) => {
-                    setBgImage(data.picture[+idContainer])
-                })
+                .then((res) =>
+                    res.json().then((data) => {
+                        setBgImage(data.picture[+idContainer])
+                        setTotalProducts((prev) => prev + 1)
+                    })
+                )
                 .catch((error) => console.log(error))
-
-            // console.log(files[0])
+            // .then((res) => res.json())
+            // .then((data) => {
+            //     console.log('data', data)
+            //     setBgImage(data.picture[+idContainer])
+            //     setTotalProducts((prev) => prev + 1)
+            // })
+            // .catch((error) => console.log(error))
         }
         input.click()
     }

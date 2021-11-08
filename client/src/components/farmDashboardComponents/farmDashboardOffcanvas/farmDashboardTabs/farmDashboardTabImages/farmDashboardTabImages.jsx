@@ -9,6 +9,7 @@ const FarmDasboardTabImages = ({
     messageDisplay,
     idProduct,
     onHide,
+    setTotalProducts,
 }) => {
     // console.log(tabImagesDisabled)
     const style = { display: messageDisplay }
@@ -32,6 +33,7 @@ const FarmDasboardTabImages = ({
                         tabImagesDisabled={tabImagesDisabled}
                         idProduct={idProduct}
                         idContainer="0"
+                        setTotalProducts={setTotalProducts}
                     ></ImageProduct>
 
                     <div>
@@ -54,6 +56,7 @@ const FarmDasboardTabImages = ({
                         tabImagesDisabled={tabImagesDisabled}
                         idProduct={idProduct}
                         idContainer="1"
+                        setTotalProducts={setTotalProducts}
                     ></ImageProduct>
                     <ImageProduct
                         width="100%"
@@ -61,6 +64,7 @@ const FarmDasboardTabImages = ({
                         tabImagesDisabled={tabImagesDisabled}
                         idProduct={idProduct}
                         idContainer="2"
+                        setTotalProducts={setTotalProducts}
                     ></ImageProduct>
                     <ImageProduct
                         width="100%"
@@ -68,6 +72,7 @@ const FarmDasboardTabImages = ({
                         tabImagesDisabled={tabImagesDisabled}
                         idProduct={idProduct}
                         idContainer="3"
+                        setTotalProducts={setTotalProducts}
                     ></ImageProduct>
                 </div>
                 <div id="divSubmit">

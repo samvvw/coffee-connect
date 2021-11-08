@@ -1,5 +1,3 @@
-import Image from '../../image/image'
-import CircleButton from '../../circleButton/circleButton'
 import {
     Container,
     DetailsContainer,
@@ -8,7 +6,6 @@ import {
 } from './productCard.styles'
 
 const ProductCard = ({
-    imageWidth,
     imageHeight,
     width,
     height,
@@ -16,15 +13,11 @@ const ProductCard = ({
     key,
 }) => {
     const style = { width: '100%', height: imageHeight }
+
     return (
-        <Container width={width} height={height}>
+        <Container key={key} width={width} height={height}>
             <div id="imageContainer">
                 <div>
-                    {/* <Image
-                        urlImage={objProductDetails.urlImage}
-                        imageWidth={imageWidth}
-                        imageHeight={imageHeight}
-                    /> */}
                     <img
                         src={objProductDetails.urlImage}
                         alt=""
@@ -32,7 +25,7 @@ const ProductCard = ({
                     />
                 </div>
                 <div>
-                    <CircleButton IconName="FavoriteEmpty" onClick="" />
+                    {/* <CircleButton IconName="FavoriteEmpty" onClick="" /> */}
                 </div>
             </div>
             <DetailsContainer>
@@ -48,7 +41,9 @@ const ProductCard = ({
                                 Location:{' '}
                                 <span>{objProductDetails.productLocation}</span>
                                 | Taste:{' '}
-                                <span>{objProductDetails.productTaste}</span>
+                                <span>
+                                    {objProductDetails.productTaste.join()}
+                                </span>
                             </p>
                         </div>
                         <div>
@@ -65,7 +60,7 @@ const ProductCard = ({
                     <Label fontSize="1rem" fontWeight="Bold">
                         ${objProductDetails.productPrice}
                         <Label fontSize=".6rem">
-                            /{objProductDetails.productUnit}
+                            /{objProductDetails.productUnit}g
                         </Label>
                     </Label>
                 </DetailsContainerChild>

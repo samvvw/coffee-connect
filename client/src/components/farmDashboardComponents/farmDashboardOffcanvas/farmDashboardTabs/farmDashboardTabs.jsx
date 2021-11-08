@@ -8,7 +8,7 @@ import FarmDasboardTabImages from './farmDashboardTabImages/farmDashboardTabImag
 import { Container } from './farmDashboardTabs.styles'
 import { theme } from '../../../../theme/theme'
 
-const OffCanvasTabs = ({ onHide }) => {
+const OffCanvasTabs = ({ onHide, setTotalProducts }) => {
     /*this state is to control tabs if needed*/
     const [keyTab, setKeyTab] = useState('productInformation')
 
@@ -41,6 +41,7 @@ const OffCanvasTabs = ({ onHide }) => {
                         setMessageDisplay={setMessageDisplay}
                         setKeyTab={setKeyTab}
                         setIdProduct={setIdProduct}
+                        setTotalProducts={setTotalProducts}
                     />
                 </Tab>
                 <Tab eventKey="images" title="Images">
@@ -50,6 +51,7 @@ const OffCanvasTabs = ({ onHide }) => {
                         submitImagesButtonBgc={submitImagesButtonBgc}
                         messageDisplay={messageDisplay}
                         idProduct={idProduct}
+                        setTotalProducts={setTotalProducts}
                     />
                 </Tab>
             </Tabs>
