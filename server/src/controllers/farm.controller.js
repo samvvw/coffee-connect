@@ -226,7 +226,14 @@ exports.getFarmById = (req, res) => {
     let getProducts = []
     Product.find(
         { farmId: req.farmId },
-        { productName: 1, location: 1, taste: 1, roastLevel: 1, sizePrice: 1 }
+        {
+            productName: 1,
+            location: 1,
+            taste: 1,
+            roastLevel: 1,
+            sizePrice: 1,
+            picture: 1,
+        }
     )
         .exec()
         .then((result) => {
