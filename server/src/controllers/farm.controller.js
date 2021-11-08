@@ -78,16 +78,28 @@ exports.getFarms = (req, res) => {
             {
                 _id: 1,
                 name: 1,
-                farmPicture: 1,
+                logo: 1,
                 location: 1,
                 origin: 1,
                 altitude: 1,
+                coordinate: 1,
             }
         )
             .exec()
             .then((result) => {
                 //need to add Save based on User
-                res.json(result)
+                let data = []
+                for (i = 0; i < result.length; i++) {
+                    let url = `/api/farm/${result[i]._id}`
+
+                    let newData = {
+                        data: result[i],
+                        url: url,
+                    }
+
+                    data.push(newData)
+                }
+                res.json(data)
             })
             .catch((error) => {
                 console.log(error)
@@ -99,6 +111,10 @@ exports.getFarms = (req, res) => {
         //preparing filter object
         let setQuery = {}
 
+        if ('search' in req.query) {
+            setQuery.$text = { $search: req.query.search }
+        }
+
         //if origin filter requested, make the filter query and set in filter object
         if ('origin' in req.query) {
             setQuery.origin = { $in: req.query.origin }
@@ -108,10 +124,11 @@ exports.getFarms = (req, res) => {
         Farm.find(setQuery, {
             _id: 1,
             name: 1,
-            farmPicture: 1,
+            logo: 1,
             location: 1,
             origin: 1,
             altitude: 1,
+            coordinate: 1,
         })
             .exec()
             .then((result) => {
@@ -206,11 +223,21 @@ exports.getFarmById = (req, res) => {
     //Adding all products which belongs to this farm
     //Search all products which have this farmId and return Array of belonging product object
     //Will modify the field to return after fixing product schema
-    let getProducts
-    Product.find({ farmId: req.farmId }, { _id: 1, name: 1 })
+    let getProducts = []
+    Product.find({ farmId: req.farmId }, { productName: 1, location: 1, taste: 1, roastLevel: 1, sizePrice: 1})
         .exec()
         .then((result) => {
-            getProducts = result
+            // getProducts = result
+            for (i = 0; i < result.length; i++) {
+                let url = `/api/farm/${req.farmId}/product/${result[i]._id}`
+
+                let newData = {
+                    data: result[i],
+                    url: url,
+                }
+
+                getProducts.push(newData)
+            }
         })
         .then((result) => {
             Farm.findOne({ _id: req.farmId })

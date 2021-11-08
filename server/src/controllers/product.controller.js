@@ -76,7 +76,20 @@ exports.getProducts = (req, res) => {
         Object.keys(req.query).length == 0 ||
         Object.values(req.query)[0] == false
     ) {
-        Product.find({})
+        Product.find(
+            {},
+            {
+                _id: 1,
+                firmId: 1,
+                coordinate: 1,
+                location: 1,
+                productName: 1,
+                description: 1,
+                taste: 1,
+                roastLevel: 1,
+                sizePrice: 1,
+                picture: 1,
+            })
             .exec()
             .then((result) => {
                 let data = []
@@ -125,7 +138,19 @@ exports.getProducts = (req, res) => {
         }
 
         //Try to get the data with the filter object prepared above, and return the data
-        Product.find(setQuery)
+        Product.find(setQuery, 
+            {
+                _id: 1,
+                firmId: 1,
+                coordinate: 1,
+                location: 1,
+                productName: 1,
+                description: 1,
+                taste: 1,
+                roastLevel: 1,
+                sizePrice: 1,
+                picture: 1,
+            })
             .exec()
             .then((result) => {
                 let data = []
