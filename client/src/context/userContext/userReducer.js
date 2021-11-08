@@ -61,6 +61,13 @@ export const UserReducer = (state, action) => {
                 token: action.payload.token,
             }
 
+        case 'EXPIRED':
+            return {
+                ...state,
+                user: {},
+                token: '',
+            }
+
         case 'ERROR':
             return { ...state, loading: false, error: action.payload }
 
