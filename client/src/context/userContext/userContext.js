@@ -1,5 +1,6 @@
 import { createContext, useReducer, useEffect } from 'react'
 import jwt_decode from 'jwt-decode'
+import dayjs from 'dayjs'
 import { UserReducer } from './userReducer'
 
 const initialState = {
@@ -73,6 +74,26 @@ export const UserProvider = ({ children }) => {
         }
     }
 
+    const signOut = () => {
+        dispatch({ type: 'LOADING' })
+        localStorage.clear()
+        dispatch({ type: 'LOGOUT' })
+    }
+
+    const isTokenExpired = () => {
+        const token = localStorage.getItem('token')
+            ? localStorage.getItem('token')
+            : ''
+        if (token) {
+            const user = jwt_decode(token)
+            const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1
+            if (isExpired) {
+                dispatch({ type: 'EXPIRED' })
+                localStorage.clear()
+            }
+        }
+    }
+
     return (
         <UserContext.Provider
             value={{
@@ -82,7 +103,9 @@ export const UserProvider = ({ children }) => {
                 token: state.token,
                 signUp,
                 signIn,
+                signOut,
                 verifyTokenInStorage,
+                isTokenExpired,
             }}
         >
             {children}

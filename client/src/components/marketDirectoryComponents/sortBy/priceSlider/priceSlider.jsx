@@ -19,7 +19,7 @@ const PriceSlider = ({ min = 0, max = 100, onChange }) => {
     useEffect(() => {
         if (maxValRef.current) {
             const minPercent = getPercent(minVal)
-            const maxPercent = getPercent(+maxValRef.current.value) // Preceding with '+' converts the value from type string to type number
+            const maxPercent = getPercent(+maxValRef.current.value)
 
             if (range.current) {
                 range.current.style.left = `${minPercent}%`

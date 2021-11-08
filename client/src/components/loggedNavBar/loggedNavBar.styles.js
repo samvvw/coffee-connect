@@ -4,6 +4,7 @@ export const Container = styled.div`
     width: 100%;
     border: 1px solid #b0bec5;
     color: black;
+    margin-bottom: 1rem;
 
     & > ul {
         list-style-type: none;

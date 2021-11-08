@@ -1,10 +1,14 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Container } from './loggedNavBar.styles'
 import { UserContext } from '../../context/userContext/userContext'
 
 const LoggedNavBar = (props) => {
-    const { user } = useContext(UserContext)
+    const { user, isTokenExpired } = useContext(UserContext)
+
+    useEffect(() => {
+        isTokenExpired()
+    })
     return (
         <>
             {user?.userType && (

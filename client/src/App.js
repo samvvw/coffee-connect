@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
-import { Header, Footer, LoggedNavBar, PrivateRouteFarmer } from './components'
+import { Header, Footer, PrivateRouteFarmer } from './components'
 import {
     SignUp,
     SignIn,
@@ -21,7 +21,6 @@ function App() {
     return (
         <div className="view-container">
             <Header />
-            <LoggedNavBar />
             <main>
                 <Switch>
                     <Route path="/sign-up" component={SignUp} />
@@ -32,10 +31,9 @@ function App() {
                     <Route path="/contact-us" component={ContactUs} />
                     <Route path="/farm-profile" component={FarmProfile} />
                     <Route path="/farm-directory" component={FarmDirectory} />
-                    {/* <PrivateRouteFarmer path="/my-products">
+                    <PrivateRouteFarmer path="/my-products">
                         <FarmDashboard />
-                    </PrivateRouteFarmer> */}
-                    <Route path="/my-products" component={FarmDashboard} />
+                    </PrivateRouteFarmer>
                     <Route path="/" component={Home} />
                 </Switch>
             </main>
