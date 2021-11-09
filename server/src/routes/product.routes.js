@@ -11,6 +11,7 @@ const {
     uploadProductPicture,
     deleteProductPicture,
     createProductPictures,
+    likes,
 } = require('../controllers/product.controller')
 const { validateToken } = require('../middleware/user.middleware')
 const { validateFarmerUser } = require('../middleware/farm.middleware')
@@ -58,6 +59,12 @@ farmProductRouter.delete(
     validateToken,
     validateFarmerUser,
     deleteProductPicture
+)
+
+// Like product
+farmProductRouter.put(
+    '/:productId/likes',
+    likes
 )
 
 module.exports = { farmProductRouter, allProductRouter }

@@ -115,6 +115,9 @@ const productSchema = new mongoose.Schema(
             type: [String],
             maxItems: 5,
         },
+        likes: {
+            type: [String], //Store UserId who liked the product
+        },
     },
     {
         timestamps: true,

@@ -88,6 +88,7 @@ exports.getFarms = (req, res) => {
                 origin: 1,
                 altitude: 1,
                 coordinate: 1,
+                bookmarks: 1,
             }
         )
             .exec()
@@ -134,6 +135,7 @@ exports.getFarms = (req, res) => {
             origin: 1,
             altitude: 1,
             coordinate: 1,
+            bookmarks: 1,
         })
             .exec()
             .then((result) => {
@@ -238,6 +240,7 @@ exports.getFarmById = (req, res) => {
             roastLevel: 1,
             sizePrice: 1,
             picture: 1,
+            likes: 1,
         }
     )
         .exec()

@@ -79,6 +79,11 @@ const userSchema = new mongoose.Schema(
         farms: {
             type: [String],
         },
+
+        likes: {
+            type: [String],
+        },
+
     },
 
     {
