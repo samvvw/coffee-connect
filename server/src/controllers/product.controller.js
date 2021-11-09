@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken')
+const User = require('../models/user.model')
 const Product = require('../models/product.model')
 const fs = require('fs')
 const { s3Client } = require('../config/s3Client')
@@ -80,15 +82,17 @@ exports.getProducts = (req, res) => {
             {},
             {
                 _id: 1,
-                firmId: 1,
+                farmId: 1,
                 coordinate: 1,
                 location: 1,
+                bookmarks: 1,
                 productName: 1,
                 description: 1,
                 taste: 1,
                 roastLevel: 1,
                 sizePrice: 1,
                 picture: 1,
+                likes: 1,
             }
         )
             .exec()
@@ -141,15 +145,17 @@ exports.getProducts = (req, res) => {
         //Try to get the data with the filter object prepared above, and return the data
         Product.find(setQuery, {
             _id: 1,
-            firmId: 1,
+            farmId: 1,
             coordinate: 1,
             location: 1,
+            bookmarks: 1,
             productName: 1,
             description: 1,
             taste: 1,
             roastLevel: 1,
             sizePrice: 1,
             picture: 1,
+            likes: 1,
         })
             .exec()
             .then((result) => {
@@ -369,5 +375,91 @@ exports.deleteProductPicture = async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({ error: error })
+    }
+}
+
+exports.likes = async (req, res) => {
+    if (!req.body.token) {
+        res.status(403).json({ error: 'Forbidden access no token provided' })
+    }
+    const currentUser = jwt.verify(req.body.token, process.env.JWT_SECRET)
+
+    const userDb = await User.findById(currentUser.id)
+    req.currentUser = userDb
+    if (userDb) {
+        Product.findOne({ _id: req.productId }, { likes: 1 })
+        .then((result) => {
+            // console.log(result.likes)
+            if (result.likes.includes(currentUser.id)) {
+                //this object is just for the return
+                let newData = {
+                    productDB: [],
+                    userDB: [],
+                }
+
+                //when there is already the UserId, remove the UserId from likes array in Product DB
+                Product.findOneAndUpdate(
+                    { _id: req.productId },
+                    { $pull: { likes: currentUser.id } },
+                    { new: true }
+                )
+                    .then((result) => {
+                        //preparing return
+                        newData.productDB = result.likes
+                    })
+                    .then(() => {
+                        //Also remove the productId from likes array in User DB
+                        User.findOneAndUpdate(
+                            { _id: currentUser.id },
+                            { $pull: { likes: req.productId } },
+                            { new: true }
+                        ).then((result) => {
+                            //preparing return
+                            newData.userDB = result.likes
+                            //return the success status and result for both ofr ProductDB and UserDB
+                            res.status(200).json(newData)
+                        })
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                        res.status(500).json({ error: error })
+                    })
+            } else {
+                //this object is just for the return
+                let newData = {
+                    productDB: [],
+                    userDB: [],
+                }
+                //when there is not the UserId, then push the UserId into likes array in Product DB
+                Product.findOneAndUpdate(
+                    { _id: req.productId },
+                    { $push: { likes: currentUser.id } },
+                    { new: true }
+                )
+                    .then((result) => {
+                        //preparing return
+                        newData.productDB = result.likes
+                    })
+                    .then(() => {
+                        //Also push the productId into likes array in User DB
+                        User.findOneAndUpdate(
+                            { _id: currentUser.id },
+                            { $push: { likes: req.productId } },
+                            { new: true }
+                        ).then((result) => {
+                            //preparing return
+                            newData.userDB = result.likes
+                            //return the success status and result for both for ProductDB and UserDB
+                            res.status(200).json(newData)
+                        })
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                        return res.status(500).json({ error: error })
+                    })
+            }
+        })
+    } else {
+        res.status(403).json({ error: 'Access forbidden' })
     }
 }
