@@ -12,7 +12,7 @@ exports.createNewsletterSubscription = async (req, res) => {
         res.status(201).json(createNewsletterSubscription)
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }
 
@@ -24,7 +24,7 @@ exports.getNewsletterSubscriptions = (req, res) => {
         })
         .catch((error) => {
             console.log(error)
-            res.status(500).send(error)
+            res.status(500).json({ error: error })
         })
 }
 
@@ -36,6 +36,6 @@ exports.getNewsletterSubscriptionById = (req, res) => {
         })
         .catch((error) => {
             console.log(error)
-            res.status(500).send(error)
+            res.status(500).json({ error: error })
         })
 }

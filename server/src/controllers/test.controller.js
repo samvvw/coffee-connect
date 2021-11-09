@@ -19,7 +19,7 @@ exports.getAllProfilePictures = async (req, res) => {
         res.json(bucketRequest)
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }
 
@@ -39,6 +39,6 @@ exports.deletePictureS3 = async (req, res) => {
         res.json(deleteObject)
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }

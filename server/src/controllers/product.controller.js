@@ -13,7 +13,7 @@ exports.productParams = async (req, res, next, productId) => {
         req.productId = productId
         next()
     } else {
-        res.status(400).send('no product id provided')
+        res.status(400).json({ error: 'no product id provided' })
     }
 }
 
@@ -66,7 +66,7 @@ exports.createProduct = async (req, res) => {
         // res.json(data)
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }
 
@@ -89,7 +89,8 @@ exports.getProducts = (req, res) => {
                 roastLevel: 1,
                 sizePrice: 1,
                 picture: 1,
-            })
+            }
+        )
             .exec()
             .then((result) => {
                 let data = []
@@ -107,7 +108,7 @@ exports.getProducts = (req, res) => {
             })
             .catch((error) => {
                 console.log(error)
-                res.status(500).send(error)
+                res.status(500).json({ error: error })
             })
 
         //if with query strings, return filtered result with the requested filters
@@ -138,19 +139,18 @@ exports.getProducts = (req, res) => {
         }
 
         //Try to get the data with the filter object prepared above, and return the data
-        Product.find(setQuery, 
-            {
-                _id: 1,
-                firmId: 1,
-                coordinate: 1,
-                location: 1,
-                productName: 1,
-                description: 1,
-                taste: 1,
-                roastLevel: 1,
-                sizePrice: 1,
-                picture: 1,
-            })
+        Product.find(setQuery, {
+            _id: 1,
+            firmId: 1,
+            coordinate: 1,
+            location: 1,
+            productName: 1,
+            description: 1,
+            taste: 1,
+            roastLevel: 1,
+            sizePrice: 1,
+            picture: 1,
+        })
             .exec()
             .then((result) => {
                 let data = []
@@ -168,7 +168,7 @@ exports.getProducts = (req, res) => {
             })
             .catch((error) => {
                 console.log(error)
-                res.status(500).send(error)
+                res.status(500).json({ error: error })
             })
     }
 }
@@ -184,7 +184,7 @@ exports.getProductById = (req, res) => {
         })
         .catch((error) => {
             console.log(error)
-            res.status(500).send(error)
+            res.status(500).json({ error: error })
         })
 }
 
@@ -225,7 +225,7 @@ exports.modifyProduct = (req, res) => {
         })
         .catch((error) => {
             console.log(error)
-            res.status(500).send(error)
+            res.status(500).json({ error: error })
         })
 }
 
@@ -237,7 +237,7 @@ exports.deleteProduct = (req, res) => {
         })
         .catch((error) => {
             console.log(error)
-            res.status(500).send(error)
+            res.status(500).json({ error: error })
         })
 }
 
@@ -247,7 +247,7 @@ exports.createProductPictures = async (req, res) => {
         if (Array.isArray(req.files.productPictures)) {
             req.files.productPictures?.forEach((file) => {
                 if (!/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(file.name)) {
-                    res.status(404).send('Wrong file format')
+                    res.status(404).json({ error: 'Wrong file format' })
                 } else {
                     filesToUpload.push(file)
                 }
@@ -291,16 +291,16 @@ exports.createProductPictures = async (req, res) => {
         res.json(savedProduct)
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }
 
 exports.uploadProductPicture = async (req, res) => {
     try {
         if (req.product.picture.length >= 5) {
-            res.status(422).send(
-                `Max 5 pictures per product  you have ${req.product.picture.length}`
-            )
+            res.status(422).json({
+                error: `Max 5 pictures per product  you have ${req.product.picture.length}`,
+            })
         } else {
             const filePath = req.files.productFile.path
             const fileExtension = req.files.productFile.name.split('.').pop()
@@ -317,7 +317,7 @@ exports.uploadProductPicture = async (req, res) => {
                     req.files.productFile.name
                 )
             ) {
-                res.status(404).send('Wrong file format')
+                res.status(404).json({ error: 'Wrong file format' })
             }
 
             const fileStream = fs.createReadStream(filePath)
@@ -341,7 +341,7 @@ exports.uploadProductPicture = async (req, res) => {
         }
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }
 
@@ -368,6 +368,6 @@ exports.deleteProductPicture = async (req, res) => {
         }
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).json({ error: error })
     }
 }
