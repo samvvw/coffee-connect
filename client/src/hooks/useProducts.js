@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { api } from '../config/api'
 
-const useProducts = (farmId) => {
+const useProducts = (queryString = '', farmId) => {
     const [products, setProducts] = useState([])
 
-    const getProducts = async () => {
-        const { data } = await axios.get(api.getProducts)
+    const getProducts = async (queryString = '') => {
+        const { data } = await axios.get(`${api.products}?${queryString}`)
         setProducts(data)
     }
 
@@ -17,7 +17,7 @@ const useProducts = (farmId) => {
         else getProductsByFarm()
     }, [farmId])
 
-    return products
+    return [products, getProducts]
 }
 
 export default useProducts
