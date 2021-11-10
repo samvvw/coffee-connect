@@ -84,14 +84,17 @@ export const UserProvider = ({ children }) => {
         const token = localStorage.getItem('token')
             ? localStorage.getItem('token')
             : ''
+        let isExpired = true
         if (token) {
             const user = jwt_decode(token)
-            const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1
+            isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1
             if (isExpired) {
                 dispatch({ type: 'EXPIRED' })
                 localStorage.clear()
             }
         }
+
+        return isExpired
     }
 
     return (

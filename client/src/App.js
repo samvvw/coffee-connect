@@ -39,7 +39,7 @@ function App() {
                     <PrivateRouteFarmer path="/my-farm">
                         <MyFarm />
                     </PrivateRouteFarmer>
-                    <Route path="/" component={Home} />
+                    <Route path="/" exact component={Home} />
                 </Switch>
             </main>
             <Footer />

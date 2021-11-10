@@ -72,7 +72,7 @@ export default function FarmDashboardMyProducts() {
 
     function handleRenderProducts(productList) {
         return productList
-            .filter((product) => product.productPrice != 0)
+            .filter((product) => product.productPrice !== 0)
             .map((product) => {
                 return (
                     <ProductCard objProductDetails={product} key={product.id} />

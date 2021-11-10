@@ -65,7 +65,7 @@ export const UserReducer = (state, action) => {
             return {
                 ...state,
                 user: {},
-                token: '',
+                token: null,
             }
 
         case 'ERROR':

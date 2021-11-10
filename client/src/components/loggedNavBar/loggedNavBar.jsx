@@ -9,6 +9,7 @@ const LoggedNavBar = (props) => {
     useEffect(() => {
         isTokenExpired()
     })
+
     return (
         <>
             {user?.userType && (
