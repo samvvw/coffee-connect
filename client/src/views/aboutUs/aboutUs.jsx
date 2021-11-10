@@ -89,7 +89,7 @@ const AboutUS = () => {
         <Container>
             <AboutUsHero />
 
-            <h2>About Us</h2>
+            <h2>Meet Us</h2>
 
             <CardsContainer>
                 <TeamMemberCard

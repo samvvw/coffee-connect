@@ -24,7 +24,9 @@ const TeamMemberCard = ({ imgUrl, arrObjMemberData }) => {
     const [isbioShort, toggleBio] = useToggle()
     return (
         <Container>
-            <img src={imgUrl} alt={arrObjMemberData.name} />
+            <div className="team-member-image-wrapper">
+                <img src={imgUrl} alt={arrObjMemberData.name} />
+            </div>
             <h3>{arrObjMemberData.name}</h3>
             <h4>{arrObjMemberData.role}</h4>
 

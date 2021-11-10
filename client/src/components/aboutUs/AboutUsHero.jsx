@@ -1,4 +1,4 @@
-import imgPlaceholder from '../../assets/images/placeholder.png'
+import imgPlaceholder from '../../assets/images/aboutUsHero.png'
 
 import { Container, SubContainer, ChildContainer } from './AboutUsHero.styles'
 
@@ -6,7 +6,9 @@ const AboutUsHero = () => {
     return (
         <Container>
             <ChildContainer gridColumn="1/2" gridRow="2/3">
-                <img src={imgPlaceholder} alt="" />
+                <div className="image-wrapper">
+                    <img src={imgPlaceholder} alt="" />
+                </div>
             </ChildContainer>
             <ChildContainer gridColumn="1/2" gridRow="1/2">
                 <SubContainer>

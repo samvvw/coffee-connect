@@ -5,8 +5,10 @@ export const Container = styled.div`
     flex-direction: column;
 
     h2 {
-        text-align: center;
+        padding-left: 1.438rem;
+        text-align: start;
         font-size: 2rem;
+        font-weight: bold;
     }
 
     @media only screen and (min-width: 401px) {
@@ -21,7 +23,7 @@ export const CardsContainer = styled.div`
     flex-direction: column;
     row-gap: 2rem;
 
-    padding-top: 5rem;
+    padding-top: 1.312rem;
     padding-bottom: 5rem;
 
     @media only screen and (min-width: 401px) {
