@@ -5,17 +5,11 @@ import {
     Label,
 } from './productCard.styles'
 
-const ProductCard = ({
-    imageHeight,
-    width,
-    height,
-    objProductDetails,
-    key,
-}) => {
+const ProductCard = ({ imageHeight, width, height, objProductDetails }) => {
     const style = { width: '100%', height: imageHeight }
 
     return (
-        <Container key={key} width={width} height={height}>
+        <Container width={width} height={height}>
             <div id="imageContainer">
                 <div>
                     <img
