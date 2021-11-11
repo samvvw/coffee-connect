@@ -1,3 +1,5 @@
+import { useEffect, useState, useContext } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Container } from './farmProfile.styles'
 
 import FarmProfileHero from '../../components/farmProfile/farmProfileHero'
@@ -6,7 +8,8 @@ import FarmProfileProducts from '../../components/farmProfile/farmProfileProduct
 import FarmProfileHeader from '../../components/farmProfile/farmProfileHeader'
 import FarmProfileCertificates from '../../components/farmProfile/farmProfileCertificates'
 import FarmProfileGallery from '../../components/farmProfile/farmProfileGallery'
-import { useEffect, useState } from 'react'
+import { LoggedNavBar } from '../../components'
+import { UserContext } from '../../context/userContext/userContext'
 
 //delete after connect to db
 import placeHolder from '../../assets/images/placeholder.png'
@@ -23,6 +26,15 @@ import pic7 from '../../assets/testImages/pic7.png'
 import pic8 from '../../assets/testImages/pic8.png'
 
 const FarmProfile = () => {
+    const { isTokenExpired } = useContext(UserContext)
+    const history = useHistory()
+
+    useEffect(() => {
+        if (isTokenExpired()) {
+            history.replace('/sign-in')
+        }
+    })
+
     // delete objects after connect to db
 
     const arrPicFarmGallery = [
@@ -52,11 +64,7 @@ const FarmProfile = () => {
     }
 
     /*coordinates for the map*/
-    const data = [
-        {
-            coordinates: [4.11, -72.93],
-        },
-    ]
+    const data = [[4.11, -72.93]]
 
     const arrObjProductDetails = [
         {
@@ -137,48 +145,56 @@ const FarmProfile = () => {
     if (arrPicFarmGallery.length > 0) hasImages = true
 
     return (
-        <Container>
-            <div id="mainContainer">
-                <FarmProfileHeader
-                    farmLogoUrl={objFarmProfileHeader.farmLogoUrl.placeHolder}
-                    farmName={objFarmProfileHeader.farmName}
-                    origin={objFarmProfileHeader.origin}
-                    location={objFarmProfileHeader.location}
-                    altitude={objFarmProfileHeader.altitude}
-                />
-                <FarmProfileHero farmName={objFarmProfileHeader.farmName} />
+        <>
+            <LoggedNavBar />
+            <Container>
+                <div id="mainContainer">
+                    <FarmProfileHeader
+                        farmLogoUrl={
+                            objFarmProfileHeader.farmLogoUrl.placeHolder
+                        }
+                        farmName={objFarmProfileHeader.farmName}
+                        origin={objFarmProfileHeader.origin}
+                        location={objFarmProfileHeader.location}
+                        altitude={objFarmProfileHeader.altitude}
+                    />
+                    <FarmProfileHero farmName={objFarmProfileHeader.farmName} />
 
-                <FarmProfileDescription objFarmProfile={objFarmProfile} />
+                    <FarmProfileDescription objFarmProfile={objFarmProfile} />
 
-                {/* Show map only in desktop */}
-                {matches && (
-                    <div id="map">
-                        {/* Map */}
-                        <div>
-                            <p>Our location</p>
+                    {/* Show map only in desktop */}
+                    {matches && (
+                        <div id="map">
+                            {/* Map */}
+                            <div>
+                                <p>Our location</p>
+                            </div>
+                            <Map
+                                data={data}
+                                style={{ width: '100%', height: '300px' }}
+                                zoom={4}
+                            />
                         </div>
-                        {/* <Map
-                            data={data}
-                            style={{ width: '100%', height: '300px' }}
-                        /> */}
+                    )}
+
+                    <FarmProfileCertificates
+                        arrImgCertificates={arrImgCertificates}
+                    />
+
+                    <FarmProfileProducts
+                        imageWidth="100%"
+                        arrObjProductDetails={arrObjProductDetails}
+                    />
+                </div>
+                {hasImages && (
+                    <div id="gallery">
+                        <FarmProfileGallery
+                            arrPicFarmGallery={arrPicFarmGallery}
+                        />
                     </div>
                 )}
-
-                <FarmProfileCertificates
-                    arrImgCertificates={arrImgCertificates}
-                />
-
-                <FarmProfileProducts
-                    imageWidth="100%"
-                    arrObjProductDetails={arrObjProductDetails}
-                />
-            </div>
-            {hasImages && (
-                <div id="gallery">
-                    <FarmProfileGallery arrPicFarmGallery={arrPicFarmGallery} />
-                </div>
-            )}
-        </Container>
+            </Container>
+        </>
     )
 }
 

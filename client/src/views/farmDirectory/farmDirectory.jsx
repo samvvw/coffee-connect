@@ -42,10 +42,16 @@ const countries = [
 
 const FarmDirectory = (props) => {
     const [querySearch, setQuerySearch] = useState('')
+    const [queryFilters, setQueryFilters] = useState('')
 
     const handleKeyUp = (e) => {
         if (e.keyCode === 13) setQuerySearch(e.target.value)
     }
+
+    const handleFilterChange = (value) => {
+        setQueryFilters(value)
+    }
+
     return (
         <Container>
             <div className="main">
@@ -56,7 +62,7 @@ const FarmDirectory = (props) => {
                         onKeyUp={(e) => handleKeyUp(e)}
                     />
                 </div>
-                <SortBy data={filters} />
+                <SortBy data={filters} onChange={handleFilterChange} />
                 <div className="main__results">
                     <div className="main__results__query">
                         <p>Search results for:</p>
