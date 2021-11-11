@@ -12,7 +12,7 @@ const FarmDashboardTabProductInformation = ({
     setTotalProducts,
 }) => {
     const [body, setBody] = useState({
-        farmId: '6184abab196df21a8eb2e8ac',
+        farmId: '61808eb787ad9fd90a35acdd',
         productName: '',
         description: '',
         taste: [],

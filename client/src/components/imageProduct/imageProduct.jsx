@@ -21,7 +21,7 @@ const ImageProduct = ({
         input.onchange = (_) => {
             // you can use this method to get file and perform respective operations
             let files = Array.from(input.files)
-            const farmId = '6184abab196df21a8eb2e8ac'
+            const farmId = '61808eb787ad9fd90a35acdd'
             const productId = idProduct
             const token = localStorage.getItem('token')
             const form = new FormData()
