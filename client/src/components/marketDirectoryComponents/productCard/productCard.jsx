@@ -6,7 +6,10 @@ const ProductCard = ({ data }) => {
     return (
         <CardContainer>
             <div className="image-container">
-                <img src={data.picture[0]} alt="" />
+                {data.picture.length > 0 && (
+                    <img src={data.picture[0]} alt="" />
+                )}
+                {data.picture.length === 0 && <img src={placeholder} alt="" />}
             </div>
             <div className="product">
                 <p className="product__title">{data.productName}</p>
