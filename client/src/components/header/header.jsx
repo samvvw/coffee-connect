@@ -4,7 +4,6 @@ import Logo from '../logo/logo'
 import NavBar from '../navBar/navBar'
 import LoggedUser from '../loggedUser/loggedUser'
 import NavBarMobile from '../navBarMobile/navBarMobile'
-import { theme } from '../../theme/theme'
 
 const Header = (props) => {
     const [matches, setMatches] = useState(

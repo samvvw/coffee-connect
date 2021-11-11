@@ -5,7 +5,7 @@ import { UserContext } from '../../context/userContext/userContext'
 import Button from '../../components/button/button'
 import { Container } from './signIn.styles'
 import HeroImage from '../../assets/images/ContactUsImg.png'
-import { theme } from '../../theme/theme.js'
+// import { theme } from '../../theme/theme.js'
 
 const SignIn = (props) => {
     const history = useHistory()
@@ -37,7 +37,7 @@ const SignIn = (props) => {
                     width="109px"
                 />
             </p> */}
-            <div class="form-container">
+            <div className="form-container">
                 <form onSubmit={handleSubmit}>
                     <h1>Sign in to Qafa</h1>
                     <label htmlFor="email">Email</label>
@@ -50,7 +50,7 @@ const SignIn = (props) => {
                     {loading && <small>Loading...</small>}
                     {/* {error.ob && <pre>{JSON.stringify(error, null, 2)}</pre>} */}
                 </form>
-                <p class="mobile-sign-up">
+                <p className="mobile-sign-up">
                     Don't have a Qafa account yet?{' '}
                     <span>
                         <Link to="/sign-up">Sign up</Link>
