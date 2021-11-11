@@ -8,5 +8,5 @@ export const StyledFooter = styled.footer`
     align-items: center;
     gap: 233px;
     height: 4rem;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
 `
