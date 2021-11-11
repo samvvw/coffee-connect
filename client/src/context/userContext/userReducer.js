@@ -17,7 +17,9 @@ export const UserReducer = (state, action) => {
                     lastName: action.payload.user.lastName,
                     email: action.payload.user.email,
                     userType: action.payload.user.userType,
-                    farms: action.payload?.farms ? action.payload.farms : [],
+                    farms: action.payload.user?.farms
+                        ? action.payload.user.farms
+                        : [],
                 },
                 token: action.payload.token,
             }
@@ -34,7 +36,9 @@ export const UserReducer = (state, action) => {
                     email: action.payload.user.email,
                     userType: action.payload.user.userType,
                     profilePicture: action.payload.user.profilePicture,
-                    farms: action.payload?.farms ? action.payload.farms : [],
+                    farms: action.payload.user?.farms
+                        ? action.payload.user.farms
+                        : [],
                 },
                 token: action.payload.token,
             }
@@ -59,7 +63,9 @@ export const UserReducer = (state, action) => {
                     email: action.payload.user.email,
                     userType: action.payload.user.userType,
                     profilePicture: action.payload.user.profilePicture,
-                    farms: action.payload?.farms ? action.payload.farms : [],
+                    farms: action.payload.user?.farms
+                        ? action.payload.user.farms
+                        : [],
                 },
                 token: action.payload.token,
             }
