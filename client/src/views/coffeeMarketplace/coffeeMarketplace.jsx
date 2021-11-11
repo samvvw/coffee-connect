@@ -5,7 +5,6 @@ import Map from '../../components/map/map'
 import SearchBar from '../../components/searchBar/searchBar'
 import { useProducts } from '../../hooks'
 import { Container } from './coffeeMarketplace.styles'
-import { api } from '../../config/api'
 
 const filters = [
     {

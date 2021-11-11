@@ -11,12 +11,15 @@ export const CardContainer = styled.div`
     img {
         width: 352px;
         height: 240px;
-        object-fit: cover;
+        object-fit: contain;
         border-radius: 8px;
         cursor: pointer;
     }
 
     .product {
+        width: 100%;
+        max-width: 100%;
+
         &__title {
             font-weight: bold;
             font-size: 1.4rem;
