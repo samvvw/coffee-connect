@@ -69,7 +69,7 @@ const MyFarmDashboardNewFarmForm = () => {
             (country) => country.name === selectedCountry
         )
 
-        if (selected.length != 0) {
+        if (selected.length !== 0) {
             // console.log(selected[0].region, selected[0].latlng)
             setSelectedOrigin(selected[0].region)
             setSelectedLatLng(selected[0].latlng)

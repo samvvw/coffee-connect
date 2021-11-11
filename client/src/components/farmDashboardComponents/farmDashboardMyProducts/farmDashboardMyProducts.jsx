@@ -1,23 +1,31 @@
 import { FarmMyProductsWrapper } from './farmDashboardMyProducts.styles'
 import Button from '../../button/button'
 import { theme } from '../../../theme/theme'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
-
+import { UserContext } from '../../../context/userContext/userContext'
+import { useHistory } from 'react-router-dom'
 import OffCanvas from '../farmDashboardOffcanvas/farmDashboardOffcanvas'
 
 import FarmDashboardProductCardSection from '../farmDashboardProductCardSection/farmDashboardProductCardSection'
-// import FarmDashboardProductCard from '../farmDashboardProductCard/farmDashboardProductCard'
 
 import ProductCard from '../productCard/productCard'
-
-// import placeholder from '../../../assets/images/placeholder.png'
 
 export default function FarmDashboardMyProducts() {
     const [myProducts, setMyProducts] = useState()
     const [totalProducts, setTotalProducts] = useState()
+    const { user } = useContext(UserContext)
+    const history = useHistory()
     /*Delete farmID after conect*/
-    const farmID = '61808eb787ad9fd90a35acdd'
+    let farmID = '' //'61808eb787ad9fd90a35acdd'
+
+    if (user.farms.length > 0) {
+        farmID = user.farms[0]
+        // console.log('farmId', farmID)
+    } else {
+        // console.log('No farms')
+        history.push('/my-farm')
+    }
     /**************************** */
 
     const [matches, setMatches] = useState(
@@ -73,10 +81,8 @@ export default function FarmDashboardMyProducts() {
     function handleRenderProducts(productList) {
         return productList
             .filter((product) => product.productPrice !== 0)
-            .map((product) => {
-                return (
-                    <ProductCard objProductDetails={product} key={product.id} />
-                )
+            .map((product, index) => {
+                return <ProductCard objProductDetails={product} key={index} />
             })
     }
 
