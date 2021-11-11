@@ -1,3 +1,26 @@
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url(./assets/fonts/ProximaNova-Regular.otf) format('opentype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url(./assets/fonts/Proxima\ Nova\ Bold.otf) format('opentype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url(./assets/fonts/FontsFree-Net-Proxima-Nova-Sbold.otf)
+        format('opentype');
+    font-weight: 500;
+}
+
+body {
+    font-family: 'Proxima Nova';
+}
+
 .view-container {
     display: grid;
     grid-template-rows: auto 1fr auto;

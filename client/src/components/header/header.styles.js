@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const DesktopContainer = styled.header`
-    padding-top: 0.5rem;
+    /* padding-top: 0.5rem; */
     background-color: #ffffff;
     color: #000000;
     display: flex;
@@ -9,7 +9,7 @@ export const DesktopContainer = styled.header`
     align-items: center;
     max-width: 100%;
     width: 100%;
-    padding-bottom: 1rem;
+    /* padding-bottom: 1rem; */
     border-bottom: 1px solid #b0bec5;
 `
 

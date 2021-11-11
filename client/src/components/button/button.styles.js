@@ -6,7 +6,8 @@ export const StyledButton = styled.button`
     border-radius: 20px;
     padding: 8px 13px;
     border: none;
-    font-weight: bold;
     cursor: pointer;
-    width: 100%;
+    width: ${(props) => props.width};
+    border: 1px solid;
+    border-color: ${(props) => props.borderColor || '#000000'};
 `
