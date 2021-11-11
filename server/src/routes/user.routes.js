@@ -13,7 +13,7 @@ userRouter.post('/sign-up', userSignUp)
 userRouter.post('/sign-in', userSignIn)
 
 // GET user by Id
-userRouter.get('/', validateToken, getUserById)
+userRouter.post('/', validateToken, getUserById)
 
 // POST image
 userRouter.post('/profile-picture', validateToken, uploadProfilePicture)
