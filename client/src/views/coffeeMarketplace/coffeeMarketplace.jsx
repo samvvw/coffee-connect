@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ProductCard from '../../components/marketDirectoryComponents/productCard/productCard'
 import SortBy from '../../components/marketDirectoryComponents/sortBy/sortBy'
 import Map from '../../components/map/map'
 import SearchBar from '../../components/searchBar/searchBar'
 import { useProducts } from '../../hooks'
 import { Container } from './coffeeMarketplace.styles'
+import lottie from 'lottie-web'
 
 const filters = [
     {
@@ -29,6 +30,8 @@ const CoffeeMarketplace = () => {
     const [querySearch, setQuerySearch] = useState('')
     const [coordinates, setCoordinates] = useState()
     const [queryFilters, setQueryFilters] = useState('')
+    const [loading, setLoading] = useState(true)
+    const container = useRef()
 
     const handleKeyUp = (e) => {
         if (e.keyCode === 13) {
@@ -65,6 +68,21 @@ const CoffeeMarketplace = () => {
         }
     }, [queryFilters])
 
+    useEffect(() => {
+        lottie.loadAnimation({
+            container: container.current,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            animationData: require('../../assets/cofffee-loading.json'),
+            width: '100',
+        })
+    }, [])
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), 1000)
+    }, [products])
+
     return (
         <Container>
             <div className="main">
@@ -94,10 +112,13 @@ const CoffeeMarketplace = () => {
                 </div>
             </div>
             <div className="map-container">
-                <Map
-                    data={coordinates}
-                    style={{ width: '100%', height: '80vh' }}
-                />
+                {!loading && (
+                    <Map
+                        data={coordinates}
+                        style={{ width: '100%', height: '80vh' }}
+                    />
+                )}
+                {loading && <div className="container" ref={container}></div>}
             </div>
         </Container>
     )

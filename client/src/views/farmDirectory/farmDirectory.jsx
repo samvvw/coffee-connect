@@ -3,7 +3,8 @@ import SortBy from '../../components/marketDirectoryComponents/sortBy/sortBy'
 import ProductCardDirectory from '../../components/marketDirectoryComponents/productCardDirectory/productCardDirectory'
 import Map from '../../components/map/map'
 import { Container } from './farmDirectory.styles'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import lottie from 'lottie-web'
 
 const filters = [
     {
@@ -43,6 +44,8 @@ const countries = [
 const FarmDirectory = (props) => {
     const [querySearch, setQuerySearch] = useState('')
     const [queryFilters, setQueryFilters] = useState('')
+    const [loading, setLoading] = useState(true)
+    const container = useRef()
 
     const handleKeyUp = (e) => {
         if (e.keyCode === 13) setQuerySearch(e.target.value)
@@ -51,6 +54,21 @@ const FarmDirectory = (props) => {
     const handleFilterChange = (value) => {
         setQueryFilters(value)
     }
+
+    useEffect(() => {
+        lottie.loadAnimation({
+            container: container.current,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            animationData: require('../../assets/cofffee-loading.json'),
+            width: '100',
+        })
+    }, [])
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), 1000)
+    }, [])
 
     return (
         <Container>
@@ -81,10 +99,13 @@ const FarmDirectory = (props) => {
                 </div>
             </div>
             <div className="map-container">
-                <Map
-                    data={countries}
-                    style={{ width: '100%', height: '80vh' }}
-                />
+                {!loading && (
+                    <Map
+                        data={countries}
+                        style={{ width: '100%', height: '80vh' }}
+                    />
+                )}
+                {loading && <div className="container" ref={container}></div>}
             </div>
         </Container>
     )
