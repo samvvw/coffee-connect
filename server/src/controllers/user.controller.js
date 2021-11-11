@@ -74,6 +74,7 @@ exports.userSignIn = async (req, res) => {
                     _id,
                     profilePicture,
                     userType,
+                    farms,
                 } = user
                 const payload = {
                     id: _id,
@@ -83,6 +84,7 @@ exports.userSignIn = async (req, res) => {
                     email: email,
                     profilePicture: profilePicture,
                     userType: userType,
+                    farms: farms,
                 }
 
                 const token = createToken(payload)
