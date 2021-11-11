@@ -4,6 +4,8 @@ export const Text = styled.p`
     color: #000000;
     font-size: 1rem;
     margin-bottom: 0.2rem;
+    display: flex;
+    gap: 0.5rem;
 
     & > a {
         color: #000000;
@@ -23,6 +25,7 @@ export const Container = styled.div`
 
     p {
         margin-bottom: 0;
+        font-size: 1.1rem;
         /* padding-left: 50px; */
 
         & > span {
@@ -35,10 +38,13 @@ export const Container = styled.div`
             color: black;
             font-weight: bold;
             padding-left: 0.5rem;
+            font-size: 1.1rem;
+            margin-top: -1px;
+            font-family: 'Proxima Nova';
         }
 
         .dropdown-menu {
-            font-size: 1rem;
+            font-size: 1.1rem;
             width: 300px;
             margin-top: 20px;
         }

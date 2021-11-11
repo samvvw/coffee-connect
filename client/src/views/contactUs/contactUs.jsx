@@ -9,7 +9,7 @@ const ContactUs = () => {
                 <img src={ContactUsImg} alt="" />
             </div>
             <div id="divText">
-                <h1>We would like hearing from you.</h1>
+                <h2>We would like hearing from you.</h2>
                 <p>
                     Mollis bibendum leo, pulvinar blandit gravida nec.
                     Adipiscing sed pellentque cras massa urna lectus leo, ut.

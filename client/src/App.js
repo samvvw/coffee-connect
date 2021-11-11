@@ -20,30 +20,28 @@ import {
 
 function App() {
     return (
-        <div className="view-container">
+        <main className="view-container">
             <Header />
-            <main>
-                <Switch>
-                    <Route path="/sign-up" component={SignUp} />
-                    <Route path="/sign-in" component={SignIn} />
-                    <Route path="/product" component={Product} />
-                    <Route path="/marketplace" component={CoffeeMarketplace} />
-                    <Route path="/about-us" component={AboutUs} />
-                    <Route path="/contact-us" component={ContactUs} />
-                    <Route path="/farm-profile" component={FarmProfile} />
-                    <Route path="/farm-directory" component={FarmDirectory} />
+            <Switch>
+                <Route path="/sign-up" component={SignUp} />
+                <Route path="/sign-in" component={SignIn} />
+                <Route path="/product" component={Product} />
+                <Route path="/marketplace" component={CoffeeMarketplace} />
+                <Route path="/about-us" component={AboutUs} />
+                <Route path="/contact-us" component={ContactUs} />
+                <Route path="/farm-profile" component={FarmProfile} />
+                <Route path="/farm-directory" component={FarmDirectory} />
 
-                    <PrivateRouteFarmer path="/my-products">
-                        <FarmDashboard />
-                    </PrivateRouteFarmer>
-                    <PrivateRouteFarmer path="/my-farm">
-                        <MyFarm />
-                    </PrivateRouteFarmer>
-                    <Route path="/" exact component={Home} />
-                </Switch>
-            </main>
+                <PrivateRouteFarmer path="/my-products">
+                    <FarmDashboard />
+                </PrivateRouteFarmer>
+                <PrivateRouteFarmer path="/my-farm">
+                    <MyFarm />
+                </PrivateRouteFarmer>
+                <Route path="/" exact component={Home} />
+            </Switch>
             <Footer />
-        </div>
+        </main>
     )
 }
 

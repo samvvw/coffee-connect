@@ -9,4 +9,8 @@ export const StyledLogo = styled.h1`
         text-decoration: none;
         color: #006a6b;
     }
+
+    img {
+        width: 180px;
+    }
 `
