@@ -157,10 +157,10 @@ const FarmProfile = () => {
                         <div>
                             <p>Our location</p>
                         </div>
-                        <Map
+                        {/* <Map
                             data={data}
                             style={{ width: '100%', height: '300px' }}
-                        />
+                        /> */}
                     </div>
                 )}
 
