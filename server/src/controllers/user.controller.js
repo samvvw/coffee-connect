@@ -97,6 +97,14 @@ exports.userSignIn = async (req, res) => {
     }
 }
 
+exports.getUserById = async (req, res) => {
+    if (req.currentUser) {
+        res.status(200).json({ user: req.currentUser })
+    } else {
+        res.status(404).json({ error: 'User not found' })
+    }
+}
+
 exports.uploadProfilePicture = async (req, res) => {
     try {
         const fileName = `profile-picture/${req.files.profilePicture.name}`

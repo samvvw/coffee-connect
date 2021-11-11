@@ -5,11 +5,15 @@ const {
     userSignIn,
     uploadProfilePicture,
     deleteProfilePicture,
+    getUserById,
 } = require('../controllers/user.controller')
 const { validateToken } = require('../middleware/user.middleware')
 
 userRouter.post('/sign-up', userSignUp)
 userRouter.post('/sign-in', userSignIn)
+
+// GET user by Id
+userRouter.get('/', validateToken, getUserById)
 
 // POST image
 userRouter.post('/profile-picture', validateToken, uploadProfilePicture)
