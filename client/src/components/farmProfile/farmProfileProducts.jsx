@@ -48,7 +48,6 @@ const FarmProfileProducts = ({ imageWidth, arrObjProductDetails }) => {
             <div id="divButton">
                 <Button
                     title="See all the products"
-                    onClick=""
                     backgroundColor="lightgray"
                     textColor="Black"
                 />

@@ -1,6 +1,10 @@
 import { useEffect, useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
+import Map from '../../components/map/map'
+import axios from 'axios'
+import MessageModal from '../../components/messageModal/messageModal'
 import { Container } from './farmProfile.styles'
+import { theme } from '../../theme/theme'
 
 import FarmProfileHero from '../../components/farmProfile/farmProfileHero'
 import FarmProfileDescription from '../../components/farmProfile/farmProfileDescription'
@@ -11,23 +15,21 @@ import FarmProfileGallery from '../../components/farmProfile/farmProfileGallery'
 import { LoggedNavBar } from '../../components'
 import { UserContext } from '../../context/userContext/userContext'
 
-//delete after connect to db
 import placeHolder from '../../assets/images/placeholder.png'
-import Map from '../../components/map/map'
-
-//delete images for testing
-import pic1 from '../../assets/testImages/pic1.png'
-import pic2 from '../../assets/testImages/pic2.png'
-import pic3 from '../../assets/testImages/pic3.png'
-import pic4 from '../../assets/testImages/pic4.png'
-import pic5 from '../../assets/testImages/pic5.png'
-import pic6 from '../../assets/testImages/pic6.png'
-import pic7 from '../../assets/testImages/pic7.png'
-import pic8 from '../../assets/testImages/pic8.png'
 
 const FarmProfile = () => {
+    const { user } = useContext(UserContext)
+    // let farmID = user.farms
+    console.log('farmID', user)
+    // let farmID = '618de93d89b847892b6b0421'
     const { isTokenExpired } = useContext(UserContext)
     const history = useHistory()
+    const [farmData, setFarmData] = useState()
+    /*variables to control messages in modal*/
+
+    const [show, setShow] = useState(false)
+    const handleClose = () => setShow(false)
+    let errorMessage = ''
 
     useEffect(() => {
         if (isTokenExpired()) {
@@ -35,36 +37,31 @@ const FarmProfile = () => {
         }
     })
 
-    // delete objects after connect to db
-
-    const arrPicFarmGallery = [
-        pic1,
-        pic2,
-        pic3,
-        pic4,
-        pic5,
-        pic6,
-        pic7,
-        pic8,
-        pic1,
-        pic2,
-        pic3,
-        pic4,
-        pic5,
-        pic6,
-        pic7,
-    ]
-
-    const objFarmProfile = {
-        farmSize: '10Km',
-        farmDescriptionShort:
-            'Tellus sit ipsum sit iaculis tortor aliquet egestas. Tempus hac fames sagittis felis curabitur ultricies. Enim at adipiscing gravida diam venenatis, pellentesque metus montes. Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ut. Eget dapibus eros, ullamcorper vestibulum vel congue proin. ',
-        farmDescriptionLong:
-            'Tellus sit ipsum sit iaculis tortor aliquet egestas. Tempus hac fames sagittis felis curabitur ultricies. Enim at adipiscing gravida diam venenatis, pellentesque metus montes. Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ut. Eget dapibus eros, ullamcorper vestibulum vel congue proin. \n Tellus sit ipsum sit iaculis tortor aliquet egestas. Tempus hac fames sagittis felis curabitur ultricies. Enim at adipiscing gravida diam venenatis, pellentesque metus montes. Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ut. Eget dapibus eros, ullamcorper vestibulum vel congue proin',
-    }
+    useEffect(() => {
+        if (Object.keys(user).length > 0) {
+            axios
+                .get(`/api/farm/${user.farms[0]}`)
+                // .get(`/api/farm/${farmID}`)
+                .then((res) => {
+                    setFarmData(res)
+                    console.log('datosssss', res)
+                })
+                .catch((error) => {
+                    // setShow(true)
+                    console.log('un error mas:', error)
+                })
+        }
+    }, [user])
 
     /*coordinates for the map*/
-    const data = [[4.11, -72.93]]
+    // const data = [farmData.data.data.coordinate]
+    const arrPicFarmGallery = [] //farmData.data.gallery
+
+    // const objFarmProfile = {
+    //     farmSize: farmData.data.farmSize,
+    //     farmDescriptionShort: farmData.data.description,
+    //     farmDescriptionLong: farmData.data.description,
+    // }
 
     const arrObjProductDetails = [
         {
@@ -118,24 +115,26 @@ const FarmProfile = () => {
         },
     ]
 
-    const objFarmProfileHeader = {
-        farmLogoUrl: { placeHolder },
-        farmName: 'Farm Name',
-        origin: 'South America',
-        location: 'Colombia',
-        altitude: '1200masl',
-    }
-    const arrImgCertificates = [placeHolder, placeHolder, placeHolder]
+    // const objFarmProfileHeader = {
+    //     farmLogoUrl: farmData.data.logo,
+    //     farmName: farmData.data.name,
+    //     origin: farmData.data.origin,
+    //     location: farmData.data.location,
+    //     altitude: farmData.data.altitude,
+    // }
+    // const arrImgCertificates = farmData.data.certification
     /************************************************* */
     //Verify when to show map
 
     const [matches, setMatches] = useState(
-        window.matchMedia('(min-width: 401px)').matches
+        window.matchMedia(`(min-width: ${theme.layout.desktop})`).matches
     )
 
     useEffect(() => {
         const handler = (e) => setMatches(e.matches)
-        window.matchMedia('(min-width: 401px)').addListener(handler)
+        window
+            .matchMedia(`(min-width: ${theme.layout.desktop})`)
+            .addListener(handler)
     }, [])
     /**************************************************** */
 
@@ -147,53 +146,64 @@ const FarmProfile = () => {
     return (
         <>
             <LoggedNavBar />
-            <Container>
-                <div id="mainContainer">
-                    <FarmProfileHeader
-                        farmLogoUrl={
-                            objFarmProfileHeader.farmLogoUrl.placeHolder
-                        }
-                        farmName={objFarmProfileHeader.farmName}
-                        origin={objFarmProfileHeader.origin}
-                        location={objFarmProfileHeader.location}
-                        altitude={objFarmProfileHeader.altitude}
-                    />
-                    <FarmProfileHero farmName={objFarmProfileHeader.farmName} />
+            {farmData && (
+                <Container>
+                    <div id="mainContainer">
+                        <FarmProfileHeader
+                            farmLogoUrl={''}
+                            farmName={farmData.data.data.name}
+                            origin={farmData.data.data.origin}
+                            location={farmData.data.data.location}
+                            altitude={`${farmData.data.data.altitude} masl`}
+                        />
+                        {/*
+                    <FarmProfileHero farmName={farmData.data.data.name} />
 
-                    <FarmProfileDescription objFarmProfile={objFarmProfile} />
-
-                    {/* Show map only in desktop */}
-                    {matches && (
-                        <div id="map">
-                            {/* Map */}
-                            <div>
-                                <p>Our location</p>
+                    <FarmProfileDescription
+                        objFarmProfile={farmData.data.data.description}
+                        /> */}
+                        {/* <h1>{farmData.data.data.name}</h1> */}
+                        {/* Show map only in desktop */}
+                        {matches && (
+                            <div id="map">
+                                {/* Map */}
+                                <div>
+                                    <p>Our location</p>
+                                </div>
+                                <Map
+                                    data={
+                                        farmData
+                                            ? [farmData.data.data.coordinate]
+                                            : [[10, 100]]
+                                    }
+                                    style={{ width: '100%', height: '300px' }}
+                                    zoom={4}
+                                />
                             </div>
-                            <Map
-                                data={data}
-                                style={{ width: '100%', height: '300px' }}
-                                zoom={4}
-                            />
-                        </div>
-                    )}
+                        )}
 
-                    <FarmProfileCertificates
-                        arrImgCertificates={arrImgCertificates}
-                    />
+                        {/* <FarmProfileCertificates
+                        arrImgCertificates={farmData.arrImgCertificates}
+                    /> */}
 
-                    <FarmProfileProducts
-                        imageWidth="100%"
-                        arrObjProductDetails={arrObjProductDetails}
-                    />
-                </div>
-                {hasImages && (
-                    <div id="gallery">
-                        <FarmProfileGallery
-                            arrPicFarmGallery={arrPicFarmGallery}
+                        <FarmProfileProducts
+                            imageWidth="100%"
+                            arrObjProductDetails={arrObjProductDetails}
                         />
                     </div>
-                )}
-            </Container>
+                    {hasImages && (
+                        <div id="gallery">
+                            <FarmProfileGallery arrPicFarmGallery={[]} />
+                        </div>
+                    )}
+                </Container>
+            )}
+            <MessageModal
+                handleClose={handleClose}
+                show={show}
+                title="Message from Qafa"
+                message={errorMessage}
+            />
         </>
     )
 }

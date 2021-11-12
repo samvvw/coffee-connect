@@ -77,6 +77,23 @@ export const UserReducer = (state, action) => {
                 token: null,
             }
 
+        case 'UPDATE_USER':
+            return {
+                ...state,
+                user: {
+                    userName: action.payload.user.userName,
+                    firstName: action.payload.user.firstName,
+                    lastName: action.payload.user.lastName,
+                    email: action.payload.user.email,
+                    userType: action.payload.user.userType,
+                    profilePicture: action.payload.user.profilePicture,
+                    farms: action.payload.user?.farms
+                        ? action.payload.user.farms
+                        : [],
+                },
+                token: action.payload.token,
+            }
+
         case 'ERROR':
             return { ...state, loading: false, error: action.payload }
 

@@ -28,6 +28,7 @@ const LoggedUser = (props) => {
 
     const handleSignOut = () => {
         signOut()
+        history.replace('/')
     }
 
     useEffect(() => {

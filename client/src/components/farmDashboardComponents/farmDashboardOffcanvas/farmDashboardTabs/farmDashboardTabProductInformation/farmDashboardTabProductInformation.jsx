@@ -1,10 +1,12 @@
 import { Container } from './farmDashboardTabProductInformation.styles'
 import Button from '../../../../button/button'
 import { theme } from '../../../../../theme/theme'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
 import MessageModal from '../../../../messageModal/messageModal'
 import { UserContext } from '../../../../../context/userContext/userContext'
+import { useHistory } from 'react-router-dom'
+
 const FarmDashboardTabProductInformation = ({
     setTabImagesDiabled,
     setSubmitImagesButtonBgc,
@@ -13,7 +15,15 @@ const FarmDashboardTabProductInformation = ({
     setIdProduct,
     setTotalProducts,
 }) => {
-    const { user } = useContext(UserContext)
+    const history = useHistory()
+    const { user, isTokenExpired } = useContext(UserContext)
+
+    useEffect(() => {
+        if (isTokenExpired()) {
+            history.replace('/sign-in')
+        }
+    })
+
     let farmID = user.farms[0]
 
     const [body, setBody] = useState({
