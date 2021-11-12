@@ -13,14 +13,10 @@ const AboutUsHero = () => {
             <ChildContainer gridColumn="1/2" gridRow="1/2">
                 <SubContainer>
                     <h1>
-                        Lorem ipsum dolor sit amet, onsectetrasas dipiscing
-                        elit.
+                        Behind every human achievement, there is a team.
                     </h1>
                     <p>
-                        Mollis bibendum leo, pulvinar blandit gravida nec.
-                        Adipiscing sed pellentesque cras massa urna lectus leo,
-                        ut. Eget dapibus eros, ullamcorper vestibulum vel congue
-                        proin.
+                        Here is the team, who worked closely with each other from designing to developing the qafa platform.
                     </p>
                 </SubContainer>
             </ChildContainer>

@@ -43,9 +43,16 @@ export const Container = styled.div`
     h4 {
         padding-bottom: 0.5rem;
     }
+
+    @media only screen and (min-width: 401px) {
+        .team-member-image-wrapper {
+            width: 240px;
+            height: 240px;
+        }
+    }
 `
 export const IconsContainer = styled.div`
-    width: 20%;
+    width: 25%;
     display: flex;
     justify-content: space-between;
 

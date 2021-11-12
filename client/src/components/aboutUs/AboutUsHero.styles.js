@@ -17,7 +17,6 @@ export const Container = styled.div`
     @media only screen and (min-width: 401px) {
         align-items: center;
 
-        padding-top: 2rem;
         padding-bottom: 5rem;
 
         width: 100%;
@@ -46,9 +45,31 @@ export const SubContainer = styled.div`
         font-size: 1.125rem;
         font-weight: bold;
     }
-    @media only screen and (min-width: 401px) {
+    @media only screen and (min-width: 401px) {       
+        padding-left: 15vw;
+        
         h1 {
             font-size: 4rem;
+            margin-bottom: 1rem;
+            width: 756px;
+        }
+
+        p {
+            font-size: 1.5rem;
+            position: relative;
+            width: 756px;
+        }
+
+        //short line
+        p::before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0; /* horizontal position */
+            top: -10px; /* vertical position */
+            width: 50px; 
+            height: 2px; /* boldness */
+            background-color: #FF9933; 
         }
     }
 `

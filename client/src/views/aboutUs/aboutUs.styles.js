@@ -14,6 +14,7 @@ export const Container = styled.div`
     @media only screen and (min-width: 401px) {
         h2 {
             font-size: 3rem;
+            text-align: center;
         }
     }
 `
@@ -31,7 +32,8 @@ export const CardsContainer = styled.div`
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(2, 1fr);
         width: 80%;
-        gap: 3rem;
+        gap: 1rem;
         margin: 0 auto;
+        padding-bottom: 10rem;
     }
 `
