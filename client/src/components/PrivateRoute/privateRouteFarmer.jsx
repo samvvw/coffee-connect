@@ -8,11 +8,11 @@ const PrivateRouteFarmer = ({ children, path, ...rest }) => {
 
     useEffect(() => {
         setLoading(false)
-    }, [])
+    }, [user])
 
     return (
         <>
-            {!loading && (
+            {!loading && Object.keys(user).length > 0 && (
                 <Route
                     {...rest}
                     path={path}

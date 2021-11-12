@@ -14,7 +14,7 @@ const FarmProfileProductCard = ({
     height,
     objProductDetails,
 }) => {
-    console.log('product', objProductDetails.productUrlImage)
+    // console.log('product', objProductDetails.productUrlImage)
 
     return (
         <Container width={width} height={height}>
@@ -29,7 +29,7 @@ const FarmProfileProductCard = ({
                 <div>
                     <CircleButton
                         IconName="FavoriteEmpty"
-                        onClick=""
+                        // onClick=
                         buttonBgc="white"
                     />
                 </div>

@@ -1,10 +1,11 @@
 import { theme } from '../../theme/theme'
 import { Container } from './myFarmDashboardNewFarmForm.style'
 import Button from '../button/button'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import MessageModal from '../messageModal/messageModal'
+import { UserContext } from '../../context/userContext/userContext'
 
 const MyFarmDashboardNewFarmForm = () => {
     /*variables to control messages in modal*/
@@ -14,8 +15,9 @@ const MyFarmDashboardNewFarmForm = () => {
     /************************************* */
 
     const [countries, setCountries] = useState([])
-    const [selectedCountry, setSelectedCountry] = useState()
-    const [selectedOrigin, setSelectedOrigin] = useState()
+    const [selected, setSelected] = useState({})
+    const [selectedCountry, setSelectedCountry] = useState('')
+    const [selectedOrigin, setSelectedOrigin] = useState('')
     const [selectedLatLng, setSelectedLatLng] = useState()
     const history = useHistory()
 
@@ -56,7 +58,7 @@ const MyFarmDashboardNewFarmForm = () => {
             name: '',
             location: '',
             origin: '',
-            altitud: 0,
+            altitude: 0,
             farmSize: 0,
             description: '',
             coordinate: [],
@@ -64,35 +66,40 @@ const MyFarmDashboardNewFarmForm = () => {
     ])
 
     useEffect(() => {
-        let selected = []
-        selected = countries.filter(
-            (country) => country.name === selectedCountry
+        setSelected(
+            countries.filter((country) => country.name === selectedCountry)
         )
+    }, [selectedCountry])
 
-        if (selected.length !== 0) {
-            // console.log(selected[0].region, selected[0].latlng)
+    useEffect(() => {
+        console.log('selected', selected)
+        if (selected.length > 0) {
             setSelectedOrigin(selected[0].region)
             setSelectedLatLng(selected[0].latlng)
-
-            setBody((prevBody) => ({
-                ...prevBody,
-                origin: selectedOrigin,
-            }))
-            setBody((prevBody) => ({
-                ...prevBody,
-                coordinate: selectedLatLng,
-            }))
-            setBody((prevBody) => ({
-                ...prevBody,
-                location: selectedCountry,
-            }))
         }
-    }, [selectedCountry])
+    }, [selected])
+
+    useEffect(() => {
+        setBody((prevBody) => ({
+            ...prevBody,
+            origin: selectedOrigin,
+        }))
+        setBody((prevBody) => ({
+            ...prevBody,
+            coordinate: selectedLatLng,
+        }))
+        setBody((prevBody) => ({
+            ...prevBody,
+            location: selectedCountry,
+        }))
+    }, [selectedOrigin])
+
+    const { updateUser } = useContext(UserContext)
+
+    // const [user, setUser] = useState()
 
     const handleSubmit = (event) => {
         event.preventDefault()
-
-        // console.log(localStorage.getItem('token'))
 
         axios
             .post(`/api/farm/`, {
@@ -101,10 +108,12 @@ const MyFarmDashboardNewFarmForm = () => {
             })
             .then((res) => {
                 setShow(false)
+
+                updateUser()
                 history.push('/farm-profile')
             })
             .catch((error) => {
-                console.log(error)
+                console.log('Error creating farm', error)
                 setShow(true)
             })
     }
@@ -165,19 +174,19 @@ const MyFarmDashboardNewFarmForm = () => {
                         value={selectedOrigin}
                     />
                 </div>
-                <div id="farmAltitud">
-                    <label htmlFor="altitud">
-                        Altitud (masl)<span>*</span>
+                <div id="farmAltitude">
+                    <label htmlFor="altitude">
+                        Altitude (masl)<span>*</span>
                     </label>
                     <input
                         type="text"
-                        name="altitud"
+                        name="altitude"
                         placeholder=""
                         required
                         onChange={(event) => {
                             return setBody((prevBody) => ({
                                 ...prevBody,
-                                altitud: event.target.value,
+                                altitude: event.target.value,
                             }))
                         }}
                     />
