@@ -226,6 +226,7 @@ const MyFarmDashboardNewFarmForm = () => {
                     <Button
                         type="submit"
                         backgroundColor={theme.pallette.secondary.c800}
+                        borderColor={theme.pallette.secondary.c800}
                         textColor="white"
                         title="Create"
                     />
