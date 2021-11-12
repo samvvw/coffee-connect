@@ -7,6 +7,7 @@ import Button from '../button/button'
 import MyFarmDashboardNewFarmForm from './myFarmDashboardNewFarmForm'
 
 import { MyFarmWrapper } from './myFarmDashboard.style'
+import { ThemeConsumer } from 'styled-components'
 
 const MyFarmDashboard = () => {
     const history = useHistory()
@@ -70,7 +71,11 @@ const MyFarmDashboard = () => {
                 <p>To get started, add your farm information.</p>
                 {matches && (
                     //desktop
-                    <Button title="New Farm" onClick={handleShow} />
+                    <Button
+                        title="New Farm"
+                        onClick={handleShow}
+                        borderColor={theme.pallette.primary[500]}
+                    />
                 )}
                 {/* mobile */}
                 {!matches && <Button title="+" onClick={handleShow} />}

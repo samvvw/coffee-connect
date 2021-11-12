@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { theme } from '../../theme/theme'
 
 export const MyFarmWrapper = styled.div`
     display: flex;
@@ -55,9 +56,9 @@ export const MyFarmWrapper = styled.div`
                 display: flex;
                 align-items: center;
                 &:hover {
-                    color: black;
+                    color: ${theme.pallette.primary[500]};
                     background-color: #fff;
-                    border: 1px solid black;
+                    border: 1px solid ${theme.pallette.primary[500]};
                 }
             }
         }
