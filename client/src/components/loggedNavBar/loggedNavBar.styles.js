@@ -11,7 +11,7 @@ export const Container = styled.div`
         display: flex;
         justify-content: start;
         align-items: center;
-        gap: 1rem;
+        gap: 2rem;
         padding: 1rem 0;
         width: 50%;
         margin: 0 auto;
@@ -19,6 +19,7 @@ export const Container = styled.div`
         & li > a {
             text-decoration: none;
             color: #000000;
+            padding-bottom: 6px;
 
             &.selected {
                 color: #ff9933;

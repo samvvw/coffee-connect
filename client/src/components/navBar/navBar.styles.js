@@ -20,5 +20,6 @@ export const MenuItem = styled.li`
     & > a {
         text-decoration: none;
         color: #000000;
+        font-size: 1.1rem;
     }
 `

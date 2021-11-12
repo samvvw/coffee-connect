@@ -7,6 +7,8 @@ const Button = ({
     backgroundColor,
     textColor,
     disabled = false,
+    borderColor,
+    width = '100%',
 }) => {
     return (
         <StyledButton
@@ -15,6 +17,8 @@ const Button = ({
             backgroundColor={backgroundColor}
             textColor={textColor}
             disabled={disabled}
+            borderColor={borderColor}
+            width={width}
         >
             {title}
         </StyledButton>

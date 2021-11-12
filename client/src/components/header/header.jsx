@@ -7,12 +7,12 @@ import NavBarMobile from '../navBarMobile/navBarMobile'
 
 const Header = (props) => {
     const [matches, setMatches] = useState(
-        window.matchMedia('(min-width: 850px)').matches
+        window.matchMedia(`(min-width: 930px)`).matches
     )
 
     useEffect(() => {
         const handler = (e) => setMatches(e.matches)
-        window.matchMedia('(min-width: 850px)').addListener(handler)
+        window.matchMedia('(min-width: 930px)').addListener(handler)
     }, [])
 
     return (

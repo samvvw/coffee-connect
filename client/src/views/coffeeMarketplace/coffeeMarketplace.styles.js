@@ -4,6 +4,14 @@ export const Container = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
 
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30%;
+        height: 100%;
+    }
+
     .main {
         display: flex;
         flex-direction: column;

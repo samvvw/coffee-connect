@@ -1,11 +1,10 @@
 import styled from 'styled-components'
-
+import { theme } from '../../theme/theme'
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
     width: 90%;
     margin: 0 auto;
-    padding-top: 2rem;
 
     h2 {
         font-size: 2rem;
@@ -19,40 +18,52 @@ export const Container = styled.div`
         display: flex;
         flex-direction: column;
         margin-bottom: 2rem;
+
+        label {
+            margin-bottom: 0.5rem;
+        }
+        input[type='text'],
+        input[type='email'],
+        textarea {
+            height: 48px;
+            width: 100%;
+            border-color: ${theme.pallette.accent1.light};
+            margin-bottom: 1.5rem;
+        }
+        textarea {
+            height: 300px;
+        }
+
         div {
             button {
                 width: 100%;
             }
         }
     }
-    form :nth-child(2),
-    form :nth-child(4),
-    form :nth-child(6),
-    form :nth-child(8) {
-        margin-bottom: 2rem;
-        padding-left: 1rem;
-    }
-    form :nth-child(8) {
-        height: 300px;
-        padding: 1rem;
-    }
+
     label {
         font-size: 1.5rem;
-    }
-    input {
-        border-radius: 25px;
-        height: 50px;
-    }
-    textarea {
-        border-radius: 25px;
+        span {
+            color: red;
+        }
     }
 
-    @media only screen and (min-width: 401px) {
-        form,
-        h1,
+    @media only screen and (min-width: ${theme.layout.desktop}) {
         p {
-            width: 40%;
-            margin: 0 auto;
+            text-align: left;
+        }
+        p,
+        h2 {
+            width: 70%;
+        }
+
+        form {
+            width: 70%;
+            h2 {
+                text-align: left;
+                font-size: 2.5rem;
+            }
+            /* margin: 0 auto; */
         }
 
         p,
@@ -60,7 +71,8 @@ export const Container = styled.div`
             margin-bottom: 2rem;
         }
         form div button {
-            width: 33%;
+            width: 50%;
+            margin: 0 auto;
         }
         form div {
             display: flex;

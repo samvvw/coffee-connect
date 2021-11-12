@@ -1,13 +1,23 @@
 import { theme } from '../../theme/theme'
 import Offcanvas from 'react-bootstrap/Offcanvas'
-import { useEffect, useState } from 'react'
-
+import { useEffect, useState, useContext } from 'react'
+import { UserContext } from '../../context/userContext/userContext'
+import { useHistory } from 'react-router-dom'
 import Button from '../button/button'
 import MyFarmDashboardNewFarmForm from './myFarmDashboardNewFarmForm'
 
 import { MyFarmWrapper } from './myFarmDashboard.style'
+import { ThemeConsumer } from 'styled-components'
 
 const MyFarmDashboard = () => {
+    const history = useHistory()
+    const { user } = useContext(UserContext)
+
+    //check if the user has a farm created already, if so, user needs to be redirected to farmProfile
+    if (user.farms.length > 0) {
+        history.push('/farm-profile')
+    }
+
     const [matches, setMatches] = useState(
         window.matchMedia(`(min-width: ${theme.layout.desktop})`).matches
     )
@@ -24,7 +34,7 @@ const MyFarmDashboard = () => {
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
     /*----------------------------------------------*/
-    console.log(show)
+    // console.log(show)
 
     let style, styleHeader, styleTitle, styleBody
     styleBody = { padding: 0 }
@@ -36,7 +46,7 @@ const MyFarmDashboard = () => {
             color: theme.pallette.primary[500],
             display: 'grid',
             gridTemplateColumns: '9fr 1fr',
-            border: '1px solid gray',
+            // border: '1px solid gray',
         }
         styleTitle = {
             textAlign: 'left',
@@ -61,7 +71,11 @@ const MyFarmDashboard = () => {
                 <p>To get started, add your farm information.</p>
                 {matches && (
                     //desktop
-                    <Button title="New Farm" onClick={handleShow} />
+                    <Button
+                        title="New Farm"
+                        onClick={handleShow}
+                        borderColor={theme.pallette.primary[500]}
+                    />
                 )}
                 {/* mobile */}
                 {!matches && <Button title="+" onClick={handleShow} />}
@@ -80,7 +94,7 @@ const MyFarmDashboard = () => {
                         </Offcanvas.Title>
                     </Offcanvas.Header>
                     <Offcanvas.Body style={styleBody}>
-                        <MyFarmDashboardNewFarmForm />
+                        <MyFarmDashboardNewFarmForm setShow={setShow} />
                     </Offcanvas.Body>
                 </Offcanvas>
             </>

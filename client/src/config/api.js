@@ -1,3 +1,3 @@
 export const api = {
-    getProducts: '/api/product',
+    products: '/api/product',
 }

@@ -74,6 +74,7 @@ exports.userSignIn = async (req, res) => {
                     _id,
                     profilePicture,
                     userType,
+                    farms,
                 } = user
                 const payload = {
                     id: _id,
@@ -83,6 +84,7 @@ exports.userSignIn = async (req, res) => {
                     email: email,
                     profilePicture: profilePicture,
                     userType: userType,
+                    farms: farms,
                 }
 
                 const token = createToken(payload)
@@ -92,6 +94,14 @@ exports.userSignIn = async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({ error: error })
+    }
+}
+
+exports.getUserById = async (req, res) => {
+    if (req.currentUser) {
+        res.status(200).json({ user: req.currentUser })
+    } else {
+        res.status(404).json({ error: 'User not found' })
     }
 }
 

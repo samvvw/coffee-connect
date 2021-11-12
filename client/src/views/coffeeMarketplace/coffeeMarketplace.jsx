@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ProductCard from '../../components/marketDirectoryComponents/productCard/productCard'
 import SortBy from '../../components/marketDirectoryComponents/sortBy/sortBy'
 import Map from '../../components/map/map'
 import SearchBar from '../../components/searchBar/searchBar'
 import { useProducts } from '../../hooks'
 import { Container } from './coffeeMarketplace.styles'
+import lottie from 'lottie-web'
 
 const filters = [
     {
@@ -25,12 +26,27 @@ const filters = [
 ]
 
 const CoffeeMarketplace = () => {
-    const products = useProducts()
+    const [products, getProducts] = useProducts()
     const [querySearch, setQuerySearch] = useState('')
     const [coordinates, setCoordinates] = useState()
+    const [queryFilters, setQueryFilters] = useState('')
+    const [loading, setLoading] = useState(true)
+    const container = useRef()
 
     const handleKeyUp = (e) => {
-        if (e.keyCode === 13) setQuerySearch(e.target.value)
+        if (e.keyCode === 13) {
+            //Get products with new search
+            if (e.target.value.trim()) {
+                getProducts(`search=${e.target.value}&${queryFilters}`)
+            } else {
+                getProducts(`${queryFilters}`)
+            }
+            setQuerySearch(e.target.value)
+        }
+    }
+
+    const handleFilterChange = (value) => {
+        setQueryFilters(value)
     }
 
     useEffect(() => {
@@ -44,6 +60,29 @@ const CoffeeMarketplace = () => {
         getCoordinates()
     }, [products])
 
+    useEffect(() => {
+        if (querySearch.trim()) {
+            getProducts(`search=${querySearch}&${queryFilters}`)
+        } else {
+            getProducts(`${queryFilters}`)
+        }
+    }, [queryFilters])
+
+    useEffect(() => {
+        lottie.loadAnimation({
+            container: container.current,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            animationData: require('../../assets/cofffee-loading.json'),
+            width: '100',
+        })
+    }, [])
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), 1200)
+    }, [products])
+
     return (
         <Container>
             <div className="main">
@@ -54,7 +93,7 @@ const CoffeeMarketplace = () => {
                         onKeyUp={(e) => handleKeyUp(e)}
                     />
                 </div>
-                <SortBy data={filters} />
+                <SortBy data={filters} onChange={handleFilterChange} />
                 <div className="main__results">
                     <div className="main__results__query">
                         <p>Search results for:</p>
@@ -73,10 +112,13 @@ const CoffeeMarketplace = () => {
                 </div>
             </div>
             <div className="map-container">
-                <Map
-                    data={coordinates}
-                    style={{ width: '100%', height: '80vh' }}
-                />
+                {!loading && (
+                    <Map
+                        data={coordinates}
+                        style={{ width: '100%', height: '80vh' }}
+                    />
+                )}
+                {loading && <div className="container" ref={container}></div>}
             </div>
         </Container>
     )

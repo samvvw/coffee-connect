@@ -2,7 +2,7 @@ import { createContext, useReducer, useEffect } from 'react'
 import jwt_decode from 'jwt-decode'
 import dayjs from 'dayjs'
 import { UserReducer } from './userReducer'
-
+import axios from 'axios'
 const initialState = {
     user: {},
     error: {},
@@ -63,12 +63,43 @@ export const UserProvider = ({ children }) => {
         }
     }
 
+    const updateUser = async () => {
+        try {
+            const token = localStorage.getItem('token')
+            axios({
+                method: 'post',
+                url: '/api/user',
+                headers: { 'Content-type': 'application/json' },
+                data: { token: token },
+            })
+                .then((res) => {
+                    dispatch({
+                        type: 'UPDATE_USER',
+                        payload: { token: token, user: res.data.user },
+                    })
+                })
+                .catch((error) => console.log('error getting user', error))
+        } catch (err) {}
+    }
+
     const verifyTokenInStorage = () => {
-        dispatch({ type: 'LOADING' })
+        // dispatch({ type: 'LOADING' })
         const token = localStorage.getItem('token')
         if (token) {
-            const decoded = jwt_decode(token)
-            dispatch({ type: 'REFRESH', payload: { token, user: decoded } })
+            // const decoded = jwt_decode(token)
+            axios({
+                method: 'post',
+                url: '/api/user',
+                headers: { 'Content-type': 'application/json' },
+                data: { token: token },
+            })
+                .then((res) => {
+                    dispatch({
+                        type: 'UPDATE_USER',
+                        payload: { token: token, user: res.data.user },
+                    })
+                })
+                .catch((error) => console.log('error getting user', error))
         } else {
             dispatch({ type: 'UNLOADING' })
         }
@@ -89,6 +120,7 @@ export const UserProvider = ({ children }) => {
             const user = jwt_decode(token)
             isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1
             if (isExpired) {
+                console.log('TOKEN EXPIRED!')
                 dispatch({ type: 'EXPIRED' })
                 localStorage.clear()
             }
@@ -109,6 +141,7 @@ export const UserProvider = ({ children }) => {
                 signOut,
                 verifyTokenInStorage,
                 isTokenExpired,
+                updateUser,
             }}
         >
             {children}

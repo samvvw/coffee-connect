@@ -17,6 +17,9 @@ export const UserReducer = (state, action) => {
                     lastName: action.payload.user.lastName,
                     email: action.payload.user.email,
                     userType: action.payload.user.userType,
+                    farms: action.payload.user?.farms
+                        ? action.payload.user.farms
+                        : [],
                 },
                 token: action.payload.token,
             }
@@ -33,6 +36,9 @@ export const UserReducer = (state, action) => {
                     email: action.payload.user.email,
                     userType: action.payload.user.userType,
                     profilePicture: action.payload.user.profilePicture,
+                    farms: action.payload.user?.farms
+                        ? action.payload.user.farms
+                        : [],
                 },
                 token: action.payload.token,
             }
@@ -57,6 +63,9 @@ export const UserReducer = (state, action) => {
                     email: action.payload.user.email,
                     userType: action.payload.user.userType,
                     profilePicture: action.payload.user.profilePicture,
+                    farms: action.payload.user?.farms
+                        ? action.payload.user.farms
+                        : [],
                 },
                 token: action.payload.token,
             }
@@ -66,6 +75,23 @@ export const UserReducer = (state, action) => {
                 ...state,
                 user: {},
                 token: null,
+            }
+
+        case 'UPDATE_USER':
+            return {
+                ...state,
+                user: {
+                    userName: action.payload.user.userName,
+                    firstName: action.payload.user.firstName,
+                    lastName: action.payload.user.lastName,
+                    email: action.payload.user.email,
+                    userType: action.payload.user.userType,
+                    profilePicture: action.payload.user.profilePicture,
+                    farms: action.payload.user?.farms
+                        ? action.payload.user.farms
+                        : [],
+                },
+                token: action.payload.token,
             }
 
         case 'ERROR':
