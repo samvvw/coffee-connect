@@ -56,6 +56,7 @@ export const Container = styled.div`
         select {
             height: 48px;
             width: 100%;
+            border: 3px solid ${theme.pallette.accent1.light};
         }
 
         div {

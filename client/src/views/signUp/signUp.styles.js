@@ -114,7 +114,7 @@ export const Container = styled.div`
         display: grid;
         grid-template-columns: 1fr 1fr;
         /* grid-template-rows: 0.1fr auto; */
-        grid-template-rows: 0fr auto;
+        grid-template-rows: 0.1fr auto;
         max-width: 100%;
         width: 100%;
         padding-top: 0;
