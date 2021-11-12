@@ -2,6 +2,15 @@ import styled from 'styled-components'
 import { theme } from '../../theme/theme'
 
 export const Container = styled.div`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* max-width: 400px; */
+    width: 100%;
+    margin: 0 auto;
+    /* padding-top: 2rem; */
+
     .sign-in-image {
         display: none;
     }
