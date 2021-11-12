@@ -69,7 +69,7 @@ const farmSchema = new mongoose.Schema(
         // },
         farmPicture: {
             type: String, //As of now, picture only based on the hi-fi, if needed, use mediaSchema later
-            // required: [true, "Please enter coordinate"],
+            default: 'Default Picture URL',
         },
         certification: {
             type: [String], //As of now, pictures only based on the hi-fi, if needed, use certificationSchema later
