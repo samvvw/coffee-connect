@@ -5,11 +5,11 @@ const ProductCard = (props) => {
         <article className={props.className}>
             <div className="product-img-wrapper">
                 <img src={props.product.image} alt={props.product.name} />
-                <span>HEART</span>
+                <span>❤️</span>
             </div>
             <div className="product-content">
                 <h3>{props.product.name}</h3>
-                <div>
+                <div className="product-properties">
                     <p>
                         Location: <span>{props.product.location}</span>| Taste:{' '}
                         <span>{props.product.taste}</span>
@@ -18,7 +18,7 @@ const ProductCard = (props) => {
                         Roast Level: <span>{props.product.roastLevel}</span>
                     </p>
                 </div>
-                <div>
+                <div className="product-price">
                     <h4>
                         ${props.product.price} CAD{' '}
                         <span>/ {props.product.size}g</span>
@@ -32,8 +32,60 @@ const ProductCard = (props) => {
 export const DashboardProductCard = styled((props) => (
     <ProductCard {...props} />
 ))`
-    img {
-        width: 300px;
-        height: auto;
+    border-radius: 8px;
+    box-sizing: border-box;
+    border: 1px solid ${({ theme }) => theme.pallette.black[100]};
+    overflow: hidden;
+    .product-img-wrapper {
+        position: relative;
+        height: 216px;
+        width: 368px;
+        overflow: hidden;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center left;
+        }
+        span {
+            padding: 0.2rem 0.2rem 0.07rem 0.2rem;
+            border-radius: 50%;
+            background-color: #fff;
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+        }
+        span:hover {
+            background-color: #f0f0f0;
+        }
+    }
+    .product-content {
+        padding: 1rem;
+        h3 {
+            font-size: 1.125rem;
+            font-weight: bold;
+            &::first-letter {
+                text-transform: capitalize;
+            }
+        }
+        .product-properties {
+            p {
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: ${({ theme }) => theme.pallette.black[400]};
+                span {
+                    color: ${({ theme }) => theme.pallette.black[900]};
+                }
+            }
+        }
+        .product-price {
+            h4 {
+                font-size: 1rem;
+                font-weight: bold;
+                span {
+                    font-weight: normal;
+                }
+            }
+        }
     }
 `
