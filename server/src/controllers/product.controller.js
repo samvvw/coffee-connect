@@ -194,6 +194,23 @@ exports.getProductById = (req, res) => {
         })
 }
 
+exports.getProductList = async (req, res) => {
+    try {
+        const { token } = req.query
+
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+
+        const currentUser = await User.findById(decodedToken.id)
+        const findProducts = await Product.find({
+            _id: { $in: currentUser.likes },
+        })
+        res.json(findProducts)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error })
+    }
+}
+
 exports.modifyProduct = (req, res) => {
     const {
         productName,
@@ -387,8 +404,7 @@ exports.likes = async (req, res) => {
     const userDb = await User.findById(currentUser.id)
     req.currentUser = userDb
     if (userDb) {
-        Product.findOne({ _id: req.productId }, { likes: 1 })
-        .then((result) => {
+        Product.findOne({ _id: req.productId }, { likes: 1 }).then((result) => {
             // console.log(result.likes)
             if (result.likes.includes(currentUser.id)) {
                 //this object is just for the return
