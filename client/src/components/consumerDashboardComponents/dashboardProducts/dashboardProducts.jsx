@@ -6,16 +6,22 @@ export default function DashboardProducts({ likedProducts }) {
             <FarmDashboardProductCardSection>
                 {likedProducts?.map((product) => {
                     return product.sizePrice.map((size) => {
-                        const productProps = {
-                            image: product.picture[0],
-                            name: product.productName,
-                            location: product.location,
-                            taste: product.taste.join(', '),
-                            roastLevel: product.roastLevel,
-                            price: size.price,
-                            size: size.size,
+                        if (size.size && size.price) {
+                            const productProps = {
+                                image: product.picture[0],
+                                name: product.productName,
+                                location: product.location,
+                                taste: product.taste.join(', '),
+                                roastLevel: product.roastLevel,
+                                price: size.price,
+                                size: size.size,
+                            }
+                            return (
+                                <DashboardProductCard product={productProps} />
+                            )
+                        } else {
+                            return ''
                         }
-                        return <DashboardProductCard product={productProps} />
                     })
                 })}
             </FarmDashboardProductCardSection>
