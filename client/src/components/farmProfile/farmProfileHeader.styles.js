@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import { theme } from '../../theme/theme'
 export const HeaderContainer = styled.div`
     background-color: ${(props) => props.backgroundColor || '#ffffff'};
     color: #000000;
@@ -22,6 +22,8 @@ export const HeaderMainContainer = styled.div`
         p,
         h5 {
             font-size: 1rem;
+            display: flex;
+            align-items: center;
         }
 
         p {
@@ -35,17 +37,26 @@ export const HeaderMainContainer = styled.div`
 
         border-right: 1px solid ${(props) => props.borderRight || 'transparent'};
     }
-    & > :nth-child(1) {
+    #divLogoName {
         padding-left: 2rem;
         padding-right: 2rem;
         display: flex;
         align-items: center;
-        img {
-            width: 48px;
-            height: 48px;
+        justify-content: space-between;
+        width: 100%;
+        height: auto;
+        padding-bottom: 1rem;
+
+        #divLogo {
+            width: 57px;
+            height: 57px;
+        }
+        /* img {
+            width: 57px;
+            height: 57px;
             border-radius: 50%;
             padding-right: 0.5rem;
-        }
+        } */
     }
     & > :nth-child(2) {
         display: flex;
@@ -81,12 +92,26 @@ export const HeaderMainContainer = styled.div`
         display: none;
     }
 
-    @media only screen and (min-width: 401px) {
+    @media only screen and (min-width: ${theme.layout.desktop}) {
         display: grid;
         grid-template-columns: 2fr 1fr;
         grid-template-rows: auto auto;
-
+        align-items: center;
         width: 80%;
+
+        #divLogoName {
+            display: flex;
+            #divLogo {
+                height: 102px;
+                width: 102px;
+                margin-right: 2rem;
+            }
+        }
+
+        #divButtons {
+            height: 40px;
+            justify-content: flex-end;
+        }
         h4 {
             padding-top: 1rem;
             padding-bottom: 1rem;

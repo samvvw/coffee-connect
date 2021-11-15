@@ -10,6 +10,7 @@ const ImageFarm = ({
     heightButton,
     bgImage,
     idContainer,
+    fileContainerinDB,
     // idProduct,
 }) => {
     // const [bgImage, setBgImage] = useState()
@@ -22,22 +23,40 @@ const ImageFarm = ({
         input.onchange = (_) => {
             // you can use this method to get file and perform respective operations
             let files = Array.from(input.files)
-            // const farmId = '61808eb787ad9fd90a35acdd'
-            // const productId = idProduct
             const token = localStorage.getItem('token')
+
+            let apiUrl = ''
+            switch (fileContainerinDB) {
+                case 'gallery':
+                    apiUrl = `/api/farm/${farmID}/gallery`
+                    break
+                case 'hero':
+                    break
+                case 'logo':
+                    break
+                default:
+                    break
+            }
+
             const form = new FormData()
-            form.append('productFile', files[0])
+            form.append('caption', 'some caption')
+            form.append('files', { imageFile: files[0] })
             form.append('token', token)
-            const data = { method: 'post', body: form }
-            // console.log(`/api/farm/${farmID}/product/${productId}/pictures`)
-            // fetch(`/api/farm/${farmID}/product/${productId}/pictures`, data)q
-            //     .then((res) =>
-            //         res.json().then((data) => {
-            //             setBgImage(data.picture[+idContainer])
-            //             setTotalProducts((prev) => prev + 1)
-            //         })
-            //     )
-            //     .catch((error) => console.log(error))
+            const data = {
+                method: 'post',
+                body: form,
+                files: { imageFile: 'hola!' },
+            }
+
+            fetch(apiUrl, data)
+                .then((res) =>
+                    res.json().then((data) => {
+                        console.log('save image to gallery', data)
+                        // setBgImage(data.picture[+idContainer])
+                        // setTotalProducts((prev) => prev + 1)
+                    })
+                )
+                .catch((error) => console.log(error))
         }
         input.click()
     }

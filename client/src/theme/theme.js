@@ -29,6 +29,7 @@ export const theme = {
         },
         black: {
             500: '#607D8B',
+            400: '#78909C',
             200: '#B0BEC5',
             50: '#ECEFF1',
         },

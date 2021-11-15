@@ -1,26 +1,65 @@
 // import CircleButton from '../../circleButton/circleButton'
-import ButtonShare from '../buttonShare/buttonShare'
+import { useState, useEffect } from 'react'
+import { theme } from '../../theme/theme'
+// import ButtonShare from '../buttonShare/buttonShare'
 
-import ButtonSave from '../buttonSave/buttonSave'
+// import ButtonSave from '../buttonSave/buttonSave'
+import Button from '../button/button'
+import ImageFarm from './imageFarm/imageFarm'
 import {
     HeaderContainer,
     HeaderMainContainer,
 } from './farmProfileHeader.styles'
 
 const FarmProfileHeader = ({
+    farmID,
     farmLogoUrl,
     backgroundColor,
     farmName,
     origin,
     location,
     altitude,
+    handleShowEdit,
 }) => {
+    const [matches, setMatches] = useState(
+        window.matchMedia(`(min-width: ${theme.layout.desktop})`).matches
+    )
+
+    useEffect(() => {
+        const handler = (e) => setMatches(e.matches)
+        window
+            .matchMedia(`(min-width: ${theme.layout.desktop})`)
+            .addListener(handler)
+    }, [])
     return (
         <HeaderContainer backgroundColor={backgroundColor}>
             <HeaderMainContainer>
-                <div>
-                    <img src={farmLogoUrl} alt="" />
-                    <h4>{farmName}</h4>
+                <div id="divLogoName">
+                    {/* <img src={farmLogoUrl} alt="" /> */}
+                    {/* <div id="divLogo"> */}
+                    <div id="divLogo">
+                        {matches && (
+                            <ImageFarm
+                                idFarm={farmID}
+                                bgImage={farmLogoUrl && ''}
+                                fileContainerinDB="logo"
+                                width="102px"
+                                height="102px"
+                            ></ImageFarm>
+                        )}
+                        {!matches && (
+                            <ImageFarm
+                                idFarm={farmID}
+                                bgImage={farmLogoUrl && ''}
+                                fileContainerinDB="logo"
+                                width="57px"
+                                height="57px"
+                            ></ImageFarm>
+                        )}
+                    </div>
+                    <div id="divFarmName">
+                        <h4>{farmName}</h4>
+                    </div>
                 </div>
                 <div>
                     <div>
@@ -38,10 +77,19 @@ const FarmProfileHeader = ({
                         <h5>{altitude}</h5>
                     </div>
                 </div>
-                <div id="buttons">
+                <div id="divButtons">
                     {/* Buttons */}
-                    <ButtonShare></ButtonShare>
-                    <ButtonSave></ButtonSave>
+                    {/* <ButtonShare></ButtonShare>
+                    <ButtonSave></ButtonSave> */}
+                    <Button
+                        title="Edit"
+                        type="button"
+                        backgroundColor="white"
+                        textColor={theme.pallette.primary[500]}
+                        borderColor={theme.pallette.primary[500]}
+                        width="148px"
+                        onClick={handleShowEdit}
+                    />
                 </div>
             </HeaderMainContainer>
         </HeaderContainer>

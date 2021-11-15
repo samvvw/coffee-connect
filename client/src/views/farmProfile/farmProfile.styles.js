@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { theme } from '../../theme/theme'
 
 export const Container = styled.div`
     #mainContainer {
@@ -16,6 +17,11 @@ export const Container = styled.div`
         > :nth-child(3) {
             /*Description  */
             order: 3;
+            display: flex;
+            flex-direction: column;
+            padding-left: 2rem;
+            padding-right: 2rem;
+
             > :nth-child(1) {
                 border-top: 1px solid lightgray;
                 padding-top: 2rem;
@@ -25,6 +31,7 @@ export const Container = styled.div`
         > :nth-child(4) {
             /* Certificates */
             order: 4;
+            display: block;
             > :nth-child(1) {
                 border-top: 1px solid lightgray;
                 padding-top: 2rem;
@@ -34,7 +41,7 @@ export const Container = styled.div`
             /* Products */
             order: 5;
             padding-top: 4rem;
-
+            /* display: block; */
             > :nth-child(1) {
                 /* margin-top: 2rem; */
                 border-top: 1px solid lightgray;
@@ -44,21 +51,21 @@ export const Container = styled.div`
     }
     #gallery {
         width: 100%;
-        background-color: lightgray;
+        background-color: ${theme.pallette.black[50]};
         padding-left: 2rem;
         padding-right: 2rem;
     }
-    @media only screen and (min-width: 401px) {
+    @media only screen and (min-width: ${theme.layout.desktop}) {
         #mainContainer {
             width: 80%;
             margin: 0 auto;
 
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(5, auto);
+            grid-template-rows: repeat(4, auto);
 
             > :nth-child(1) {
-                background-color: white;
+                /* background-color: red; */
 
                 grid-column: 1/4;
                 grid-row: 1/2;
@@ -97,6 +104,7 @@ export const Container = styled.div`
                     border-top: none;
                 }
             }
+            /* certificates */
             > :nth-child(5) {
                 grid-column: 1/4;
                 grid-row: 4/5;
@@ -106,8 +114,9 @@ export const Container = styled.div`
                 > :nth-child(1) {
                     border-top: none;
                 }
+                display: flex;
             }
-            > :nth-child(6) {
+            /* > :nth-child(6) {
                 grid-column: 1/4;
                 grid-row: 5/6;
                 padding-left: 0;
@@ -118,7 +127,10 @@ export const Container = styled.div`
                     border-top: 1px solid lightgray;
                     padding-top: 2rem;
                 }
-            }
+            } */
+        }
+        #gallery {
+            margin-top: 4rem;
         }
     }
 `
