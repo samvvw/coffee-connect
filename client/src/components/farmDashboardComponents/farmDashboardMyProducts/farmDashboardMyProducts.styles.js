@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { theme } from '../../../theme/theme'
 
 export const FarmMyProductsWrapper = styled.div.attrs({
     // className: 'farm-dashboard-my-products-wrapper',
@@ -39,6 +40,7 @@ export const FarmMyProductsWrapper = styled.div.attrs({
         justify-content: center;
         font-size: 1rem;
         background-color: ${(props) => props.theme.pallette.primary[500]};
+        border-color: ${theme.pallette.primary[500]};
 
         margin-right: 1rem;
     }
@@ -66,9 +68,9 @@ export const FarmMyProductsWrapper = styled.div.attrs({
                 display: flex;
                 align-items: center;
                 &:hover {
-                    color: black;
+                    color: ${theme.pallette.primary[500]};
                     background-color: #fff;
-                    border: 1px solid black;
+                    border: 1px solid ${theme.pallette.primary[500]};
                 }
             }
         }

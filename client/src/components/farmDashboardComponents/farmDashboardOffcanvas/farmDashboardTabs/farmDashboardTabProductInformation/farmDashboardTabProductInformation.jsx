@@ -911,6 +911,7 @@ const FarmDashboardTabProductInformation = ({
                         textColor="white"
                         title=" Save Information"
                         disabled={submitProductButtonDisabled}
+                        borderColor={theme.pallette.secondary.c800}
                     />
                 </div>
             </form>

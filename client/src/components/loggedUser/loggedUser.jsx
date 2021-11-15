@@ -14,6 +14,8 @@ const LoggedUser = (props) => {
         if (!isTokenExpired()) {
             if (user.userType === 'farmer') {
                 history.push('/my-products')
+            } else if (user.userType === 'consumer') {
+                history.push('/consumer-dashboard')
             }
         } else {
             history.replace('/sign-in')

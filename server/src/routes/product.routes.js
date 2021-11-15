@@ -12,6 +12,7 @@ const {
     deleteProductPicture,
     createProductPictures,
     likes,
+    getProductList,
 } = require('../controllers/product.controller')
 const { validateToken } = require('../middleware/user.middleware')
 const { validateFarmerUser } = require('../middleware/farm.middleware')
@@ -22,6 +23,8 @@ farmProductRouter.post('/', validateToken, validateFarmerUser, createProduct)
 
 // GET Products - Gets all products
 allProductRouter.get('/', getProducts)
+
+allProductRouter.get('/list', getProductList)
 
 // GET Product - Gets a single product
 farmProductRouter.get('/:productId', getProductById)
@@ -62,9 +65,6 @@ farmProductRouter.delete(
 )
 
 // Like product
-farmProductRouter.put(
-    '/:productId/likes',
-    likes
-)
+farmProductRouter.put('/:productId/likes', likes)
 
 module.exports = { farmProductRouter, allProductRouter }
