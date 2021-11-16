@@ -52,7 +52,7 @@ const farmSchema = new mongoose.Schema(
         },
         description: {
             type: String,
-            maxLength: 500,
+            maxLength: 2000,
             // minLength: 2,
             // required: [true, "Please enter farm description"],
         },
