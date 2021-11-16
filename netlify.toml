@@ -19,8 +19,8 @@
   command = "CI= npm run build"
 
   [[redirects]]
-  from = "/*"
-  to = "http://54.67.56.230/*"
+  from = "/api/*"
+  to = "http://54.67.56.230/:splat"
   status = 200
 
 
