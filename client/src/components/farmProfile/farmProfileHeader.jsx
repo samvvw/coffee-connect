@@ -12,7 +12,6 @@ import {
 } from './farmProfileHeader.styles'
 
 const FarmProfileHeader = ({
-    farmID,
     farmLogoUrl,
     backgroundColor,
     farmName,
@@ -35,25 +34,21 @@ const FarmProfileHeader = ({
         <HeaderContainer backgroundColor={backgroundColor}>
             <HeaderMainContainer>
                 <div id="divLogoName">
-                    {/* <img src={farmLogoUrl} alt="" /> */}
-                    {/* <div id="divLogo"> */}
                     <div id="divLogo">
                         {matches && (
                             <ImageFarm
-                                idFarm={farmID}
-                                bgImage={farmLogoUrl && ''}
                                 fileContainerinDB="logo"
                                 width="102px"
                                 height="102px"
+                                urlImage={farmLogoUrl}
                             ></ImageFarm>
                         )}
                         {!matches && (
                             <ImageFarm
-                                idFarm={farmID}
-                                bgImage={farmLogoUrl && ''}
                                 fileContainerinDB="logo"
                                 width="57px"
                                 height="57px"
+                                urlImage={farmLogoUrl}
                             ></ImageFarm>
                         )}
                     </div>

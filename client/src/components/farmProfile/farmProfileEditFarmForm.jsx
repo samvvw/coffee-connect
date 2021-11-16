@@ -1,13 +1,13 @@
 import { theme } from '../../theme/theme'
 import { Container } from './farmProfileEditFarmForm.style'
 import Button from '../button/button'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useRef } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import MessageModal from '../messageModal/messageModal'
-import { UserContext } from '../../context/userContext/userContext'
+// import { UserContext } from '../../context/userContext/userContext'
 
-const MyFarmDashboardNewFarmForm = () => {
+const MyFarmDashboardNewFarmForm = (props) => {
     /*variables to control messages in modal*/
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
@@ -16,10 +16,15 @@ const MyFarmDashboardNewFarmForm = () => {
 
     const [countries, setCountries] = useState([])
     const [selected, setSelected] = useState({})
-    const [selectedCountry, setSelectedCountry] = useState('')
-    const [selectedOrigin, setSelectedOrigin] = useState('')
-    const [selectedLatLng, setSelectedLatLng] = useState()
+    const [selectedCountry, setSelectedCountry] = useState(props.location)
+    const [selectedOrigin, setSelectedOrigin] = useState(props.origin)
+    const [selectedLatLng, setSelectedLatLng] = useState(props.coordinate)
     const history = useHistory()
+
+    const farmName = useRef(props.farmName)
+    const altitude = useRef(props.altitude)
+    const farmSize = useRef(props.farmSize)
+    const descrption = useRef(props.description)
 
     useEffect(() => {
         axios
@@ -53,18 +58,6 @@ const MyFarmDashboardNewFarmForm = () => {
         setSelectedCountry(e.target.value)
     }
 
-    const [body, setBody] = useState([
-        {
-            name: '',
-            location: '',
-            origin: '',
-            altitude: 0,
-            farmSize: 0,
-            description: '',
-            coordinate: [],
-        },
-    ])
-
     useEffect(() => {
         setSelected(
             countries.filter((country) => country.name === selectedCountry)
@@ -72,48 +65,37 @@ const MyFarmDashboardNewFarmForm = () => {
     }, [selectedCountry])
 
     useEffect(() => {
-        console.log('selected', selected)
         if (selected.length > 0) {
             setSelectedOrigin(selected[0].region)
             setSelectedLatLng(selected[0].latlng)
         }
     }, [selected])
 
-    useEffect(() => {
-        setBody((prevBody) => ({
-            ...prevBody,
-            origin: selectedOrigin,
-        }))
-        setBody((prevBody) => ({
-            ...prevBody,
-            coordinate: selectedLatLng,
-        }))
-        setBody((prevBody) => ({
-            ...prevBody,
-            location: selectedCountry,
-        }))
-    }, [selectedOrigin])
-
-    const { updateUser } = useContext(UserContext)
-
-    // const [user, setUser] = useState()
-
     const handleSubmit = (event) => {
         event.preventDefault()
 
+        const body = {
+            name: farmName.current.value,
+            location: selectedCountry,
+            origin: selectedOrigin,
+            altitude: altitude.current.value,
+            farmSize: farmSize.current.value,
+            description: descrption.current.value,
+            coordinate: selectedLatLng,
+        }
+
         axios
-            .post(`/api/farm/`, {
+            .put(`/api/farm/${props.farmID}`, {
                 ...body,
                 token: localStorage.getItem('token'),
             })
             .then((res) => {
-                setShow(false)
-
-                updateUser()
+                props.setShow(false)
+                props.setUpdated((prev) => prev + 1)
                 history.push('/farm-profile')
             })
             .catch((error) => {
-                console.log('Error creating farm', error)
+                console.log('Error updating farm', error)
                 setShow(true)
             })
     }
@@ -130,16 +112,12 @@ const MyFarmDashboardNewFarmForm = () => {
                         Farm Name<span>*</span>
                     </label>
                     <input
+                        ref={farmName}
+                        defaultValue={props.farmName}
                         type="text"
                         name="farmName"
                         placeholder="e.g. Finca Loma Verde"
                         required
-                        onChange={(event) => {
-                            return setBody((prevBody) => ({
-                                ...prevBody,
-                                name: event.target.value,
-                            }))
-                        }}
                     />
                 </div>
                 <div id="farmCountry">
@@ -147,7 +125,7 @@ const MyFarmDashboardNewFarmForm = () => {
                         Country<span>*</span>
                     </label>
                     <select
-                        defaultValue="default"
+                        value={selectedCountry}
                         onChange={(e) => handleCountryChange(e)}
                     >
                         <option disabled value="default">
@@ -179,16 +157,12 @@ const MyFarmDashboardNewFarmForm = () => {
                         Altitude (masl)<span>*</span>
                     </label>
                     <input
+                        ref={altitude}
+                        defaultValue={props.altitude}
                         type="text"
                         name="altitude"
                         placeholder=""
                         required
-                        onChange={(event) => {
-                            return setBody((prevBody) => ({
-                                ...prevBody,
-                                altitude: event.target.value,
-                            }))
-                        }}
                     />
                 </div>
                 <div id="farmSize">
@@ -196,30 +170,22 @@ const MyFarmDashboardNewFarmForm = () => {
                         Farm size (km)<span>*</span>
                     </label>
                     <input
+                        ref={farmSize}
                         type="text"
                         name="farmSize"
                         placeholder=""
                         required
-                        onChange={(event) => {
-                            return setBody((prevBody) => ({
-                                ...prevBody,
-                                farmSize: event.target.value,
-                            }))
-                        }}
+                        defaultValue={props.farmSize}
                     />
                 </div>
                 <div id="farmAbout">
                     <label htmlFor="about">About the Farm</label>
                     <textarea
+                        ref={descrption}
+                        defaultValue={props.description}
                         rows="10"
                         name="about"
                         placeholder=""
-                        onChange={(event) => {
-                            return setBody((prevBody) => ({
-                                ...prevBody,
-                                description: event.target.value,
-                            }))
-                        }}
                     />
                 </div>
                 <div id="submit">
@@ -236,7 +202,7 @@ const MyFarmDashboardNewFarmForm = () => {
                 handleClose={handleClose}
                 show={show}
                 title="Message from Qafa"
-                message="There are some errors in your data. Farm could not be created."
+                message="There are some errors in your data. Farm could not be updated."
             />
         </Container>
     )

@@ -1,7 +1,7 @@
 import { Container } from './farmProfileCerificates.styles'
 import ImageFarm from './imageFarm/imageFarm'
 
-const FarmProfileCertificates = ({ arrImgCertificates, farmID }) => {
+const FarmProfileCertificates = ({ arrImgCertificates }) => {
     // if there's no certificates, this component won't show
     let display = ''
     if (arrImgCertificates.length === 0) display = 'none'
@@ -11,35 +11,18 @@ const FarmProfileCertificates = ({ arrImgCertificates, farmID }) => {
         <Container display={display}>
             <h5>Certificates</h5>
             <div id="certificatesContainer">
-                {/* {arrImgCertificates.map(function (url) {
-                    return (
-                        <div>
-                            <img src={url} alt="" />
-                        </div>
-                    )
-                })} */}
                 <ImageFarm
-                    idFarm={farmID}
-                    bgImage={
-                        !arrImgCertificates[0] === 'undefined'
-                            ? arrImgCertificates[0]
-                            : ''
-                    }
-                    fileContainerinDB="certificate"
+                    fileContainerinDB="farmCertificate"
                     width="102px"
                     height="102px"
+                    urlImage={arrImgCertificates[0]}
                 ></ImageFarm>
 
                 <ImageFarm
-                    idFarm={farmID}
-                    bgImage={
-                        !arrImgCertificates[1] === 'undefined'
-                            ? arrImgCertificates[1]
-                            : ''
-                    }
-                    fileContainerinDB="certificate"
+                    fileContainerinDB="farmCertificate"
                     width="102px"
                     height="102px"
+                    urlImage={arrImgCertificates[1]}
                 ></ImageFarm>
             </div>
         </Container>

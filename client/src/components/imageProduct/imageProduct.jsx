@@ -31,7 +31,7 @@ const ImageProduct = ({
             form.append('productFile', files[0])
             form.append('token', token)
             const data = { method: 'post', body: form }
-            console.log(`/api/farm/${farmID}/product/${productId}/pictures`)
+
             fetch(`/api/farm/${farmID}/product/${productId}/pictures`, data)
                 .then((res) =>
                     res.json().then((data) => {
@@ -40,13 +40,6 @@ const ImageProduct = ({
                     })
                 )
                 .catch((error) => console.log(error))
-            // .then((res) => res.json())
-            // .then((data) => {
-            //     console.log('data', data)
-            //     setBgImage(data.picture[+idContainer])
-            //     setTotalProducts((prev) => prev + 1)
-            // })
-            // .catch((error) => console.log(error))
         }
         input.click()
     }

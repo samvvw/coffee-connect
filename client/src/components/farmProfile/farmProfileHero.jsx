@@ -1,11 +1,10 @@
 import CircleButton from '../../components/circleButton/circleButton'
-// import imgPlaceholder from '../../assets/images/placeholderrectangle.png'
 import { Container } from './farmProfileHero.styles'
 import { useEffect, useState } from 'react'
 import { theme } from '../../theme/theme'
 import ImageFarm from './imageFarm/imageFarm'
 
-const FarmProfileHero = ({ farmID, bgImage, farmName }) => {
+const FarmProfileHero = ({ urlImage, farmName }) => {
     // *******************************************************
 
     const [matches, setMatches] = useState(
@@ -31,11 +30,9 @@ const FarmProfileHero = ({ farmID, bgImage, farmName }) => {
                 </div>
             </div>
             <div id="image">
-                {/* <img alt="" src={imgUrl} /> */}
                 <ImageFarm
-                    idFarm={farmID}
-                    bgImage={bgImage}
-                    fileContainerinDB={'hero'}
+                    fileContainerinDB={'farmPicture'}
+                    urlImage={urlImage}
                 ></ImageFarm>
             </div>
             {matches && (

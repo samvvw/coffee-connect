@@ -1,5 +1,5 @@
 import { Container } from './imageFarm.styles'
-// import { useState, useContext } from 'react'
+import { useContext, useState } from 'react'
 
 import { UserContext } from '../../../context/userContext/userContext'
 const ImageFarm = ({
@@ -8,58 +8,85 @@ const ImageFarm = ({
     alt = '',
     widthButton,
     heightButton,
-    bgImage,
+    urlImage = '',
     idContainer,
     fileContainerinDB,
-    // idProduct,
 }) => {
-    // const [bgImage, setBgImage] = useState()
+    const [bgImage, setBgImage] = useState(urlImage)
     const { user } = useContext(UserContext)
     const farmID = user.farms[0]
 
-    const importFiles = (idContainer) => {
+    const importFiles = () => {
         let input = document.createElement('input')
         input.type = 'file'
         input.onchange = (_) => {
             // you can use this method to get file and perform respective operations
             let files = Array.from(input.files)
             const token = localStorage.getItem('token')
+            const form = new FormData()
 
             let apiUrl = ''
+
+            form.append('token', token)
             switch (fileContainerinDB) {
                 case 'gallery':
+                    form.append('caption', '')
+                    form.append('imageFile', files[0])
                     apiUrl = `/api/farm/${farmID}/gallery`
                     break
-                case 'hero':
+                case 'farmPicture':
+                    form.append('farmPicture', files[0])
+                    apiUrl = `/api/farm/${farmID}/pictures`
                     break
                 case 'logo':
+                    form.append('farmLogo', files[0])
+                    apiUrl = `/api/farm/${farmID}/pictures`
+                    break
+                case 'farmCertificate':
+                    form.append('farmCertificate', files[0])
+                    apiUrl = `/api/farm/${farmID}/pictures`
                     break
                 default:
                     break
             }
 
-            const form = new FormData()
-            form.append('caption', 'some caption')
-            form.append('files', { imageFile: files[0] })
-            form.append('token', token)
             const data = {
                 method: 'post',
                 body: form,
-                files: { imageFile: 'hola!' },
             }
 
             fetch(apiUrl, data)
                 .then((res) =>
                     res.json().then((data) => {
-                        console.log('save image to gallery', data)
-                        // setBgImage(data.picture[+idContainer])
-                        // setTotalProducts((prev) => prev + 1)
+                        switch (fileContainerinDB) {
+                            case 'gallery':
+                                setBgImage(
+                                    data.gallery[data.gallery.length - 1].image
+                                )
+                                break
+                            case 'logo':
+                                setBgImage(data.logo)
+                                break
+                            case 'farmPicture':
+                                setBgImage(data.farmPicture)
+                                break
+                            case 'farmCertificate':
+                                setBgImage(
+                                    data.certification[
+                                        data.certification.length - 1
+                                    ]
+                                )
+                                break
+                            default:
+                                break
+                        }
                     })
                 )
                 .catch((error) => console.log(error))
         }
         input.click()
     }
+
     return (
         <Container
             width={width}
@@ -67,7 +94,7 @@ const ImageFarm = ({
             widthButton={widthButton}
             heightButton={heightButton}
         >
-            <img src={bgImage} alt={alt} />
+            <img src={bgImage || urlImage} alt={alt} />
             <button onClick={() => importFiles(idContainer)}>+</button>
         </Container>
     )
