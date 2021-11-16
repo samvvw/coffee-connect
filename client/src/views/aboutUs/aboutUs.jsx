@@ -1,14 +1,18 @@
 import AboutUsHero from '../../components/aboutUs/AboutUsHero'
 import TeamMemberCard from '../../components/aboutUs/teamMemberCard'
 import imgPlaceholder from '../../assets/images/placeholder.png'
+import imgPlaceholder2 from '../../assets/images/placeholder2.png'
 
 import { Container, CardsContainer } from './aboutUs.styles'
 
 const AboutUS = () => {
     const arrObjMemberData = [
         {
-            name: 'Tayo Adetola',
-            role: 'Digital Product Designer',
+            defaultImg: imgPlaceholder,
+            hoverImg: imgPlaceholder2,
+            firstName: 'Tayo',
+            lastName: 'Adetola',
+            role: 'Digital Product Designer - UI/UX',
             bioShort:
                 'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
             bioLong:
@@ -18,7 +22,10 @@ const AboutUS = () => {
             socialNetwork: 'http://socialNetwork',
         },
         {
-            name: 'Jose Arteaga',
+            defaultImg: imgPlaceholder,
+            hoverImg: imgPlaceholder2,
+            firstName: 'Jose',
+            lastName: 'Arteaga',
             role: 'Front-end Developer',
             bioShort:
                 'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
@@ -29,8 +36,11 @@ const AboutUS = () => {
             socialNetwork: 'http://socialNetwork',
         },
         {
-            name: 'Elnaz Behravesh',
-            role: 'Product Designer UX/UI',
+            defaultImg: imgPlaceholder,
+            hoverImg: imgPlaceholder2,
+            firstName: 'Elnaz',
+            lastName: 'Behravesh',
+            role: 'Digital Product Designer - UI/UX',
             bioShort:
                 'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
             bioLong:
@@ -40,8 +50,11 @@ const AboutUS = () => {
             socialNetwork: 'http://socialNetwork',
         },
         {
-            name: 'Lilian Fajardo Talavera',
-            role: 'Product & UX designer',
+            defaultImg: imgPlaceholder,
+            hoverImg: imgPlaceholder2,
+            firstName: 'Lilian',
+            lastName: 'Fajardo Talavera',
+            role: 'Digital Product Designer - UI/UX',
             bioShort:
                 'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
             bioLong:
@@ -51,8 +64,11 @@ const AboutUS = () => {
             socialNetwork: 'http://socialNetwork',
         },
         {
-            name: 'Alejandra Hernandez Vega',
-            role: 'Front-end Developer',
+            defaultImg: imgPlaceholder,
+            hoverImg: imgPlaceholder2,
+            firstName: 'Alejandra',
+            lastName: 'Hernandez Vega',
+            role: 'Full-stack Developer',
             bioShort:
                 'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
             bioLong:
@@ -62,8 +78,11 @@ const AboutUS = () => {
             socialNetwork: 'http://socialNetwork',
         },
         {
-            name: 'Megumi Takashima',
-            role: 'Front-end Developer, Project Manager',
+            defaultImg: imgPlaceholder,
+            hoverImg: imgPlaceholder2,
+            firstName: 'Megumi',
+            lastName: 'Takashima',
+            role: 'Full-stack Developer, Project Manager',
             bioShort:
                 'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
             bioLong:
@@ -73,8 +92,11 @@ const AboutUS = () => {
             socialNetwork: 'http://socialNetwork',
         },
         {
-            name: 'Samuel Villegas',
-            role: 'Front-end Developer',
+            defaultImg: imgPlaceholder,
+            hoverImg: imgPlaceholder2,
+            firstName: 'Samuel',
+            lastName: 'Villegas Warren',
+            role: 'Full-stack Developer',
             bioShort:
                 'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
             bioLong:

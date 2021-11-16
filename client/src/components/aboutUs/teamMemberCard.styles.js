@@ -10,8 +10,8 @@ export const Container = styled.div`
         border-radius: 50%;
         overflow: hidden;
         margin: 0 auto 2rem auto;
-        height: 176px;
-        width: 176px;
+        height: 324px;
+        width: 324px;
     }
     img {
         width: 100%;
@@ -37,6 +37,7 @@ export const Container = styled.div`
     }
     h5 {
         font-size: 1rem;
+        font-weight: normal;
     }
 
     h3,
@@ -46,8 +47,18 @@ export const Container = styled.div`
 
     @media only screen and (min-width: 401px) {
         .team-member-image-wrapper {
-            width: 240px;
-            height: 240px;
+            width: 270px;
+            height: 270px;
+        }
+
+        h3 span {
+            display: block;
+            font-size: 1rem;
+            font-weight: normal;
+        }
+
+        h4 {
+            font-weight: normal;
         }
     }
 `

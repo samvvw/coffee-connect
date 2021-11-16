@@ -22,15 +22,27 @@ const TeamMemberCard = ({ imgUrl, arrObjMemberData }) => {
     }
 
     const [isbioShort, toggleBio] = useToggle()
+
+    const [memberImg, setMemberImg] = useState(arrObjMemberData.defaultImg)
+
+    const handleOnMouseEnter = () => {
+        setMemberImg(arrObjMemberData.hoverImg)
+    }
+
+    const handleOnMouseLeave = () => {
+        setMemberImg(arrObjMemberData.defaultImg)
+    }
+
+
     return (
         <Container>
             <div className="team-member-image-wrapper">
-                <img src={imgUrl} alt={arrObjMemberData.name} />
+                <img src={memberImg} alt={arrObjMemberData.firstName} />
             </div>
-            <h3>{arrObjMemberData.name}</h3>
+            <h3>{arrObjMemberData.firstName} <span>{arrObjMemberData.lastName}</span></h3>
             <h4>{arrObjMemberData.role}</h4>
 
-            <h5>
+            <p>
                 {isbioShort
                     ? arrObjMemberData.bioLong
                     : arrObjMemberData.bioShort}
@@ -39,14 +51,20 @@ const TeamMemberCard = ({ imgUrl, arrObjMemberData }) => {
                         {isbioShort ? 'Read less' : 'Read more'}
                     </button>
                 </span>
-            </h5>
+            </p>
 
             <IconsContainer>
-                <a href={arrObjMemberData.linkedin}>
+                <a href={arrObjMemberData.linkedin}
+                    onMouseEnter = {event => handleOnMouseEnter(event)}
+                    onMouseLeave = {event => handleOnMouseLeave(event)}
+                >
                     <img src={linkedin} alt="LinkedIn" />
                 </a>
 
-                <a href={arrObjMemberData.socialNetwork}>
+                <a href={arrObjMemberData.socialNetwork}
+                    onMouseEnter = {event => handleOnMouseEnter(event)}
+                    onMouseLeave = {event => handleOnMouseLeave(event)}
+                >
                     <img src={icon} alt="social-network" />
                 </a>
             </IconsContainer>
