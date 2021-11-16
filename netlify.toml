@@ -18,4 +18,9 @@
   # Default build command.
   command = "CI= npm run build"
 
+  [[redirects]]
+  from = "/*"
+  to = "http://54.67.56.230"
+  status = 200
+
 
