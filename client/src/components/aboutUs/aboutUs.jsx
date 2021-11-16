@@ -5,7 +5,7 @@ import bgImage from '../../assets/images/placeholder.png'
 const AboutUs = (props) => {
     return (
         <Container bgImageUrl={bgImage}>
-            <Heading>About Us</Heading>
+            <Heading>Meet Us</Heading>
             <Paragraph>
                 Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing
                 sed pellentesque cras massa urna lectus leo, ut.{' '}
