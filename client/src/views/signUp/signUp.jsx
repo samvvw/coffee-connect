@@ -9,12 +9,21 @@ const SignUp = (props) => {
     const history = useHistory()
     const location = useLocation()
     const [tabs, setTabs] = useState({ tab1: true, tab2: false })
+    const [userType, setUserType] = useState('farmer')
     const { signUp, loading, error } = useContext(UserContext)
 
     const { from } = location.state || { from: { pathname: '/' } }
 
-    const handleTabChange = () => {
-        setTabs((prevTab) => ({ tab1: !prevTab.tab1, tab2: !prevTab.tab2 }))
+    const handleTabChange = (e, value) => {
+        if (value === 'tab1' && !tabs.tab1) {
+            setTabs({ tab1: true, tab2: false })
+            setUserType(e.target.value)
+        } else {
+            if (value === 'tab2' && !tabs.tab2) {
+                setTabs({ tab1: false, tab2: true })
+                setUserType(e.target.value)
+            }
+        }
     }
 
     const handleSubmit = async (e) => {
@@ -25,7 +34,7 @@ const SignUp = (props) => {
             email: e.target.email.value,
             userName: e.target.userName.value,
             password: e.target.password.value,
-            userType: e.target.userType.value,
+            userType: userType,
         }
         await signUp(user)
         if (!Object.keys(error).length) history.replace(from)
@@ -49,7 +58,7 @@ const SignUp = (props) => {
                                 name="userType"
                                 value="farmer"
                                 id="farmer"
-                                onChange={handleTabChange}
+                                onChange={(e) => handleTabChange(e, 'tab1')}
                             />
                         </label>
 
@@ -63,7 +72,7 @@ const SignUp = (props) => {
                                 name="userType"
                                 value="consumer"
                                 id="consumer"
-                                onChange={handleTabChange}
+                                onChange={(e) => handleTabChange(e, 'tab2')}
                             />
                         </label>
                     </div>
