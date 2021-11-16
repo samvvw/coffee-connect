@@ -43,20 +43,24 @@ export const UserProvider = ({ children }) => {
 
     const signIn = async (user) => {
         try {
-            dispatch({ type: 'LOADING' })
+            // dispatch({ type: 'LOADING' })
             const response = await fetch('/api/user/sign-in', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(user),
             })
 
-            const data = await response.json()
-            localStorage.setItem('token', data.token)
-            const decoded = jwt_decode(data.token)
-            dispatch({
-                type: 'USER_SIGN_IN',
-                payload: { user: decoded, token: data.token },
-            })
+            if (response.status === 200) {
+                const data = await response.json()
+                localStorage.setItem('token', data.token)
+                const decoded = jwt_decode(data.token)
+                dispatch({
+                    type: 'USER_SIGN_IN',
+                    payload: { user: decoded, token: data.token },
+                })
+            }
+            // dispatch({ type: 'UNLOADING' })
+            return response
         } catch (err) {
             dispatch({ type: 'ERROR', payload: err })
             console.log('User cannot be logged in', err)

@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useHistory, useLocation } from 'react-router-dom'
 import { UserContext } from '../../context/userContext/userContext'
@@ -10,6 +10,8 @@ import HeroImage from '../../assets/images/ContactUsImg.png'
 const SignIn = (props) => {
     const history = useHistory()
     const location = useLocation()
+    const [errorEmail, setErrorEmail] = useState('')
+    const [errorPassword, setErrorPassword] = useState('')
     const { signIn, loading, error } = useContext(UserContext)
 
     const { from } = location.state || { from: { pathname: '/' } }
@@ -20,8 +22,18 @@ const SignIn = (props) => {
             email: e.target.email.value,
             password: e.target.password.value,
         }
-        await signIn(user)
-        if (!Object.keys(error).length) history.replace(from)
+        const response = await signIn(user)
+        if (response.status === 200) {
+            if (!Object.keys(error).length) history.replace(from)
+        } else {
+            if (response.status === 404) {
+                setErrorEmail('Invalid email')
+                setErrorPassword('')
+            } else {
+                setErrorEmail('')
+                setErrorPassword('Invalid password')
+            }
+        }
     }
 
     return (
@@ -42,9 +54,11 @@ const SignIn = (props) => {
                     <h1>Sign in to Qafa</h1>
                     <label htmlFor="email">Email</label>
                     <input type="email" name="email" id="email" />
+                    <small className="error">{errorEmail}</small>
 
                     <label htmlFor="password">Password</label>
                     <input type="password" name="password" id="password" />
+                    <small className="error">{errorPassword}</small>
 
                     {!loading && <Button title="Login" type="submit" />}
                     {loading && <small>Loading...</small>}
