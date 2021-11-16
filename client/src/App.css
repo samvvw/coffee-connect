@@ -19,6 +19,7 @@
 
 body {
     font-family: 'Proxima Nova';
+    line-height: 1.5;
 }
 
 .view-container {
