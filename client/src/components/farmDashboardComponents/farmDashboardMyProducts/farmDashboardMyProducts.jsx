@@ -14,6 +14,7 @@ import ProductCard from '../productCard/productCard'
 export default function FarmDashboardMyProducts() {
     const [myProducts, setMyProducts] = useState()
     const [totalProducts, setTotalProducts] = useState()
+    const [hasProducts, setHasProducts] = useState(false)
     const { user } = useContext(UserContext)
     const history = useHistory()
     /*Delete farmID after conect*/
@@ -65,6 +66,10 @@ export default function FarmDashboardMyProducts() {
                 setTotalProducts(merged.length)
                 setMyProducts(merged)
 
+                if (data.length > 0) {
+                    setHasProducts(true)
+                }
+
                 // console.log('Respuesta variable', arrObjProductDetails1)
             })
             .catch((error) => console.log(error))
@@ -86,11 +91,11 @@ export default function FarmDashboardMyProducts() {
             })
     }
 
-    let hasProducts = false
+    // let hasProducts = false
 
-    if (myProducts) {
-        hasProducts = true
-    }
+    // if (myProducts) {
+    //     hasProducts = true
+    // }
     return (
         <>
             <FarmMyProductsWrapper theme={theme}>
@@ -105,6 +110,7 @@ export default function FarmDashboardMyProducts() {
                             <Button
                                 title="Add a new products"
                                 onClick={handleShow}
+                                width="221px"
                             />
                         )}
                         {/* mobile */}
@@ -124,6 +130,7 @@ export default function FarmDashboardMyProducts() {
                             <Button
                                 title="Add a new product"
                                 onClick={handleShow}
+                                width="221px"
                             />
                         )}
                         {/* mobile */}
