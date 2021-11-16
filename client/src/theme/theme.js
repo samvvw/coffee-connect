@@ -28,8 +28,11 @@ export const theme = {
             veryLight: '#df7475',
         },
         black: {
+            900: '#263238',
             500: '#607D8B',
+            400: '#78909C',
             200: '#B0BEC5',
+            100: '#CFD8DC',
             50: '#ECEFF1',
         },
         disabledButton: {
