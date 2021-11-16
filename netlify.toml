@@ -1,6 +1,9 @@
 # Settings in the [build] context are global and are applied to all contexts
 # unless otherwise overridden by more specific contexts.
 [build]
+
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF"
+  
   # Directory to change to before starting a build.
   # This is where we will look for package.json/.nvmrc/etc.
   # If not set, defaults to the root directory.
@@ -16,5 +19,4 @@
   command = "echo 'default context'"
   command = "CI= npm run build"
 
-[build]
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF"
+
