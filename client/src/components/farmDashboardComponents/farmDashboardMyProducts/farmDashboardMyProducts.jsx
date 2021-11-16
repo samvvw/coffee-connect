@@ -87,7 +87,10 @@ export default function FarmDashboardMyProducts() {
         return productList
             .filter((product) => product.productPrice !== 0)
             .map((product, index) => {
-                return <ProductCard objProductDetails={product} key={index} />
+                // return <ProductCard objProductDetails={product} key={index} />
+                return (
+                    <ProductCard objProductDetails={product} key={product.id} />
+                )
             })
     }
 

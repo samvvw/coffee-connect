@@ -33,7 +33,7 @@ export const Container = styled.div`
                 //first label (title of section)
                 font-size: 1rem;
                 font-weight: bold;
-                padding-bottom: 1rem;
+                /* padding-bottom: 1rem; */
                 span {
                     color: red;
                 }
@@ -72,10 +72,18 @@ export const Container = styled.div`
         #divRoastDate,
         #divProductSize1,
         #divProductSize2,
-        #divProductSize3 {
+        #divProductSize3,
+        #divAromas {
             display: flex;
             flex-direction: column;
         }
+
+        /* #divTaste,
+        #divAromas {
+            display: flex;
+            flex-direction: column;
+           
+        } */
 
         #divTaste,
         #divAromas,
@@ -83,12 +91,20 @@ export const Container = styled.div`
         #divcoffeProcess,
         #divcoffeeVariety,
         #divcoffeeType {
-            div {
+            .gridChkRadioWrapper {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 row-gap: 1rem;
+                column-gap: 1rem;
+                padding-top: 1rem;
+
+                .gridChkRadio {
+                    display: grid;
+                    grid-template-columns: 0.3fr 1fr;
+                }
             }
         }
+
         #divProductSize1,
         #divProductSize2,
         #divProductSize3 {
@@ -295,6 +311,25 @@ export const Container = styled.div`
                     font-weight: bold;
                     span {
                         font-size: 1.2rem;
+                    }
+                }
+            }
+
+            #divTaste,
+            #divAromas,
+            #divRoastLevel,
+            #divcoffeProcess,
+            #divcoffeeVariety,
+            #divcoffeeType {
+                .gridChkRadioWrapper {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    row-gap: 1rem;
+                    column-gap: 1rem;
+
+                    .gridChkRadio {
+                        display: grid;
+                        grid-template-columns: 0.3fr 1fr;
                     }
                 }
             }

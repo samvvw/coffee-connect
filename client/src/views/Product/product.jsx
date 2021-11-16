@@ -191,14 +191,14 @@ const Product = (props) => {
                 </div>
                 {/* 8 Map */}
                 <div id="map">
-                    {/* Map */}
+                    {/* Map
                     <div>
                         <p>Location</p>
                     </div>
                     <Map
                         data={data}
                         style={{ width: '100%', height: '300px' }}
-                    />
+                    /> */}
                 </div>
                 {/* 4 Connect with farmer */}
                 <div id="connectWFarmer">
