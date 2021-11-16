@@ -66,7 +66,7 @@ const productSchema = new mongoose.Schema(
         },
         description: {
             type: String,
-            maxLength: 1000,
+            maxLength: 2000,
         },
         taste: {
             type: [String],
