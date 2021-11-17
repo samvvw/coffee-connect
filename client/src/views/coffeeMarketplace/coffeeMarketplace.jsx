@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import ProductCard from '../../components/marketDirectoryComponents/productCard/productCard'
 import SortBy from '../../components/marketDirectoryComponents/sortBy/sortBy'
 import Map from '../../components/map/map'
+import lottie from 'lottie-web'
 import SearchBar from '../../components/searchBar/searchBar'
+import { UserContext } from '../../context/userContext/userContext'
 import { useProducts } from '../../hooks'
 import { Container } from './coffeeMarketplace.styles'
-import lottie from 'lottie-web'
 
 const filters = [
     {
@@ -26,6 +27,7 @@ const filters = [
 ]
 
 const CoffeeMarketplace = () => {
+    const { user } = useContext(UserContext)
     const [products, getProducts] = useProducts()
     const [querySearch, setQuerySearch] = useState('')
     const [coordinates, setCoordinates] = useState()
@@ -111,7 +113,11 @@ const CoffeeMarketplace = () => {
                 </div>
                 <div className="products">
                     {products.map(({ data }) => (
-                        <ProductCard key={data._id} data={data} />
+                        <ProductCard
+                            key={data._id}
+                            data={data}
+                            userId={user ? user.id : null}
+                        />
                     ))}
                 </div>
             </div>
