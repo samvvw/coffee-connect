@@ -1,9 +1,11 @@
 import styled from 'styled-components'
+import { theme } from '../../theme/theme'
 
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-
+    /* width: 80%;
+    margin: 0 auto; */
     h4 {
         font-size: 2rem;
         width: 100%;
@@ -11,7 +13,26 @@ export const Container = styled.div`
     }
 
     #images {
-        position: relative;
+        #divBanner {
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            #divLink {
+                Link {
+                    color: black;
+                }
+
+                display: flex;
+                justify-content: space-between;
+                padding: 0 1rem;
+                margin-bottom: 1rem;
+                button {
+                    background-color: transparent;
+                    border: none;
+                }
+            }
+        }
+        /* position: relative;
         & > :nth-child(2) {
             position: absolute;
             top: 20px;
@@ -19,7 +40,49 @@ export const Container = styled.div`
             display: flex;
             width: 6rem;
             justify-content: space-between;
+        } */
+
+        /* .imagesWrapper {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 0.5rem;
+            img {
+                width: 100%;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+            .picture {
+                border-radius: 50px;
+            }
+            & :nth-child(1) {
+                grid-column: 1/5;
+                grid-row: 1/4;
+            }
+            & :nth-child(2) {
+                grid-column: 5/7;
+                grid-row: 1/3;
+            }
+            & :nth-child(3) {
+                grid-column: 5/6;
+                grid-row: 3/4;
+            }
+            & :nth-child(4) {
+                grid-column: 6/7;
+                grid-row: 3/4;
+            }
+        } */
+    }
+
+    #description {
+        width: 80%;
+        margin: 0 auto;
+        h5 {
+            font-size: 1rem;
         }
+        border-top: 1px solid gray;
+        padding-top: 1.5rem;
+        margin-top: 1rem;
     }
     #map {
         padding-top: 2rem;
@@ -51,7 +114,7 @@ export const Container = styled.div`
         }
     }
 
-    @media only screen and (min-width: 401px) {
+    @media only screen and (min-width: ${theme.layout.desktop}) {
         #subContainer {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -60,6 +123,80 @@ export const Container = styled.div`
             margin-top: 0;
             width: 80%;
             margin: 0 auto;
+            margin-bottom: 6rem;
+            #divBannerHeader {
+                padding: 0;
+
+                #divLink {
+                    margin-top: 1rem;
+                    display: flex;
+                    a {
+                        display: flex;
+                        text-decoration: none;
+                    }
+                    Link {
+                        span {
+                            font-size: 1rem;
+                            color: ${theme.pallette.black[400]};
+                            color: red;
+                        }
+                        p {
+                            margin: 0;
+                        }
+                    }
+
+                    span {
+                        font-size: 1rem;
+                        color: ${theme.pallette.black[400]};
+                    }
+                    p {
+                        color: black;
+                        margin: 0;
+                    }
+
+                    display: flex;
+                    /* justify-content: space-between; */
+                    padding: 0 1rem;
+                }
+            }
+
+            #images {
+                grid-column: 1/3;
+                grid-row: 2/3;
+
+                .imagesWrapper {
+                    display: grid;
+                    grid-template-columns: repeat(6, 1fr);
+                    grid-template-rows: repeat(3, 1fr);
+                    gap: 0.5rem;
+
+                    div img {
+                        width: 100%;
+                        object-fit: cover;
+                        border-radius: 5px;
+                        height: 100%;
+                    }
+                    .picture {
+                        border-radius: 50px;
+                    }
+                    & :nth-child(1) {
+                        grid-column: 1/5;
+                        grid-row: 1/4;
+                    }
+                    & :nth-child(2) {
+                        grid-column: 5/7;
+                        grid-row: 1/3;
+                    }
+                    & :nth-child(3) {
+                        grid-column: 5/6;
+                        grid-row: 3/4;
+                    }
+                    & :nth-child(4) {
+                        grid-column: 6/7;
+                        grid-row: 3/4;
+                    }
+                }
+            }
 
             #headerDesktop {
                 grid-column: 1/3;
@@ -70,19 +207,21 @@ export const Container = styled.div`
                     padding-right: 0;
                 }
             }
-            #images {
+            /* #images {
                 grid-column: 1/3;
                 grid-row: 2/3;
                 height: 600px;
                 & > :nth-child(2) {
                     display: none;
                 }
-            }
+            } */
             #description {
                 grid-column: 1/2;
                 grid-row: 3/4;
-                div {
-                    margin-left: 0;
+                border: none;
+                width: -webkit-fill-available;
+                h5 {
+                    font-weight: bold;
                 }
             }
             #detailCard {

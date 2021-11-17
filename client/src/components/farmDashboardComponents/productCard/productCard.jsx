@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import {
     Container,
     DetailsContainer,
@@ -12,11 +13,18 @@ const ProductCard = ({ imageHeight, width, height, objProductDetails }) => {
         <Container width={width} height={height}>
             <div id="imageContainer">
                 <div>
-                    <img
-                        src={objProductDetails.urlImage}
-                        alt=""
-                        style={style}
-                    />
+                    <Link
+                        to={{
+                            pathname: '/product',
+                            state: { id: objProductDetails.id },
+                        }}
+                    >
+                        <img
+                            src={objProductDetails.urlImage}
+                            alt=""
+                            style={style}
+                        />
+                    </Link>
                 </div>
                 <div>
                     {/* <CircleButton IconName="FavoriteEmpty" onClick="" /> */}

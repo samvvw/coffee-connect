@@ -30,7 +30,7 @@ export const Container = styled.div`
         border-radius: 50%;
         display: flex;
         justify-content: center;
-        align-content: center;
+        align-items: center;
 
         color: ${theme.pallette.primary[500]};
         font-size: 2rem;

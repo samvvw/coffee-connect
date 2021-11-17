@@ -1,6 +1,9 @@
 // import CircleButton from '../../circleButton/circleButton'
-import ButtonShare from '../../buttonShare/buttonShare'
-import ButtonHeart from '../../buttonHeart/buttonHeart'
+// import ButtonShare from '../../buttonShare/buttonShare'
+// import ButtonHeart from '../../buttonHeart/buttonHeart'
+import { useState } from 'react'
+import Button from '../../button/button'
+import { theme } from '../../../theme/theme'
 import {
     HeaderContainer,
     HeaderMainContainer,
@@ -13,7 +16,11 @@ const ProductDetailHeader = ({
     origin,
     location,
     altitude,
+    handleShow,
 }) => {
+    // const handleOpenCanvas = () => {
+    //     handleShow
+    // }
     return (
         <HeaderContainer backgroundColor={backgroundColor}>
             <HeaderMainContainer>
@@ -22,14 +29,13 @@ const ProductDetailHeader = ({
                         {productName}, {farmName}
                     </h4>
                 </div>
-                <div>
+                <div id="origin">
                     <div>
                         <div>
                             <p>Origin:</p>
                             <h5>{origin}</h5>
                         </div>
                         <div>
-                            <p>Location:</p>
                             <h5>{location}</h5>
                         </div>
                     </div>
@@ -39,9 +45,17 @@ const ProductDetailHeader = ({
                     </div>
                 </div>
                 <div id="buttons">
+                    <Button
+                        title="Edit Product"
+                        backgroundColor="white"
+                        textColor={theme.pallette.secondary.c800}
+                        borderColor={theme.pallette.secondary.c800}
+                        width="50%"
+                        onClick={handleShow}
+                    ></Button>
                     {/* Buttons */}
-                    <ButtonShare></ButtonShare>
-                    <ButtonHeart></ButtonHeart>
+                    {/* <ButtonShare></ButtonShare>
+                    <ButtonHeart></ButtonHeart> */}
                 </div>
             </HeaderMainContainer>
         </HeaderContainer>

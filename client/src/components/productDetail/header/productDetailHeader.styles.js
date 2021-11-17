@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import { theme } from '../../../theme/theme'
 export const HeaderContainer = styled.div`
     background-color: ${(props) => props.backgroundColor || '#f2f2f2'};
     color: #000000;
@@ -22,6 +22,8 @@ export const HeaderMainContainer = styled.div`
         p,
         h5 {
             font-size: 1rem;
+            display: flex;
+            align-items: center;
         }
 
         p {
@@ -72,47 +74,44 @@ export const HeaderMainContainer = styled.div`
         display: none;
     }
 
-    @media only screen and (min-width: 401px) {
+    @media only screen and (min-width: ${theme.layout.desktop}) {
         display: grid;
         grid-template-columns: 2fr 1fr;
         grid-template-rows: auto auto;
-
-        width: 80%;
-        h4 {
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
+        margin-bottom: 1rem;
 
         & > :nth-child(1) {
             grid-column: 1/2;
             grid-row: 1/2;
         }
-        & > :nth-child(2) {
+        #origin {
             grid-column: 1/2;
             grid-row: 2/3;
+            display: flex;
             flex-direction: row;
+            margin-top: 0.3rem;
+            width: fit-content !important;
             div {
-                align-items: center;
+                width: fit-content;
             }
             & > :nth-child(2) {
-                padding-left: 1rem;
+                /* padding-left: 1rem; */
+                /* margin-left: 1rem; */
                 border-left: 1px solid gray;
+                p {
+                    margin-left: 1rem;
+                }
             }
         }
-        & > :nth-child(3) {
-            grid-column: 2/3;
-            grid-row: 1/3;
-            display: flex;
-        }
+
         #buttons {
+            grid-column: 2/3;
+            grid-row: 1/2;
             display: flex;
             align-items: center;
             justify-content: flex-end;
             & > :nth-child(1) {
                 margin-right: 1rem;
-            }
-            button {
-                height: 40%;
             }
         }
     }

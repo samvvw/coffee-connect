@@ -1,111 +1,160 @@
+import { useHistory } from 'react-router-dom'
+import { useEffect, useState, useContext } from 'react'
 import { Container } from './product.styles'
-
+import { theme } from '../../theme/theme'
+import placeHolder from '../../assets/images/placeholder.png'
+import { UserContext } from '../../context/userContext/userContext'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+import Pencil from '@material-ui/icons/Create'
+import ArrowBack from '@material-ui/icons/ArrowBack'
 import ProductDetailHeader from '../../components/productDetail/header/productDetailHeader'
-
 import ProductDetailImages from '../../components/productDetail/imagesGroup/productDetailImages'
 import ProductDetailCard from '../../components/productDetail/productDetailCard/productDetailCard'
-import ProductDescription from '../../components/productDetail/productDescription/productDetailDescription'
-import ConnectWithFarmer from '../../components/productDetail/connectWithFarmerCard/connectWithFarmerCard'
-import OtherProducts from '../../components/productDetail/otherProducts/otherProducts'
+import OffCanvas from '../../components/productDetail/Offcanvas/offcanvas'
 
-import Map from '../../components/map/map'
-import CircleButton from '../../components/circleButton/circleButton'
+// import ConnectWithFarmer from '../../components/productDetail/connectWithFarmerCard/connectWithFarmerCard'
+// import OtherProducts from '../../components/productDetail/otherProducts/otherProducts'
 
-import placeHolder from '../../assets/images/placeholder.png'
-// import videoPlaceHolder from '../../assets/images/video-placeholder.png'
-import { useEffect, useState } from 'react'
+// import Map from '../../components/map/map'
+// import CircleButton from '../../components/circleButton/circleButton'
 
 const Product = (props) => {
-    /*Remove after connect to db*/
-    const headerDetails = {
-        productName: 'Balcon de la Montaña',
-        farmName: 'Pan de Azucar, Caldas',
-        origin: 'South America',
-        location: 'Colombia',
-        altitude: '1200masl',
+    const history = useHistory()
+    const { user, isTokenExpired } = useContext(UserContext)
+    const [productData, setProductData] = useState()
+    const [farmID, setFarmID] = useState()
+
+    /*variables to control offcanvas - new product*/
+    const [show, setShow] = useState(false)
+
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
+    /*----------------------------------------------*/
+
+    const [totalProducts, setTotalProducts] = useState(0)
+    useEffect(() => {
+        if (isTokenExpired()) {
+            history.replace('/sign-in')
+        }
+    })
+
+    useEffect(() => {
+        if (Object.keys(user).length > 0) {
+            setFarmID(user.farms[0])
+        }
+    }, [user])
+
+    // console.log('ID', props.location.state.id)
+    // console.log('farmID', farmID)
+    // console.log(
+    //     'url:',
+    //     `/api/farm/${farmID}/product/${props.location.state.id}`
+    // )
+
+    function convert(str) {
+        var date = new Date(str),
+            mnth = ('0' + (date.getMonth() + 1)).slice(-2),
+            day = ('0' + date.getDate()).slice(-2)
+        return [day, mnth, date.getFullYear()].join('-')
     }
+
+    useEffect(() => {
+        if (Object.keys(user).length > 0 && farmID) {
+            axios
+                .get(`/api/farm/${farmID}/product/${props.location.state.id}`)
+                .then((res) => {
+                    // console.log('infor of product', res.data.data)
+                    setProductData(res.data.data)
+                })
+                .catch((error) => {
+                    console.log('Product Detail:', error)
+                })
+        }
+    }, [user, farmID, totalProducts])
+
     //no more than 4 images
-    const urlsArray = [placeHolder, placeHolder, placeHolder, placeHolder]
+    // const urlsArray = [placeHolder, placeHolder, placeHolder, placeHolder]
 
-    const objArraySizes = [
-        {
-            id: '1',
-            option: '340gr',
-        },
-        {
-            id: '2',
-            option: '454gr',
-        },
-        {
-            id: '3',
-            option: '680gr',
-        },
-    ]
-    const objProductValues = {
-        productName: 'Fire Dept. Coffe Original',
-        taste: 'Sweet',
-        roastLevel: 'Medium dark',
-        process: 'Dry',
-        variety: 'Arabica',
-        roastDate: ' 2/10/2021',
-        objPriceUnitSize: [
-            {
-                size: '340',
-                unit: 'gr',
-                price: '10us',
-            },
-            {
-                size: '454',
-                unit: 'gr',
-                price: '12us',
-            },
-            {
-                size: '680',
-                unit: 'gr',
-                price: '15us',
-            },
-        ],
-    }
+    // const objArraySizes = [
+    //     {
+    //         id: '1',
+    //         option: '340gr',
+    //     },
+    //     {
+    //         id: '2',
+    //         option: '454gr',
+    //     },
+    //     {
+    //         id: '3',
+    //         option: '680gr',
+    //     },
+    // ]
+    // const objProductValues = {
+    //     productName: 'Fire Dept. Coffe Original',
+    //     taste: 'Sweet',
+    //     roastLevel: 'Medium dark',
+    //     process: 'Dry',
+    //     variety: 'Arabica',
+    //     roastDate: ' 2/10/2021',
+    //     objPriceUnitSize: [
+    //         {
+    //             size: '340',
+    //             unit: 'gr',
+    //             price: '10us',
+    //         },
+    //         {
+    //             size: '454',
+    //             unit: 'gr',
+    //             price: '12us',
+    //         },
+    //         {
+    //             size: '680',
+    //             unit: 'gr',
+    //             price: '15us',
+    //         },
+    //     ],
+    // }
 
-    const objProductDescription = {
-        process: 'Red Honey',
-        aroma: 'Red Apple, Chocolate Bar',
-        fermentation: 'Anaerobic Fermentation 72 Hrs. , 6 Hrs, Aerobic',
-        drying: 'Canopy',
-        roast: 'Scandinavian',
-        profile: 'Milk Chocolate, Caramel, Tamarind, Kiwi, Red Apple',
-        residuals: 'Sweet, Prolonged',
-        acidity: 'Juicy',
-        body: 'Creamy',
-        description:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto perferendis tempora animi eveniet ipsam minima quia provident eligendi delectus mollitia aliquam atque ea hic laudantium nesciunt, saepe error voluptatem quidem officia numquam dolores aspernatur ullam, ducimus porro! Minima, at. Ipsa eos reprehenderit obcaecati nam possimus minima odit amet mollitia porro non vel, sit rerum explicabo molestias totam deserunt dolore officia quidem tempora beatae vero! Illum quos eligendi voluptas incidunt omnis.',
-    }
-    const arrObjProductDetails = [
-        {
-            productName: 'Whirlwind Coffe Co. Ethiopia',
-            productPrice: '18.99 CAD',
-            productUnit: '100gr',
-            productDescription: 'Yirgacheffe',
-        },
-        {
-            productName: 'Fire Dept. Coffe Original',
-            productPrice: '18.99 CAD',
-            productUnit: '100g',
-            productDescription: 'Medium Roast',
-        },
-        {
-            productName: 'Howler Coffee Co. Bucksaw',
-            productPrice: '18.99 CAD',
-            productUnit: '100g',
-            productDescription: 'Blend',
-        },
-        {
-            productName: 'Onyx Coffee Lab Colombia',
-            productPrice: '18.99',
-            productUnit: '100g',
-            productDescription: 'Aponte Village',
-        },
-    ]
+    // const objProductDescription = {
+    //     coffeProcess: productData.coffeProcess,
+    //     coffeType: productData.coffeeType,
+    //     coffeVariety: productData.coffeVariety,
+    //     roast: productData.roastLevel,
+    //     taste: productData.taste,
+    //     aroma: productData.aromas,
+    //     flavor: '',
+    //     residuals: 'Sweet, Prolonged',
+    //     acidity: 'Juicy',
+    //     body: 'Creamy',
+    //     description: productData.description,
+    // }
+    // const arrObjProductDetails = [
+    //     {
+    //         productName: 'Whirlwind Coffe Co. Ethiopia',
+    //         productPrice: '18.99 CAD',
+    //         productUnit: '100gr',
+    //         productDescription: 'Yirgacheffe',
+    //     },
+    //     {
+    //         productName: 'Fire Dept. Coffe Original',
+    //         productPrice: '18.99 CAD',
+    //         productUnit: '100g',
+    //         productDescription: 'Medium Roast',
+    //     },
+    //     {
+    //         productName: 'Howler Coffee Co. Bucksaw',
+    //         productPrice: '18.99 CAD',
+    //         productUnit: '100g',
+    //         productDescription: 'Blend',
+    //     },
+    //     {
+    //         productName: 'Onyx Coffee Lab Colombia',
+    //         productPrice: '18.99',
+    //         productUnit: '100g',
+    //         productDescription: 'Aponte Village',
+    //     },
+    // ]
 
     const data = [
         {
@@ -121,104 +170,213 @@ const Product = (props) => {
     // *******************************************************
 
     const [matches, setMatches] = useState(
-        window.matchMedia('(min-width: 401px)').matches
+        window.matchMedia(`(min-width: ${theme.layout.desktop}`).matches
     )
 
     useEffect(() => {
         const handler = (e) => setMatches(e.matches)
-        window.matchMedia('(min-width: 401px)').addListener(handler)
+        window
+            .matchMedia(`(min-width: ${theme.layout.desktop}`)
+            .addListener(handler)
     }, [])
 
     return (
-        <Container>
-            <div id="subContainer">
-                <div id="headerDesktop">
-                    {matches && (
-                        <ProductDetailHeader
-                            backgroundColor="white"
-                            productName={headerDetails.productName}
-                            farmName={headerDetails.farmName}
-                            origin={headerDetails.origin}
-                            location={headerDetails.location}
-                            altitude={headerDetails.altitude}
-                        />
-                    )}
-                </div>
-                {/* 2 Group of images */}
-                <div id="images">
-                    <div>
-                        <ProductDetailImages
-                            urlsArray={urlsArray}
-                            width="100%"
-                        />
-                    </div>
-                    <div>
-                        <CircleButton IconName="FavoriteFull" onClick="" />
-                        <CircleButton IconName="Share" onClick="" />
-                    </div>
-                </div>
-                {/* 1 header */}
-                <div id="header">
-                    {!matches && (
-                        <ProductDetailHeader
-                            backgroundColor="white"
-                            productName={headerDetails.productName}
-                            farmName={headerDetails.farmName}
-                            origin={headerDetails.origin}
-                            location={headerDetails.location}
-                            altitude={headerDetails.altitude}
-                        />
-                    )}
-                </div>
-                {/* 3 Product detail card */}
-                <div id="detailCard">
-                    <ProductDetailCard
-                        width="300px"
-                        productName={
-                            headerDetails.productName +
-                            ', ' +
-                            headerDetails.farmName
-                        }
-                        objProductValues={objProductValues}
-                        objArraySizes={objArraySizes}
+        <>
+            {productData && (
+                <>
+                    <Container>
+                        <div id="subContainer">
+                            <div id="headerDesktop">
+                                {matches && (
+                                    <>
+                                        <div id="divBannerHeader">
+                                            <div id="divLink">
+                                                <Link to="/my-products">
+                                                    <ArrowBack
+                                                        style={{
+                                                            fill: theme.pallette
+                                                                .black[400],
+                                                        }}
+                                                    />
+                                                    <p>
+                                                        My Products/
+                                                        <span>
+                                                            {
+                                                                productData.productName
+                                                            }
+                                                        </span>
+                                                    </p>
+                                                </Link>
+                                            </div>
+                                        </div>
+
+                                        <ProductDetailHeader
+                                            backgroundColor="white"
+                                            productName={
+                                                productData.productName
+                                            }
+                                            farmName={productData.farmName}
+                                            origin={productData.origin}
+                                            location={productData.location}
+                                            altitude={productData.altitude}
+                                            handleShow={handleShow}
+                                        />
+                                    </>
+                                )}
+                            </div>
+                            {/* 2 Group of images */}
+                            <div id="images">
+                                {!matches && (
+                                    <div id="divBanner">
+                                        <div id="divLink">
+                                            <Link to="/my-products">
+                                                <ArrowBack
+                                                    style={{
+                                                        fill: theme.pallette
+                                                            .black[400],
+                                                    }}
+                                                />
+                                            </Link>
+
+                                            <button
+                                                style={{
+                                                    fill: theme.pallette
+                                                        .black[400],
+                                                }}
+                                            >
+                                                <Pencil
+                                                    style={{
+                                                        fill: theme.pallette
+                                                            .black[400],
+                                                    }}
+                                                />
+                                                Edit
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <ProductDetailImages
+                                                urlsArray={productData.picture}
+                                                width="100%"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+
+                                {matches && (
+                                    <div className="imagesWrapper">
+                                        <div className="'picture">
+                                            <img
+                                                src={productData.picture[0]}
+                                                alt=""
+                                            ></img>
+                                        </div>
+                                        <div className="'picture">
+                                            <img
+                                                src={
+                                                    productData.picture[1] ||
+                                                    placeHolder
+                                                }
+                                                alt=""
+                                            ></img>
+                                        </div>
+                                        <div className="'picture">
+                                            <img
+                                                src={
+                                                    productData.picture[2] ||
+                                                    placeHolder
+                                                }
+                                                alt=""
+                                            ></img>
+                                        </div>
+                                        <div className="'picture">
+                                            <img
+                                                src={
+                                                    productData.picture[3] ||
+                                                    placeHolder
+                                                }
+                                                alt=""
+                                            ></img>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* <div>
+                                <CircleButton IconName="FavoriteFull" />
+                                <CircleButton IconName="Share" />
+                            </div> */}
+                            </div>
+                            {/* 1 header */}
+                            <div id="header">
+                                {!matches && (
+                                    <ProductDetailHeader
+                                        backgroundColor="white"
+                                        productName={productData.productName}
+                                        farmName={productData.farmName}
+                                        origin={productData.origin}
+                                        location={productData.location}
+                                        altitude={productData.altitude}
+                                    />
+                                )}
+                            </div>
+                            {/* 3 Product detail card */}
+                            <div id="detailCard">
+                                <ProductDetailCard
+                                    // width="300px"
+                                    productName={
+                                        productData.productName +
+                                        ', ' +
+                                        productData.farmName
+                                    }
+                                    objProductValues={{
+                                        roastLevel: productData.roastLevel,
+                                        coffeeProcess:
+                                            productData.coffeeProcess,
+                                        coffeeVariety:
+                                            productData.coffeeVariety,
+                                        roastDate: convert(
+                                            productData.roastDate
+                                        ),
+                                    }}
+                                    objArraySizes={productData.sizePrice}
+                                />
+                            </div>
+                            {/* 5 Product description */}
+                            <div id="description">
+                                <h5>Product Description</h5>
+                                <p>{productData.description}</p>
+                            </div>
+                            {/* 8 Map */}
+                            <div id="map">
+                                {/* Map
+                        <div>
+                            <p>Location</p>
+                        </div>
+                        <Map
+                            data={data}
+                            style={{ width: '100%', height: '300px' }}
+                        /> */}
+                            </div>
+                            {/* 4 Connect with farmer */}
+                            {/* <div id="connectWFarmer">
+                            <ConnectWithFarmer
+                                objMemberSince={objMemberSince}
+                                description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto perferendis tempora animi eveniet ipsam minima quia provident eligendi delectus "
+                            />
+                        </div> */}
+                        </div>
+                        {/* 10 Other products card */}
+                    </Container>
+
+                    <OffCanvas
+                        handleClose={handleClose}
+                        handleShow={handleShow}
+                        show={show}
+                        productData={productData}
+                        setTotalProducts={setTotalProducts}
                     />
-                </div>
-                {/* 5 Product description */}
-                <div id="description">
-                    <ProductDescription
-                        objProductDescription={objProductDescription}
-                    />
-                </div>
-                {/* 8 Map */}
-                <div id="map">
-                    {/* Map
-                    <div>
-                        <p>Location</p>
-                    </div>
-                    <Map
-                        data={data}
-                        style={{ width: '100%', height: '300px' }}
-                    /> */}
-                </div>
-                {/* 4 Connect with farmer */}
-                <div id="connectWFarmer">
-                    <ConnectWithFarmer
-                        objMemberSince={objMemberSince}
-                        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto perferendis tempora animi eveniet ipsam minima quia provident eligendi delectus "
-                    />
-                </div>
-            </div>
-            {/* 10 Other products card */}
-            <div id="otherProducts">
-                {/* Other products from this farmer */}
-                <h4>Other products from this farmer</h4>
-                <OtherProducts
-                    arrUrlImage={urlsArray}
-                    imageWidth="100%"
-                    arrObjProductDetails={arrObjProductDetails}
-                />
-            </div>
-        </Container>
+                </>
+            )}
+        </>
     )
 }
 

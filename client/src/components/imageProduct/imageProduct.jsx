@@ -50,7 +50,7 @@ const ImageProduct = ({
             widthButton={widthButton}
             heightButton={heightButton}
         >
-            <img src={bgImage} alt={alt} />
+            <img src={bgImage || urlImg} alt={alt} />
             <button
                 onClick={() => importFiles(idContainer)}
                 disabled={tabImagesDisabled}
