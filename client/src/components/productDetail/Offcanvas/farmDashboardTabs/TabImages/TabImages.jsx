@@ -89,6 +89,7 @@ const TabImages = ({
                         backgroundColor={theme.pallette.secondary.c800}
                         textColor="white"
                         disabled={false}
+                        borderColor={theme.pallette.secondary.c800}
                     />
                 </div>
             </div>

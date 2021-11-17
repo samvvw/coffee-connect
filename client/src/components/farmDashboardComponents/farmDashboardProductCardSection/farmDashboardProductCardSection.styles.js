@@ -11,6 +11,7 @@ export const FarmDashboardProductCardSectionWrapper = styled.section.attrs({
     padding-top: 3rem;
     padding-right: 2rem;
     padding-left: 2rem;
+    padding-bottom: 7rem;
 
     /*  @media only screen and (min-width: ${(props) =>
         props.theme.desktop}) { */
