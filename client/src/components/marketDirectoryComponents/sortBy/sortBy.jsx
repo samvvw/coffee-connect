@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
-import DropdownMenu from 'react-bootstrap/DropdownMenu'
 import Dropdown from 'react-bootstrap/Dropdown'
-import classNames from 'classnames'
-import RadioButton from '../radioButton/radioButton'
+// import classNames from 'classnames'
+// import RadioButton from '../radioButton/radioButton'
 import PriceSlider from './priceSlider/priceSlider'
-import { Container } from './sortBy.styles'
 import RoastLevelCheckboxes from './roastLevelCheckboxes/roastLevelCheckboxes'
 import OriginCheckboxes from './originCheckboxes/originCheckboxes'
+import { Container } from './sortBy.styles'
 import { theme } from '../../../theme/theme'
 
 const priceSliderStyle = {
@@ -33,24 +32,6 @@ const SortBy = ({ data, onChange, type }) => {
         roastLevel: false,
         origin: false,
     })
-
-    const handleChange = (value, checked) => {
-        if (!filterSelected) {
-            setFilters((prevFilters) => ({ ...prevFilters, [value]: checked }))
-        } else {
-            setFilters((prevFilters) => ({
-                ...prevFilters,
-                [filterSelected]: !prevFilters[filterSelected],
-                [value]: checked,
-            }))
-        }
-
-        if (!checked) {
-            setFilterSelected('')
-        } else {
-            setFilterSelected(value)
-        }
-    }
 
     const roastFilter = (value, checked) => {
         if (checked) {
@@ -97,21 +78,12 @@ const SortBy = ({ data, onChange, type }) => {
             return (accum += `&${current}`)
         }, '')
 
-        const queryFilter = `${minPrice}&${maxPrice}${roastLevel}${origin}`
-        onChange(queryFilter)
+        if (type === 'marketplace') {
+            onChange(`${minPrice}&${maxPrice}${roastLevel}${origin}`)
+        } else {
+            onChange(`${origin}`)
+        }
     }
-
-    const priceClass = classNames({
-        active: filters.price,
-    })
-
-    const roastClass = classNames({
-        active: filters.roastLevel,
-    })
-
-    const originClass = classNames({
-        active: filters.origin,
-    })
 
     useEffect(() => {
         buildQueryString()
@@ -124,7 +96,7 @@ const SortBy = ({ data, onChange, type }) => {
                     <Dropdown className="d-inline">
                         <Dropdown.Toggle
                             variant="warning"
-                            id="dropdown-autoclose-true"
+                            id="dropdown-autoclose-true1"
                         >
                             Price
                         </Dropdown.Toggle>
@@ -150,7 +122,7 @@ const SortBy = ({ data, onChange, type }) => {
                     <Dropdown className="d-inline ">
                         <Dropdown.Toggle
                             variant="warning"
-                            id="dropdown-autoclose-true"
+                            id="dropdown-autoclose-true2"
                         >
                             Roast Level
                         </Dropdown.Toggle>
@@ -162,10 +134,10 @@ const SortBy = ({ data, onChange, type }) => {
                     </Dropdown>
                 )}
 
-                <Dropdown align="end" className="d-inline ">
+                <Dropdown className="d-inline ">
                     <Dropdown.Toggle
                         variant="warning"
-                        id="dropdown-autoclose-true"
+                        id="dropdown-autoclose-true3"
                     >
                         Origin
                     </Dropdown.Toggle>

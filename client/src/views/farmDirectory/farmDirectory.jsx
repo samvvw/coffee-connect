@@ -53,6 +53,14 @@ const FarmDirectory = (props) => {
     }, [farms])
 
     useEffect(() => {
+        if (querySearch.trim()) {
+            getFarms(`search=${querySearch}&${queryFilters}`)
+        } else {
+            getFarms(`${queryFilters}`)
+        }
+    }, [queryFilters])
+
+    useEffect(() => {
         lottie.loadAnimation({
             container: container.current,
             renderer: 'svg',
