@@ -1,29 +1,20 @@
 import DropdownList from '../../dropdownList/dropdownList'
 import Button from '../../button/button'
 import { CardContainer } from './productDetailCard.styles'
+import { useState } from 'react'
+import { theme } from '../../../theme/theme'
 
 const ProductDetailCard = ({
     productName,
-    farmName,
-    objProductSizesPrices,
     objArraySizes,
     objProductValues,
 }) => {
-    /*
-    Object Product values            
-        roastLevel
-        process
-        variety
-        roastDate
-        objPriceUnitSize
-    */
+    const [price, setPrice] = useState()
 
     return (
         <CardContainer>
             <div id="farmProduct">
-                <h2>
-                    {productName},{farmName}
-                </h2>
+                <h2>{productName}</h2>
             </div>
             <div id="roastLevel">
                 <div>
@@ -38,7 +29,7 @@ const ProductDetailCard = ({
                     <p>Process:</p>
                 </div>
                 <div>
-                    <p>{objProductValues.process}</p>
+                    <p>{objProductValues.coffeeProcess}</p>
                 </div>
             </div>
             <div id="variety">
@@ -46,7 +37,7 @@ const ProductDetailCard = ({
                     <p>Variety:</p>
                 </div>
                 <div>
-                    <p>{objProductValues.variety}</p>
+                    <p>{objProductValues.coffeeVariety}</p>
                 </div>
             </div>
             <div id="roastDate">
@@ -64,9 +55,8 @@ const ProductDetailCard = ({
                 <div>
                     <DropdownList
                         width="95%"
-                        selectName="ddlSizes"
-                        selectId="ddlIDSizes"
-                        objArrayValues={objArraySizes}
+                        objArraySizes={objArraySizes}
+                        setPrice={setPrice}
                     />
                 </div>
             </div>
@@ -74,19 +64,19 @@ const ProductDetailCard = ({
                 <div>
                     <p>Price:</p>
                 </div>
-                <div>
-                    $10
-                    {/* ${objProductValues.objPriceUnitSize.price} */}
-                    <span>
-                        /100gr {/* /{objProductValues.objPriceUnitSize.unit} */}
-                    </span>
-                </div>
+                {price && (
+                    <div>
+                        {price}
+                        <span>/100gr</span>
+                    </div>
+                )}
             </div>
             <div id="button">
                 <Button
                     title="Available"
-                    backgroundColor="#C4C4C4"
+                    backgroundColor={theme.pallette.accent1[50]}
                     textColor="Black"
+                    borderColor={theme.pallette.accent1[50]}
                 ></Button>
             </div>
         </CardContainer>
