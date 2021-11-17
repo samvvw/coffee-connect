@@ -74,6 +74,7 @@ export const UserProvider = ({ children }) => {
     const updateUser = async () => {
         try {
             const token = localStorage.getItem('token')
+            const decoded = jwt_decode(token)
             axios({
                 method: 'post',
                 url: '/api/user',
@@ -83,7 +84,11 @@ export const UserProvider = ({ children }) => {
                 .then((res) => {
                     dispatch({
                         type: 'UPDATE_USER',
-                        payload: { token: token, user: res.data.user },
+                        payload: {
+                            token: token,
+                            user: res.data.user,
+                            userId: decoded.id,
+                        },
                     })
                 })
                 .catch((error) => console.log('error getting user', error))
@@ -94,7 +99,7 @@ export const UserProvider = ({ children }) => {
         // dispatch({ type: 'LOADING' })
         const token = localStorage.getItem('token')
         if (token) {
-            // const decoded = jwt_decode(token)
+            const decoded = jwt_decode(token)
             axios({
                 method: 'post',
                 url: '/api/user',
@@ -104,7 +109,11 @@ export const UserProvider = ({ children }) => {
                 .then((res) => {
                     dispatch({
                         type: 'UPDATE_USER',
-                        payload: { token: token, user: res.data.user },
+                        payload: {
+                            token: token,
+                            user: res.data.user,
+                            userId: decoded.id,
+                        },
                     })
                 })
                 .catch((error) => console.log('error getting user', error))
@@ -114,7 +123,7 @@ export const UserProvider = ({ children }) => {
     }
 
     const signOut = () => {
-        dispatch({ type: 'LOADING' })
+        // dispatch({ type: 'LOADING' })
         localStorage.clear()
         dispatch({ type: 'LOGOUT' })
     }

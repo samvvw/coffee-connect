@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import lottie from 'lottie-web'
 import SearchBar from '../../components/searchBar/searchBar'
 import SortBy from '../../components/marketDirectoryComponents/sortBy/sortBy'
@@ -6,7 +6,6 @@ import ProductCardDirectory from '../../components/marketDirectoryComponents/pro
 import Map from '../../components/map/map'
 import { UserContext } from '../../context/userContext/userContext'
 import { Container } from './farmDirectory.styles'
-import { useState, useEffect, useRef } from 'react'
 import { useFarms } from '../../hooks'
 
 const filters = [
@@ -72,6 +71,8 @@ const FarmDirectory = (props) => {
         }
     }, [])
 
+    useEffect(() => {}, [user])
+
     return (
         <Container>
             <div className="main">
@@ -94,17 +95,19 @@ const FarmDirectory = (props) => {
                         </p>
                     </div>
                 </div>
-                <div className="farms">
-                    {farms.map(({ data }) => {
-                        return (
-                            <ProductCardDirectory
-                                key={data._id}
-                                data={data}
-                                userId={user ? user.id : null}
-                            />
-                        )
-                    })}
-                </div>
+                {user?.id && (
+                    <div className="farms">
+                        {farms.map(({ data }) => {
+                            return (
+                                <ProductCardDirectory
+                                    key={data._id}
+                                    data={data}
+                                    userId={user ? user.id : null}
+                                />
+                            )
+                        })}
+                    </div>
+                )}
             </div>
             <div className="map-container">
                 {!loading && (
