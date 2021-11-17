@@ -43,8 +43,15 @@ export const Container = styled.div`
                 padding-bottom: 0.3rem;
             }
 
-            #email {
-                margin-bottom: 1.2rem;
+            small {
+                color: red;
+                padding-left: 0.2rem;
+                padding-top: 0.1rem;
+                /* visibility: hidden; */
+            }
+
+            small:nth-of-type(1) {
+                margin-bottom: 1rem;
             }
 
             & input {
@@ -56,6 +63,10 @@ export const Container = styled.div`
                 appearance: none;
                 -webkit-appearance: none;
                 -moz-appearance: none;
+
+                &::placeholder {
+                    color: ${theme.pallette.black[200]};
+                }
             }
 
             /* Change autocomplete styles in WebKit */
@@ -69,7 +80,7 @@ export const Container = styled.div`
             }
 
             & button {
-                margin-top: 1.5rem;
+                margin-top: 1rem;
                 align-self: center;
                 width: 100%;
                 background-color: ${theme.pallette.secondary.c800};
