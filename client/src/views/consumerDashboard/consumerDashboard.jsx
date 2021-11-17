@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
+import { LoggedNavBar } from '../../components'
 import DashboardProducts from '../../components/consumerDashboardComponents/dashboardProducts/dashboardProducts'
 import { UserContext } from '../../context/userContext/userContext'
 
@@ -31,6 +32,7 @@ export default function ConsumerDashboard() {
     }, [token])
     return (
         <>
+            <LoggedNavBar />
             <DashboardProducts likedProducts={likedProducts} />
         </>
     )
