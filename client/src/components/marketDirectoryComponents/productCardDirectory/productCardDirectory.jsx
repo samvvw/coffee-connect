@@ -21,7 +21,9 @@ const ProductCardDirectory = ({ data, userId }) => {
     }
 
     useEffect(() => {
-        if (data.bookmarks.includes(userId)) setBookmark(true)
+        if (userId && data.bookmarks.includes(userId)) {
+            setBookmark(true)
+        }
     }, [])
 
     return (

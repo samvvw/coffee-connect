@@ -1,12 +1,27 @@
 import styled from 'styled-components'
+import { theme } from '../../../theme/theme'
 
 export const CardContainer = styled.div`
     max-width: 884px;
     width: 100%;
-    padding-right: 10px;
+    padding-right: 0.5rem;
     display: flex;
     gap: 1.5rem;
     margin-bottom: 1rem;
+
+    .image-container {
+        position: relative;
+
+        & .like-container {
+            border: 1px solid ${theme.pallette.black[50]};
+            padding: 0.2rem 0.3rem;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            right: 0.5rem;
+            cursor: pointer;
+        }
+    }
 
     img {
         width: 352px;
