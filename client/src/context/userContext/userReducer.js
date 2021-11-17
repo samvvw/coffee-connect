@@ -84,7 +84,7 @@ export const UserReducer = (state, action) => {
             return {
                 ...state,
                 user: {
-                    id: action.payload.user.id,
+                    id: action.payload.userId,
                     userName: action.payload.user.userName,
                     firstName: action.payload.user.firstName,
                     lastName: action.payload.user.lastName,

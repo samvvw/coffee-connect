@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import lottie from 'lottie-web'
 import SearchBar from '../../components/searchBar/searchBar'
 import SortBy from '../../components/marketDirectoryComponents/sortBy/sortBy'
@@ -6,7 +6,6 @@ import ProductCardDirectory from '../../components/marketDirectoryComponents/pro
 import Map from '../../components/map/map'
 import { UserContext } from '../../context/userContext/userContext'
 import { Container } from './farmDirectory.styles'
-import { useState, useEffect, useRef } from 'react'
 import { useFarms } from '../../hooks'
 
 const filters = [
@@ -54,6 +53,14 @@ const FarmDirectory = (props) => {
     }, [farms])
 
     useEffect(() => {
+        if (querySearch.trim()) {
+            getFarms(`search=${querySearch}&${queryFilters}`)
+        } else {
+            getFarms(`${queryFilters}`)
+        }
+    }, [queryFilters])
+
+    useEffect(() => {
         lottie.loadAnimation({
             container: container.current,
             renderer: 'svg',
@@ -72,6 +79,8 @@ const FarmDirectory = (props) => {
         }
     }, [])
 
+    useEffect(() => {}, [user])
+
     return (
         <Container>
             <div className="main">
@@ -82,7 +91,11 @@ const FarmDirectory = (props) => {
                         onKeyUp={(e) => handleKeyUp(e)}
                     />
                 </div>
-                <SortBy data={filters} onChange={handleFilterChange} />
+                <SortBy
+                    data={filters}
+                    onChange={handleFilterChange}
+                    type="directory"
+                />
                 <div className="main__results">
                     <div className="main__results__query">
                         <p>Search results for:</p>
@@ -94,17 +107,32 @@ const FarmDirectory = (props) => {
                         </p>
                     </div>
                 </div>
-                <div className="farms">
-                    {farms.map(({ data }) => {
-                        return (
-                            <ProductCardDirectory
-                                key={data._id}
-                                data={data}
-                                userId={user ? user.id : null}
-                            />
-                        )
-                    })}
-                </div>
+                {user?.id && (
+                    <div className="farms">
+                        {farms.map(({ data }) => {
+                            return (
+                                <ProductCardDirectory
+                                    key={data._id}
+                                    data={data}
+                                    userId={user ? user.id : null}
+                                />
+                            )
+                        })}
+                    </div>
+                )}
+                {!user?.id && (
+                    <div className="farms">
+                        {farms.map(({ data }) => {
+                            return (
+                                <ProductCardDirectory
+                                    key={data._id}
+                                    data={data}
+                                    userId={user ? user.id : null}
+                                />
+                            )
+                        })}
+                    </div>
+                )}
             </div>
             <div className="map-container">
                 {!loading && (

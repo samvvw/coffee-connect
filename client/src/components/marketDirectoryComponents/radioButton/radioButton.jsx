@@ -19,7 +19,7 @@ const RadioButton = ({ id, value, label, onChange }) => {
                 checked={checked}
                 value={value}
                 onChange={(e) => handleChange(e)}
-                style={checked ? checkedStyled : { borderRadius: '15px' }}
+                style={checked ? checkedStyled : { borderRadius: '20px' }}
             >
                 {label}
             </ToggleButton>

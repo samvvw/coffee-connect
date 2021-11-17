@@ -89,6 +89,8 @@ const CoffeeMarketplace = () => {
         }
     }, [products])
 
+    useEffect(() => {}, [user])
+
     return (
         <Container>
             <div className="main">
@@ -99,7 +101,11 @@ const CoffeeMarketplace = () => {
                         onKeyUp={(e) => handleKeyUp(e)}
                     />
                 </div>
-                <SortBy data={filters} onChange={handleFilterChange} />
+                <SortBy
+                    data={filters}
+                    onChange={handleFilterChange}
+                    type="marketplace"
+                />
                 <div className="main__results">
                     <div className="main__results__query">
                         <p>Search results for:</p>
@@ -111,15 +117,28 @@ const CoffeeMarketplace = () => {
                         </p>
                     </div>
                 </div>
-                <div className="products">
-                    {products.map(({ data }) => (
-                        <ProductCard
-                            key={data._id}
-                            data={data}
-                            userId={user ? user.id : null}
-                        />
-                    ))}
-                </div>
+                {user?.id && (
+                    <div className="products">
+                        {products.map(({ data }) => (
+                            <ProductCard
+                                key={data._id}
+                                data={data}
+                                userId={user ? user.id : null}
+                            />
+                        ))}
+                    </div>
+                )}
+                {!user?.id && (
+                    <div className="products">
+                        {products.map(({ data }) => (
+                            <ProductCard
+                                key={data._id}
+                                data={data}
+                                userId={user ? user.id : null}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
             <div className="map-container">
                 {!loading && (
