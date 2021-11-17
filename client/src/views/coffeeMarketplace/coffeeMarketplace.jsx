@@ -128,6 +128,17 @@ const CoffeeMarketplace = () => {
                         ))}
                     </div>
                 )}
+                {!user?.id && (
+                    <div className="products">
+                        {products.map(({ data }) => (
+                            <ProductCard
+                                key={data._id}
+                                data={data}
+                                userId={user ? user.id : null}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
             <div className="map-container">
                 {!loading && (

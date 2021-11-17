@@ -120,6 +120,19 @@ const FarmDirectory = (props) => {
                         })}
                     </div>
                 )}
+                {!user?.id && (
+                    <div className="farms">
+                        {farms.map(({ data }) => {
+                            return (
+                                <ProductCardDirectory
+                                    key={data._id}
+                                    data={data}
+                                    userId={user ? user.id : null}
+                                />
+                            )
+                        })}
+                    </div>
+                )}
             </div>
             <div className="map-container">
                 {!loading && (
