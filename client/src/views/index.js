@@ -9,6 +9,7 @@ import ContactUs from './contactUs/contactUs'
 import FarmProfile from './farmProfile/farmProfile'
 import FarmDirectory from './farmDirectory/farmDirectory'
 import MyFarm from './myFarm/myFarm'
+import Account from './account/account'
 
 export {
     SignUp,
@@ -22,4 +23,5 @@ export {
     FarmProfile,
     FarmDirectory,
     MyFarm,
+    Account,
 }

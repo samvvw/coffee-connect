@@ -5,10 +5,11 @@ export const Container = styled.div`
     flex-direction: column;
     width: 90%;
     margin: 0 auto;
+    /* margin-left: 4rem; */
 
     h2 {
         font-size: 2rem;
-        font-weight: bold;
+        font-weight: 500;
     }
     p {
         text-align: center;
@@ -27,11 +28,15 @@ export const Container = styled.div`
         textarea {
             height: 48px;
             width: 100%;
-            border-color: ${theme.pallette.accent1.light};
+            border: 1px solid ${theme.pallette.black[400]};
             margin-bottom: 1.5rem;
+            padding-left: 8px;
+            border-radius: 4px;
         }
         textarea {
-            height: 300px;
+            min-height: 150px;
+            height: 100%;
+            padding-top: 8px;
         }
 
         div {
@@ -49,12 +54,17 @@ export const Container = styled.div`
     }
 
     @media only screen and (min-width: ${theme.layout.desktop}) {
+        margin: 0;
+        margin-left: 4rem;
         p {
             text-align: left;
         }
         p,
         h2 {
             width: 70%;
+            font-size: 48px;
+            font-weight: 500;
+            margin-bottom: 1rem;
         }
 
         form {
