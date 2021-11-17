@@ -14,7 +14,6 @@ const SignUp = (props) => {
     const [errorMsgs, setErrorMsgs] = useState({
         firstName: '',
         lastName: '',
-        userName: '',
         email: '',
         password: '',
         confirmPassword: '',
@@ -39,25 +38,24 @@ const SignUp = (props) => {
         const error = {
             firstName: '',
             lastName: '',
-            userName: '',
             email: '',
             password: '',
             confirmPassword: '',
         }
         let resValidation = true
 
-        if (user.firstName.length < 2 || user.firstName.length > 15) {
-            error.firstName = 'Must be between 2 and 15 characters'
+        if (user.firstName.length < 3 || user.firstName.length > 15) {
+            error.firstName = 'Must be between 3 and 15 characters'
             resValidation = false
         }
-        if (user.lastName.length < 2 || user.lastName.length > 15) {
-            error.lastName = 'Must be between 2 and 15 characters'
+        if (user.lastName.length < 3 || user.lastName.length > 15) {
+            error.lastName = 'Must be between 3 and 15 characters'
             resValidation = false
         }
-        if (user.userName.length < 3 || user.userName.length > 15) {
-            error.userName = 'Must be between 3 and 15 characters'
-            resValidation = false
-        }
+        // if (user.userName.length < 3 || user.userName.length > 15) {
+        //     error.userName = 'Must be between 3 and 15 characters'
+        //     resValidation = false
+        // }
         if (!emailRegex.test(user.email)) {
             error.email = 'Invalid email'
             resValidation = false
@@ -81,7 +79,7 @@ const SignUp = (props) => {
             firstName: e.target.firstName.value,
             lastName: e.target.lastName.value,
             email: e.target.email.value,
-            userName: e.target.userName.value,
+            userName: e.target.firstName.value,
             password: e.target.password.value,
             confirmPassword: e.target.confirmPassword.value,
             userType: userType,
@@ -153,7 +151,7 @@ const SignUp = (props) => {
                         />
                         <small className="error">{errorMsgs.lastName}</small>
 
-                        <label htmlFor="userName">Username</label>
+                        {/* <label htmlFor="userName">Username</label>
                         <input
                             type="text"
                             name="userName"
@@ -162,7 +160,7 @@ const SignUp = (props) => {
                             placeholder="Your Username"
                             required
                         />
-                        <small className="error">{errorMsgs.userName}</small>
+                        <small className="error">{errorMsgs.userName}</small> */}
 
                         <label htmlFor="email">Email</label>
                         <input
