@@ -12,6 +12,7 @@ export const UserReducer = (state, action) => {
                 loading: false,
                 error: {},
                 user: {
+                    id: action.payload.user.id,
                     userName: action.payload.user.userName,
                     firstName: action.payload.user.firstName,
                     lastName: action.payload.user.lastName,
@@ -30,6 +31,7 @@ export const UserReducer = (state, action) => {
                 loading: false,
                 error: {},
                 user: {
+                    id: action.payload.user.id,
                     userName: action.payload.user.userName,
                     firstName: action.payload.user.firstName,
                     lastName: action.payload.user.lastName,
@@ -57,6 +59,7 @@ export const UserReducer = (state, action) => {
                 ...state,
                 loading: false,
                 user: {
+                    id: action.payload.user.id,
                     userName: action.payload.user.userName,
                     firstName: action.payload.user.firstName,
                     lastName: action.payload.user.lastName,
@@ -81,6 +84,7 @@ export const UserReducer = (state, action) => {
             return {
                 ...state,
                 user: {
+                    id: action.payload.user.id,
                     userName: action.payload.user.userName,
                     firstName: action.payload.user.firstName,
                     lastName: action.payload.user.lastName,

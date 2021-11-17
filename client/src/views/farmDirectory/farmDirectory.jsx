@@ -1,59 +1,57 @@
+import { useContext } from 'react'
+import lottie from 'lottie-web'
 import SearchBar from '../../components/searchBar/searchBar'
 import SortBy from '../../components/marketDirectoryComponents/sortBy/sortBy'
 import ProductCardDirectory from '../../components/marketDirectoryComponents/productCardDirectory/productCardDirectory'
 import Map from '../../components/map/map'
+import { UserContext } from '../../context/userContext/userContext'
 import { Container } from './farmDirectory.styles'
 import { useState, useEffect, useRef } from 'react'
-import lottie from 'lottie-web'
+import { useFarms } from '../../hooks'
 
 const filters = [
     {
-        value: 'roastLevel',
-        id: 1,
-        label: 'Roast Level',
-    },
-    {
         value: 'origin',
-        id: 2,
-        label: 'Country',
-    },
-]
-
-const farms = [
-    {
         id: 1,
-        name: 'Farm Name # 1',
-        origin: 'South America',
-        location: 'Colombia',
-        altitude: '1200 masl',
+        label: 'Origin',
     },
-    {
-        id: 2,
-        name: 'Farm Name # 2',
-        origin: 'North America',
-        location: 'Canada',
-        altitude: '90 masl',
-    },
-]
-
-const countries = [
-    [35.652832, 139.839478],
-    [40.416775, -3.70379],
 ]
 
 const FarmDirectory = (props) => {
+    const { user } = useContext(UserContext)
+    const [farms, getFarms] = useFarms()
+    const [coordinates, setCoordinates] = useState()
     const [querySearch, setQuerySearch] = useState('')
     const [queryFilters, setQueryFilters] = useState('')
     const [loading, setLoading] = useState(true)
     const container = useRef()
 
     const handleKeyUp = (e) => {
-        if (e.keyCode === 13) setQuerySearch(e.target.value)
+        if (e.keyCode === 13) {
+            //Get products with new search
+            if (e.target.value.trim()) {
+                getFarms(`search=${e.target.value}&${queryFilters}`)
+            } else {
+                getFarms(`${queryFilters}`)
+            }
+            setQuerySearch(e.target.value)
+        }
     }
 
     const handleFilterChange = (value) => {
         setQueryFilters(value)
     }
+
+    useEffect(() => {
+        const getCoordinates = () => {
+            const result = farms.map(({ data }) => [
+                +data.coordinate[0],
+                +data.coordinate[1],
+            ])
+            setCoordinates(result)
+        }
+        getCoordinates()
+    }, [farms])
 
     useEffect(() => {
         lottie.loadAnimation({
@@ -67,7 +65,11 @@ const FarmDirectory = (props) => {
     }, [])
 
     useEffect(() => {
-        setTimeout(() => setLoading(false), 1000)
+        let timeout = setTimeout(() => setLoading(false), 1200)
+
+        return () => {
+            clearTimeout(timeout)
+        }
     }, [])
 
     return (
@@ -93,15 +95,21 @@ const FarmDirectory = (props) => {
                     </div>
                 </div>
                 <div className="farms">
-                    {farms.map((farm) => (
-                        <ProductCardDirectory key={farm.id} data={farm} />
-                    ))}
+                    {farms.map(({ data }) => {
+                        return (
+                            <ProductCardDirectory
+                                key={data._id}
+                                data={data}
+                                userId={user ? user.id : null}
+                            />
+                        )
+                    })}
                 </div>
             </div>
             <div className="map-container">
                 {!loading && (
                     <Map
-                        data={countries}
+                        data={coordinates}
                         style={{ width: '100%', height: '80vh' }}
                     />
                 )}

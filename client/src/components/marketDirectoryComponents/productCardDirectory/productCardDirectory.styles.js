@@ -1,12 +1,13 @@
 import styled from 'styled-components'
+import { theme } from '../../../theme/theme'
 
 export const Container = styled.div`
     max-width: 884px;
-    width: 100%;
-    padding-right: 10px;
+    width: 90%;
     display: flex;
-    gap: 1.5rem;
+    justify-content: space-between;
     margin-bottom: 1rem;
+    gap: 1.5rem;
 
     img {
         width: 136px;
@@ -17,6 +18,22 @@ export const Container = styled.div`
     }
 
     .product {
+        margin-top: 1rem;
+        flex-grow: 1;
+
+        & .top-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            & .bookmark-container {
+                border: 1px solid ${theme.pallette.black[200]};
+                border-radius: 50%;
+                padding: 0.2rem 0.33rem;
+                cursor: pointer;
+            }
+        }
+
         &__title {
             font-weight: bold;
             font-size: 1.4rem;
@@ -38,7 +55,7 @@ export const Container = styled.div`
                 font-size: 0.9rem;
 
                 span {
-                    font-weight: 600;
+                    font-weight: 500;
                     font-size: 1rem;
                     color: #000000;
                 }
