@@ -14,6 +14,11 @@ export const Container = styled.div`
             border-color: ${theme.pallette.accent1.light};
         }
 
+        textarea {
+            border-color: ${theme.pallette.accent1.light};
+            padding: 1rem;
+        }
+
         #divTaste,
         #divRoastDate,
         #divProductSize1,

@@ -1,7 +1,8 @@
 import { Container } from './imageProduct.styles'
-import { useState, useContext } from 'react'
-// import axios from 'axios'
+import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../../context/userContext/userContext'
+
+import blankmg from '../../assets/images/blankImg.jpg'
 const ImageProduct = ({
     urlImg,
     width,
@@ -14,10 +15,25 @@ const ImageProduct = ({
     idProduct,
     setTotalProducts,
 }) => {
-    const [bgImage, setBgImage] = useState()
+    const [bgImage, setBgImage] = useState(urlImg)
     const { user } = useContext(UserContext)
     const farmID = user.farms[0]
 
+    // variables to control centered button
+    const [centeredCircleDisplay, setCenteredCircleDisplay] = useState(false)
+
+    // variables to control delete button
+    const [deleteCircleDisplay, setDeleteCircleDisplay] = useState(false)
+
+    useEffect(() => {
+        if (urlImg) {
+            setCenteredCircleDisplay(false)
+            setDeleteCircleDisplay(true)
+        } else {
+            setCenteredCircleDisplay(true)
+            setDeleteCircleDisplay(false)
+        }
+    }, [])
     const importFiles = (idContainer) => {
         let input = document.createElement('input')
         input.type = 'file'
@@ -33,15 +49,34 @@ const ImageProduct = ({
             const data = { method: 'post', body: form }
 
             fetch(`/api/farm/${farmID}/product/${productId}/pictures`, data)
-                .then((res) =>
+                .then((res) => {
                     res.json().then((data) => {
                         setBgImage(data.picture[+idContainer])
                         setTotalProducts((prev) => prev + 1)
                     })
-                )
+                    setCenteredCircleDisplay(false)
+                    setDeleteCircleDisplay(true)
+                })
                 .catch((error) => console.log(error))
         }
         input.click()
+    }
+
+    const deleteFile = () => {
+        const form = new FormData()
+        const token = localStorage.getItem('token')
+        form.append('token', token)
+        form.append('deleteUrl', bgImage)
+        const data = { method: 'delete', body: form }
+
+        fetch(`/api/farm/${farmID}/product/${idProduct}/pictures`, data)
+            .then((res) => {
+                setCenteredCircleDisplay(true)
+                setDeleteCircleDisplay(false)
+                setBgImage(blankmg)
+                setTotalProducts((prev) => prev + 1)
+            })
+            .catch((error) => console.log(error))
     }
     return (
         <Container
@@ -51,12 +86,21 @@ const ImageProduct = ({
             heightButton={heightButton}
         >
             <img src={bgImage || urlImg} alt={alt} />
-            <button
-                onClick={() => importFiles(idContainer)}
-                disabled={tabImagesDisabled}
-            >
-                +
-            </button>
+            {centeredCircleDisplay && (
+                <button
+                    id="centeredCircle"
+                    onClick={() => importFiles(idContainer)}
+                    disabled={tabImagesDisabled}
+                >
+                    +
+                </button>
+            )}
+
+            {deleteCircleDisplay && (
+                <button id="deleteCircle" onClick={() => deleteFile()}>
+                    x
+                </button>
+            )}
         </Container>
     )
 }

@@ -151,11 +151,12 @@ const TabProductInformation = ({
                     </label>
                     <label>
                         (How would you describe this product to your customers.
-                        This will be displayed on the product details page)
+                        This will be displayed on the product details page.)
                     </label>
-                    <input
+                    <textarea
                         defaultValue={productData.description}
-                        type="text"
+                        rows="5"
+                        // type="text"
                         name="description"
                         placeholder="Description..."
                         required

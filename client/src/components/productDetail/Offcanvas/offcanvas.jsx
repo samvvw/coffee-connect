@@ -69,7 +69,7 @@ const OffCanvas = ({
             >
                 <Offcanvas.Header style={styleHeader} closeButton>
                     <Offcanvas.Title style={styleTitle}>
-                        Add New Product
+                        Edit Product
                     </Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body style={styleBody}>
