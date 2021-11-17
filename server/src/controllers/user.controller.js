@@ -37,6 +37,7 @@ exports.userSignUp = async (req, res) => {
             userName: userName,
             email: email,
             userType: userType,
+            createdAt: createUser.createdAt,
         }
 
         const token = createToken(payload)
@@ -85,6 +86,7 @@ exports.userSignIn = async (req, res) => {
                     profilePicture: profilePicture,
                     userType: userType,
                     farms: farms,
+                    createdAt: user.createdAt,
                 }
 
                 const token = createToken(payload)
