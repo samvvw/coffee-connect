@@ -83,7 +83,11 @@ const FarmDirectory = (props) => {
                         onKeyUp={(e) => handleKeyUp(e)}
                     />
                 </div>
-                <SortBy data={filters} onChange={handleFilterChange} />
+                <SortBy
+                    data={filters}
+                    onChange={handleFilterChange}
+                    type="directory"
+                />
                 <div className="main__results">
                     <div className="main__results__query">
                         <p>Search results for:</p>

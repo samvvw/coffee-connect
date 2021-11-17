@@ -1,12 +1,26 @@
 import { useEffect, useState } from 'react'
+import DropdownMenu from 'react-bootstrap/DropdownMenu'
+import Dropdown from 'react-bootstrap/Dropdown'
 import classNames from 'classnames'
 import RadioButton from '../radioButton/radioButton'
 import PriceSlider from './priceSlider/priceSlider'
 import { Container } from './sortBy.styles'
 import RoastLevelCheckboxes from './roastLevelCheckboxes/roastLevelCheckboxes'
 import OriginCheckboxes from './originCheckboxes/originCheckboxes'
+import { theme } from '../../../theme/theme'
 
-const SortBy = ({ data, onChange }) => {
+const priceSliderStyle = {
+    border: `1px solid ${theme.pallette.black[500]}`,
+    borderBottomLeftRadius: '10px',
+    borderBottomRightRadius: '10px',
+    maxWidth: '400px',
+    width: '320px',
+    marginLeft: '1rem',
+    backgroundColor: '#fff',
+    padding: '1rem 2rem 2rem 0.5rem',
+}
+
+const SortBy = ({ data, onChange, type }) => {
     const [queryFilters, setQueryFilters] = useState({
         priceMin: 1,
         priceMax: 1000,
@@ -106,7 +120,64 @@ const SortBy = ({ data, onChange }) => {
     return (
         <Container>
             <div className="options">
-                {data.map((filter, i) => (
+                {type === 'marketplace' && (
+                    <Dropdown className="d-inline">
+                        <Dropdown.Toggle
+                            variant="warning"
+                            id="dropdown-autoclose-true"
+                        >
+                            Price
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu style={priceSliderStyle}>
+                            <div className="price-slider">
+                                <PriceSlider
+                                    min={1}
+                                    max={1000}
+                                    onChange={({ min, max }) => {
+                                        setQueryFilters((prevQueryFilters) => ({
+                                            ...prevQueryFilters,
+                                            priceMin: min,
+                                            priceMax: max,
+                                        }))
+                                    }}
+                                />
+                            </div>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                )}
+
+                {type === 'marketplace' && (
+                    <Dropdown className="d-inline ">
+                        <Dropdown.Toggle
+                            variant="warning"
+                            id="dropdown-autoclose-true"
+                        >
+                            Roast Level
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu style={priceSliderStyle}>
+                            <div className="price-slider">
+                                <RoastLevelCheckboxes onChange={roastFilter} />
+                            </div>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                )}
+
+                <Dropdown align="end" className="d-inline ">
+                    <Dropdown.Toggle
+                        variant="warning"
+                        id="dropdown-autoclose-true"
+                    >
+                        Origin
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu style={priceSliderStyle}>
+                        <div className="price-slider">
+                            <OriginCheckboxes onChange={originFilter} />
+                        </div>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
+
+            {/* {data.map((filter, i) => (
                     <RadioButton
                         key={filter.id}
                         id={filter.id}
@@ -114,10 +185,9 @@ const SortBy = ({ data, onChange }) => {
                         label={filter.label}
                         onChange={handleChange}
                     />
-                ))}
-            </div>
+                ))} */}
 
-            <div className={`price-filter ${priceClass}`}>
+            {/* <div className={`price-filter ${priceClass}`}>
                 <PriceSlider
                     min={1}
                     max={1000}
@@ -129,15 +199,15 @@ const SortBy = ({ data, onChange }) => {
                         }))
                     }}
                 />
-            </div>
+            </div> */}
 
-            <div className={`roast-filter ${roastClass}`}>
+            {/* <div className={`roast-filter ${roastClass}`}>
                 <RoastLevelCheckboxes onChange={roastFilter} />
-            </div>
+            </div> */}
 
-            <div className={`origin-filter ${originClass}`}>
+            {/* <div className={`origin-filter ${originClass}`}>
                 <OriginCheckboxes onChange={originFilter} />
-            </div>
+            </div> */}
         </Container>
     )
 }
