@@ -53,11 +53,21 @@ const SignIn = (props) => {
                 <form onSubmit={handleSubmit}>
                     <h1>Sign in to Qafa</h1>
                     <label htmlFor="email">Email</label>
-                    <input type="email" name="email" id="email" />
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Email Address"
+                    />
                     <small className="error">{errorEmail}</small>
 
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" />
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="Your Password"
+                    />
                     <small className="error">{errorPassword}</small>
 
                     {!loading && <Button title="Login" type="submit" />}

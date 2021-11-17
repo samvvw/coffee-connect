@@ -138,6 +138,7 @@ const SignUp = (props) => {
                             type="text"
                             name="firstName"
                             id="firstName"
+                            placeholder="e.g. James"
                             required
                         />
                         <small className="error">{errorMsgs.firstName}</small>
@@ -147,6 +148,7 @@ const SignUp = (props) => {
                             type="text"
                             name="lastName"
                             id="lastName"
+                            placeholder="e.g. Johnson"
                             required
                         />
                         <small className="error">{errorMsgs.lastName}</small>
@@ -157,12 +159,19 @@ const SignUp = (props) => {
                             name="userName"
                             id="userName"
                             id="userName"
+                            placeholder="Your Username"
                             required
                         />
                         <small className="error">{errorMsgs.userName}</small>
 
                         <label htmlFor="email">Email</label>
-                        <input type="email" name="email" id="email" required />
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            placeholder="Email Address"
+                            required
+                        />
                         <small className="error">{errorMsgs.email}</small>
 
                         <label htmlFor="password">Password</label>
@@ -170,6 +179,7 @@ const SignUp = (props) => {
                             type="password"
                             name="password"
                             id="password"
+                            placeholder="Your Password"
                             required
                         />
                         <small className="error">{errorMsgs.password}</small>
@@ -181,6 +191,7 @@ const SignUp = (props) => {
                             type="password"
                             name="confirmPassword"
                             id="confirmPassword"
+                            placeholder="Your Password"
                             required
                         />
                         <small className="error">

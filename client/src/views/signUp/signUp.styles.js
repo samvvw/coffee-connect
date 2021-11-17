@@ -99,6 +99,10 @@ export const Container = styled.div`
                 -webkit-appearance: none;
                 -moz-appearance: none;
                 /* margin-bottom: 0.5rem; */
+
+                &::placeholder {
+                    color: ${theme.pallette.black[200]};
+                }
             }
 
             /* Change autocomplete styles in WebKit */
