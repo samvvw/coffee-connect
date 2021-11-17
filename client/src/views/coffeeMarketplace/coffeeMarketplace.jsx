@@ -80,7 +80,11 @@ const CoffeeMarketplace = () => {
     }, [])
 
     useEffect(() => {
-        setTimeout(() => setLoading(false), 1200)
+        let timeout = setTimeout(() => setLoading(false), 1200)
+
+        return () => {
+            clearTimeout(timeout)
+        }
     }, [products])
 
     return (
