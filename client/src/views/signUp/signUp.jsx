@@ -99,6 +99,7 @@ const SignUp = (props) => {
             <div className="form-container">
                 <h1>Create your Account</h1>
                 <p>Welcome to Qafa.</p>
+                <p className="type-label">Which best describes you?</p>
                 <form onSubmit={handleSubmit}>
                     <div className="tab-container">
                         <label

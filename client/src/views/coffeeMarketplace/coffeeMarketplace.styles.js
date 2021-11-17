@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { theme } from '../../theme/theme'
 
 export const Container = styled.div`
     display: grid;
@@ -18,7 +19,7 @@ export const Container = styled.div`
 
         &__search {
             padding: 0.5rem;
-            background-color: #009999;
+            background-color: ${theme.pallette.primary[500]};
         }
 
         &__results {
