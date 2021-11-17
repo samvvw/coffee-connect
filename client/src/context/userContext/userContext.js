@@ -21,20 +21,24 @@ export const UserProvider = ({ children }) => {
 
     const signUp = async (user) => {
         try {
-            dispatch({ type: 'LOADING' })
+            // dispatch({ type: 'LOADING' })
             const response = await fetch('/api/user/sign-up', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(user),
             })
 
-            const data = await response.json()
-            localStorage.setItem('token', data.token)
-            const decoded = jwt_decode(data.token)
-            dispatch({
-                type: 'USER_SIGN_UP',
-                payload: { user: decoded, token: data.token },
-            })
+            if (response.status === 201) {
+                const data = await response.json()
+                localStorage.setItem('token', data.token)
+                const decoded = jwt_decode(data.token)
+                dispatch({
+                    type: 'USER_SIGN_UP',
+                    payload: { user: decoded, token: data.token },
+                })
+            }
+            // dispatch({ type: 'UNLOADING' })
+            return response
         } catch (err) {
             dispatch({ type: 'ERROR', payload: err })
             console.log('User cannot be registered', err)

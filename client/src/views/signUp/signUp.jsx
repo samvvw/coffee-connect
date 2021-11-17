@@ -11,6 +11,14 @@ const SignUp = (props) => {
     const [tabs, setTabs] = useState({ tab1: true, tab2: false })
     const [userType, setUserType] = useState('farmer')
     const { signUp, loading, error } = useContext(UserContext)
+    const [errorMsgs, setErrorMsgs] = useState({
+        firstName: '',
+        lastName: '',
+        userName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+    })
 
     const { from } = location.state || { from: { pathname: '/' } }
 
@@ -26,6 +34,47 @@ const SignUp = (props) => {
         }
     }
 
+    const dataValidation = (user) => {
+        const emailRegex = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')
+        const error = {
+            firstName: '',
+            lastName: '',
+            userName: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+        }
+        let resValidation = true
+
+        if (user.firstName.length < 2 || user.firstName.length > 15) {
+            error.firstName = 'Must be between 2 and 15 characters'
+            resValidation = false
+        }
+        if (user.lastName.length < 2 || user.lastName.length > 15) {
+            error.lastName = 'Must be between 2 and 15 characters'
+            resValidation = false
+        }
+        if (user.userName.length < 3 || user.userName.length > 15) {
+            error.userName = 'Must be between 3 and 15 characters'
+            resValidation = false
+        }
+        if (!emailRegex.test(user.email)) {
+            error.email = 'Invalid email'
+            resValidation = false
+        }
+        if (user.password.length < 8) {
+            error.password = 'Must be at least 8 characters'
+            resValidation = false
+        }
+        if (user.password !== user.confirmPassword) {
+            error.confirmPassword = 'Passwords do not match'
+            resValidation = false
+        }
+
+        setErrorMsgs(error)
+        return resValidation
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         const user = {
@@ -34,10 +83,16 @@ const SignUp = (props) => {
             email: e.target.email.value,
             userName: e.target.userName.value,
             password: e.target.password.value,
+            confirmPassword: e.target.confirmPassword.value,
             userType: userType,
         }
-        await signUp(user)
-        if (!Object.keys(error).length) history.replace(from)
+        const resValidation = dataValidation(user)
+        if (resValidation) {
+            const response = await signUp(user)
+            if (response.status === 201) {
+                if (!Object.keys(error).length) history.replace(from)
+            }
+        }
     }
 
     return (
@@ -77,103 +132,68 @@ const SignUp = (props) => {
                         </label>
                     </div>
 
-                    {/* Consumer Form Content */}
-                    {tabs.tab2 && (
-                        <div className="form-content">
-                            <label htmlFor="firstName">First Name</label>
-                            <input
-                                type="text"
-                                name="firstName"
-                                id="firstName"
-                            />
+                    <div className="form-content">
+                        <label htmlFor="firstName">First Name</label>
+                        <input
+                            type="text"
+                            name="firstName"
+                            id="firstName"
+                            required
+                        />
+                        <small className="error">{errorMsgs.firstName}</small>
 
-                            <label htmlFor="lastName">Last Name</label>
-                            <input type="text" name="lastName" id="lastName" />
+                        <label htmlFor="lastName">Last Name</label>
+                        <input
+                            type="text"
+                            name="lastName"
+                            id="lastName"
+                            required
+                        />
+                        <small className="error">{errorMsgs.lastName}</small>
 
-                            <label htmlFor="userName">Username</label>
-                            <input
-                                type="text"
-                                name="userName"
-                                id="userName"
-                                id="userName"
-                            />
+                        <label htmlFor="userName">Username</label>
+                        <input
+                            type="text"
+                            name="userName"
+                            id="userName"
+                            id="userName"
+                            required
+                        />
+                        <small className="error">{errorMsgs.userName}</small>
 
-                            <label htmlFor="email">Email</label>
-                            <input type="email" name="email" id="email" />
+                        <label htmlFor="email">Email</label>
+                        <input type="email" name="email" id="email" required />
+                        <small className="error">{errorMsgs.email}</small>
 
-                            <label htmlFor="password">Password</label>
-                            <input
-                                type="password"
-                                name="password"
-                                id="password"
-                            />
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            required
+                        />
+                        <small className="error">{errorMsgs.password}</small>
 
-                            <label htmlFor="confirmPassword">
-                                Confirm Password
-                            </label>
-                            <input
-                                type="password"
-                                name="confirmPassword"
-                                id="confirmPassword"
-                            />
+                        <label htmlFor="confirmPassword">
+                            Confirm Password
+                        </label>
+                        <input
+                            type="password"
+                            name="confirmPassword"
+                            id="confirmPassword"
+                            required
+                        />
+                        <small className="error">
+                            {errorMsgs.confirmPassword}
+                        </small>
 
-                            {!loading && (
-                                <Button title="Create Account" type="submit" />
-                            )}
-                            {loading && <small>Loading...</small>}
+                        {!loading && (
+                            <Button title="Create Account" type="submit" />
+                        )}
+                        {loading && <small>Loading...</small>}
 
-                            {/* {error && <pre>{JSON.stringify(error, null, 2)}</pre>} */}
-                        </div>
-                    )}
-
-                    {/* Farmer Form Content */}
-                    {tabs.tab1 && (
-                        <div className="form-content">
-                            <label htmlFor="firstName">First Name</label>
-                            <input
-                                type="text"
-                                name="firstName"
-                                id="firstName"
-                            />
-
-                            <label htmlFor="lastName">Last Name</label>
-                            <input type="text" name="lastName" id="lastName" />
-
-                            <label htmlFor="userName">Username</label>
-                            <input
-                                type="text"
-                                name="userName"
-                                id="userName"
-                                id="userName"
-                            />
-
-                            <label htmlFor="email">Email</label>
-                            <input type="email" name="email" id="email" />
-
-                            <label htmlFor="password">Password</label>
-                            <input
-                                type="password"
-                                name="password"
-                                id="password"
-                            />
-
-                            <label htmlFor="confirmPassword">
-                                Confirm Password
-                            </label>
-                            <input
-                                type="password"
-                                name="confirmPassword"
-                                id="confirmPassword"
-                            />
-
-                            {!loading && (
-                                <Button title="Create Account" type="submit" />
-                            )}
-                            {loading && <small>Loading...</small>}
-
-                            {/* {error && <pre>{JSON.stringify(error, null, 2)}</pre>} */}
-                        </div>
-                    )}
+                        {/* {error && <pre>{JSON.stringify(error, null, 2)}</pre>} */}
+                    </div>
                 </form>
             </div>
         </Container>

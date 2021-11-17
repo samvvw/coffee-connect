@@ -7,7 +7,7 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     max-width: 400px;
-    width: 100%;
+    width: 90%;
     margin: 0 auto;
     padding-top: 2rem;
 
@@ -20,13 +20,13 @@ export const Container = styled.div`
     }
 
     .form-container {
-        margin-top: 1rem;
+        margin-top: 4rem;
         margin: auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
         max-width: 900px;
-        width: 100%;
+        width: 95%;
     }
 
     & form {
@@ -51,6 +51,7 @@ export const Container = styled.div`
                 display: flex;
                 justify-content: center;
                 border-radius: 4px;
+                font-size: 0.9rem;
 
                 &.active {
                     border-bottom: none;
@@ -71,6 +72,17 @@ export const Container = styled.div`
             justify-content: center;
             padding: 1rem 0;
 
+            small {
+                color: red;
+                padding-left: 0.2rem;
+                padding-top: 0.1rem;
+                /* visibility: hidden; */
+            }
+
+            small:not(:nth-last-of-type()) {
+                margin-bottom: 1rem;
+            }
+
             & label {
                 align-items: center;
                 margin-top: 0.5rem;
@@ -86,7 +98,7 @@ export const Container = styled.div`
                 appearance: none;
                 -webkit-appearance: none;
                 -moz-appearance: none;
-                margin-bottom: 0.5rem;
+                /* margin-bottom: 0.5rem; */
             }
 
             /* Change autocomplete styles in WebKit */
@@ -106,6 +118,7 @@ export const Container = styled.div`
                 background-color: ${theme.pallette.secondary.c800};
                 border-color: ${theme.pallette.secondary.c800};
                 color: #ffffff;
+                margin-bottom: 2rem;
             }
         }
     }
