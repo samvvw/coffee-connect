@@ -5,31 +5,31 @@ import axios from 'axios'
 import MessageModal from '../../components/messageModal/messageModal'
 import { Container } from './farmProfile.styles'
 import { theme } from '../../theme/theme'
-
+import Offcanvas from 'react-bootstrap/Offcanvas'
 import FarmProfileHero from '../../components/farmProfile/farmProfileHero'
 import FarmProfileDescription from '../../components/farmProfile/farmProfileDescription'
-import FarmProfileProducts from '../../components/farmProfile/farmProfileProducts'
+
 import FarmProfileHeader from '../../components/farmProfile/farmProfileHeader'
 import FarmProfileCertificates from '../../components/farmProfile/farmProfileCertificates'
 import FarmProfileGallery from '../../components/farmProfile/farmProfileGallery'
 import { LoggedNavBar } from '../../components'
 import { UserContext } from '../../context/userContext/userContext'
-
+import FarmProfileEditFarmForm from '../../components/farmProfile/farmProfileEditFarmForm'
 import placeHolder from '../../assets/images/placeholder.png'
 
 const FarmProfile = () => {
     const { user } = useContext(UserContext)
-    // let farmID = user.farms
-    console.log('farmID', user)
-    // let farmID = '618de93d89b847892b6b0421'
     const { isTokenExpired } = useContext(UserContext)
     const history = useHistory()
     const [farmData, setFarmData] = useState()
-    /*variables to control messages in modal*/
 
+    /*variables to control messages in modal*/
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     let errorMessage = ''
+
+    //control when to update data
+    const [updated, setUpdated] = useState(false)
 
     useEffect(() => {
         if (isTokenExpired()) {
@@ -37,94 +37,59 @@ const FarmProfile = () => {
         }
     })
 
+    const [description, setDescription] = useState()
+    const [descriptionShort, setDescriptionShort] = useState()
+    const [descriptionLong, setDescriptionLong] = useState()
+
+    /*variables to control offcanvas - new product*/
+    const [showEdit, setShowEdit] = useState(0)
+
+    const handleCloseEdit = () => setShowEdit(false)
+    const handleShowEdit = () => setShowEdit(true)
+
+    const [arrPicFarmGallery, setArrPicFarmGallery] = useState([
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+    ])
+
     useEffect(() => {
         if (Object.keys(user).length > 0) {
             axios
                 .get(`/api/farm/${user.farms[0]}`)
-                // .get(`/api/farm/${farmID}`)
+
                 .then((res) => {
+                    res.data.data.description === ''
+                        ? setDescription(
+                              'A great description is comming soon for this farm.'
+                          )
+                        : setDescription(res.data.data.description)
                     setFarmData(res)
-                    console.log('datosssss', res)
+
+                    setArrPicFarmGallery(res.data.data.gallery)
+                    console.log('res data', res)
                 })
                 .catch((error) => {
-                    // setShow(true)
-                    console.log('un error mas:', error)
+                    console.log('FarmProfile:', error)
                 })
         }
-    }, [user])
+    }, [user, updated])
 
-    /*coordinates for the map*/
-    // const data = [farmData.data.data.coordinate]
-    const arrPicFarmGallery = [] //farmData.data.gallery
+    useEffect(() => {
+        if (description) {
+            let newDesc = description
 
-    // const objFarmProfile = {
-    //     farmSize: farmData.data.farmSize,
-    //     farmDescriptionShort: farmData.data.description,
-    //     farmDescriptionLong: farmData.data.description,
-    // }
-
-    const arrObjProductDetails = [
-        {
-            productName: 'Whirlwind Coffe Co. Ethiopia',
-            productPrice: '18.99 CAD',
-            productUnit: '100gr',
-            productDescription: 'Yirgacheffe',
-            productUrlImage: { placeHolder },
-        },
-        {
-            productName: 'Fire Dept. Coffe Original',
-            productPrice: '18.99 CAD',
-            productUnit: '100g',
-            productDescription: 'Medium Roast',
-            productUrlImage: { placeHolder },
-        },
-        {
-            productName: 'Howler Coffee Co. Bucksaw',
-            productPrice: '18.99 CAD',
-            productUnit: '100g',
-            productDescription: 'Blend',
-            productUrlImage: { placeHolder },
-        },
-        {
-            productName: 'Onyx Coffee Lab Colombia',
-            productPrice: '18.99',
-            productUnit: '100g',
-            productDescription: 'Aponte Village',
-            productUrlImage: { placeHolder },
-        },
-        {
-            productName: 'Whirlwind Coffee Co. Ethiopia',
-            productPrice: '17.99',
-            productUnit: '100g',
-            productDescription: 'Colombia',
-            productUrlImage: { placeHolder },
-        },
-        {
-            productName: 'Tecito',
-            productPrice: '18.99',
-            productUnit: '100g',
-            productDescription: 'Ingland',
-            productUrlImage: { placeHolder },
-        },
-        {
-            productName: 'Cocholatito',
-            productPrice: '16.99',
-            productUnit: '100g',
-            productLocation: 'Mexico',
-            productUrlImage: { placeHolder },
-        },
-    ]
-
-    // const objFarmProfileHeader = {
-    //     farmLogoUrl: farmData.data.logo,
-    //     farmName: farmData.data.name,
-    //     origin: farmData.data.origin,
-    //     location: farmData.data.location,
-    //     altitude: farmData.data.altitude,
-    // }
-    // const arrImgCertificates = farmData.data.certification
-    /************************************************* */
-    //Verify when to show map
+            setDescriptionShort(newDesc.substring(0, newDesc.length / 2))
+            setDescriptionLong(
+                newDesc.substring(newDesc.length / 2, newDesc.length)
+            )
+        }
+    }, [description])
 
     const [matches, setMatches] = useState(
         window.matchMedia(`(min-width: ${theme.layout.desktop})`).matches
@@ -138,10 +103,36 @@ const FarmProfile = () => {
     }, [])
     /**************************************************** */
 
-    // Verify if gallery has images
-
-    let hasImages = false
-    if (arrPicFarmGallery.length > 0) hasImages = true
+    // Style for canvas
+    let style, styleHeader, styleTitle, styleBody
+    styleBody = { padding: 0 }
+    if (matches) {
+        //desktop
+        style = { width: '65%' }
+        styleHeader = {
+            backgroundColor: 'white',
+            color: theme.pallette.primary[500],
+            display: 'grid',
+            gridTemplateColumns: '9fr 1fr',
+            border: '1px solid gray',
+        }
+        styleTitle = {
+            textAlign: 'left',
+        }
+    } else {
+        //mobile
+        style = { width: '100%' }
+        styleHeader = {
+            backgroundColor: theme.pallette.primary[500],
+            color: 'white',
+            display: 'grid',
+            gridTemplateColumns: '9fr 1fr',
+        }
+        styleTitle = {
+            textAlign: 'center',
+        }
+    }
+    // *************************************
 
     return (
         <>
@@ -150,19 +141,26 @@ const FarmProfile = () => {
                 <Container>
                     <div id="mainContainer">
                         <FarmProfileHeader
-                            farmLogoUrl={''}
+                            farmID={user.farms[0]}
+                            farmLogoUrl={farmData.data.data.logo}
                             farmName={farmData.data.data.name}
                             origin={farmData.data.data.origin}
                             location={farmData.data.data.location}
                             altitude={`${farmData.data.data.altitude} masl`}
+                            handleShowEdit={handleShowEdit}
                         />
-                        {/*
-                    <FarmProfileHero farmName={farmData.data.data.name} />
+                        <FarmProfileHero
+                            farmName={farmData.data.data.name}
+                            urlImage={farmData.data.data.farmPicture}
+                        />
+                        <FarmProfileDescription
+                            objFarmProfile={{
+                                farmSize: farmData.data.data.farmSize,
+                                farmDescriptionShort: descriptionShort,
+                                farmDescriptionLong: descriptionLong,
+                            }}
+                        />
 
-                    <FarmProfileDescription
-                        objFarmProfile={farmData.data.data.description}
-                        /> */}
-                        {/* <h1>{farmData.data.data.name}</h1> */}
                         {/* Show map only in desktop */}
                         {matches && (
                             <div id="map">
@@ -181,23 +179,50 @@ const FarmProfile = () => {
                                 />
                             </div>
                         )}
-
-                        {/* <FarmProfileCertificates
-                        arrImgCertificates={farmData.arrImgCertificates}
-                    /> */}
-
-                        <FarmProfileProducts
-                            imageWidth="100%"
-                            arrObjProductDetails={arrObjProductDetails}
+                        <FarmProfileCertificates
+                            arrImgCertificates={
+                                farmData.data.data.certification
+                            }
                         />
                     </div>
-                    {hasImages && (
-                        <div id="gallery">
-                            <FarmProfileGallery arrPicFarmGallery={[]} />
-                        </div>
-                    )}
+
+                    <div id="gallery">
+                        <FarmProfileGallery
+                            arrPicFarmGallery={arrPicFarmGallery}
+                        />
+                    </div>
                 </Container>
             )}
+            <>
+                <Offcanvas
+                    onHide={handleCloseEdit}
+                    placement="end"
+                    show={showEdit}
+                    style={style}
+                >
+                    <Offcanvas.Header style={styleHeader} closeButton>
+                        <Offcanvas.Title style={styleTitle}>
+                            Edit a Farm Profile
+                        </Offcanvas.Title>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body style={styleBody}>
+                        {farmData && (
+                            <FarmProfileEditFarmForm
+                                setShow={setShowEdit}
+                                farmID={user.farms[0]}
+                                farmName={farmData.data.data.name}
+                                origin={farmData.data.data.origin}
+                                location={farmData.data.data.location}
+                                altitude={farmData.data.data.altitude}
+                                description={description}
+                                farmSize={farmData.data.data.farmSize}
+                                coordinate={farmData.data.data.coordinate}
+                                setUpdated={setUpdated}
+                            />
+                        )}
+                    </Offcanvas.Body>
+                </Offcanvas>
+            </>
             <MessageModal
                 handleClose={handleClose}
                 show={show}

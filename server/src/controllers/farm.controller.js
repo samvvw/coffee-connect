@@ -409,6 +409,7 @@ exports.deleteFarmPicture = async (req, res) => {
 
 exports.uploadMedia = async (req, res) => {
     try {
+        console.log(req)
         const imageFile = req.files.imageFile
         const caption = req.body.caption
 

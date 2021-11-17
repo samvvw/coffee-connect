@@ -4,11 +4,13 @@ import { theme } from '../../../theme/theme'
 export const Container = styled.div`
     position: relative;
     width: 100%;
+    height: 100%;
     margin: 0 auto;
+    background-color: white;
 
     img {
         width: ${(props) => props.width || '100%'};
-        height: ${(props) => props.height || 'auto'};
+        height: ${(props) => props.height || '100%'};
         border: 2px dashed ${theme.pallette.primary[500]};
         border-radius: 4px;
         /* padding: 5px; */
@@ -17,9 +19,11 @@ export const Container = styled.div`
     }
 
     button {
-        width: 58px;
-        height: 58px;
+        width: 40px;
+        height: 40px;
         position: absolute;
+        display: flex;
+        align-items: center;
 
         top: 50%;
         left: 50%;

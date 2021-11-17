@@ -13,7 +13,9 @@ const FarmProfileDescription = ({ objFarmProfile }) => {
                 </div>
                 <p>
                     {isDescriptionShort
-                        ? objFarmProfile.farmDescriptionLong
+                        ? objFarmProfile.farmDescriptionShort.concat(
+                              objFarmProfile.farmDescriptionLong
+                          )
                         : objFarmProfile.farmDescriptionShort}
                     <span>
                         <button type="button" onClick={toggleDescription}>

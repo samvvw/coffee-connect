@@ -1,18 +1,21 @@
 import CircleButton from '../../components/circleButton/circleButton'
-import imgPlaceholder from '../../assets/images/placeholderrectangle.png'
 import { Container } from './farmProfileHero.styles'
 import { useEffect, useState } from 'react'
+import { theme } from '../../theme/theme'
+import ImageFarm from './imageFarm/imageFarm'
 
-const FarmProfileHero = ({ farmName }) => {
+const FarmProfileHero = ({ urlImage, farmName }) => {
     // *******************************************************
 
     const [matches, setMatches] = useState(
-        window.matchMedia('(min-width: 401px)').matches
+        window.matchMedia(`(min-width: ${theme.layout.desktop})`).matches
     )
 
     useEffect(() => {
         const handler = (e) => setMatches(e.matches)
-        window.matchMedia('(min-width: 401px)').addListener(handler)
+        window
+            .matchMedia(`(min-width: ${theme.layout.desktop})`)
+            .addListener(handler)
     }, [])
 
     return (
@@ -21,18 +24,16 @@ const FarmProfileHero = ({ farmName }) => {
                 <div>
                     <CircleButton
                         IconName="BookmarkBorderIcon"
-                        onClick=""
                         buttonBgc="white"
                     />
-                    <CircleButton
-                        IconName="Share"
-                        onClick=""
-                        buttonBgc="white"
-                    />
+                    <CircleButton IconName="Share" buttonBgc="white" />
                 </div>
             </div>
             <div id="image">
-                <img alt="" src={imgPlaceholder} />
+                <ImageFarm
+                    fileContainerinDB={'farmPicture'}
+                    urlImage={urlImage}
+                ></ImageFarm>
             </div>
             {matches && (
                 <div id="farmName">

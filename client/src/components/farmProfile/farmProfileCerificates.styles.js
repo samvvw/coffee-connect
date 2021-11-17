@@ -14,14 +14,15 @@ export const Container = styled.div`
         flex-wrap: wrap-reverse;
         gap: 1rem;
         justify-content: flex-start;
+        width: 300px;
         div {
-            width: 144px;
-            height: 144px;
+            width: 102px;
+            height: 102px;
         }
     }
-    img {
+    /* img {
         width: 100%;
         object-fit: cover;
         border-radius: 50%;
-    }
+    } */
 `

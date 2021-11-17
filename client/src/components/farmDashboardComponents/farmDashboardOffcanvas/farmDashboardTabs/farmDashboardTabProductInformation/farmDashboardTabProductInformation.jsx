@@ -158,9 +158,8 @@ const FarmDashboardTabProductInformation = ({
                         Taste<span>*</span>
                     </label>
                     <label>Please select multiple choices if applicable.</label>
-                    <div>
-                        <div>
-                            <label htmlFor="tasteSour">Sour</label>
+                    <div className="gridChkRadioWrapper">
+                        <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
                                     value="Sour"
@@ -181,9 +180,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkCheckbox"></span>
                             </label>
+                            <label htmlFor="tasteSour">Sour</label>
                         </div>
-                        <div>
-                            <label htmlFor="tasteBitter">Bitter</label>
+                        <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
                                     value="Bitter"
@@ -204,9 +203,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkCheckbox"></span>
                             </label>
+                            <label htmlFor="tasteBitter">Bitter</label>
                         </div>
-                        <div>
-                            <label htmlFor="tasteSweet">Sweet</label>
+                        <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
                                     value="Sweet"
@@ -227,9 +226,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkCheckbox"></span>
                             </label>
+                            <label htmlFor="tasteSweet">Sweet</label>
                         </div>
-                        <div>
-                            <label htmlFor="tasteSalt">Salty</label>
+                        <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
                                     value="Salty"
@@ -250,6 +249,7 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkCheckbox"></span>
                             </label>
+                            <label htmlFor="tasteSalt">Salty</label>
                         </div>
                     </div>
                 </div>
@@ -257,10 +257,11 @@ const FarmDashboardTabProductInformation = ({
                     <label htmlFor="productAromas">
                         Aromas<span>*</span>
                     </label>
-                    <label>Please select multiple choices if applicable.</label>
-                    <div id="productAromas">
-                        <div>
-                            <label htmlFor="aroma1">Flowery</label>
+                    <label className="labelDescription">
+                        Please select multiple choices if applicable.
+                    </label>
+                    <div id="productAromas" className="gridChkRadioWrapper">
+                        <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
                                     value="Flowery"
@@ -281,10 +282,10 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkCheckbox"></span>
                             </label>
+                            <label htmlFor="aroma1">Flowery</label>
                         </div>
 
-                        <div>
-                            <label htmlFor="aroma2">Resinous</label>
+                        <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
                                     value="Resinous"
@@ -305,9 +306,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkCheckbox"></span>
                             </label>
+                            <label htmlFor="aroma2">Resinous</label>
                         </div>
-                        <div>
-                            <label htmlFor="aroma3">Fruity</label>
+                        <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
                                     value="Fruity"
@@ -328,9 +329,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkCheckbox"></span>
                             </label>
+                            <label htmlFor="aroma3">Fruity</label>
                         </div>
-                        <div>
-                            <label htmlFor="aroma4">Spicy</label>
+                        <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
                                     value="Spicy"
@@ -351,9 +352,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkCheckbox"></span>
                             </label>
+                            <label htmlFor="aroma4">Spicy</label>
                         </div>
-                        <div>
-                            <label htmlFor="aroma5">Herby</label>
+                        <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
                                     value="Herby"
@@ -374,9 +375,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkCheckbox"></span>
                             </label>
+                            <label htmlFor="aroma5">Herby</label>
                         </div>
-                        <div>
-                            <label htmlFor="aroma6">Carbony</label>
+                        <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
                                     value="Carbony"
@@ -397,9 +398,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkCheckbox"></span>
                             </label>
+                            <label htmlFor="aroma6">Carbony</label>
                         </div>
-                        <div>
-                            <label htmlFor="aroma7">Nutty</label>
+                        <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
                                     value="Nutty"
@@ -420,9 +421,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkCheckbox"></span>
                             </label>
+                            <label htmlFor="aroma7">Nutty</label>
                         </div>
-                        <div>
-                            <label htmlFor="aroma8">Chocolatey</label>
+                        <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
                                     value="Chocolatey"
@@ -443,9 +444,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkCheckbox"></span>
                             </label>
+                            <label htmlFor="aroma8">Chocolatey</label>
                         </div>
-                        <div>
-                            <label htmlFor="aroma9">Caramelly</label>
+                        {/* <div>
                             <label className="containerCheckbox">
                                 <input
                                     value="Caramelly"
@@ -466,16 +467,16 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkCheckbox"></span>
                             </label>
-                        </div>
+                            <label htmlFor="aroma9">Caramelly</label>
+                        </div> */}
                     </div>
                 </div>
                 <div id="divRoastLevel">
                     <label htmlFor="productRoastLevel">
                         Roast Level<span>*</span>
                     </label>
-                    <div id="productRoastLevel">
-                        <div>
-                            <label htmlFor="roastLevel1">Light</label>
+                    <div id="productRoastLevel" className="gridChkRadioWrapper">
+                        <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
                                     value="Light"
@@ -491,10 +492,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkRadio"></span>
                             </label>
+                            <label htmlFor="roastLevel1">Light</label>
                         </div>
-                        <div>
-                            <label htmlFor="roastLevel2">Medium-Dark</label>
-
+                        <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
                                     value="Medium - Dark"
@@ -510,10 +510,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkRadio"></span>
                             </label>
+                            <label htmlFor="roastLevel2">Medium-Dark</label>
                         </div>
-                        <div>
-                            <label htmlFor="roastLevel3">Medium</label>
-
+                        <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
                                     value="Medium"
@@ -529,10 +528,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkRadio"></span>
                             </label>
+                            <label htmlFor="roastLevel3">Medium</label>
                         </div>
-                        <div>
-                            <label htmlFor="roastLevel4">Dark</label>
-
+                        <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
                                     value="Dark"
@@ -548,6 +546,7 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkRadio"></span>
                             </label>
+                            <label htmlFor="roastLevel4">Dark</label>
                         </div>
                     </div>
                 </div>
@@ -555,10 +554,11 @@ const FarmDashboardTabProductInformation = ({
                     <label htmlFor="productCoffeProcess">
                         Coffee Process<span>*</span>
                     </label>
-                    <div id="productCoffeProcess">
-                        <div>
-                            <label htmlFor="coffeProcess1">Natural</label>
-
+                    <div
+                        id="productCoffeProcess"
+                        className="gridChkRadioWrapper"
+                    >
+                        <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
                                     value="Natural"
@@ -574,10 +574,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkRadio"></span>
                             </label>
+                            <label htmlFor="coffeProcess1">Natural</label>
                         </div>
-                        <div>
-                            <label htmlFor="coffeProcess2">Honey</label>
-
+                        <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
                                     value="Honey"
@@ -593,11 +592,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkRadio"></span>
                             </label>
+                            <label htmlFor="coffeProcess2">Honey</label>
                         </div>
-                        <div>
-                            <label htmlFor="coffeProcess3">
-                                Pulped Natural
-                            </label>
+                        <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
                                     value="Pulped Natural"
@@ -613,10 +610,11 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkRadio"></span>
                             </label>
+                            <label htmlFor="coffeProcess3">
+                                Pulped Natural
+                            </label>
                         </div>
-                        <div>
-                            <label htmlFor="coffeProcess4">Washed</label>
-
+                        <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
                                     value="Washed"
@@ -632,6 +630,7 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkRadio"></span>
                             </label>
+                            <label htmlFor="coffeProcess4">Washed</label>
                         </div>
                     </div>
                 </div>
@@ -639,10 +638,11 @@ const FarmDashboardTabProductInformation = ({
                     <label htmlFor="productCoffeVariety">
                         Coffee Variety<span>*</span>
                     </label>
-                    <div id="productCoffeVariety">
-                        <div>
-                            <label htmlFor="variety1">Robusta</label>
-
+                    <div
+                        id="productCoffeVariety"
+                        className="gridChkRadioWrapper"
+                    >
+                        <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
                                     value="Robusta"
@@ -658,10 +658,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkRadio"></span>
                             </label>
+                            <label htmlFor="variety1">Robusta</label>
                         </div>
-                        <div>
-                            <label htmlFor="variety2">Arabica</label>
-
+                        <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
                                     value="Arabica"
@@ -677,6 +676,7 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkRadio"></span>
                             </label>
+                            <label htmlFor="variety2">Arabica</label>
                         </div>
                     </div>
                 </div>
@@ -702,10 +702,8 @@ const FarmDashboardTabProductInformation = ({
                     <label htmlFor="productCoffeType">
                         Coffee Type<span>*</span>
                     </label>
-                    <div id="productCoffeType">
-                        <div>
-                            <label htmlFor="Type1">Whole Bean</label>
-
+                    <div id="productCoffeType" className="gridChkRadioWrapper">
+                        <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
                                     value="Whole Bean"
@@ -721,10 +719,9 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkRadio"></span>
                             </label>
+                            <label htmlFor="Type1">Whole Bean</label>
                         </div>
-                        <div>
-                            <label htmlFor="Type2">Grounded</label>
-
+                        <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
                                     value="Grounded"
@@ -740,6 +737,7 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkRadio"></span>
                             </label>
+                            <label htmlFor="Type2">Grounded</label>
                         </div>
                     </div>
                 </div>
