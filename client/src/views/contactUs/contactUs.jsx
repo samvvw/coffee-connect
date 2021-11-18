@@ -11,9 +11,9 @@ const ContactUs = () => {
             <div id="divText">
                 <h2>We would like hearing from you.</h2>
                 <p>
-                    Mollis bibendum leo, pulvinar blandit gravida nec.
-                    Adipiscing sed pellentque cras massa urna lectus leo, ut.
-                    Eget dapibus eros, ullamcorper vestibulum vel congue proin.
+                    Whether you have a question about features, trials, pricing,
+                    need a demo or anything else, our team is ready to answer
+                    all your questions.
                 </p>
             </div>
             <div id="divForm">

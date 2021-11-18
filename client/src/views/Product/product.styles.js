@@ -169,6 +169,7 @@ export const Container = styled.div`
                     grid-template-columns: repeat(6, 1fr);
                     grid-template-rows: repeat(3, 1fr);
                     gap: 0.5rem;
+                    max-height: 600px;
 
                     div img {
                         width: 100%;
@@ -220,8 +221,28 @@ export const Container = styled.div`
                 grid-row: 3/4;
                 border: none;
                 width: -webkit-fill-available;
+
+                #divTasteAromas {
+                    margin-top: 2rem;
+                    margin-bottom: 2rem;
+                    div {
+                        display: flex;
+                        margin-bottom: 1rem;
+                    }
+                    border-bottom: 1px solid gray;
+                }
                 h5 {
                     font-weight: bold;
+                }
+                h6 {
+                    font-size: 0.87;
+                    margin: 0;
+                }
+                div p {
+                    font-size: 1rem;
+                    font-weight: bold;
+                    margin-left: 1rem;
+                    margin-bottom: 0;
                 }
             }
             #detailCard {

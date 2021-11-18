@@ -156,16 +156,16 @@ const Product = (props) => {
     //     },
     // ]
 
-    const data = [
-        {
-            coordinates: [4.11, -72.93],
-        },
-    ]
-    const objMemberSince = {
-        imgUrl: placeHolder,
-        farmName: 'Finca LomaVerde',
-        memberSince: '2018',
-    }
+    // const data = [
+    //     {
+    //         coordinates: [4.11, -72.93],
+    //     },
+    // ]
+    // const objMemberSince = {
+    //     imgUrl: placeHolder,
+    //     farmName: 'Finca LomaVerde',
+    //     memberSince: '2018',
+    // }
 
     // *******************************************************
 
@@ -199,8 +199,9 @@ const Product = (props) => {
                                                         }}
                                                     />
                                                     <p>
-                                                        My Products/
+                                                        My Products /
                                                         <span>
+                                                            {'  '}
                                                             {
                                                                 productData.productName
                                                             }
@@ -239,6 +240,7 @@ const Product = (props) => {
                                             </Link>
 
                                             <button
+                                                onClick={handleShow}
                                                 style={{
                                                     fill: theme.pallette
                                                         .black[400],
@@ -266,7 +268,10 @@ const Product = (props) => {
                                     <div className="imagesWrapper">
                                         <div className="'picture">
                                             <img
-                                                src={productData.picture[0]}
+                                                src={
+                                                    productData.picture[0] ||
+                                                    placeHolder
+                                                }
                                                 alt=""
                                             ></img>
                                         </div>
@@ -343,6 +348,17 @@ const Product = (props) => {
                             {/* 5 Product description */}
                             <div id="description">
                                 <h5>Product Description</h5>
+                                <div id="divTasteAromas">
+                                    <div id="divTaste">
+                                        <h6>Taste:</h6>
+                                        <p>{productData.taste.join(', ')}</p>
+                                    </div>
+                                    <div id="divAromas">
+                                        <h6>Aromas:</h6>
+                                        <p>{productData.aromas.join(', ')}</p>
+                                    </div>
+                                </div>
+
                                 <p>{productData.description}</p>
                             </div>
                             {/* 8 Map */}

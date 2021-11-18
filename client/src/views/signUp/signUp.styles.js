@@ -11,6 +11,13 @@ export const Container = styled.div`
     margin: 0 auto;
     padding-top: 2rem;
 
+    .type-label {
+        font-weight: 500;
+        margin: 0;
+        margin-bottom: 8px;
+        margin-top: 16px;
+    }
+
     .sign-up-image {
         display: none;
     }

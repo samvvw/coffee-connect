@@ -140,8 +140,8 @@ const FarmDashboardTabProductInformation = ({
                         (How would you describe this product to your customers.
                         This will be displayed on the product details page)
                     </label>
-                    <input
-                        type="text"
+                    <textarea
+                        rows="5"
                         name="description"
                         placeholder="Description..."
                         required
