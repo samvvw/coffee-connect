@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react'
 import { LoggedNavBar } from '../../components'
-import DashboardProducts from '../../components/consumerDashboardComponents/dashboardProducts/dashboardProducts'
+import DashboardFarms from '../../components/consumerDashboardComponents/dashboardFarms/dashboardFarms'
 import { UserContext } from '../../context/userContext/userContext'
 
-export default function ConsumerDashboard() {
-    const { user, token } = useContext(UserContext)
-    const [likedProducts, setLikedProducts] = useState([])
+export default function ConsumerDashboardFarms() {
+    const { token } = useContext(UserContext)
+    const [bookmarkedFarms, setBookmarkedFarms] = useState([])
 
     // likedProducts.map((product) => {
     //     return product.size.map((size) => {
@@ -18,10 +18,10 @@ export default function ConsumerDashboard() {
             const controller = new AbortController()
             const { signal } = controller
 
-            fetch(`/api/product/list?token=${token}`, { signal })
+            fetch(`/api/farm/list?token=${token}`, { signal })
                 .then((response) => {
                     response.json().then((data) => {
-                        setLikedProducts(data)
+                        setBookmarkedFarms(data)
                     })
                 })
                 .catch((error) => console.log(error))
@@ -33,7 +33,7 @@ export default function ConsumerDashboard() {
     return (
         <>
             <LoggedNavBar />
-            <DashboardProducts likedProducts={likedProducts} />
+            <DashboardFarms bookmarkedFarms={bookmarkedFarms} />
         </>
     )
 }

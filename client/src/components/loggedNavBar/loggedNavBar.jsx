@@ -49,8 +49,24 @@ const LoggedNavBar = (props) => {
                     )}
                     {user?.userType === 'consumer' && (
                         <ul>
-                            <li>My Q-Coffee</li>
-                            <li>My Q-Farmers</li>
+                            <li>
+                                <NavLink
+                                    exact
+                                    to="/consumer-dashboard-products"
+                                    activeClassName="selected"
+                                >
+                                    My Q-Coffee
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    exact
+                                    to="/consumer-dashboard-farms"
+                                    activeClassName="selected"
+                                >
+                                    My Q-Farmers
+                                </NavLink>
+                            </li>
                         </ul>
                     )}
                 </Container>

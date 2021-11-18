@@ -15,7 +15,7 @@ const LoggedUser = (props) => {
             if (user.userType === 'farmer') {
                 history.push('/my-products')
             } else if (user.userType === 'consumer') {
-                history.push('/consumer-dashboard')
+                history.push('/consumer-dashboard-products')
             }
         } else {
             history.replace('/sign-in')

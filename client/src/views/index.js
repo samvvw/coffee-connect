@@ -9,6 +9,8 @@ import ContactUs from './contactUs/contactUs'
 import FarmProfile from './farmProfile/farmProfile'
 import FarmDirectory from './farmDirectory/farmDirectory'
 import MyFarm from './myFarm/myFarm'
+import ConsumerDashboardFarms from './consumerDashboardFarms/consumerDashboardFarms'
+import ConsumerDashboardProducts from './consumerDashboardProducts/consumerDashboardProducts'
 import Account from './account/account'
 
 export {
@@ -23,5 +25,7 @@ export {
     FarmProfile,
     FarmDirectory,
     MyFarm,
+    ConsumerDashboardFarms,
+    ConsumerDashboardProducts,
     Account,
 }
