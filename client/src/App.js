@@ -16,12 +16,9 @@ import {
     FarmProfile,
     FarmDirectory,
     MyFarm,
-<<<<<<< HEAD
     ConsumerDashboardProducts,
     ConsumerDashboardFarms,
-=======
     Account,
->>>>>>> dev
 } from './views'
 
 function App() {
