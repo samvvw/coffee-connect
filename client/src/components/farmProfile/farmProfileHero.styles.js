@@ -25,45 +25,47 @@ export const Container = styled.div`
             }
         }
     }
-    @media only screen and (min-width: 401px) {
-        #divBannerHeader {
-            padding: 0;
-            #divLink {
-                margin-top: 1rem;
+
+    #divBannerHeader {
+        padding: 0;
+        #divLink {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            a {
                 display: flex;
-                justify-content: space-between;
-                a {
-                    display: flex;
-                    text-decoration: none;
-                }
-                Link {
-                    span {
-                        font-size: 1rem;
-                        color: ${theme.pallette.black[400]};
-                        color: red;
-                    }
-                    p {
-                        margin: 0;
-                    }
-                }
-                button {
-                    background-color: transparent;
-                    border: none;
-                }
+                text-decoration: none;
+            }
+            Link {
                 span {
                     font-size: 1rem;
                     color: ${theme.pallette.black[400]};
+                    color: red;
                 }
                 p {
-                    color: black;
                     margin: 0;
                 }
-
-                display: flex;
-                /* justify-content: space-between; */
-                padding: 0 1rem;
             }
+            #btnEdit {
+                background-color: transparent;
+                border: none;
+            }
+            span {
+                font-size: 1rem;
+                color: ${theme.pallette.black[400]};
+            }
+            p {
+                color: black;
+                margin: 0;
+            }
+
+            display: flex;
+            /* justify-content: space-between; */
+            padding: 0 1rem;
         }
+    }
+
+    @media only screen and (min-width: ${theme.layout.desktop}) {
         #subContainer {
             #buttons {
                 display: none;
