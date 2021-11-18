@@ -56,7 +56,7 @@ export const StyledIntro = styled.div`
     @media only screen and (min-width: ${theme.layout.desktop}) {
 
         h1 {
-            font-size: 4rem;
+            font-size: 3rem;
         }
 
         p {
@@ -81,7 +81,7 @@ export const StyledGoToFarmer = styled.div`
 
     a {
         color: ${theme.pallette.secondary.c800};
-        margin-left: 1rem;
+        margin-left: 0.5rem;
     }
 
     @media only screen and (min-width: ${theme.layout.desktop}) {

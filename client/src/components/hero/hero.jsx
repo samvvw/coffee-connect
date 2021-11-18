@@ -1,4 +1,5 @@
 import Button from '../button/button'
+import { Link } from 'react-router-dom'
 import { theme } from '../../theme/theme'
 import imgPlaceholderMobile from '../../assets/images/home-hero-mobile.png'
 import imgPlaceholderDesktop from '../../assets/images/home-hero.png'
@@ -33,6 +34,7 @@ const Hero = ({
 
                 <StyledGoToFarmer>
 
+                <Link to="/marketplace">
                     <Button
                         onClick={onClick}
                         title={"Find your Coffee"}
@@ -40,11 +42,15 @@ const Hero = ({
                         textColor="#ffffff"
                         border="none"
                         borderRadius="50px"
-                        padding="0"
+                        padding="0 2rem"
                         height="3rem"
                     ></Button>
-
-                    <p>Are you Farmer? <a href="/">Signup here &#10142;</a></p>
+                </Link>
+                    <p>Are you Farmer? 
+                        <Link to="/sign-up">
+                            <a href="/">Signup here &#10142;</a>
+                        </Link>
+                    </p>
                     
                 </StyledGoToFarmer>
             </StyledGridLeft>
