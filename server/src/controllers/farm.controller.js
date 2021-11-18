@@ -369,7 +369,7 @@ exports.deleteFarmPicture = async (req, res) => {
         }
         delete req.body.token
         const reqKeys = Object.keys(req.body)
-
+        console.log('BODY', req.body)
         if (
             reqKeys.length > 1 ||
             (reqKeys[0] != 'farmLogo' &&
@@ -395,7 +395,7 @@ exports.deleteFarmPicture = async (req, res) => {
                 if (reqKeys[0] === 'farmCertificate') {
                     req.farm[keyOptions[reqKeys[0]]].pull(req.body[reqKeys[0]])
                 } else {
-                    req.farm[keyOptions[reqKeys[0]]] = 'DefaultImg'
+                    req.farm[keyOptions[reqKeys[0]]] = ''
                 }
                 const saveDB = await req.farm.save()
                 res.status(200).json(saveDB)
@@ -409,7 +409,6 @@ exports.deleteFarmPicture = async (req, res) => {
 
 exports.uploadMedia = async (req, res) => {
     try {
-        console.log(req)
         const imageFile = req.files.imageFile
         const caption = req.body.caption
 
@@ -457,7 +456,7 @@ exports.uploadMedia = async (req, res) => {
 exports.removeMedia = async (req, res) => {
     try {
         const { mediaId } = req.params
-
+        console.log('mediaId', mediaId)
         const mediaIndex = req.farm.gallery.findIndex((e) => e.id === mediaId)
         if (mediaIndex != -1) {
             const fileName = req.farm.gallery[mediaIndex].image.split(

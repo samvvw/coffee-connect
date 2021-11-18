@@ -107,6 +107,9 @@ export const HeaderMainContainer = styled.div`
                 margin-right: 2rem;
             }
         }
+        #divData {
+            width: fit-content;
+        }
 
         #divButtons {
             height: 40px;
@@ -117,24 +120,28 @@ export const HeaderMainContainer = styled.div`
             padding-bottom: 1rem;
         }
 
-        & > :nth-child(1) {
+        & :nth-child(1) {
             grid-column: 1/2;
             grid-row: 1/2;
         }
-        & > :nth-child(2) {
+        & :nth-child(2) {
             /* data */
             grid-column: 1/2;
             grid-row: 2/3;
             flex-direction: row;
+            width: fit-content;
             h5 {
                 width: max-content;
             }
             div {
                 align-items: center;
+                width: auto;
+                width: fit-content;
             }
-            & > :nth-child(1) {
+            & :nth-child(1) {
             }
-            & > :nth-child(2) {
+            & :nth-child(2) {
+                width: fit-content;
                 padding-left: 1rem;
                 border-left: 1px solid gray;
                 p {
@@ -142,11 +149,12 @@ export const HeaderMainContainer = styled.div`
                 }
             }
         }
-        & > :nth-child(3) {
+        & :nth-child(3) {
             grid-column: 2/3;
             grid-row: 1/3;
             display: flex;
         }
+
         #buttons {
             display: flex;
             align-items: center;
