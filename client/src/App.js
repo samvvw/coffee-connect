@@ -16,8 +16,9 @@ import {
     FarmProfile,
     FarmDirectory,
     MyFarm,
+    ConsumerDashboardProducts,
+    ConsumerDashboardFarms,
 } from './views'
-import ConsumerDashboard from './views/consumerDashboard/consumerDashboard'
 
 function App() {
     return (
@@ -34,8 +35,13 @@ function App() {
                     <Route path="/farm-profile" component={FarmProfile} />
                     <Route path="/farm-directory" component={FarmDirectory} />
                     <Route
-                        path="/consumer-dashboard"
-                        component={ConsumerDashboard}
+                        path="/consumer-dashboard-products"
+                        component={ConsumerDashboardProducts}
+                    />
+
+                    <Route
+                        path="/consumer-dashboard-farms"
+                        component={ConsumerDashboardFarms}
                     />
 
                     <PrivateRouteFarmer path="/my-products">
