@@ -6,6 +6,7 @@ export const Text = styled.p`
     margin-bottom: 0.2rem;
     display: flex;
     gap: 0.5rem;
+    z-index: 100;
 
     & > a {
         color: #000000;

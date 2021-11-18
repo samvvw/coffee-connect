@@ -3,11 +3,10 @@ import { Heading, Container, StyledParagraph } from './whatsQaja.styles'
 const WhatsQafa = () => {
     return (
         <Container>
-            <Heading>What is Qafa</Heading>
+            <Heading>One platform, endless possibilities</Heading>
+            
             <StyledParagraph>
-                Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing
-                sed pellentesque cras massa urna lectus leo, ut. Eget dapibus
-                eros, ullamcorper vestibulum vel congue proin.
+            Qafa is a web platform that helps specialty coffee farmers connect directly with coffee enthusiasts from around the world, significantly expanding their end-client channels and improving profitability.
             </StyledParagraph>
         </Container>
     )

@@ -1,9 +1,13 @@
 import styled from 'styled-components'
+import bgImg from '../../assets/images/home-bg.png'
+
 
 export const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 60px;
-    margin-top: 2rem;
+    width: 100%;
+    overflow-X: hidden;
+`
+
+
+export const SubContainer = styled.div`
+    background: url('${bgImg});
 `

@@ -1,66 +1,55 @@
 import { StyleTriCardHolder } from './triCardHolder.styles'
+import imgTriCard1 from '../../assets/images/home-3card-1.png'
+import imgTriCard2 from '../../assets/images/home-3card-2.png'
+import imgTriCard3 from '../../assets/images/home-3card-3.png'
+import iconTriCard1 from '../../assets/images/home-3card-icon-1.png'
+import iconTriCard2 from '../../assets/images/home-3card-icon-2.png'
+import iconTriCard3 from '../../assets/images/home-3card-icon-3.png'
 
-import ImageCard from '../imgCard/imgCard'
-import Button from '../button/button'
 
-const TriCardHolder = ({
-    width1,
-    height1,
-    backgroundColor1,
-    paragraphTextColor1,
-    paragraphFontSize1,
-    paragraphText1,
-    urlImg1,
+const TriCardHolder = () => {
 
-    width2,
-    height2,
-    backgroundColor2,
-    paragraphTextColor2,
-    paragraphFontSize2,
-    paragraphText2,
-    urlImg2,
+    const cardContents = [
+        {
+            id: 0,
+            img: imgTriCard1,
+            icon: iconTriCard1,
+            heading: "Coffee Marketplace",
+            paragraph: 'Experience better taste. Get freshly sourced specialty coffee directly from local farmers - from the farm to your cup.'
+        },
+        {
+            id: 1,
+            img: imgTriCard2,
+            icon: iconTriCard2,
+            heading: "Farmer's Dashboard",
+            paragraph: 'Our comprehensive platform powers your business. From product listing to farm management, we’ve got you covered.'
+        },
+        {
+            id: 2,
+            img: imgTriCard3,
+            icon: iconTriCard3,
+            heading: "User's Dashboard",
+            paragraph: 'We make specialty coffee accessible. Our platform is designed to help guide users to the best coffee bean.'
+        },
 
-    width3,
-    height3,
-    backgroundColor3,
-    paragraphTextColor3,
-    paragraphFontSize3,
-    paragraphText3,
-    urlImg3,
-}) => {
+    ]
+
     return (
         <>
             <StyleTriCardHolder>
-                <ImageCard
-                    width={width1}
-                    height={height1}
-                    backgroundColor={backgroundColor1}
-                    paragraphTextColor={paragraphTextColor1}
-                    paragraphFontSize={paragraphFontSize1}
-                    paragraphText={paragraphText1}
-                    urlImg={urlImg1}
-                ></ImageCard>
-                <ImageCard
-                    width={width2}
-                    height={height2}
-                    backgroundColor={backgroundColor2}
-                    paragraphTextColor={paragraphTextColor2}
-                    paragraphFontSize={paragraphFontSize2}
-                    paragraphText={paragraphText2}
-                    urlImg={urlImg2}
-                ></ImageCard>
-                <ImageCard
-                    width={width3}
-                    height={height3}
-                    backgroundColor={backgroundColor3}
-                    paragraphTextColor={paragraphTextColor3}
-                    paragraphFontSize={paragraphFontSize3}
-                    paragraphText={paragraphText3}
-                    urlImg={urlImg3}
-                ></ImageCard>
-            </StyleTriCardHolder>
-            <StyleTriCardHolder>
-                <Button title="Get Started"></Button>
+
+                {cardContents.map(content => 
+                <li key={content.id}>
+                    <div className="image">
+                        <img className="img" src={content.img} alt={content.heading} />
+                        <img className="icon" src={content.icon} alt={content.heading} />
+                    </div>
+                    <div className="text">
+                        <h5>{content.heading}</h5>
+                        <p>{content.paragraph}</p>
+                    </div>
+                </li>)}
+
             </StyleTriCardHolder>
         </>
     )

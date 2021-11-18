@@ -1,8 +1,13 @@
 import styled from 'styled-components'
+import { theme } from '../../theme/theme'
+
 
 export const StyledGrid = styled.div`
-    display: grid;
+    padding: 2rem;
 
-    grid-template-columns: ${(props) => props.gridTemplateColumns};
-    grid-template-rows: ${(props) => props.gridTemplateRows};
+    @media only screen and (min-width: ${theme.layout.desktop}) {
+        display: grid;
+        grid-template-columns: ${(props) => props.gridTemplateColumns};
+        grid-template-rows: ${(props) => props.gridTemplateRows};
+    }
 `
