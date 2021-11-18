@@ -45,6 +45,7 @@ export const Container = styled.div`
             button {
                 width: 50%;
                 margin: 0 auto;
+                border: none;
             }
         }
 

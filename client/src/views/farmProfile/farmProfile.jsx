@@ -150,6 +150,7 @@ const FarmProfile = () => {
                             handleShowEdit={handleShowEdit}
                         />
                         <FarmProfileHero
+                            handleShowEdit={handleShowEdit}
                             farmName={farmData.data.data.name}
                             urlImage={farmData.data.data.farmPicture}
                         />

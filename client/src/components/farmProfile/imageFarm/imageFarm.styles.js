@@ -18,7 +18,46 @@ export const Container = styled.div`
         object-fit: cover;
     }
 
-    button {
+    #centeredCircle {
+        width: 58px;
+        height: 58px;
+        position: absolute;
+
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+
+        background-color: ${theme.pallette.black[50]};
+        border-radius: 50%;
+        display: 'flex';
+        justify-content: center;
+        align-items: center;
+
+        color: ${theme.pallette.primary[500]};
+        font-size: 2rem;
+
+        border: none;
+        cursor: pointer;
+    }
+
+    #deleteCircle {
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        background-color: white;
+        color: red;
+        border-radius: 50%;
+        display: 'flex';
+        justify-content: center;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+        top: 0.7rem;
+        right: 0.7rem;
+    }
+
+    /* button {
         width: 40px;
         height: 40px;
         position: absolute;
@@ -41,5 +80,5 @@ export const Container = styled.div`
 
         border: none;
         cursor: pointer;
-    }
+    } */
 `
