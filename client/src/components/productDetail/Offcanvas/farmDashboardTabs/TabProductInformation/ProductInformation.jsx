@@ -1,4 +1,4 @@
-import { Container } from './farmDashboardTabProductInformation.styles'
+import { Container } from './TabProductInformation.styles'
 import Button from '../../../../button/button'
 import { theme } from '../../../../../theme/theme'
 import { useState, useContext, useEffect } from 'react'
@@ -7,13 +7,14 @@ import MessageModal from '../../../../messageModal/messageModal'
 import { UserContext } from '../../../../../context/userContext/userContext'
 import { useHistory } from 'react-router-dom'
 
-const FarmDashboardTabProductInformation = ({
-    setTabImagesDiabled,
-    setSubmitImagesButtonBgc,
-    setMessageDisplay,
+const TabProductInformation = ({
+    // setTabImagesDiabled,
+    // setSubmitImagesButtonBgc,
+    // setMessageDisplay,
     setKeyTab,
-    setIdProduct,
+    // setIdProduct,
     setTotalProducts,
+    productData,
 }) => {
     const history = useHistory()
     const { user, isTokenExpired } = useContext(UserContext)
@@ -28,20 +29,16 @@ const FarmDashboardTabProductInformation = ({
 
     const [body, setBody] = useState({
         farmId: farmID,
-        productName: '',
-        description: '',
-        taste: [],
-        aromas: [],
-        roastLevel: '',
-        coffeeProcess: '',
-        coffeeVariety: '',
-        roastDate: '',
-        coffeeType: '',
-        sizePrice: [
-            { size: 0, price: 0 },
-            { size: 0, price: 0 },
-            { size: 0, price: 0 },
-        ],
+        productName: productData.productName,
+        description: productData.description,
+        taste: productData.taste,
+        aromas: productData.aromas,
+        roastLevel: productData.roastLevel,
+        coffeeProcess: productData.coffeeProcess,
+        coffeeVariety: productData.coffeeVariety,
+        roastDate: productData.roastDate,
+        coffeeType: productData.coffeeType,
+        sizePrice: productData.sizePrice,
     })
 
     /*variables to control messages in modal*/
@@ -63,20 +60,22 @@ const FarmDashboardTabProductInformation = ({
     }
 
     //state tu disabled submit button
-    const [submitProductButtonDisabled, setSubmitProductButtonDisabled] =
-        useState(false)
+    // const [submitProductButtonDisabled, setSubmitProductButtonDisabled] =
+    //     useState(false)
     //state de change submit color button
-    const [submitProductButtonBgc, setSubmitProductButtonBgc] = useState(
-        theme.pallette.secondary.c800
-    )
+    // const [submitProductButtonBgc, setSubmitProductButtonBgc] = useState(
+    //     theme.pallette.secondary.c800
+    // )
+
+    const [modalMessage, setModalMessage] = useState()
 
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        // console.log(localStorage.getItem('token'))
+        console.log(`/api/farm/${body.farmId}/product/${productData._id}`, body)
 
         axios
-            .post(`/api/farm/${body.farmId}/product`, {
+            .put(`/api/farm/${body.farmId}/product/${productData._id}`, {
                 ...body,
                 token: localStorage.getItem('token'),
             })
@@ -84,27 +83,40 @@ const FarmDashboardTabProductInformation = ({
                 // onHide()
                 //save new idProduct
                 // console.log('Qui toy', res.data.data)
-                setIdProduct(res.data.data._id)
+                // setIdProduct(res.data.data._id)
 
                 //Desable Submit Button
-                setSubmitProductButtonDisabled(true)
-                setSubmitProductButtonBgc(theme.pallette.disabledButton.light)
+                // setSubmitProductButtonDisabled(true)
+                // setSubmitProductButtonBgc(theme.pallette.disabledButton.light)
 
                 //Change behavior of image tab submitt button
-                setTabImagesDiabled(false)
+                // setTabImagesDiabled(false)
                 //Change bgc of image tab submit button
-                setSubmitImagesButtonBgc(theme.pallette.secondary.c800)
+                // setSubmitImagesButtonBgc(theme.pallette.secondary.c800)
                 //Show message on Images Tab about product information has been saved
-                setMessageDisplay('block')
+                // setMessageDisplay('block')
                 //change selected tab to images tab
                 setKeyTab('images')
                 //change the number of totalproduct variable just to rerender list of products
                 setTotalProducts((prev) => prev + 1)
-            })
-            .catch((error) => {
-                console.log(error)
+
+                setModalMessage(
+                    'Product updated, please update images if needed'
+                )
                 setShow(true)
             })
+            .catch((error) => {
+                console.log('ERROR!', error)
+                setModalMessage(error)
+                setShow(true)
+            })
+    }
+
+    function convert(str) {
+        var date = new Date(str),
+            mnth = ('0' + (date.getMonth() + 1)).slice(-2),
+            day = ('0' + date.getDate()).slice(-2)
+        return [date.getFullYear(), mnth, day].join('-')
     }
 
     return (
@@ -120,6 +132,7 @@ const FarmDashboardTabProductInformation = ({
                         Product Name <span>*</span>
                     </label>
                     <input
+                        defaultValue={productData.productName}
                         type="text"
                         name="productName"
                         placeholder="e.g. Jamaican Blue Mountain"
@@ -138,10 +151,12 @@ const FarmDashboardTabProductInformation = ({
                     </label>
                     <label>
                         (How would you describe this product to your customers.
-                        This will be displayed on the product details page)
+                        This will be displayed on the product details page.)
                     </label>
                     <textarea
+                        defaultValue={productData.description}
                         rows="5"
+                        // type="text"
                         name="description"
                         placeholder="Description..."
                         required
@@ -166,6 +181,9 @@ const FarmDashboardTabProductInformation = ({
                                     type="checkbox"
                                     name="taste"
                                     id="tasteSour"
+                                    defaultChecked={productData.taste.some(
+                                        (e) => e === 'Sour'
+                                    )}
                                     onChange={(event) => {
                                         return setBody((prevBody) => ({
                                             ...prevBody,
@@ -185,6 +203,9 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
+                                    defaultChecked={productData.taste.some(
+                                        (e) => e === 'Bitter'
+                                    )}
                                     value="Bitter"
                                     type="checkbox"
                                     name="taste"
@@ -208,6 +229,9 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
+                                    defaultChecked={productData.taste.some(
+                                        (e) => e === 'Sweet'
+                                    )}
                                     value="Sweet"
                                     type="checkbox"
                                     name="taste"
@@ -231,6 +255,9 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
+                                    defaultChecked={productData.taste.some(
+                                        (e) => e === 'Salty'
+                                    )}
                                     value="Salty"
                                     type="checkbox"
                                     name="taste"
@@ -264,6 +291,9 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
+                                    defaultChecked={productData.aromas.some(
+                                        (e) => e === 'Flowery'
+                                    )}
                                     value="Flowery"
                                     type="checkbox"
                                     name="aromas"
@@ -288,6 +318,9 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
+                                    defaultChecked={productData.aromas.some(
+                                        (e) => e === 'Resinous'
+                                    )}
                                     value="Resinous"
                                     type="checkbox"
                                     name="aromas"
@@ -311,6 +344,9 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
+                                    defaultChecked={productData.aromas.some(
+                                        (e) => e === 'Fruity'
+                                    )}
                                     value="Fruity"
                                     type="checkbox"
                                     name="aromas"
@@ -334,6 +370,9 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
+                                    defaultChecked={productData.aromas.some(
+                                        (e) => e === 'Spicy'
+                                    )}
                                     value="Spicy"
                                     type="checkbox"
                                     name="aromas"
@@ -357,6 +396,9 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
+                                    defaultChecked={productData.aromas.some(
+                                        (e) => e === 'Herby'
+                                    )}
                                     value="Herby"
                                     type="checkbox"
                                     name="aromas"
@@ -380,6 +422,9 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
+                                    defaultChecked={productData.aromas.some(
+                                        (e) => e === 'Carbony'
+                                    )}
                                     value="Carbony"
                                     type="checkbox"
                                     name="aromas"
@@ -403,6 +448,9 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
+                                    defaultChecked={productData.aromas.some(
+                                        (e) => e === 'Nutty'
+                                    )}
                                     value="Nutty"
                                     type="checkbox"
                                     name="aromas"
@@ -426,6 +474,9 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerCheckbox">
                                 <input
+                                    defaultChecked={productData.aromas.some(
+                                        (e) => e === 'Chocolatey'
+                                    )}
                                     value="Chocolatey"
                                     type="checkbox"
                                     name="aromas"
@@ -479,6 +530,11 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
+                                    defaultChecked={
+                                        productData.roastLevel === 'Light'
+                                            ? true
+                                            : false
+                                    }
                                     value="Light"
                                     type="radio"
                                     name="roastLevel"
@@ -497,6 +553,12 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
+                                    defaultChecked={
+                                        productData.roastLevel ===
+                                        'Medium - Dark'
+                                            ? true
+                                            : false
+                                    }
                                     value="Medium - Dark"
                                     type="radio"
                                     name="roastLevel"
@@ -515,6 +577,11 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
+                                    defaultChecked={
+                                        productData.roastLevel === 'Medium'
+                                            ? true
+                                            : false
+                                    }
                                     value="Medium"
                                     type="radio"
                                     name="roastLevel"
@@ -533,6 +600,11 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
+                                    defaultChecked={
+                                        productData.roastLevel === 'Dark'
+                                            ? true
+                                            : false
+                                    }
                                     value="Dark"
                                     type="radio"
                                     name="roastLevel"
@@ -561,6 +633,11 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
+                                    defaultChecked={
+                                        productData.coffeeProcess === 'Natural'
+                                            ? true
+                                            : false
+                                    }
                                     value="Natural"
                                     type="radio"
                                     name="coffeeProcess"
@@ -579,6 +656,11 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
+                                    defaultChecked={
+                                        productData.coffeeProcess === 'Honey'
+                                            ? true
+                                            : false
+                                    }
                                     value="Honey"
                                     type="radio"
                                     name="coffeeProcess"
@@ -597,6 +679,12 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
+                                    defaultChecked={
+                                        productData.coffeeProcess ===
+                                        'Pulped Natural'
+                                            ? true
+                                            : false
+                                    }
                                     value="Pulped Natural"
                                     type="radio"
                                     name="coffeeProcess"
@@ -617,6 +705,11 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
+                                    defaultChecked={
+                                        productData.coffeeProcess === 'Washed'
+                                            ? true
+                                            : false
+                                    }
                                     value="Washed"
                                     type="radio"
                                     name="coffeeProcess"
@@ -645,6 +738,11 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
+                                    defaultChecked={
+                                        productData.coffeeVariety === 'Robusta'
+                                            ? true
+                                            : false
+                                    }
                                     value="Robusta"
                                     type="radio"
                                     name="coffeeVariety"
@@ -663,6 +761,11 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
+                                    defaultChecked={
+                                        productData.coffeeVariety === 'Arabica'
+                                            ? true
+                                            : false
+                                    }
                                     value="Arabica"
                                     type="radio"
                                     name="coffeeVariety"
@@ -685,6 +788,7 @@ const FarmDashboardTabProductInformation = ({
                         Roast Date <span>*</span>
                     </label>
                     <input
+                        defaultValue={convert(productData.roastDate)} //"2021-01-01"
                         type="date"
                         id="productRoastDate"
                         name="roastDate"
@@ -706,6 +810,11 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
+                                    defaultChecked={
+                                        productData.coffeeType === 'Whole Bean'
+                                            ? true
+                                            : false
+                                    }
                                     value="Whole Bean"
                                     type="radio"
                                     name="coffeeType"
@@ -724,6 +833,11 @@ const FarmDashboardTabProductInformation = ({
                         <div className="gridChkRadio">
                             <label className="containerRadio">
                                 <input
+                                    defaultChecked={
+                                        productData.coffeeType === 'Grounded'
+                                            ? true
+                                            : false
+                                    }
                                     value="Grounded"
                                     type="radio"
                                     name="coffeeType"
@@ -749,6 +863,7 @@ const FarmDashboardTabProductInformation = ({
                                 Size <span>*</span>
                             </label>
                             <input
+                                defaultValue={productData.sizePrice[0].size}
                                 id="productSize1"
                                 type="number"
                                 name="size1"
@@ -777,6 +892,7 @@ const FarmDashboardTabProductInformation = ({
                                 Price <span>*</span>
                             </label>
                             <input
+                                defaultValue={productData.sizePrice[0].price}
                                 id="productPrice1"
                                 type="number"
                                 name="price1"
@@ -808,6 +924,7 @@ const FarmDashboardTabProductInformation = ({
                         <div>
                             <label htmlFor="productSize2">Size</label>
                             <input
+                                defaultValue={productData.sizePrice[1].size}
                                 id="productSize2"
                                 type="number"
                                 name="size2"
@@ -833,6 +950,7 @@ const FarmDashboardTabProductInformation = ({
                         <div>
                             <label htmlFor="productPrice2">Price</label>
                             <input
+                                defaultValue={productData.sizePrice[1].price}
                                 id="productPrice2"
                                 type="number"
                                 name="price2"
@@ -863,6 +981,7 @@ const FarmDashboardTabProductInformation = ({
                         <div>
                             <label htmlFor="productSize3">Size</label>
                             <input
+                                defaultValue={productData.sizePrice[2].size}
                                 id="productSize3"
                                 type="number"
                                 name="size3"
@@ -888,6 +1007,7 @@ const FarmDashboardTabProductInformation = ({
                         <div>
                             <label htmlFor="productPrice3">Price</label>
                             <input
+                                defaultValue={productData.sizePrice[2].price}
                                 id="productPrice3"
                                 type="number"
                                 name="price3"
@@ -915,10 +1035,10 @@ const FarmDashboardTabProductInformation = ({
                 <div id="divSubmit">
                     <Button
                         type="submit"
-                        backgroundColor={submitProductButtonBgc}
+                        backgroundColor={theme.pallette.secondary.c800}
                         textColor="white"
-                        title=" Save Information"
-                        disabled={submitProductButtonDisabled}
+                        title="Save Changes"
+                        disabled={false}
                         borderColor={theme.pallette.secondary.c800}
                     />
                 </div>
@@ -926,13 +1046,13 @@ const FarmDashboardTabProductInformation = ({
             <MessageModal
                 handleClose={handleClose}
                 show={show}
-                title="Message from Qafa"
-                message="There are some errors in your data. Product could not be created."
+                title="Qafa"
+                message={modalMessage}
             />
         </Container>
     )
 }
 
-export default FarmDashboardTabProductInformation
+export default TabProductInformation
 
 // div>(div>label[htmlFor=roastLevel$]+input:radio[name=roasLevel])*4

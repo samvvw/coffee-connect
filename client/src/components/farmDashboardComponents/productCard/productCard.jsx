@@ -1,9 +1,12 @@
+import { Link } from 'react-router-dom'
 import {
     Container,
     DetailsContainer,
     DetailsContainerChild,
     Label,
 } from './productCard.styles'
+
+import placeholder from '../../../assets/images/placeholder.png'
 
 const ProductCard = ({ imageHeight, width, height, objProductDetails }) => {
     const style = { width: '100%', height: imageHeight }
@@ -12,11 +15,18 @@ const ProductCard = ({ imageHeight, width, height, objProductDetails }) => {
         <Container width={width} height={height}>
             <div id="imageContainer">
                 <div>
-                    <img
-                        src={objProductDetails.urlImage}
-                        alt=""
-                        style={style}
-                    />
+                    <Link
+                        to={{
+                            pathname: '/product',
+                            state: { id: objProductDetails.id },
+                        }}
+                    >
+                        <img
+                            src={objProductDetails.urlImage || placeholder}
+                            alt=""
+                            style={style}
+                        />
+                    </Link>
                 </div>
                 <div>
                     {/* <CircleButton IconName="FavoriteEmpty" onClick="" /> */}

@@ -6,10 +6,10 @@ const FormContactUs = () => {
     return (
         <Container>
             <h2>Contact Us</h2>
-            <p>
+            {/* <p>
                 Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing
                 sed pellentesque cras massa urna lectus leo, ut.{' '}
-            </p>
+            </p> */}
             <form action="onSubmit" method="POST">
                 <label htmlFor="fullName">
                     Full Name<span>*</span>
@@ -31,6 +31,7 @@ const FormContactUs = () => {
                     <Button
                         title="Submit"
                         backgroundColor={theme.pallette.secondary.c800}
+                        borderColor={theme.pallette.secondary.c800}
                         textColor="white"
                         type="submit"
                     />

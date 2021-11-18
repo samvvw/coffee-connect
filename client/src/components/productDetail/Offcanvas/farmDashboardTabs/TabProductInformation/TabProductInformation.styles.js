@@ -138,9 +138,6 @@ export const Container = styled.div`
             padding-top: 1rem;
             margin-top: 3rem;
             margin-left: 0;
-            /* position: fixed;
-            bottom: 0;
-            left: 0; */
 
             box-shadow: 0px 5px 5px 0 ${theme.pallette.black[50]} inset;
         }

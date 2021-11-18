@@ -56,7 +56,7 @@ const FarmProfileHeader = ({
                         <h4>{farmName}</h4>
                     </div>
                 </div>
-                <div>
+                <div id="divData">
                     <div>
                         <div>
                             <p>Origin:</p>
@@ -72,20 +72,22 @@ const FarmProfileHeader = ({
                         <h5>{altitude}</h5>
                     </div>
                 </div>
-                <div id="divButtons">
-                    {/* Buttons */}
-                    {/* <ButtonShare></ButtonShare>
+                {matches && (
+                    <div id="divButtons">
+                        {/* Buttons */}
+                        {/* <ButtonShare></ButtonShare>
                     <ButtonSave></ButtonSave> */}
-                    <Button
-                        title="Edit"
-                        type="button"
-                        backgroundColor="white"
-                        textColor={theme.pallette.primary[500]}
-                        borderColor={theme.pallette.primary[500]}
-                        width="148px"
-                        onClick={handleShowEdit}
-                    />
-                </div>
+                        <Button
+                            title="Edit"
+                            type="button"
+                            backgroundColor="white"
+                            textColor={theme.pallette.primary[500]}
+                            borderColor={theme.pallette.primary[500]}
+                            width="148px"
+                            onClick={handleShowEdit}
+                        />
+                    </div>
+                )}
             </HeaderMainContainer>
         </HeaderContainer>
     )

@@ -15,7 +15,7 @@ import FarmProfileGallery from '../../components/farmProfile/farmProfileGallery'
 import { LoggedNavBar } from '../../components'
 import { UserContext } from '../../context/userContext/userContext'
 import FarmProfileEditFarmForm from '../../components/farmProfile/farmProfileEditFarmForm'
-import placeHolder from '../../assets/images/placeholder.png'
+// import placeHolder from '../../assets/images/placeholder.png'
 
 const FarmProfile = () => {
     const { user } = useContext(UserContext)
@@ -150,6 +150,7 @@ const FarmProfile = () => {
                             handleShowEdit={handleShowEdit}
                         />
                         <FarmProfileHero
+                            handleShowEdit={handleShowEdit}
                             farmName={farmData.data.data.name}
                             urlImage={farmData.data.data.farmPicture}
                         />

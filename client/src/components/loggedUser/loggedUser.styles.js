@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { theme } from '../../theme/theme'
 
 export const Text = styled.p`
     color: #000000;
@@ -53,5 +54,32 @@ export const Container = styled.div`
         #sign-out {
             color: red;
         }
+    }
+
+    .profile__badge {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -3px;
+
+        background-color: ${(props) => {
+            if (props.type === 'consumer') {
+                return theme.pallette.primary.light
+            } else {
+                return theme.pallette.secondary.light
+            }
+        }};
+        color: ${(props) => {
+            if (props.type === 'consumer') {
+                return theme.pallette.primary.dark
+            } else {
+                return theme.pallette.secondary.dark
+            }
+        }};
+        font-weight: 600;
+        font-size: 14px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
     }
 `

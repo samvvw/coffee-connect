@@ -16,6 +16,7 @@ import {
     FarmProfile,
     FarmDirectory,
     MyFarm,
+    Account,
 } from './views'
 import ConsumerDashboard from './views/consumerDashboard/consumerDashboard'
 
@@ -25,6 +26,7 @@ function App() {
             <Header />
             <main>
                 <Switch>
+                    <Route path="/account" component={Account} />
                     <Route path="/sign-up" component={SignUp} />
                     <Route path="/sign-in" component={SignIn} />
                     <Route path="/product" component={Product} />

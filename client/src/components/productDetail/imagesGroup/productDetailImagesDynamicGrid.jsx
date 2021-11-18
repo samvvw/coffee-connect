@@ -2,7 +2,7 @@ import { ImageGroupParent } from './productDetailImagesDynamicGrid.styles'
 
 const ProductDetailImageDynamicGrid = ({ urlsArray }) => {
     const imgsTotal = urlsArray.length
-    console.log(urlsArray)
+    // console.log(urlsArray)
     let totalCols, totalRows
 
     if (imgsTotal === 1) {
