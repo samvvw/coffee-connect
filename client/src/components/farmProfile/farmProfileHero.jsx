@@ -34,6 +34,7 @@ const FarmProfileHero = ({ urlImage, farmName, handleShowEdit }) => {
                             />
                         </Link>
                         <button
+                            id="btnEdit"
                             onClick={handleShowEdit}
                             style={{
                                 fill: theme.pallette.black[400],

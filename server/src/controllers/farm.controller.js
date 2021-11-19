@@ -159,6 +159,23 @@ exports.getFarms = (req, res) => {
     }
 }
 
+exports.getBookmarkedFarms = async (req, res) => {
+    try {
+        const { token } = req.query
+
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+
+        const currentUser = await User.findById(decodedToken.id)
+        const findFarms = await Farm.find({
+            _id: { $in: currentUser.bookmarks },
+        })
+        res.json(findFarms)
+    } catch (error) {
+        console.log('--->', error)
+        res.status(500).json({ error: error })
+    }
+}
+
 exports.modifyFarm = (req, res) => {
     //Set fields and new data to be modified
     //Whichever the field/s to be modified, send in body

@@ -13,6 +13,7 @@ const {
     uploadMedia,
     removeMedia,
     bookmarks,
+    getBookmarkedFarms,
 } = require('../controllers/farm.controller')
 const { validateToken } = require('../middleware/user.middleware')
 const { validateFarmerUser } = require('../middleware/farm.middleware')
@@ -24,6 +25,7 @@ farmRouter.post('/', validateToken, validateFarmerUser, createFarm)
 // GET Farms - Gets all farms
 farmRouter.get('/', getFarms)
 
+farmRouter.get('/list', getBookmarkedFarms)
 // GET Farm - Gets a single farm
 farmRouter.get('/:farmId', getFarmById)
 
@@ -66,5 +68,7 @@ farmRouter.delete(
 
 // Bookmark Farm
 farmRouter.put('/:farmId/bookmarks', bookmarks)
+
+// GET Bookmarked Farms
 
 module.exports = farmRouter
