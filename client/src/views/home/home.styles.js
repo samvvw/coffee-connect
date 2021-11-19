@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import bgImg from '../../assets/images/home-bg.png'
+import { theme } from '../../theme/theme'
 
 
 export const Container = styled.div`
@@ -9,5 +10,11 @@ export const Container = styled.div`
 
 
 export const SubContainer = styled.div`
-    background: url('${bgImg});
+
+    @media only screen and (min-width: ${theme.layout.desktop}) { 
+        background: url('${bgImg}');
+        background-repeat: no-repeat;
+        background-position: center 25px;
+    }
+
 `
