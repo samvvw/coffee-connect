@@ -1,71 +1,64 @@
-import Image from '../image/image'
 import Button from '../button/button'
-
-import Grid from '../grid/grid'
-import GridColumnRow from '../gridColumnRow/gridColumnRow'
-
-import imgPlaceholder from '../../assets/images/placeholder.png'
+import { Link } from 'react-router-dom'
+import { theme } from '../../theme/theme'
+import imgPlaceholderMobile from '../../assets/images/home-hero-mobile.png'
+import imgPlaceholderDesktop from '../../assets/images/home-hero.png'
 
 import {
+    StyledGridLeft,
     StyledHero,
-    StyleParagrahHero,
-    StyledTitleHero,
-    // StyleTitleHeroDiv,
-    // StyleGridColumnRow,
+    StyledIntro,
+    StyledGoToFarmer,
+    Picture
 } from './hero.styles'
 
 const Hero = ({
     backgroundColor,
     maxWidth,
-    title,
-    titleFontSize,
-    titleTextColor,
     //for image
-    urlImg = imgPlaceholder,
-    //for paragraph
-    paragraphText,
-    pTextColor,
-    pFontSize,
+    urlImgMobile = imgPlaceholderMobile,
+    urlImgDesktop = imgPlaceholderDesktop,
     //for button
-    buttonTitle,
-    onClick,
-    buttonBackgroundColor,
-    buttonTextColor,
+    onClick
 }) => {
     return (
         <StyledHero maxWidth={maxWidth} backgroundColor={backgroundColor}>
-            <Grid
-                gridTemplateRows="repeat(3,auto)"
-                gridTemplateColumns="repeat(3,1fr)"
-            >
-                <GridColumnRow gridColumn="1/4" gridRow="1/2">
-                    <StyledTitleHero
-                        titleFontSize={titleFontSize}
-                        titleTextColor={titleTextColor}
-                    >
-                        {title}
-                    </StyledTitleHero>
-                </GridColumnRow>
-                <GridColumnRow gridColumn="1/4" gridRow="2/3">
-                    <StyleParagrahHero
-                        pTextColor={pTextColor}
-                        pFontSize={pFontSize}
-                    >
-                        {paragraphText}
-                    </StyleParagrahHero>
-                </GridColumnRow>
-                <GridColumnRow gridColumn="1/2" gridRow="3/4">
+            <StyledGridLeft>
+                <StyledIntro gridColumn="1/3">
+                    <h1>Qafa is home to the world's specialty coffee farmers</h1>
+
+                    <p>It’s simple. We connect local specialty coffee farmers with coffee consumers globally.</p>
+
+                    <p>NO <span>WHOLESALERS</span>, <span>AGENTS</span> OR <span>RETAILERS</span></p>
+                </StyledIntro>
+
+                <StyledGoToFarmer>
+
+                <Link to="/marketplace">
                     <Button
                         onClick={onClick}
-                        title={buttonTitle}
-                        backgroundColor={buttonBackgroundColor}
-                        textColor={buttonTextColor}
+                        title={"Find your Coffee"}
+                        backgroundColor={theme.pallette.primary[500]}
+                        textColor="#ffffff"
+                        border="none"
+                        borderRadius="50px"
+                        padding="0 3rem"
+                        height="3rem"
                     ></Button>
-                </GridColumnRow>
-                <GridColumnRow gridColumn="2/3" gridRow="3/4"></GridColumnRow>
-                <GridColumnRow gridColumn="3/4" gridRow="3/4"></GridColumnRow>
-            </Grid>
-            <Image urlImg={urlImg} width="100%"></Image>
+                </Link>
+                    <p>Are you Farmer? 
+                        <Link to="/sign-up">
+                            Signup here &#10142;
+                        </Link>
+                    </p>
+                    
+                </StyledGoToFarmer>
+            </StyledGridLeft>
+
+            <Picture>
+                <img className="mobile" src={urlImgMobile} alt="farmer"/>
+                <img className="desktop" src={urlImgDesktop} alt="farmer"/>
+            </Picture>
         </StyledHero>
     )
 }

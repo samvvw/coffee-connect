@@ -9,6 +9,10 @@ const Button = ({
     disabled = false,
     borderColor,
     width = '100%',
+    height,
+    border,
+    borderRadius,
+    padding
 }) => {
     return (
         <StyledButton
@@ -19,6 +23,10 @@ const Button = ({
             disabled={disabled}
             borderColor={borderColor}
             width={width}
+            border={border}
+            borderRadius={borderRadius}
+            padding={padding}
+            height={height}
         >
             {title}
         </StyledButton>

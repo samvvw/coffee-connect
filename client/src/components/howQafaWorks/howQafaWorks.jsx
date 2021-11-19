@@ -1,27 +1,15 @@
-import Image from '../image/image'
-import {
-    Heading,
-    Container,
-    StyledParagraph,
-    HorizontalContainer,
-} from './howQafaWorks.styles'
-import videoPlaceholder from '../../assets/images/video-placeholder.png'
+import {Container, Heading, OneLine, Video, Paragraph} from './howQafaWorks.styles'
+
 
 const HowQafaWorks = (props) => {
     return (
         <Container>
-            <Heading>How Qafa works?</Heading>
-            <HorizontalContainer>
-                <Image urlImg={videoPlaceholder} width="300px" />
-                <StyledParagraph>
-                    Mollis bibendum leo, pulvinar blandit gravida nec.
-                    Adipiscing sed pellentesque cras massa urna lectus leo, ut.
-                    ollis bibendum leo, pulvinar blandit gravida nec. Adipiscing
-                    sed pellentesque cras massa urna lectus leo, ut.Mollis
-                    bibendum leo, pulvinar blandit gravida nec. Adipiscing sed
-                    pellentesque cras massa urna lectus leo, ut.
-                </StyledParagraph>
-            </HorizontalContainer>
+            <Heading>How Qafa Works</Heading>
+            <OneLine>Qafa is built to help your business grow.</OneLine>
+            <Video src="https://www.youtube.com/embed/PnzfjIM5U-M"></Video>
+            <Paragraph>
+            Qafa is the new reality for coffee farmers, with easy access to customers globally, an online storefront and a full farmer’s dashboard. Everything you need to build and manage your business -<span> all in one place.</span>
+            </Paragraph>
         </Container>
     )
 }

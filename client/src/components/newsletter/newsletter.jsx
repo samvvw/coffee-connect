@@ -1,23 +1,26 @@
 import InteractiveTextField from '../interactiveTextField/interactiveTextField'
 import {
+    Wrapper,
     Container,
-    TextContainer,
     Heading,
     Paragraph,
+    Email
 } from './newsletter.styles'
 
 const Newsletter = (props) => {
     return (
-        <Container>
-            <TextContainer>
-                <Heading>Join our Newsletter</Heading>
+        <Wrapper>
+            <Container>
+                <Heading>Follow along on the journey</Heading>
+
                 <Paragraph>
-                    Mollis bibendum leo, pulvinar blandit gravida nec.
-                    Adipiscing sed pellentesque cras.
+                    Sign up for helpful tips, free resources and get farm updates directly inside your mail box.
                 </Paragraph>
-            </TextContainer>
-            <InteractiveTextField placeholder="Your email address" />
-        </Container>
+
+                <Email>Email Address:</Email>
+                <InteractiveTextField placeholder="Your email address" />
+            </Container>
+        </Wrapper>
     )
 }
 
