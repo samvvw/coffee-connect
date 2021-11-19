@@ -28,7 +28,7 @@ const ProductCard = ({
                     />
                 </div>
                 <div>
-                    <CircleButton IconName="FavoriteEmpty" onClick="" />
+                    <CircleButton IconName="FavoriteEmpty" />
                 </div>
             </div>
             <DetailsContainer>

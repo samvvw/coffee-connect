@@ -1,40 +1,37 @@
 import { SelectContainer } from './dropdownList.styles'
 
-const DropdownList = ({
-    width,
-    height,
-    selectName,
-    selectId,
-    objArrayValues,
-    onChange,
-}) => {
-    // objArrayValues = [
-    //     {
-    //         id: '1',
-    //         option: 'Qty 1',
-    //     },
-    //     {
-    //         id: '2',
-    //         option: 'Qty 2',
-    //     },
-    //     {
-    //         id: '3',
-    //         option: 'Qty 3',
-    //     },
-    // ]
+const DropdownList = ({ width, height, objArraySizes, setPrice }) => {
+    // console.log('obj', objArraySizes)
 
-    let optionTemplate = objArrayValues.map((option) => (
-        <option value={option.id}>{option.option}</option>
-    ))
+    const handleChange = (e) => {
+        if (e.target.value) {
+            const j = objArraySizes.findIndex(
+                (item) => item._id === e.target.value
+            )
+            setPrice(objArraySizes[j].price)
+        } else {
+            setPrice('')
+        }
+    }
+
+    let optionTemplate = objArraySizes.map(
+        (option) =>
+            option.size > 0 && (
+                <option key={option._id} value={option._id}>
+                    {option.size}
+                </option>
+            )
+    )
 
     return (
         <SelectContainer
-            onChange={onChange}
-            name={selectName}
-            id={selectId}
+            name="sizes"
             width={width}
             height={height}
+            onChange={(e) => handleChange(e)}
+            defaultValue=""
         >
+            <option value=""> </option>
             {optionTemplate}
         </SelectContainer>
     )

@@ -15,7 +15,7 @@ const LoggedUser = (props) => {
             if (user.userType === 'farmer') {
                 history.push('/my-products')
             } else if (user.userType === 'consumer') {
-                history.push('/consumer-dashboard')
+                history.push('/consumer-dashboard-products')
             }
         } else {
             history.replace('/sign-in')
@@ -24,7 +24,9 @@ const LoggedUser = (props) => {
 
     const handleMyAccount = () => {
         if (!isTokenExpired()) {
-            console.log('My Account')
+            history.push('/account')
+        } else {
+            history.replace('/sign-in')
         }
     }
 
@@ -63,7 +65,7 @@ const LoggedUser = (props) => {
             )}
             {user?.firstName && (
                 <>
-                    <Container>
+                    <Container type={user.userType}>
                         <p>Hello!</p>
                         <NavDropdown title={user.firstName} id="nav-dropdown">
                             <NavDropdown.Item onClick={handleMyDashboard}>
@@ -80,6 +82,11 @@ const LoggedUser = (props) => {
                                 Sign Out
                             </NavDropdown.Item>
                         </NavDropdown>
+                        <div className="profile__badge">
+                            <span>
+                                {user.firstName.split('')[0].toUpperCase()}
+                            </span>
+                        </div>
                     </Container>
                 </>
             )}

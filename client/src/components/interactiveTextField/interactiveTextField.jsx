@@ -1,29 +1,28 @@
-import { Input, FieldContainer, Container } from './interactiveTextField.styles'
 import Button from '../button/button'
+import { theme } from '../../theme/theme'
+import { Container, IconContainer, Input } from './interactiveTextField.styles'
 
-const InteractiveTextField = ({
-    onClick,
-    onKeyUp,
-    width,
-    height,
-    placeholder,
-}) => {
+
+const InteractiveTextField  = (props) => {
+
     return (
-        <FieldContainer>
+        <Container>
+            <IconContainer>
+                <Button
+
+                    title={"Subscribe"}
+                    backgroundColor={theme.pallette.secondary.c800}
+                    textColor={"#ffffff"}
+                    border="none"
+                    padding="5px 20px"
+                ></Button>
+            </IconContainer>
             <Input
-                type="text"
-                name="searchQuery"
-                id="searchQuery"
-                placeholder={placeholder}
-                onKeyUp={onKeyUp}
-                width={width}
-                height={height}
+            type="text"
+            placeholder="john@example.com"
             />
-            <Container>
-                <Button title="Subscribe" onClick={onClick} />
-            </Container>
-        </FieldContainer>
+        </Container>
     )
 }
 
-export default InteractiveTextField
+export default InteractiveTextField 

@@ -159,6 +159,23 @@ exports.getFarms = (req, res) => {
     }
 }
 
+exports.getBookmarkedFarms = async (req, res) => {
+    try {
+        const { token } = req.query
+
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+
+        const currentUser = await User.findById(decodedToken.id)
+        const findFarms = await Farm.find({
+            _id: { $in: currentUser.bookmarks },
+        })
+        res.json(findFarms)
+    } catch (error) {
+        console.log('--->', error)
+        res.status(500).json({ error: error })
+    }
+}
+
 exports.modifyFarm = (req, res) => {
     //Set fields and new data to be modified
     //Whichever the field/s to be modified, send in body
@@ -369,7 +386,7 @@ exports.deleteFarmPicture = async (req, res) => {
         }
         delete req.body.token
         const reqKeys = Object.keys(req.body)
-
+        console.log('BODY', req.body)
         if (
             reqKeys.length > 1 ||
             (reqKeys[0] != 'farmLogo' &&
@@ -395,7 +412,7 @@ exports.deleteFarmPicture = async (req, res) => {
                 if (reqKeys[0] === 'farmCertificate') {
                     req.farm[keyOptions[reqKeys[0]]].pull(req.body[reqKeys[0]])
                 } else {
-                    req.farm[keyOptions[reqKeys[0]]] = 'DefaultImg'
+                    req.farm[keyOptions[reqKeys[0]]] = ''
                 }
                 const saveDB = await req.farm.save()
                 res.status(200).json(saveDB)
@@ -409,7 +426,6 @@ exports.deleteFarmPicture = async (req, res) => {
 
 exports.uploadMedia = async (req, res) => {
     try {
-        console.log(req)
         const imageFile = req.files.imageFile
         const caption = req.body.caption
 
@@ -457,7 +473,7 @@ exports.uploadMedia = async (req, res) => {
 exports.removeMedia = async (req, res) => {
     try {
         const { mediaId } = req.params
-
+        console.log('mediaId', mediaId)
         const mediaIndex = req.farm.gallery.findIndex((e) => e.id === mediaId)
         if (mediaIndex != -1) {
             const fileName = req.farm.gallery[mediaIndex].image.split(

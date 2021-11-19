@@ -11,12 +11,14 @@ export const FarmDashboardProductCardSectionWrapper = styled.section.attrs({
     padding-top: 3rem;
     padding-right: 2rem;
     padding-left: 2rem;
+    padding-bottom: 7rem;
 
     /*  @media only screen and (min-width: ${(props) =>
         props.theme.desktop}) { */
     @media only screen and (min-width: ${theme.layout.desktop}) {
         max-width: ${(props) => props.theme.layout.screenMaxWidth};
         margin: 0 auto;
+        margin-bottom: 2rem;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: auto;

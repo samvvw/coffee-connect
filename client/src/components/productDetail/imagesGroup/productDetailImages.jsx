@@ -1,5 +1,5 @@
 // import ProductDetailImageGroup from './productDetailImagesGroup'
-import ProductDetailImageDynamicGrid from './productDetailImagesDynamicGrid'
+// import ProductDetailImageDynamicGrid from './productDetailImagesDynamicGrid'
 import ProductDetailImagesCarousel from './productDetailImagesCarousel'
 import { StyledProductDetailImages } from './productDetailImages.styles'
 
@@ -18,8 +18,8 @@ const ProductDetailImages = ({ urlsArray, width }) => {
     return (
         <StyledProductDetailImages width={width}>
             {!matches && <ProductDetailImagesCarousel urlsArray={urlsArray} />}
-            {/* {matches && <ProductDetailImageGroup urlsArray={urlsArray} />} */}
-            {matches && <ProductDetailImageDynamicGrid urlsArray={urlsArray} />}
+
+            {/* {matches && <ProductDetailImageDynamicGrid urlsArray={urlsArray} />} */}
         </StyledProductDetailImages>
     )
 }

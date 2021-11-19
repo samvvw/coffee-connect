@@ -1,11 +1,14 @@
 import styled from 'styled-components'
+import FavoriteIcon from '@material-ui/icons/Favorite'
 
 const ProductCard = (props) => {
     return (
         <article className={props.className}>
             <div className="product-img-wrapper">
                 <img src={props.product.image} alt={props.product.name} />
-                <span>❤️</span>
+                <span>
+                    <FavoriteIcon />
+                </span>
             </div>
             <div className="product-content">
                 <h3>{props.product.name}</h3>
@@ -48,12 +51,22 @@ export const DashboardProductCard = styled((props) => (
             object-position: center left;
         }
         span {
-            padding: 0.2rem 0.2rem 0.07rem 0.2rem;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             background-color: #fff;
+            border: 1px solid ${({ theme }) => theme.pallette.black[50]};
             position: absolute;
             top: 0.5rem;
             right: 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        svg {
+            width: 24px;
+            height: 24px;
+            fill: red;
         }
         span:hover {
             background-color: #f0f0f0;

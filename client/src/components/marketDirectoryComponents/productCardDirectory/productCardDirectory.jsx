@@ -1,15 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import BookmarkIcon from '@material-ui/icons/Bookmark'
+import BookmarkEmptyIcon from '@material-ui/icons/TurnedInNot'
 import placeholder from '../../../assets/images/placeholder.png'
 import { Container } from './productCardDirectory.styles'
+import { theme } from '../../../theme/theme'
+import { api } from '../../../config/api'
 
-const productCardDirectory = ({ data }) => {
+const ProductCardDirectory = ({ data, userId }) => {
+    const [bookmark, setBookmark] = useState(false)
+
+    const handleBookmark = (farmId) => {
+        const token = localStorage.getItem('token')
+        axios
+            .put(`${api.farms}/${farmId}/bookmarks`, { token })
+            .then((res) => {
+                setBookmark((prevBookmark) => !prevBookmark)
+            })
+            .catch((err) => console.log(err))
+    }
+
+    useEffect(() => {
+        if (userId && data.bookmarks.includes(userId)) {
+            setBookmark(true)
+        }
+    }, [])
+
     return (
         <Container>
             <div className="image-container">
-                <img src={placeholder} alt="" />
+                <img
+                    src={
+                        data.logo === 'Default Picture URL'
+                            ? placeholder
+                            : data.logo
+                    }
+                    alt=""
+                />
             </div>
             <div className="product">
-                <p className="product__title">{data.name}</p>
+                <div className="top-container">
+                    <p className="product__title">{data.name}</p>
+                    <div
+                        className="bookmark-container"
+                        onClick={() => handleBookmark(data._id)}
+                    >
+                        {bookmark ? (
+                            <BookmarkIcon />
+                        ) : (
+                            <BookmarkEmptyIcon
+                                style={{ fill: theme.pallette.black[400] }}
+                            />
+                        )}
+                    </div>
+                </div>
                 <div className="product__metadata">
                     <p className="product__metadata__location">
                         Origin: <span>{data.origin} </span>
@@ -28,4 +72,4 @@ const productCardDirectory = ({ data }) => {
     )
 }
 
-export default productCardDirectory
+export default ProductCardDirectory

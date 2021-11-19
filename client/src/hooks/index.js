@@ -1,3 +1,4 @@
 import useProducts from './useProducts'
+import useFarms from './useFarms'
 
-export { useProducts }
+export { useProducts, useFarms }

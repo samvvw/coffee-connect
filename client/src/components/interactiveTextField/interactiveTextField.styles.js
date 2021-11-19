@@ -1,22 +1,29 @@
 import styled from 'styled-components'
+import { theme } from '../../theme/theme'
 
-export const Input = styled.input`
-    border-radius: 24px;
-    border: 1px solid black;
-    width: ${(props) => props.width || '400px'};
-    height: ${(props) => props.height || '48px'};
-    padding-left: 1rem;
-    font-size: 1rem;
-    padding-right: 3.5rem;
-`
 
 export const Container = styled.div`
     position: relative;
-    right: 110px;
-    cursor: pointer;
+    width: 311px;
+    margin: 0 auto;
+
+    @media only screen and (min-width: ${theme.layout.desktop}){
+        width: 100%;
+    }
 `
 
-export const FieldContainer = styled.div`
-    display: flex;
-    align-items: center;
+export const IconContainer = styled.div`
+    position: absolute; 
+    top: 7px;
+    right: 5px
+`
+
+export const Input = styled.input`
+    display: block;
+    width: 100%;
+    height: 3rem;
+    border-radius: 50px;
+    border: none;
+    text-indent: 1rem;
+
 `

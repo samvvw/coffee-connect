@@ -1,14 +1,33 @@
 import styled from 'styled-components'
+import { theme } from '../../theme/theme'
 
 export const SearchHomeContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
+
+    @media only screen and (min-width: ${theme.layout.desktop}) {
+        margin-bottom: 12rem;
+    }
+    
 `
 
 export const Heading = styled.h2`
-    font-weight: bold;
+    text-align: center;
     font-size: 2rem;
-    margin-bottom: 0;
+    margin: 3rem auto 1rem auto;
+    width: 311px
+
+    @media only screen and (min-width: ${theme.layout.desktop}) {
+        width: 811px
+    }
 `
+
+export const MapContainer = styled.div`
+    position: relative;
+`
+
+export const SearchBarContainer = styled.div`
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+`
+
