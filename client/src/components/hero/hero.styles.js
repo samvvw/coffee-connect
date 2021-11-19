@@ -7,12 +7,13 @@ export const StyledHero = styled.div`
 
     @media only screen and (min-width: ${theme.layout.desktop}) {
         margin-left: 15%;
+        margin-top: 6rem;
 
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         place-items: center;
 
-        margin-bottom: 8rem;
+        margin-bottom: 18rem;
     }
 `
 
@@ -79,7 +80,7 @@ export const StyledGoToFarmer = styled.div`
         margin: 1.5rem auto;
     }
 
-    a {
+    a:last-child {
         color: ${theme.pallette.secondary.c800};
         margin-left: 0.5rem;
     }
@@ -87,7 +88,16 @@ export const StyledGoToFarmer = styled.div`
     @media only screen and (min-width: ${theme.layout.desktop}) {
         display: grid;
         grid-template-columns: 40% 60%;
-        place-items: center;
+
+        place-items: center left;
+
+        a {
+            margin-left: 0;
+        }
+
+        p {
+            margin-left: 0;
+        }
     }
 `
 

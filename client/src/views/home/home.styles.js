@@ -15,6 +15,8 @@ export const SubContainer = styled.div`
         background: url('${bgImg}');
         background-repeat: no-repeat;
         background-position: center 25px;
+
+        margin-bottom: 8rem;
     }
 
 `

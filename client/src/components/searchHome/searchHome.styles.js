@@ -3,6 +3,10 @@ import { theme } from '../../theme/theme'
 
 export const SearchHomeContainer = styled.div`
 
+    @media only screen and (min-width: ${theme.layout.desktop}) {
+        margin-bottom: 12rem;
+    }
+    
 `
 
 export const Heading = styled.h2`
@@ -18,7 +22,6 @@ export const Heading = styled.h2`
 
 export const MapContainer = styled.div`
     position: relative;
-
 `
 
 export const SearchBarContainer = styled.div`

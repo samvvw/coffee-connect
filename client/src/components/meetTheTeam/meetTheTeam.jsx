@@ -30,7 +30,7 @@ const MeetTheTeam = ({onClick, urlImg=homeAbout}) => {
                 ></Button>
             </Link>
 
-            <Image urlImg={urlImg} border="none" padding="3rem 0 0 0"></Image>
+            <Image urlImg={urlImg} border="none" padding="8rem 0 0 0"></Image>
         </Container>
     )
 }

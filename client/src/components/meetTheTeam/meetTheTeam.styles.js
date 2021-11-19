@@ -9,7 +9,7 @@ export const Container = styled.div`
         
         button {
             width: 270px;
-        } 
+        }
     }
 `
 

@@ -3,12 +3,13 @@ import { theme } from '../../theme/theme'
 import { Container, IconContainer, Input } from './interactiveTextField.styles'
 
 
-const InteractiveTextField  = ({ onClick, onKeyUp, width, height, placeholder = '' }) => {
+const InteractiveTextField  = (props) => {
+
     return (
-        <Container onClick={onClick}>
+        <Container>
             <IconContainer>
                 <Button
-                    onClick={onClick}
+
                     title={"Subscribe"}
                     backgroundColor={theme.pallette.secondary.c800}
                     textColor={"#ffffff"}
@@ -18,11 +19,7 @@ const InteractiveTextField  = ({ onClick, onKeyUp, width, height, placeholder = 
             </IconContainer>
             <Input
             type="text"
-            name="searchQuery"
-            id="searchQuery"
-            email="email"
             placeholder="john@example.com"
-            onKeyUp={onKeyUp}
             />
         </Container>
     )

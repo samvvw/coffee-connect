@@ -1,6 +1,7 @@
 const NewsletterSubscription = require('../models/newsletterSubscription.model')
 
 exports.createNewsletterSubscription = async (req, res) => {
+    console.log(req.body)
     try {
         const { email } = req.body
 

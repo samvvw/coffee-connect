@@ -42,13 +42,13 @@ const Hero = ({
                         textColor="#ffffff"
                         border="none"
                         borderRadius="50px"
-                        padding="0 2rem"
+                        padding="0 3rem"
                         height="3rem"
                     ></Button>
                 </Link>
                     <p>Are you Farmer? 
                         <Link to="/sign-up">
-                            <a href="/">Signup here &#10142;</a>
+                            Signup here &#10142;
                         </Link>
                     </p>
                     

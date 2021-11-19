@@ -7,7 +7,7 @@ export const Container = styled.div`
     width: 311px;
 
     @media only screen and (min-width: ${theme.layout.desktop}){ 
-        margin: 8rem auto;
+        margin: 10rem auto;
         display: Grid;
         height: 400px;
         width: 70%;
@@ -20,13 +20,12 @@ export const Container = styled.div`
             display: block;
             position: absolute;
             left: 0; /* horizontal position */
-            top: -25px; /* vertical position */
+            top: -50px; /* vertical position */
             width: 50px; 
             height: 2px; /* boldness */
             background-color: #FF9933; 
         }
     }
-
 `
 
 export const Heading = styled.h5`
@@ -39,6 +38,7 @@ export const Heading = styled.h5`
         grid-column: 1/2;
         grid-row: 1/2;
         align-self: end;
+        margin-bottom: 1rem;
     }
 `
 export const OneLine = styled.h2`
