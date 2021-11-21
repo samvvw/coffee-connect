@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
 // import classNames from 'classnames'
 // import RadioButton from '../radioButton/radioButton'
@@ -26,12 +26,12 @@ const SortBy = ({ data, onChange, type }) => {
         roastLevel: [],
         origin: [],
     })
-    const [filterSelected, setFilterSelected] = useState('')
-    const [filters, setFilters] = useState({
-        price: false,
-        roastLevel: false,
-        origin: false,
-    })
+    // const [filterSelected, setFilterSelected] = useState('')
+    // const [filters, setFilters] = useState({
+    //     price: false,
+    //     roastLevel: false,
+    //     origin: false,
+    // })
 
     const roastFilter = (value, checked) => {
         if (checked) {
@@ -68,7 +68,7 @@ const SortBy = ({ data, onChange, type }) => {
         }
     }
 
-    const buildQueryString = () => {
+    const buildQueryString = useCallback(() => {
         const minPrice = `minPrice=${queryFilters.priceMin}`
         const maxPrice = `maxPrice=${queryFilters.priceMax}`
         const roastLevel = queryFilters.roastLevel.reduce((accum, current) => {
@@ -83,11 +83,26 @@ const SortBy = ({ data, onChange, type }) => {
         } else {
             onChange(`${origin}`)
         }
-    }
+    }, [
+        queryFilters.priceMax,
+        queryFilters.priceMin,
+        type,
+        queryFilters.origin,
+        queryFilters.roastLevel,
+        onChange,
+    ])
 
     useEffect(() => {
         buildQueryString()
-    }, [queryFilters])
+    }, [buildQueryString])
+
+    const handlePriceChange = useCallback(({ min, max }) => {
+        setQueryFilters((prevQueryFilters) => ({
+            ...prevQueryFilters,
+            priceMin: min,
+            priceMax: max,
+        }))
+    }, [])
 
     return (
         <Container>
@@ -105,13 +120,7 @@ const SortBy = ({ data, onChange, type }) => {
                                 <PriceSlider
                                     min={1}
                                     max={1000}
-                                    onChange={({ min, max }) => {
-                                        setQueryFilters((prevQueryFilters) => ({
-                                            ...prevQueryFilters,
-                                            priceMin: min,
-                                            priceMax: max,
-                                        }))
-                                    }}
+                                    onChange={handlePriceChange}
                                 />
                             </div>
                         </Dropdown.Menu>

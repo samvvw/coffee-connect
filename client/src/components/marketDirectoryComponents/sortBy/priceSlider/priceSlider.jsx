@@ -43,7 +43,7 @@ const PriceSlider = ({ min = 0, max = 100, onChange }) => {
     // Get min and max values when their state changes
     useEffect(() => {
         onChange({ min: minVal, max: maxVal })
-    }, [minVal, maxVal])
+    }, [minVal, maxVal, onChange])
 
     return (
         <Container>
