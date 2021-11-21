@@ -18,7 +18,7 @@ const Newsletter = (props) => {
                 </Paragraph>
 
                 <Email>Email Address:</Email>
-                <InteractiveTextField placeholder="Your email address" />
+                <InteractiveTextField />
             </Container>
         </Wrapper>
     )
