@@ -1,5 +1,5 @@
 import { Switch, Route } from 'react-router-dom'
-
+import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
@@ -22,6 +22,8 @@ import {
 } from './views'
 
 function App() {
+    const [querySearch, setQuerySearch] = useState('')
+
     return (
         <div className="view-container">
             <Header />
@@ -31,7 +33,9 @@ function App() {
                     <Route path="/sign-up" component={SignUp} />
                     <Route path="/sign-in" component={SignIn} />
                     <Route path="/product" component={Product} />
-                    <Route path="/marketplace" component={CoffeeMarketplace} />
+                    <Route path="/marketplace" > 
+                    <CoffeeMarketplace querySearch={querySearch} setQuerySearch={setQuerySearch}/>
+                    </Route>
                     <Route path="/about-us" component={AboutUs} />
                     <Route path="/contact-us" component={ContactUs} />
                     <Route path="/farm-profile" component={FarmProfile} />
@@ -52,7 +56,9 @@ function App() {
                     <PrivateRouteFarmer path="/my-farm">
                         <MyFarm />
                     </PrivateRouteFarmer>
-                    <Route path="/" exact component={Home} />
+                    <Route path="/" exact> 
+                        <Home querySearch={querySearch} setQuerySearch={setQuerySearch}/>
+                    </Route>
                 </Switch>
             </main>
             <Footer />
