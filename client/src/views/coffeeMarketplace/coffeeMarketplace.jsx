@@ -31,7 +31,7 @@ const CoffeeMarketplace = () => {
     const [products, getProducts] = useProducts()
     const [querySearch, setQuerySearch] = useState('')
     const [coordinates, setCoordinates] = useState()
-    const [queryFilters, setQueryFilters] = useState('')
+    const [queryFilters, setQueryFilters] = useState('minPrice=1&maxPrice=1000')
     const [loading, setLoading] = useState(true)
     const container = useRef()
 
@@ -39,11 +39,12 @@ const CoffeeMarketplace = () => {
         if (e.keyCode === 13) {
             //Get products with new search
             if (e.target.value.trim()) {
-                getProducts(`search=${e.target.value}&${queryFilters}`)
+                // getProducts(`search=${e.target.value}&${queryFilters}`)
+                setQuerySearch(e.target.value)
             } else {
                 getProducts(`${queryFilters}`)
+                setQuerySearch('')
             }
-            setQuerySearch(e.target.value)
         }
     }
 
@@ -68,7 +69,7 @@ const CoffeeMarketplace = () => {
         } else {
             getProducts(`${queryFilters}`)
         }
-    }, [queryFilters])
+    }, [queryFilters, querySearch, getProducts])
 
     useEffect(() => {
         lottie.loadAnimation({
