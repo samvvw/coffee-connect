@@ -33,7 +33,10 @@ export default function ConsumerDashboardProducts() {
     return (
         <>
             <LoggedNavBar />
-            <DashboardProducts likedProducts={likedProducts} />
+            <DashboardProducts
+                likedProducts={likedProducts}
+                setLikedProducts={setLikedProducts}
+            />
         </>
     )
 }
