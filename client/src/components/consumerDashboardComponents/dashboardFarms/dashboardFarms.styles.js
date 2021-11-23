@@ -6,7 +6,7 @@ const FarmCard = (props) => {
         <article className={props.className}>
             <div className="farm-img-wrapper">
                 <img src={props.farm.image} alt={props.farm.name} />
-                <span>
+                <span onClick={props.handleBookmark}>
                     <BookmarkIcon />
                 </span>
             </div>

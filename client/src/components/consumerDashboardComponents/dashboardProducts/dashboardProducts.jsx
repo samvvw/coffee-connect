@@ -1,6 +1,33 @@
+import { useContext } from 'react'
+import { UserContext } from '../../../context/userContext/userContext'
 import FarmDashboardProductCardSection from '../../farmDashboardComponents/farmDashboardProductCardSection/farmDashboardProductCardSection'
 import { DashboardProductCard } from './dashboardProducts.styles'
-export default function DashboardProducts({ likedProducts }) {
+import axios from 'axios'
+export default function DashboardProducts({ likedProducts, setLikedProducts }) {
+    const { token } = useContext(UserContext)
+    async function handleLike(farmId, productId) {
+        try {
+            const data = {
+                token: token,
+            }
+            const request = await axios.put(
+                `/api/farm/${farmId}/product/${productId}/likes`,
+                data
+            )
+
+            if (request) {
+                const getProducts = await axios.get(
+                    `/api/product/list?token=${token}`
+                )
+
+                if (getProducts) {
+                    setLikedProducts(getProducts.data)
+                }
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <>
             <FarmDashboardProductCardSection>
@@ -21,6 +48,12 @@ export default function DashboardProducts({ likedProducts }) {
                                     <DashboardProductCard
                                         product={productProps}
                                         key={'product-dashboard-' + i + 1 * j}
+                                        handleLike={() =>
+                                            handleLike(
+                                                product.farmId,
+                                                product._id
+                                            )
+                                        }
                                     />
                                 )
                             } else {
