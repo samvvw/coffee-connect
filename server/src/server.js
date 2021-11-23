@@ -1,4 +1,5 @@
 const express = require('express')
+// const morgan = require('morgan')
 const app = express()
 const dotenv = require('dotenv')
 dotenv.config({ path: './.env' })
@@ -8,7 +9,7 @@ const apiRouter = require('./api')
 const PORT = process.env.PORT || 8080
 
 connectDB()
-
+// app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 

@@ -26,14 +26,15 @@ const filters = [
     },
 ]
 
-const CoffeeMarketplace = () => {
+const CoffeeMarketplace = (props) => {
     const { user } = useContext(UserContext)
     const [products, getProducts] = useProducts()
-    const [querySearch, setQuerySearch] = useState('')
+    // const [querySearch, setQuerySearch] = useState('')
     const [coordinates, setCoordinates] = useState()
     const [queryFilters, setQueryFilters] = useState('minPrice=1&maxPrice=1000')
     const [loading, setLoading] = useState(true)
     const container = useRef()
+    const {querySearch, setQuerySearch} = props
 
     const handleKeyUp = (e) => {
         if (e.keyCode === 13) {
