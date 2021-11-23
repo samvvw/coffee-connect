@@ -7,12 +7,6 @@ export default function ConsumerDashboardFarms() {
     const { token } = useContext(UserContext)
     const [bookmarkedFarms, setBookmarkedFarms] = useState([])
 
-    // likedProducts.map((product) => {
-    //     return product.size.map((size) => {
-    //         return size
-    //     })
-    // })
-
     useEffect(() => {
         if (token) {
             const controller = new AbortController()
@@ -33,7 +27,10 @@ export default function ConsumerDashboardFarms() {
     return (
         <>
             <LoggedNavBar />
-            <DashboardFarms bookmarkedFarms={bookmarkedFarms} />
+            <DashboardFarms
+                bookmarkedFarms={bookmarkedFarms}
+                setBookmarkedFarms={setBookmarkedFarms}
+            />
         </>
     )
 }

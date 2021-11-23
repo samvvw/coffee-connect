@@ -6,7 +6,7 @@ const ProductCard = (props) => {
         <article className={props.className}>
             <div className="product-img-wrapper">
                 <img src={props.product.image} alt={props.product.name} />
-                <span>
+                <span onClick={props.handleLike}>
                     <FavoriteIcon />
                 </span>
             </div>
