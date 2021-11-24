@@ -30,7 +30,7 @@ const ProductConsumer = (props) => {
     let farmID = ''
     let idProduct = ''
 
-    if (props.location.state.farmID) {
+    if (props.location?.state?.farmID) {
         idProduct = props.location.state.idProduct
         farmID = props.location.state.farmID
     } else {
