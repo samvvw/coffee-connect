@@ -1,7 +1,9 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { Menu, MenuItem, Nav } from './navBar.styles'
 
 const NavBar = (props) => {
+    const location = useLocation()
+
     return (
         <Nav>
             <Menu>

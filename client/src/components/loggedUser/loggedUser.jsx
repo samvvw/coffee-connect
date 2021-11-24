@@ -6,7 +6,7 @@ import { UserContext } from '../../context/userContext/userContext'
 import Button from '../button/button'
 import { theme } from '../../theme/theme'
 
-const LoggedUser = (props) => {
+const LoggedUser = ({ isHome }) => {
     const history = useHistory()
     const { user, signOut, isTokenExpired } = useContext(UserContext)
 
@@ -42,7 +42,7 @@ const LoggedUser = (props) => {
     return (
         <>
             {!user?.firstName && (
-                <Text>
+                <Text isHome={isHome}>
                     <NavLink to="/sign-in">
                         <Button
                             title="Login"
