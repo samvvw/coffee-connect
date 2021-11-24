@@ -6,6 +6,7 @@ const ButtonHeart = ({
     type = 'button',
     backgroundColor,
     textColor,
+    borderColor,
 }) => {
     return (
         <StyledButton
@@ -13,9 +14,10 @@ const ButtonHeart = ({
             onClick={onClick}
             backgroundColor={backgroundColor}
             textColor={textColor}
+            borderColor={borderColor}
         >
             <FavoriteEmptyIcon />
-            <span>Share</span>
+            <span>Save</span>
         </StyledButton>
     )
 }

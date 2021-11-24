@@ -15,7 +15,7 @@ const CircleButon = ({ IconName, onClick, buttonBgc }) => {
                 <Button onClick={onClick} buttonBgc={buttonBgc}>
                     <FavoriteFullIcon
                         fontSize="medium"
-                        style={{ fill: 'white' }}
+                        style={{ fill: 'red' }}
                     />
                 </Button>
             )

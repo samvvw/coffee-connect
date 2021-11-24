@@ -2,6 +2,7 @@ import SignUp from './signUp/signUp'
 import SignIn from './signIn/signIn'
 import Home from './home/home'
 import Product from './Product/product'
+import ProductConsumer from './ProductConsumer/productConsumer'
 import FarmDashboard from './farmDashboard/farmDashboard'
 import CoffeeMarketplace from './coffeeMarketplace/coffeeMarketplace'
 import AboutUs from './aboutUs/aboutUs'
@@ -18,6 +19,7 @@ export {
     SignIn,
     Home,
     Product,
+    ProductConsumer,
     FarmDashboard,
     CoffeeMarketplace,
     AboutUs,
