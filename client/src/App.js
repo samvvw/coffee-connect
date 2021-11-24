@@ -9,6 +9,7 @@ import {
     SignIn,
     Home,
     Product,
+    ProductConsumer,
     FarmDashboard,
     CoffeeMarketplace,
     AboutUs,
@@ -33,8 +34,12 @@ function App() {
                     <Route path="/sign-up" component={SignUp} />
                     <Route path="/sign-in" component={SignIn} />
                     <Route path="/product" component={Product} />
-                    <Route path="/marketplace" > 
-                    <CoffeeMarketplace querySearch={querySearch} setQuerySearch={setQuerySearch}/>
+                    <Route path="/product-detail" component={ProductConsumer} />
+                    <Route path="/marketplace">
+                        <CoffeeMarketplace
+                            querySearch={querySearch}
+                            setQuerySearch={setQuerySearch}
+                        />
                     </Route>
                     <Route path="/about-us" component={AboutUs} />
                     <Route path="/contact-us" component={ContactUs} />
@@ -56,8 +61,11 @@ function App() {
                     <PrivateRouteFarmer path="/my-farm">
                         <MyFarm />
                     </PrivateRouteFarmer>
-                    <Route path="/" exact> 
-                        <Home querySearch={querySearch} setQuerySearch={setQuerySearch}/>
+                    <Route path="/" exact>
+                        <Home
+                            querySearch={querySearch}
+                            setQuerySearch={setQuerySearch}
+                        />
                     </Route>
                 </Switch>
             </main>

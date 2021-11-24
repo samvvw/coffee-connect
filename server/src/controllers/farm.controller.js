@@ -252,6 +252,7 @@ exports.getFarmById = (req, res) => {
         { farmId: req.farmId },
         {
             productName: 1,
+            description: 1,
             location: 1,
             taste: 1,
             roastLevel: 1,

@@ -6,7 +6,7 @@ export const StyledButton = styled.button`
     color: red;
     border-radius: 20px;
     padding: 8px 13px;
-    border: 1px solid lightgray;
+    border: 1px solid ${(props) => props.borderColor || 'gray'};
     font-weight: bold;
     cursor: pointer;
     font-size: 1rem;
