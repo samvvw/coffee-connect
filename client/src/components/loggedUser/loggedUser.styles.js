@@ -8,6 +8,8 @@ export const Text = styled.p`
     display: flex;
     gap: 0.5rem;
     z-index: 100;
+    position: ${(props) => (props.isHome ? 'absolute' : '')};
+    right: ${(props) => (props.isHome ? '32px' : '0')};
 
     & > a {
         color: #000000;

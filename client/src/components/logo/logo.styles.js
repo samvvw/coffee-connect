@@ -13,4 +13,9 @@ export const StyledLogo = styled.h1`
     img {
         width: 180px;
     }
+
+    .mobile-logo {
+        width: 34px;
+        height: 34px;
+    }
 `
