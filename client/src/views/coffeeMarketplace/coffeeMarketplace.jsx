@@ -4,9 +4,13 @@ import SortBy from '../../components/marketDirectoryComponents/sortBy/sortBy'
 import Map from '../../components/map/map'
 import lottie from 'lottie-web'
 import SearchBar from '../../components/searchBar/searchBar'
+import FilterList from '@material-ui/icons/FilterList'
+import MapIcon from '@material-ui/icons/Map'
+import ViewList from '@material-ui/icons/ViewListOutlined'
 import { UserContext } from '../../context/userContext/userContext'
 import { useProducts } from '../../hooks'
 import { Container } from './coffeeMarketplace.styles'
+import ProductCardMobile from '../../components/marketDirectoryComponents/productCardMobile/productCardMobile'
 
 const filters = [
     {
@@ -30,11 +34,20 @@ const CoffeeMarketplace = (props) => {
     const { user } = useContext(UserContext)
     const [products, getProducts] = useProducts()
     // const [querySearch, setQuerySearch] = useState('')
+    const [isMapActive, setIsMapActive] = useState(false)
     const [coordinates, setCoordinates] = useState()
     const [queryFilters, setQueryFilters] = useState('minPrice=1&maxPrice=1000')
     const [loading, setLoading] = useState(true)
     const container = useRef()
-    const {querySearch, setQuerySearch} = props
+    const { querySearch, setQuerySearch } = props
+    const [matches, setMatches] = useState(
+        window.matchMedia(`(min-width: 1000px`).matches
+    )
+
+    useEffect(() => {
+        const handler = (e) => setMatches(e.matches)
+        window.matchMedia(`(min-width: 1000px`).addListener(handler)
+    }, [])
 
     const handleKeyUp = (e) => {
         if (e.keyCode === 13) {
@@ -47,6 +60,10 @@ const CoffeeMarketplace = (props) => {
                 setQuerySearch('')
             }
         }
+    }
+
+    const handleViewChange = () => {
+        setIsMapActive((prev) => !prev)
     }
 
     const handleFilterChange = (value) => {
@@ -103,43 +120,83 @@ const CoffeeMarketplace = (props) => {
                         onKeyUp={(e) => handleKeyUp(e)}
                     />
                 </div>
-                <SortBy
-                    data={filters}
-                    onChange={handleFilterChange}
-                    type="marketplace"
-                />
+                {matches && (
+                    <SortBy
+                        data={filters}
+                        onChange={handleFilterChange}
+                        type="marketplace"
+                    />
+                )}
                 <div className="main__results">
-                    <div className="main__results__query">
-                        <p>Search results for:</p>
-                        <p>{querySearch}</p>
-                    </div>
+                    {matches && (
+                        <div className="main__results__query">
+                            <p>Search results for:</p>
+                            <p>{querySearch}</p>
+                        </div>
+                    )}
                     <div className="main__results__quantity">
                         <p>
                             <span>{products.length}</span>+ coffee products
                         </p>
                     </div>
+                    {!matches && (
+                        <div className="actions">
+                            <div className="actions__filter">
+                                <FilterList />
+                                <small>FILTER</small>
+                            </div>
+                            {!isMapActive && (
+                                <div
+                                    className="actions__map"
+                                    onClick={handleViewChange}
+                                >
+                                    <MapIcon />
+                                    <small>Map</small>
+                                </div>
+                            )}
+                            {isMapActive && (
+                                <div
+                                    className="actions__map"
+                                    onClick={handleViewChange}
+                                >
+                                    <ViewList />
+                                    <small>List</small>
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </div>
-                {user?.id && (
-                    <div className="products">
-                        {products.map(({ data }) => (
-                            <ProductCard
-                                key={data._id}
-                                data={data}
-                                userId={user ? user.id : null}
-                            />
-                        ))}
+                {!matches && (
+                    <div className="main__results__query">
+                        <p>Search results for:</p>
+                        <p>{querySearch}</p>
                     </div>
                 )}
-                {!user?.id && (
-                    <div className="products">
-                        {products.map(({ data }) => (
-                            <ProductCard
-                                key={data._id}
-                                data={data}
-                                userId={user ? user.id : null}
-                            />
-                        ))}
-                    </div>
+                {!isMapActive && (
+                    <>
+                        {user?.id && (
+                            <div className="products">
+                                {products.map(({ data }) => (
+                                    <ProductCard
+                                        key={data._id}
+                                        data={data}
+                                        userId={user ? user.id : null}
+                                    />
+                                ))}
+                            </div>
+                        )}
+                        {!user?.id && (
+                            <div className="products">
+                                {products.map(({ data }) => (
+                                    <ProductCard
+                                        key={data._id}
+                                        data={data}
+                                        userId={user ? user.id : null}
+                                    />
+                                ))}
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
             <div className="map-container">
@@ -151,6 +208,49 @@ const CoffeeMarketplace = (props) => {
                 )}
                 {loading && <div className="container" ref={container}></div>}
             </div>
+
+            {/**
+             *  Products and Map components in Mobile version
+             */}
+            {isMapActive && (
+                <div className="mobile-map-container">
+                    {!loading && (
+                        <Map
+                            data={coordinates}
+                            style={{ width: '100%', height: '80vh' }}
+                        />
+                    )}
+                    {loading && (
+                        <div className="container" ref={container}></div>
+                    )}
+                </div>
+            )}
+            {isMapActive && (
+                <>
+                    {user?.id && (
+                        <div className="mobile-products-container">
+                            {products.map(({ data }) => (
+                                <ProductCardMobile
+                                    key={data._id}
+                                    data={data}
+                                    userId={user ? user.id : null}
+                                />
+                            ))}
+                        </div>
+                    )}
+                    {!user?.id && (
+                        <div className="mobile-products-container">
+                            {products.map(({ data }) => (
+                                <ProductCardMobile
+                                    key={data._id}
+                                    data={data}
+                                    userId={user ? user.id : null}
+                                />
+                            ))}
+                        </div>
+                    )}
+                </>
+            )}
         </Container>
     )
 }

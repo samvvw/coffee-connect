@@ -26,7 +26,7 @@ export const CardContainer = styled.div`
     img {
         width: 352px;
         height: 240px;
-        object-fit: contain;
+        object-fit: cover;
         border-radius: 8px;
         cursor: pointer;
     }
@@ -87,11 +87,15 @@ export const CardContainer = styled.div`
     }
 
     @media (max-width: 1000px) {
+        max-width: 90%;
+        width: 100%;
+        margin: auto;
         flex-direction: column;
 
         img {
+            max-width: 100%;
             width: 100%;
-            height: 300px;
+            height: 200px;
             object-fit: cover;
         }
 
@@ -101,6 +105,7 @@ export const CardContainer = styled.div`
                 margin-bottom: 0;
                 padding-bottom: 0;
             }
+
             &__info {
                 display: none;
             }
