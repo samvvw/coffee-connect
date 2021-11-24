@@ -22,7 +22,7 @@ const priceSliderStyle = {
 const SortBy = ({ data, onChange, type }) => {
     const [queryFilters, setQueryFilters] = useState({
         priceMin: 1,
-        priceMax: 1000,
+        priceMax: 150,
         roastLevel: [],
         origin: [],
     })
@@ -119,7 +119,7 @@ const SortBy = ({ data, onChange, type }) => {
                             <div className="price-slider">
                                 <PriceSlider
                                     min={1}
-                                    max={1000}
+                                    max={150}
                                     onChange={handlePriceChange}
                                 />
                             </div>
@@ -157,38 +157,6 @@ const SortBy = ({ data, onChange, type }) => {
                     </Dropdown.Menu>
                 </Dropdown>
             </div>
-
-            {/* {data.map((filter, i) => (
-                    <RadioButton
-                        key={filter.id}
-                        id={filter.id}
-                        value={filter.value}
-                        label={filter.label}
-                        onChange={handleChange}
-                    />
-                ))} */}
-
-            {/* <div className={`price-filter ${priceClass}`}>
-                <PriceSlider
-                    min={1}
-                    max={1000}
-                    onChange={({ min, max }) => {
-                        setQueryFilters((prevQueryFilters) => ({
-                            ...prevQueryFilters,
-                            priceMin: min,
-                            priceMax: max,
-                        }))
-                    }}
-                />
-            </div> */}
-
-            {/* <div className={`roast-filter ${roastClass}`}>
-                <RoastLevelCheckboxes onChange={roastFilter} />
-            </div> */}
-
-            {/* <div className={`origin-filter ${originClass}`}>
-                <OriginCheckboxes onChange={originFilter} />
-            </div> */}
         </Container>
     )
 }
