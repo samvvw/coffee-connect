@@ -3,11 +3,11 @@ import axios from 'axios'
 import BookmarkIcon from '@material-ui/icons/Bookmark'
 import BookmarkEmptyIcon from '@material-ui/icons/TurnedInNot'
 import placeholder from '../../../assets/images/placeholder.png'
-import { Container } from './productCardDirectory.styles'
+import { CardContainer } from './productCardDirectoryMobile.styles'
 import { theme } from '../../../theme/theme'
 import { api } from '../../../config/api'
 
-const ProductCardDirectory = ({ data, userId }) => {
+const ProductCardDirectoryMobile = ({ data, userId, type = '' }) => {
     const [bookmark, setBookmark] = useState(false)
 
     const handleBookmark = (farmId) => {
@@ -27,7 +27,7 @@ const ProductCardDirectory = ({ data, userId }) => {
     }, [])
 
     return (
-        <Container>
+        <CardContainer>
             <div className="image-container">
                 <img
                     src={
@@ -37,41 +37,31 @@ const ProductCardDirectory = ({ data, userId }) => {
                     }
                     alt=""
                 />
+                <div
+                    className="bookmark-container"
+                    onClick={() => handleBookmark(data._id)}
+                >
+                    {bookmark ? (
+                        <BookmarkIcon />
+                    ) : (
+                        <BookmarkEmptyIcon
+                            style={{ fill: theme.pallette.black[400] }}
+                        />
+                    )}
+                </div>
             </div>
-            <div className="product">
+            <div className="farm">
                 <div className="top-container">
-                    <p className="product__title">{data.name}</p>
-                    <div
-                        className="bookmark-container"
-                        onClick={() => handleBookmark(data._id)}
-                    >
-                        {bookmark ? (
-                            <BookmarkIcon />
-                        ) : (
-                            <BookmarkEmptyIcon
-                                style={{ fill: theme.pallette.black[400] }}
-                            />
-                        )}
-                    </div>
+                    <p className="farm__title">{data.name}</p>
                 </div>
-                <div className="product__metadata">
-                    <p className="product__metadata__location">
-                        Origin: <span>{data.origin} </span>
-                        &nbsp;&nbsp;|&nbsp;&nbsp;
-                    </p>
-
-                    <p className="product__metadata__taste">
+                <div className="farm__metadata">
+                    <p className="farm__metadata">
                         Location: <span>{data.location} </span>
-                        &nbsp;&nbsp;|&nbsp;&nbsp;
-                    </p>
-
-                    <p className="product__metadata__roastLevel">
-                        Altitude: <span>{data.altitude}</span>
                     </p>
                 </div>
             </div>
-        </Container>
+        </CardContainer>
     )
 }
 
-export default ProductCardDirectory
+export default ProductCardDirectoryMobile

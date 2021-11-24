@@ -5,7 +5,7 @@ import PriceSlider from '../sortBy/priceSlider/priceSlider'
 import RoastLevelCheckboxes from '../sortBy/roastLevelCheckboxes/roastLevelCheckboxes'
 import { Container } from './sortByMobile.styles'
 
-const SortByMobile = ({ data, onChange, type }) => {
+const SortByMobile = ({ data, onChange, type = '' }) => {
     const [queryFilters, setQueryFilters] = useState({
         priceMin: 1,
         priceMax: 150,
