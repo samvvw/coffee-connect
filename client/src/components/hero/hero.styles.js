@@ -2,18 +2,17 @@ import styled from 'styled-components'
 import { theme } from '../../theme/theme'
 
 export const StyledHero = styled.div`
-
     width: 100%;
 
     @media only screen and (min-width: ${theme.layout.desktop}) {
         margin-left: 15vw;
-        margin-top: 5vh;
+        margin-top: 2vw;
 
         display: grid;
         grid-template-columns: 45% 55%;
         place-items: center;
 
-        margin-bottom: 18vh;
+        margin-bottom: 10vw;
     }
 `
 
@@ -27,6 +26,8 @@ export const StyledGridLeft = styled.div`
         place-items: center;
         grid-columns: 1/2;
         padding-right: 15%;
+
+        p
     }
 
 `
@@ -96,11 +97,13 @@ export const StyledGoToFarmer = styled.div`
 
         a {
             margin-left: 0;
+            font-size: 1vw;
         }
 
         p {
             margin-left: 0;
             text-indent: 0.5vw;
+            font-size: 1vw;
         }
     }
 `
@@ -130,6 +133,11 @@ export const Picture = styled.div`
             top: 0;
             right: 0;
             width: 45vw;
+        }
+
+        .login {
+            top: 50px;
+            z-index: -100;
         }
 
     }
