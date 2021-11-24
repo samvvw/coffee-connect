@@ -7,7 +7,7 @@ import { CardContainer } from './productCardDirectoryMobile.styles'
 import { theme } from '../../../theme/theme'
 import { api } from '../../../config/api'
 
-const ProductCardDirectoryMobile = ({ data, userId, type = '' }) => {
+const ProductCardDirectoryMobile = ({ data, userId, userType }) => {
     const [bookmark, setBookmark] = useState(false)
 
     const handleBookmark = (farmId) => {
@@ -37,18 +37,20 @@ const ProductCardDirectoryMobile = ({ data, userId, type = '' }) => {
                     }
                     alt=""
                 />
-                <div
-                    className="bookmark-container"
-                    onClick={() => handleBookmark(data._id)}
-                >
-                    {bookmark ? (
-                        <BookmarkIcon />
-                    ) : (
-                        <BookmarkEmptyIcon
-                            style={{ fill: theme.pallette.black[400] }}
-                        />
-                    )}
-                </div>
+                {userId && userType && userType !== 'farmer' && (
+                    <div
+                        className="bookmark-container"
+                        onClick={() => handleBookmark(data._id)}
+                    >
+                        {bookmark ? (
+                            <BookmarkIcon />
+                        ) : (
+                            <BookmarkEmptyIcon
+                                style={{ fill: theme.pallette.black[400] }}
+                            />
+                        )}
+                    </div>
+                )}
             </div>
             <div className="farm">
                 <div className="top-container">
