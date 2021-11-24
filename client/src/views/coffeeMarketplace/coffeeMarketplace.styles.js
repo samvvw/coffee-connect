@@ -20,6 +20,7 @@ export const Container = styled.div`
         &__search {
             padding: 0.5rem;
             background-color: ${theme.pallette.primary[500]};
+            width: 100%;
         }
 
         &__results {
@@ -121,7 +122,7 @@ export const Container = styled.div`
         }
 
         .main__results__query {
-            padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+            padding: 0.5rem 1.8rem 0.5rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;

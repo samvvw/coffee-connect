@@ -16,7 +16,7 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 2rem 0 1rem;
+        padding: 1.3rem 0 1rem;
     }
 
     .slider {

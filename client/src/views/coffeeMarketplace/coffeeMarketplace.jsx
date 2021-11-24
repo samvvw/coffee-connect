@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react'
+import Offcanvas from 'react-bootstrap/Offcanvas'
 import ProductCard from '../../components/marketDirectoryComponents/productCard/productCard'
 import SortBy from '../../components/marketDirectoryComponents/sortBy/sortBy'
 import Map from '../../components/map/map'
@@ -7,10 +8,11 @@ import SearchBar from '../../components/searchBar/searchBar'
 import FilterList from '@material-ui/icons/FilterList'
 import MapIcon from '@material-ui/icons/Map'
 import ViewList from '@material-ui/icons/ViewListOutlined'
+import ProductCardMobile from '../../components/marketDirectoryComponents/productCardMobile/productCardMobile'
 import { UserContext } from '../../context/userContext/userContext'
 import { useProducts } from '../../hooks'
 import { Container } from './coffeeMarketplace.styles'
-import ProductCardMobile from '../../components/marketDirectoryComponents/productCardMobile/productCardMobile'
+import SortByMobile from '../../components/marketDirectoryComponents/sortByMobile/sortByMobile'
 
 const filters = [
     {
@@ -43,6 +45,10 @@ const CoffeeMarketplace = (props) => {
     const [matches, setMatches] = useState(
         window.matchMedia(`(min-width: 1000px`).matches
     )
+    const [show, setShow] = useState(false)
+
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
 
     useEffect(() => {
         const handler = (e) => setMatches(e.matches)
@@ -141,7 +147,10 @@ const CoffeeMarketplace = (props) => {
                     </div>
                     {!matches && (
                         <div className="actions">
-                            <div className="actions__filter">
+                            <div
+                                className="actions__filter"
+                                onClick={handleShow}
+                            >
                                 <FilterList />
                                 <small>FILTER</small>
                             </div>
@@ -172,6 +181,7 @@ const CoffeeMarketplace = (props) => {
                         <p>{querySearch}</p>
                     </div>
                 )}
+
                 {!isMapActive && (
                     <>
                         {user?.id && (
@@ -250,6 +260,33 @@ const CoffeeMarketplace = (props) => {
                         </div>
                     )}
                 </>
+            )}
+
+            {!matches && (
+                <Offcanvas
+                    show={show}
+                    onHide={handleClose}
+                    placement="end"
+                    style={{
+                        width: '65%',
+                        position: 'fixed',
+                        top: '232px',
+                        zIndex: '10000',
+                        borderTopLeftRadius: '8px',
+                    }}
+                    backdrop={true}
+                >
+                    <Offcanvas.Header closeButton>
+                        <Offcanvas.Title>Filters</Offcanvas.Title>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body>
+                        <SortByMobile
+                            data={filters}
+                            onChange={handleFilterChange}
+                            type="marketplace"
+                        />
+                    </Offcanvas.Body>
+                </Offcanvas>
             )}
         </Container>
     )

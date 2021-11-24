@@ -7,6 +7,7 @@ export const Container = styled.div`
         font-weight: bold;
         padding-top: 0.5rem;
         padding-left: 1rem;
+        margin-bottom: 0.5rem;
     }
 
     .checkboxes-container {
