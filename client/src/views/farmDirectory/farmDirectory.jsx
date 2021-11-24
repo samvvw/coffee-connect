@@ -1,12 +1,18 @@
 import { useState, useEffect, useRef, useContext } from 'react'
 import lottie from 'lottie-web'
+import Offcanvas from 'react-bootstrap/Offcanvas'
 import SearchBar from '../../components/searchBar/searchBar'
 import SortBy from '../../components/marketDirectoryComponents/sortBy/sortBy'
 import ProductCardDirectory from '../../components/marketDirectoryComponents/productCardDirectory/productCardDirectory'
 import Map from '../../components/map/map'
+import FilterList from '@material-ui/icons/FilterList'
+import MapIcon from '@material-ui/icons/Map'
+import ViewList from '@material-ui/icons/ViewListOutlined'
+import SortByMobile from '../../components/marketDirectoryComponents/sortByMobile/sortByMobile'
 import { UserContext } from '../../context/userContext/userContext'
 import { Container } from './farmDirectory.styles'
 import { useFarms } from '../../hooks'
+import ProductCardDirectoryMobile from '../../components/marketDirectoryComponents/productCardDirectoryMobile/productCardDirectoryMobile'
 
 const filters = [
     {
@@ -19,11 +25,25 @@ const filters = [
 const FarmDirectory = (props) => {
     const { user } = useContext(UserContext)
     const [farms, getFarms] = useFarms()
+    const [isMapActive, setIsMapActive] = useState(false)
     const [coordinates, setCoordinates] = useState()
     const [querySearch, setQuerySearch] = useState('')
     const [queryFilters, setQueryFilters] = useState('')
     const [loading, setLoading] = useState(true)
     const container = useRef()
+    const [matches, setMatches] = useState(
+        window.matchMedia(`(min-width: 1000px`).matches
+    )
+    const [show, setShow] = useState(false)
+
+    const handleClose = () => setShow(false)
+
+    const handleOffCanvasFilter = () => setShow((prev) => !prev)
+
+    useEffect(() => {
+        const handler = (e) => setMatches(e.matches)
+        window.matchMedia(`(min-width: 1000px`).addListener(handler)
+    }, [])
 
     const handleKeyUp = (e) => {
         if (e.keyCode === 13) {
@@ -35,6 +55,10 @@ const FarmDirectory = (props) => {
             }
             setQuerySearch(e.target.value)
         }
+    }
+
+    const handleViewChange = () => {
+        setIsMapActive((prev) => !prev)
     }
 
     const handleFilterChange = (value) => {
@@ -91,47 +115,90 @@ const FarmDirectory = (props) => {
                         onKeyUp={(e) => handleKeyUp(e)}
                     />
                 </div>
-                <SortBy
-                    data={filters}
-                    onChange={handleFilterChange}
-                    type="directory"
-                />
+                {matches && (
+                    <SortBy
+                        data={filters}
+                        onChange={handleFilterChange}
+                        type="directory"
+                    />
+                )}
                 <div className="main__results">
-                    <div className="main__results__query">
-                        <p>Search results for:</p>
-                        <p>{querySearch}</p>
-                    </div>
+                    {matches && (
+                        <div className="main__results__query">
+                            <p>Search results for:</p>
+                            <p>{querySearch}</p>
+                        </div>
+                    )}
                     <div className="main__results__quantity">
                         <p>
                             <span>{farms.length}</span>+ coffee products
                         </p>
                     </div>
+                    {!matches && (
+                        <div className="actions">
+                            <div
+                                className="actions__filter"
+                                onClick={handleOffCanvasFilter}
+                            >
+                                <FilterList />
+                                <small>FILTER</small>
+                            </div>
+                            {!isMapActive && (
+                                <div
+                                    className="actions__map"
+                                    onClick={handleViewChange}
+                                >
+                                    <MapIcon />
+                                    <small>MAP</small>
+                                </div>
+                            )}
+                            {isMapActive && (
+                                <div
+                                    className="actions__map"
+                                    onClick={handleViewChange}
+                                >
+                                    <ViewList />
+                                    <small>LIST</small>
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </div>
-                {user?.id && (
-                    <div className="farms">
-                        {farms.map(({ data }) => {
-                            return (
-                                <ProductCardDirectory
-                                    key={data._id}
-                                    data={data}
-                                    userId={user ? user.id : null}
-                                />
-                            )
-                        })}
+                {!matches && (
+                    <div className="main__results__query">
+                        <p>Search results for:</p>
+                        <p>{querySearch}</p>
                     </div>
                 )}
-                {!user?.id && (
-                    <div className="farms">
-                        {farms.map(({ data }) => {
-                            return (
-                                <ProductCardDirectory
-                                    key={data._id}
-                                    data={data}
-                                    userId={user ? user.id : null}
-                                />
-                            )
-                        })}
-                    </div>
+                {!isMapActive && (
+                    <>
+                        {user?.id && (
+                            <div className="farms">
+                                {farms.map(({ data }) => {
+                                    return (
+                                        <ProductCardDirectory
+                                            key={data._id}
+                                            data={data}
+                                            userId={user ? user.id : null}
+                                        />
+                                    )
+                                })}
+                            </div>
+                        )}
+                        {!user?.id && (
+                            <div className="farms">
+                                {farms.map(({ data }) => {
+                                    return (
+                                        <ProductCardDirectory
+                                            key={data._id}
+                                            data={data}
+                                            userId={user ? user.id : null}
+                                        />
+                                    )
+                                })}
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
             <div className="map-container">
@@ -143,6 +210,78 @@ const FarmDirectory = (props) => {
                 )}
                 {loading && <div className="container" ref={container}></div>}
             </div>
+
+            {/**
+             *  Products and Map components in Mobile version
+             */}
+            {isMapActive && (
+                <div className="mobile-map-container">
+                    {!loading && (
+                        <Map
+                            data={coordinates}
+                            style={{ width: '100%', height: '80vh' }}
+                        />
+                    )}
+                    {loading && (
+                        <div className="container" ref={container}></div>
+                    )}
+                </div>
+            )}
+            {isMapActive && (
+                <>
+                    {user?.id && (
+                        <div className="mobile-farms-container">
+                            {farms.map(({ data }) => {
+                                return (
+                                    <ProductCardDirectoryMobile
+                                        key={data._id}
+                                        data={data}
+                                        userId={user ? user.id : null}
+                                    />
+                                )
+                            })}
+                        </div>
+                    )}
+                    {!user?.id && (
+                        <div className="mobile-farms-container">
+                            {farms.map(({ data }) => {
+                                return (
+                                    <ProductCardDirectoryMobile
+                                        key={data._id}
+                                        data={data}
+                                        userId={user ? user.id : null}
+                                    />
+                                )
+                            })}
+                        </div>
+                    )}
+                </>
+            )}
+            {!matches && (
+                <Offcanvas
+                    show={show}
+                    onHide={handleClose}
+                    placement="end"
+                    style={{
+                        width: '65%',
+                        position: 'fixed',
+                        top: '188px',
+                        zIndex: '10000',
+                        borderTopLeftRadius: '8px',
+                    }}
+                    backdrop={true}
+                >
+                    <Offcanvas.Header closeButton>
+                        <Offcanvas.Title>Filters</Offcanvas.Title>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body>
+                        <SortByMobile
+                            data={filters}
+                            onChange={handleFilterChange}
+                        />
+                    </Offcanvas.Body>
+                </Offcanvas>
+            )}
         </Container>
     )
 }

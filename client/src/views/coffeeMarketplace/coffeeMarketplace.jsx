@@ -48,7 +48,8 @@ const CoffeeMarketplace = (props) => {
     const [show, setShow] = useState(false)
 
     const handleClose = () => setShow(false)
-    const handleShow = () => setShow(true)
+
+    const handleOffCanvasFilter = () => setShow((prev) => !prev)
 
     useEffect(() => {
         const handler = (e) => setMatches(e.matches)
@@ -149,7 +150,7 @@ const CoffeeMarketplace = (props) => {
                         <div className="actions">
                             <div
                                 className="actions__filter"
-                                onClick={handleShow}
+                                onClick={handleOffCanvasFilter}
                             >
                                 <FilterList />
                                 <small>FILTER</small>
@@ -160,7 +161,7 @@ const CoffeeMarketplace = (props) => {
                                     onClick={handleViewChange}
                                 >
                                     <MapIcon />
-                                    <small>Map</small>
+                                    <small>MAP</small>
                                 </div>
                             )}
                             {isMapActive && (
@@ -169,7 +170,7 @@ const CoffeeMarketplace = (props) => {
                                     onClick={handleViewChange}
                                 >
                                     <ViewList />
-                                    <small>List</small>
+                                    <small>LIST</small>
                                 </div>
                             )}
                         </div>
@@ -270,7 +271,7 @@ const CoffeeMarketplace = (props) => {
                     style={{
                         width: '65%',
                         position: 'fixed',
-                        top: '232px',
+                        top: '188px',
                         zIndex: '10000',
                         borderTopLeftRadius: '8px',
                     }}
