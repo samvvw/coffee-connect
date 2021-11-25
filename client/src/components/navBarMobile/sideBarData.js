@@ -30,3 +30,34 @@ export const SideBarData = [
         cName: 'nav-text',
     },
 ]
+
+
+export const SideBarBottom = [
+    {
+        id: 1,
+        title: 'Sign up',
+        path: '/sign-up',
+        cName: 'nav-text nav-bottom',
+    },
+    {
+        id: 2,
+        title: 'Login',
+        path: '/sign-in',
+        cName: 'nav-text nav-bottom',
+    },
+]
+
+export const SideBarBottomLoggedIn = [
+    {
+        id: 1,
+        title: 'Account Settings',
+        path: '/account',
+        cName: 'nav-text nav-bottom',
+    },
+    {
+        id: 2,
+        title: 'Logout',
+        path: '#',
+        cName: 'nav-text nav-bottom',
+    },
+]
