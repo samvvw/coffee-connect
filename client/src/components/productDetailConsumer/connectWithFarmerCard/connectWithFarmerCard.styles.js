@@ -21,8 +21,21 @@ export const Container = styled.div`
         display: flex;
         padding-bottom: 1rem;
     }
-    button:hover {
+    a:hover {
         background-color: ${theme.pallette.primary[500]};
         color: white;
+    }
+    a {
+        background-color: white;
+        color: ${theme.pallette.primary[500]};
+        border-radius: 20px;
+        padding: 8px 13px;
+
+        cursor: pointer;
+        width: ${(props) => props.width};
+        height: ${(props) => props.height};
+        border: 1px solid ${theme.pallette.primary[500]};
+        text-align: center;
+        text-decoration: none;
     }
 `

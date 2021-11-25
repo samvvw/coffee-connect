@@ -1,7 +1,7 @@
-import Button from '../../button/button'
 import ProductMemberSince from '../productMemberSince/productMemberSince'
 import { Container } from './connectWithFarmerCard.styles'
-import { theme } from '../../../theme/theme'
+
+import { Link } from 'react-router-dom'
 
 const ConnectWithFarmerCard = ({ objMemberSince, description }) => {
     return (
@@ -15,12 +15,17 @@ const ConnectWithFarmerCard = ({ objMemberSince, description }) => {
             <div id="description">
                 <p>{description}</p>
             </div>
-            <Button
-                title="View Profile"
-                backgroundColor="white"
-                textColor={theme.pallette.primary[500]}
-                borderColor={theme.pallette.primary[500]}
-            />
+
+            <Link
+                to={{
+                    pathname: '/farm-profile-detail',
+                    state: {
+                        farmID: objMemberSince.farmID,
+                    },
+                }}
+            >
+                View Profile
+            </Link>
         </Container>
     )
 }

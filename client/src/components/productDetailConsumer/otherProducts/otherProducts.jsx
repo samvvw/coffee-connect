@@ -19,7 +19,6 @@ const OtherProducts = ({ products, farmID }) => {
     //         .matchMedia(`(min-width: ${theme.layout.desktop})`)
     //         .addListener(handler)
     // }, [])
-
     return (
         <StyledOtherProductsContainer width="100%">
             {/* {matches &&  */}
