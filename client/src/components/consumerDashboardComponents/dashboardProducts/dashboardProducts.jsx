@@ -43,6 +43,8 @@ export default function DashboardProducts({ likedProducts, setLikedProducts }) {
                                     roastLevel: product.roastLevel,
                                     price: size.price,
                                     size: size.size,
+                                    farmId: product.farmId,
+                                    id: product._id,
                                 }
                                 return (
                                     <DashboardProductCard

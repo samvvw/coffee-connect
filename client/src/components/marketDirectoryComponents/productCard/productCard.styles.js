@@ -41,6 +41,11 @@ export const CardContainer = styled.div`
             max-width: 30ch;
             margin-bottom: 0.2rem;
             cursor: pointer;
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
         }
 
         &__metadata {

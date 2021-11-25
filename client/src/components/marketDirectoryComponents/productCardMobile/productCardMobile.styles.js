@@ -39,6 +39,11 @@ export const CardContainer = styled.div`
             margin-bottom: 0.2rem;
             margin-top: 0.5rem;
             cursor: pointer;
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
         }
 
         &__price {

@@ -30,7 +30,7 @@ const ProductConsumer = (props) => {
     let farmID = ''
     let idProduct = ''
 
-    if (props.location?.state?.farmID) {
+    if (props.location?.state?.farmID && props.location?.state?.idProduct) {
         idProduct = props.location.state.idProduct
         farmID = props.location.state.farmID
     } else {
@@ -141,6 +141,7 @@ const ProductConsumer = (props) => {
                                             altitude={productData.altitude}
                                             farmId={farmID}
                                             productId={idProduct}
+                                            likes={productData.likes}
                                         />
                                     </>
                                 )}
@@ -173,6 +174,7 @@ const ProductConsumer = (props) => {
                                                 width="100%"
                                                 farmId={farmID}
                                                 productId={idProduct}
+                                                likes={productData.likes}
                                             />
                                         </div>
                                     </div>
