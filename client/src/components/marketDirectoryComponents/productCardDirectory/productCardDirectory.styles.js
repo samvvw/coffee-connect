@@ -41,6 +41,11 @@ export const Container = styled.div`
             max-width: 30ch;
             margin-bottom: 0.2rem;
             cursor: pointer;
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
         }
 
         &__metadata {
@@ -68,12 +73,13 @@ export const Container = styled.div`
         max-width: 310px;
         width: 100%;
         flex-direction: column;
+        margin-left: 0;
         margin: auto;
         gap: 0.5rem;
         border-radius: 8px;
 
         img {
-            width: 290px;
+            width: 310px;
             height: 100px;
             object-fit: cover;
             cursor: pointer;

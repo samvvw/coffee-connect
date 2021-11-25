@@ -79,6 +79,11 @@ export const Container = styled.div`
     @media (max-width: 1000px) {
         grid-template-columns: 1fr;
 
+        .main .farms {
+            margin-left: 0;
+            gap: 1rem;
+        }
+
         .map-container {
             display: none;
         }

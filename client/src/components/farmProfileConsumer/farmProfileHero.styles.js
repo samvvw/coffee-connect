@@ -26,6 +26,11 @@ export const Container = styled.div`
         }
     }
 
+    .goback-container {
+        padding-bottom: 0.8rem;
+        cursor: pointer;
+    }
+
     #divBannerHeader {
         padding: 0;
         #divLink {

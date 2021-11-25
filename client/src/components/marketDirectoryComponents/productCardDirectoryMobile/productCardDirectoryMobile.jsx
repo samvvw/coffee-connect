@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import BookmarkIcon from '@material-ui/icons/Bookmark'
 import BookmarkEmptyIcon from '@material-ui/icons/TurnedInNot'
@@ -29,14 +30,23 @@ const ProductCardDirectoryMobile = ({ data, userId, userType }) => {
     return (
         <CardContainer>
             <div className="image-container">
-                <img
-                    src={
-                        data.logo === 'Default Picture URL'
-                            ? placeholder
-                            : data.logo
-                    }
-                    alt=""
-                />
+                <Link
+                    to={{
+                        pathname: '/farm-profile-detail',
+                        state: {
+                            farmID: data._id,
+                        },
+                    }}
+                >
+                    <img
+                        src={
+                            data.logo === 'Default Picture URL'
+                                ? placeholder
+                                : data.logo
+                        }
+                        alt=""
+                    />
+                </Link>
                 {userId && userType && userType !== 'farmer' && (
                     <div
                         className="bookmark-container"

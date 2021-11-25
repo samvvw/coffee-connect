@@ -3,17 +3,23 @@ import { Container } from './farmProfileHero.styles'
 import { useEffect, useState } from 'react'
 import { theme } from '../../theme/theme'
 
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import ArrowBack from '@material-ui/icons/ArrowBack'
 import placeholder from '../../assets/images/placeholder.png'
 
 const FarmProfileHero = ({ urlImage, farmName }) => {
+    const history = useHistory()
+
     // *******************************************************
 
     const [matches, setMatches] = useState(
         window.matchMedia(`(min-width: ${theme.layout.desktop})`).matches
     )
+
+    const handleGoBack = () => {
+        history.goBack()
+    }
 
     useEffect(() => {
         const handler = (e) => setMatches(e.matches)
@@ -27,13 +33,23 @@ const FarmProfileHero = ({ urlImage, farmName }) => {
             {!matches && (
                 <div id="divBannerHeader">
                     <div id="divLink">
-                        <Link to="/my-products">
+                        <div
+                            className="goback-container"
+                            onClick={handleGoBack}
+                        >
                             <ArrowBack
                                 style={{
                                     fill: theme.pallette.black[400],
                                 }}
                             />
-                        </Link>
+                        </div>
+                        {/* <Link to="/my-products">
+                            <ArrowBack
+                                style={{
+                                    fill: theme.pallette.black[400],
+                                }}
+                            />
+                        </Link> */}
                     </div>
                 </div>
             )}
