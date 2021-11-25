@@ -15,6 +15,7 @@ import {
     AboutUs,
     ContactUs,
     FarmProfile,
+    FarmProfileConsumer,
     FarmDirectory,
     MyFarm,
     ConsumerDashboardProducts,
@@ -44,6 +45,10 @@ function App() {
                     <Route path="/about-us" component={AboutUs} />
                     <Route path="/contact-us" component={ContactUs} />
                     <Route path="/farm-profile" component={FarmProfile} />
+                    <Route
+                        path="/farm-profile-detail"
+                        component={FarmProfileConsumer}
+                    />
                     <Route path="/farm-directory" component={FarmDirectory} />
                     <Route
                         path="/consumer-dashboard-products"

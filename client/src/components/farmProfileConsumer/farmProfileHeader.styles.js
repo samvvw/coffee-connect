@@ -35,8 +35,16 @@ export const HeaderMainContainer = styled.div`
             padding-left: 0.7rem;
         }
 
-        border-right: 1px solid ${(props) => props.borderRight || 'transparent'};
+        /* border-right: 1px solid ${(props) =>
+            props.borderRight || 'transparent'}; */
     }
+
+    .spanPipe {
+        padding-left: 1rem;
+        font-size: 1.3rem;
+        color: gray;
+    }
+
     #divLogoName {
         padding-left: 2rem;
         padding-right: 2rem;
@@ -77,7 +85,7 @@ export const HeaderMainContainer = styled.div`
             }
             & > :nth-child(2) {
                 h5 {
-                    border-left: 1px solid gray;
+                    /* border-left: 1px solid gray; */
                 }
                 p {
                     display: none;
@@ -99,6 +107,13 @@ export const HeaderMainContainer = styled.div`
         align-items: center;
         width: 80%;
 
+        div {
+            h5 {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+
         #divLogoName {
             display: flex;
             #divLogo {
@@ -108,7 +123,7 @@ export const HeaderMainContainer = styled.div`
             }
         }
         #divData {
-            width: fit-content;
+            /* width: fit-content; */
         }
 
         #divButtons {
@@ -124,31 +139,29 @@ export const HeaderMainContainer = styled.div`
             grid-column: 1/2;
             grid-row: 1/2;
         }
-
-        .h5Span {
-            padding-right: 1rem;
-        }
         & :nth-child(2) {
             /* data */
             grid-column: 1/2;
             grid-row: 2/3;
             flex-direction: row;
-            width: fit-content;
+            /* width: fit-content; */
             h5 {
-                /* width: max-content; */
-                padding-left: 0;
+                width: max-content;
             }
             div {
                 align-items: center;
-                width: auto;
-                width: fit-content;
+                /* width: auto; */
+                /* width: fit-content; */
             }
             & :nth-child(1) {
             }
             & :nth-child(2) {
-                width: fit-content;
+                /* width: fit-content; */
                 padding-left: 1rem;
                 /* border-left: 1px solid gray; */
+                p {
+                    /* padding-left: 2rem; */
+                }
             }
         }
         & :nth-child(3) {

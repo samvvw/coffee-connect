@@ -285,6 +285,7 @@ const ProductConsumer = (props) => {
                                         imgUrl: dataFarn.logo,
                                         farmName: dataFarn.name,
                                         memberSince: dataFarn.createAt,
+                                        farmID: farmID,
                                     }}
                                     description={dataFarn.description}
                                 />

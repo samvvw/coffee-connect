@@ -1,11 +1,10 @@
 // import CircleButton from '../../circleButton/circleButton'
 import { useState, useEffect } from 'react'
 import { theme } from '../../theme/theme'
-// import ButtonShare from '../buttonShare/buttonShare'
+import ButtonShare from '../../components/buttonShare/buttonShare'
+import ButtonHeart from '../../components/buttonHeart/buttonHeart'
+import placeholder from '../../assets/images/placeholder.png'
 
-// import ButtonSave from '../buttonSave/buttonSave'
-import Button from '../button/button'
-import ImageFarm from './imageFarm/imageFarm'
 import {
     HeaderContainer,
     HeaderMainContainer,
@@ -18,8 +17,8 @@ const FarmProfileHeader = ({
     origin,
     location,
     altitude,
-    handleShowEdit,
 }) => {
+    console.log('LOGO', farmLogoUrl)
     const [matches, setMatches] = useState(
         window.matchMedia(`(min-width: ${theme.layout.desktop})`).matches
     )
@@ -36,20 +35,28 @@ const FarmProfileHeader = ({
                 <div id="divLogoName">
                     <div id="divLogo">
                         {matches && (
-                            <ImageFarm
-                                fileContainerinDB="logo"
+                            <img
+                                alt=""
                                 width="102px"
                                 height="102px"
-                                urlImage={farmLogoUrl}
-                            ></ImageFarm>
+                                src={
+                                    farmLogoUrl === 'Default Picture URL'
+                                        ? placeholder
+                                        : farmLogoUrl
+                                }
+                            ></img>
                         )}
                         {!matches && (
-                            <ImageFarm
-                                fileContainerinDB="logo"
+                            <img
+                                alt=""
                                 width="57px"
                                 height="57px"
-                                urlImage={farmLogoUrl}
-                            ></ImageFarm>
+                                src={
+                                    farmLogoUrl === 'Default Picture URL'
+                                        ? placeholder
+                                        : farmLogoUrl
+                                }
+                            ></img>
                         )}
                     </div>
                     <div id="divFarmName">
@@ -60,13 +67,14 @@ const FarmProfileHeader = ({
                     <div>
                         <div>
                             <p>Origin:</p>
-                            <h5>{origin}</h5>
-                            <span className="h5Span">|</span>
-                            <h5 className="h5Location">{location}</h5>
+                            <h5>
+                                {origin}
+                                <span className="spanPipe">|</span>
+                            </h5>
                         </div>
                         <div>
-                            {/* <p>Location:</p>
-                            <h5 className="h5Location">{location}</h5> */}
+                            <p>Location:</p>
+                            <h5>{location}</h5>
                         </div>
                     </div>
                     <div>
@@ -76,18 +84,11 @@ const FarmProfileHeader = ({
                 </div>
                 {matches && (
                     <div id="divButtons">
-                        {/* Buttons */}
-                        {/* <ButtonShare></ButtonShare>
-                    <ButtonSave></ButtonSave> */}
-                        <Button
-                            title="Edit"
-                            type="button"
-                            backgroundColor="white"
-                            textColor={theme.pallette.primary[500]}
-                            borderColor={theme.pallette.primary[500]}
-                            width="148px"
-                            onClick={handleShowEdit}
-                        />
+                        <ButtonShare
+                            borderColor={theme.pallette.black[500]}
+                            textColor={theme.pallette.black[900]}
+                        ></ButtonShare>
+                        <ButtonHeart></ButtonHeart>
                     </div>
                 )}
             </HeaderMainContainer>

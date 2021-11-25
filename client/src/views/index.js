@@ -8,6 +8,7 @@ import CoffeeMarketplace from './coffeeMarketplace/coffeeMarketplace'
 import AboutUs from './aboutUs/aboutUs'
 import ContactUs from './contactUs/contactUs'
 import FarmProfile from './farmProfile/farmProfile'
+import FarmProfileConsumer from './farmProfileConsumer/farmProfileConsumer'
 import FarmDirectory from './farmDirectory/farmDirectory'
 import MyFarm from './myFarm/myFarm'
 import ConsumerDashboardFarms from './consumerDashboardFarms/consumerDashboardFarms'
@@ -25,6 +26,7 @@ export {
     AboutUs,
     ContactUs,
     FarmProfile,
+    FarmProfileConsumer,
     FarmDirectory,
     MyFarm,
     ConsumerDashboardFarms,

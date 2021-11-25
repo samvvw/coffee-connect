@@ -9,24 +9,18 @@ export const Container = styled.div`
 
     #imageContainer {
         img {
-            height: 200px;
+            width: 270px;
+            height: 216px;
             object-fit: cover;
+            border-radius: 10px;
         }
-
         position: relative;
         & > :nth-child(2) {
             position: absolute;
             top: 20px;
             right: 20px;
             display: flex;
-
             justify-content: space-between;
-            //heart button
-            button {
-                background-color: white;
-                width: 2rem;
-                border-radius: 50%;
-            }
         }
     }
 `
@@ -39,14 +33,12 @@ export const DetailsContainer = styled.div`
 export const DetailsContainerChild = styled.div`
     grid-column: ${(props) => props.gridColumn};
     grid-row: ${(props) => props.gridRow};
-    div {
-        span {
-            font-weight: bold;
-        }
-        p {
-            font-size: 0.7rem;
-            margin: 0;
-        }
+    & .description label {
+        display: -webkit-box;
+        max-width: 300px;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 `
 export const Label = styled.label`
