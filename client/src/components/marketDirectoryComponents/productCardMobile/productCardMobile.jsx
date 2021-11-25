@@ -8,7 +8,7 @@ import { api } from '../../../config/api'
 import { theme } from '../../../theme/theme'
 import { CardContainer } from './productCardMobile.styles'
 
-const ProductCardMobile = ({ data, userId }) => {
+const ProductCardMobile = ({ data, userId, userType }) => {
     const [liked, setLiked] = useState(false)
 
     const handleLike = () => {
@@ -36,17 +36,19 @@ const ProductCardMobile = ({ data, userId }) => {
                     <img src={data.picture[0]} alt="" />
                 )}
                 {data.picture.length === 0 && <img src={placeholder} alt="" />}
-                <div className="like-container" onClick={handleLike}>
-                    {liked ? (
-                        <Favorite
-                            style={{ fill: theme.pallette.accent2.light }}
-                        />
-                    ) : (
-                        <FavoriteBorder
-                            style={{ fill: theme.pallette.accent2.light }}
-                        />
-                    )}
-                </div>
+                {userId && userType && userType !== 'farmer' && (
+                    <div className="like-container" onClick={handleLike}>
+                        {liked ? (
+                            <Favorite
+                                style={{ fill: theme.pallette.accent2.light }}
+                            />
+                        ) : (
+                            <FavoriteBorder
+                                style={{ fill: theme.pallette.accent2.light }}
+                            />
+                        )}
+                    </div>
+                )}
             </div>
             <div className="product">
                 <p className="product__title">{data.productName}</p>

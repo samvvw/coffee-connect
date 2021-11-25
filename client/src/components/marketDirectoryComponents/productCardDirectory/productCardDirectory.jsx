@@ -7,7 +7,7 @@ import { Container } from './productCardDirectory.styles'
 import { theme } from '../../../theme/theme'
 import { api } from '../../../config/api'
 
-const ProductCardDirectory = ({ data, userId }) => {
+const ProductCardDirectory = ({ data, userId, userType }) => {
     const [bookmark, setBookmark] = useState(false)
 
     const handleBookmark = (farmId) => {
@@ -41,18 +41,20 @@ const ProductCardDirectory = ({ data, userId }) => {
             <div className="product">
                 <div className="top-container">
                     <p className="product__title">{data.name}</p>
-                    <div
-                        className="bookmark-container"
-                        onClick={() => handleBookmark(data._id)}
-                    >
-                        {bookmark ? (
-                            <BookmarkIcon />
-                        ) : (
-                            <BookmarkEmptyIcon
-                                style={{ fill: theme.pallette.black[400] }}
-                            />
-                        )}
-                    </div>
+                    {userId && userType && userType !== 'farmer' && (
+                        <div
+                            className="bookmark-container"
+                            onClick={() => handleBookmark(data._id)}
+                        >
+                            {bookmark ? (
+                                <BookmarkIcon />
+                            ) : (
+                                <BookmarkEmptyIcon
+                                    style={{ fill: theme.pallette.black[400] }}
+                                />
+                            )}
+                        </div>
+                    )}
                 </div>
                 <div className="product__metadata">
                     <p className="product__metadata__location">

@@ -45,6 +45,12 @@ const FarmDirectory = (props) => {
         window.matchMedia(`(min-width: 1000px`).addListener(handler)
     }, [])
 
+    useEffect(() => {
+        if (matches && isMapActive) {
+            setIsMapActive(false)
+        }
+    }, [matches])
+
     const handleKeyUp = (e) => {
         if (e.keyCode === 13) {
             //Get products with new search
@@ -180,6 +186,9 @@ const FarmDirectory = (props) => {
                                             key={data._id}
                                             data={data}
                                             userId={user ? user.id : null}
+                                            userType={
+                                                user ? user.userType : null
+                                            }
                                         />
                                     )
                                 })}
@@ -193,6 +202,9 @@ const FarmDirectory = (props) => {
                                             key={data._id}
                                             data={data}
                                             userId={user ? user.id : null}
+                                            userType={
+                                                user ? user.userType : null
+                                            }
                                         />
                                     )
                                 })}
@@ -237,6 +249,7 @@ const FarmDirectory = (props) => {
                                         key={data._id}
                                         data={data}
                                         userId={user ? user.id : null}
+                                        userType={user ? user.userType : null}
                                     />
                                 )
                             })}
@@ -250,6 +263,7 @@ const FarmDirectory = (props) => {
                                         key={data._id}
                                         data={data}
                                         userId={user ? user.id : null}
+                                        userType={user ? user.userType : null}
                                     />
                                 )
                             })}
