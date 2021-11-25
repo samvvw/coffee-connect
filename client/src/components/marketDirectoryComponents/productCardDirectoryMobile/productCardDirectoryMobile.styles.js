@@ -12,10 +12,13 @@ export const CardContainer = styled.div`
         height: 150px;
         object-fit: cover;
         cursor: pointer;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
     }
 
     .image-container {
         position: relative;
+        border-radius: 8px;
 
         & .bookmark-container {
             border: 1px solid ${theme.pallette.black[50]};
@@ -35,17 +38,17 @@ export const CardContainer = styled.div`
 
         &__title {
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 1rem;
             margin-bottom: 0.2rem;
             margin-top: 0.5rem;
             cursor: pointer;
         }
 
-        &__price {
+        &__metadata {
             font-size: 0.8rem;
             span {
                 font-weight: bold;
-                font-size: 0.8rem;
+                font-size: 0.9rem;
             }
         }
     }

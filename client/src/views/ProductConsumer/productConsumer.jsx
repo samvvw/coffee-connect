@@ -5,7 +5,7 @@ import { theme } from '../../theme/theme'
 import placeHolder from '../../assets/images/placeholder.png'
 // import { UserContext } from '../../context/userContext/userContext'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import ArrowBack from '@material-ui/icons/ArrowBack'
 import ProductDetailHeader from '../../components/productDetailConsumer/header/productDetailHeader'
 import ProductDetailImages from '../../components/productDetailConsumer/imagesGroup/productDetailImages'
@@ -17,7 +17,7 @@ import OtherProducts from '../../components/productDetailConsumer/otherProducts/
 import Map from '../../components/map/map'
 
 const ProductConsumer = (props) => {
-    // const history = useHistory()
+    const history = useHistory()
     // const { user, isTokenExpired } = useContext(UserContext)
     const [productData, setProductData] = useState()
     // const [farmID, setFarmID] = useState()
@@ -36,6 +36,10 @@ const ProductConsumer = (props) => {
     } else {
         idProduct = '619d7d58982462c28d44851e'
         farmID = '61970c1ca6dfef45769ee2f8'
+    }
+
+    const handleGoBack = () => {
+        history.goBack()
     }
 
     function convert(str) {
@@ -146,14 +150,22 @@ const ProductConsumer = (props) => {
                                 {!matches && (
                                     <div id="divBanner">
                                         <div id="divLink">
-                                            <Link to="/my-products">
+                                            <div onClick={handleGoBack}>
                                                 <ArrowBack
                                                     style={{
                                                         fill: theme.pallette
                                                             .black[400],
                                                     }}
                                                 />
-                                            </Link>
+                                            </div>
+                                            {/* <Link to="/my-products">
+                                                <ArrowBack
+                                                    style={{
+                                                        fill: theme.pallette
+                                                            .black[400],
+                                                    }}
+                                                />
+                                            </Link> */}
                                         </div>
                                         <div>
                                             <ProductDetailImages
