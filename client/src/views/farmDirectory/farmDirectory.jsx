@@ -137,7 +137,7 @@ const FarmDirectory = (props) => {
                     )}
                     <div className="main__results__quantity">
                         <p>
-                            <span>{farms.length}</span>+ coffee products
+                            <span>{farms.length}</span>+ &nbsp;farmers
                         </p>
                     </div>
                     {!matches && (

@@ -36,7 +36,7 @@ export const CardContainer = styled.div`
         max-width: 100%;
 
         &__title {
-            font-weight: bold;
+            font-weight: 600;
             font-size: 1.4rem;
             max-width: 30ch;
             margin-bottom: 0.2rem;
@@ -61,7 +61,7 @@ export const CardContainer = styled.div`
                 font-size: 0.9rem;
 
                 span {
-                    font-weight: 600;
+                    font-weight: 500;
                     font-size: 1rem;
                     color: #000000;
                 }
@@ -77,6 +77,16 @@ export const CardContainer = styled.div`
                 max-width: 40ch;
                 width: 100%;
                 font-size: 0.9rem;
+                display: -webkit-box;
+                max-width: 400px;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            a {
+                color: inherit;
+                text-decoration: none;
             }
 
             &__arrow {

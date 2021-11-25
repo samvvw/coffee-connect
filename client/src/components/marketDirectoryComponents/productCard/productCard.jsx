@@ -92,10 +92,20 @@ const ProductCard = ({ data, userId, userType }) => {
                     <p className="product__info__description">
                         {data.description}
                     </p>
-                    <ArrowForwardIcon
-                        className="product__info__arrow"
-                        fontSize="large"
-                    />
+                    <Link
+                        to={{
+                            pathname: '/product-detail',
+                            state: {
+                                farmID: data.farmId,
+                                idProduct: data._id,
+                            },
+                        }}
+                    >
+                        <ArrowForwardIcon
+                            className="product__info__arrow"
+                            fontSize="large"
+                        />
+                    </Link>
                 </div>
                 <div className="product__price">
                     <p>

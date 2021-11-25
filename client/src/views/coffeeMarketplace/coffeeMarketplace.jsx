@@ -149,7 +149,8 @@ const CoffeeMarketplace = (props) => {
                     )}
                     <div className="main__results__quantity">
                         <p>
-                            <span>{products.length}</span>+ coffee products
+                            <span>{products.length}</span>+ &nbsp;coffee
+                            products
                         </p>
                     </div>
                     {!matches && (

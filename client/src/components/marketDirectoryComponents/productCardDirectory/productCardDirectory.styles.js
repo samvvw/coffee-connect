@@ -36,7 +36,7 @@ export const Container = styled.div`
         }
 
         &__title {
-            font-weight: bold;
+            font-weight: 600;
             font-size: 1.4rem;
             max-width: 30ch;
             margin-bottom: 0.2rem;
@@ -99,7 +99,7 @@ export const Container = styled.div`
             }
 
             &__title {
-                font-weight: bold;
+                font-weight: 600;
                 font-size: 1.1rem;
                 max-width: 30ch;
                 margin-bottom: 0.2rem;
