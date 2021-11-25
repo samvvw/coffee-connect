@@ -1,12 +1,18 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import Carousel from 'react-bootstrap/Carousel'
-
+import { UserContext } from '../../../context/userContext/userContext'
 import { CarouselContainer } from './productDetailImagesCarousel.styles'
 import CircleButton from '../../circleButton/circleButton'
 import { api } from '../../../config/api'
 
-const ProductDetailImagesCarousel = ({ urlsArray, farmId, productId }) => {
+const ProductDetailImagesCarousel = ({
+    urlsArray,
+    farmId,
+    productId,
+    likes,
+}) => {
+    const { user } = useContext(UserContext)
     const [liked, setLiked] = useState(false)
     const [index, setIndex] = useState(0)
 
@@ -23,6 +29,12 @@ const ProductDetailImagesCarousel = ({ urlsArray, farmId, productId }) => {
                 .catch((err) => console.log(err))
         }
     }
+
+    useEffect(() => {
+        if (user?.id && likes?.includes(user?.id)) {
+            setLiked(true)
+        }
+    }, [])
 
     const handleShare = () => {
         const width = 200

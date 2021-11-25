@@ -40,6 +40,7 @@ export default function DashboardFarms({
                         location: farm.location,
                         origin: farm.origin,
                         altitude: farm.altitude,
+                        id: farm._id,
                     }
                     return (
                         <DashboardFarmCard

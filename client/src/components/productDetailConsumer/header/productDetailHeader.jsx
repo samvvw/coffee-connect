@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
+import { UserContext } from '../../../context/userContext/userContext'
 import ButtonShare from '../../buttonShare/buttonShare'
 import ButtonHeart from '../../buttonHeart/buttonHeart'
 import { theme } from '../../../theme/theme'
@@ -18,7 +19,9 @@ const ProductDetailHeader = ({
     altitude,
     farmId,
     productId,
+    likes,
 }) => {
+    const { user } = useContext(UserContext)
     const [liked, setLiked] = useState(false)
 
     const handleLike = () => {
@@ -32,6 +35,12 @@ const ProductDetailHeader = ({
             })
             .catch((err) => console.log(err))
     }
+
+    useEffect(() => {
+        if (user?.id && likes?.includes(user?.id)) {
+            setLiked(true)
+        }
+    }, [])
 
     const handleShare = () => {
         const width = 200

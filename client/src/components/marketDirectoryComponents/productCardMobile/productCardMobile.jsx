@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import Favorite from '@material-ui/icons/Favorite'
@@ -33,7 +34,17 @@ const ProductCardMobile = ({ data, userId, userType }) => {
         <CardContainer>
             <div className="image-container">
                 {data.picture.length > 0 && (
-                    <img src={data.picture[0]} alt="" />
+                    <Link
+                        to={{
+                            pathname: '/product-detail',
+                            state: {
+                                farmID: data.farmId,
+                                idProduct: data._id,
+                            },
+                        }}
+                    >
+                        <img src={data.picture[0]} alt="" />
+                    </Link>
                 )}
                 {data.picture.length === 0 && <img src={placeholder} alt="" />}
                 {userId && userType && userType !== 'farmer' && (
@@ -51,7 +62,19 @@ const ProductCardMobile = ({ data, userId, userType }) => {
                 )}
             </div>
             <div className="product">
-                <p className="product__title">{data.productName}</p>
+                <p className="product__title">
+                    <Link
+                        to={{
+                            pathname: '/product-detail',
+                            state: {
+                                farmID: data.farmId,
+                                idProduct: data._id,
+                            },
+                        }}
+                    >
+                        {data.productName}
+                    </Link>
+                </p>
                 <div className="product__price">
                     <p>
                         <span>${data.sizePrice[0]?.price} CAD</span> /{' '}

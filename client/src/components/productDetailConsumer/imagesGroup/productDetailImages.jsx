@@ -6,7 +6,13 @@ import { StyledProductDetailImages } from './productDetailImages.styles'
 import { useEffect, useState } from 'react'
 import { theme } from '../../../theme/theme'
 
-const ProductDetailImages = ({ urlsArray, width, farmId, productId }) => {
+const ProductDetailImages = ({
+    urlsArray,
+    width,
+    farmId,
+    productId,
+    likes,
+}) => {
     const [matches, setMatches] = useState(
         window.matchMedia(`(min-width: ${theme.layout.desktop})`).matches
     )
@@ -25,6 +31,7 @@ const ProductDetailImages = ({ urlsArray, width, farmId, productId }) => {
                     urlsArray={urlsArray}
                     farmId={farmId}
                     productId={productId}
+                    likes={likes}
                 />
             )}
 
