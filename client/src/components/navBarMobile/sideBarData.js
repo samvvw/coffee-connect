@@ -1,9 +1,9 @@
 export const SideBarData = [
     {
-        id: 1,
-        title: 'Home',
-        path: '/',
-        cName: 'nav-text',
+        // id: 1,
+        // title: 'Home',
+        // path: '/',
+        // cName: 'nav-text',
     },
     {
         id: 2,
