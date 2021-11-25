@@ -13,7 +13,8 @@ export const SearchHomeContainer = styled.div`
     //     height: 50%;
     // }
 
-    @media only screen and (min-width: ${theme.layout.desktop}) {
+    @media only screen and (min-width: ${theme.layout.desktop}) { 
+        width: 100%;
         margin-bottom: 12rem;
     }
     
@@ -25,8 +26,10 @@ export const Heading = styled.h2`
     margin: 3rem auto 1rem auto;
     width: 311px
 
-    @media only screen and (min-width: ${theme.layout.desktop}) {
+    @media only screen and (min-width: ${theme.layout.desktop}) { 
+        font-size: 2vw;
         width: 811px
+        max-width: 80%;
     }
 `
 
@@ -49,7 +52,7 @@ export const MapContainer = styled.div`
         object-fit: cover;
     }
 
-    @media only screen and (min-width: ${theme.layout.desktop}) {
+    @media only screen and (min-width: ${theme.layout.desktop}) { 
         height: 600px;
         img {
             height: 600px;
