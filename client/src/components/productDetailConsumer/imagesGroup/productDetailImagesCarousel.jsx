@@ -1,11 +1,40 @@
-import Carousel from 'react-bootstrap/Carousel'
 import { useState } from 'react'
+import axios from 'axios'
+import Carousel from 'react-bootstrap/Carousel'
 
 import { CarouselContainer } from './productDetailImagesCarousel.styles'
 import CircleButton from '../../circleButton/circleButton'
+import { api } from '../../../config/api'
 
-const ProductDetailImagesCarousel = ({ urlsArray }) => {
+const ProductDetailImagesCarousel = ({ urlsArray, farmId, productId }) => {
+    const [liked, setLiked] = useState(false)
     const [index, setIndex] = useState(0)
+
+    const handleLike = () => {
+        const token = localStorage.getItem('token')
+        if (farmId && productId) {
+            axios
+                .put(`${api.farms}/${farmId}/product/${productId}/likes`, {
+                    token,
+                })
+                .then((res) => {
+                    setLiked((prevLiked) => !prevLiked)
+                })
+                .catch((err) => console.log(err))
+        }
+    }
+
+    const handleShare = () => {
+        const width = 200
+        const height = 200
+        const left = (window.screen.width - 200) / 2
+        const top = (window.screen.height - 200) / 4
+        var fbpopup = window.open(
+            `https://www.facebook.com/sharer/sharer.php?u=https://qafa.ca/`,
+            'Qafa',
+            `width=${width}, height=${height}, scrollbars=no, left=${left}, top=${top}`
+        )
+    }
 
     const handleSelect = (selectedIndex, e) => {
         setIndex(selectedIndex)
@@ -61,8 +90,16 @@ const ProductDetailImagesCarousel = ({ urlsArray }) => {
                     </Carousel.Item>
                 </Carousel>
                 <div id="divCircleButtons">
-                    <CircleButton IconName="FavoriteFull" buttonBgc="white" />
-                    <CircleButton IconName="Share" buttonBgc="white" />
+                    <CircleButton
+                        IconName={liked ? 'FavoriteFull' : 'FavoriteEmpty'}
+                        buttonBgc="white"
+                        onClick={handleLike}
+                    />
+                    <CircleButton
+                        IconName="Share"
+                        buttonBgc="white"
+                        onClick={handleShare}
+                    />
                 </div>
             </CarouselContainer>
         </div>

@@ -1,5 +1,6 @@
 import { StyledButton } from './buttonHeart.styles'
 import FavoriteEmptyIcon from '@material-ui/icons/FavoriteBorder'
+import Favorite from '@material-ui/icons/Favorite'
 
 const ButtonHeart = ({
     onClick,
@@ -7,6 +8,7 @@ const ButtonHeart = ({
     backgroundColor,
     textColor,
     borderColor,
+    liked,
 }) => {
     return (
         <StyledButton
@@ -16,7 +18,7 @@ const ButtonHeart = ({
             textColor={textColor}
             borderColor={borderColor}
         >
-            <FavoriteEmptyIcon />
+            {liked ? <Favorite /> : <FavoriteEmptyIcon />}
             <span>Save</span>
         </StyledButton>
     )

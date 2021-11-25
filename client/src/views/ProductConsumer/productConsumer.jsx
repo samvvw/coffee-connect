@@ -34,8 +34,8 @@ const ProductConsumer = (props) => {
         idProduct = props.location.state.idProduct
         farmID = props.location.state.farmID
     } else {
-        idProduct = '6195a9f8f068810e03726978'
-        farmID = '61931107a3a69e9788cba0e8'
+        idProduct = '619d7d58982462c28d44851e'
+        farmID = '61970c1ca6dfef45769ee2f8'
     }
 
     function convert(str) {
@@ -135,6 +135,8 @@ const ProductConsumer = (props) => {
                                             origin={productData.origin}
                                             location={productData.location}
                                             altitude={productData.altitude}
+                                            farmId={farmID}
+                                            productId={idProduct}
                                         />
                                     </>
                                 )}
@@ -157,6 +159,8 @@ const ProductConsumer = (props) => {
                                             <ProductDetailImages
                                                 urlsArray={productData.picture}
                                                 width="100%"
+                                                farmId={farmID}
+                                                productId={idProduct}
                                             />
                                         </div>
                                     </div>
