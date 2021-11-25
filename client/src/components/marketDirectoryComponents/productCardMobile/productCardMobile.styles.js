@@ -34,7 +34,7 @@ export const CardContainer = styled.div`
         padding-left: 0.5rem;
 
         &__title {
-            font-weight: bold;
+            font-weight: 600;
             font-size: 0.9rem;
             margin-bottom: 0.2rem;
             margin-top: 0.5rem;
@@ -49,7 +49,7 @@ export const CardContainer = styled.div`
         &__price {
             font-size: 0.8rem;
             span {
-                font-weight: bold;
+                font-weight: 500;
                 font-size: 0.8rem;
             }
         }
