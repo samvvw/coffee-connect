@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { theme } from '../../theme/theme'
 import imgPlaceholderMobile from '../../assets/images/home-hero-mobile.png'
 import imgPlaceholderDesktop from '../../assets/images/home-hero.png'
+import { useEffect, useContext } from 'react'
+import { UserContext } from '../../context/userContext/userContext'
 
 import {
     StyledGridLeft,
@@ -21,6 +23,11 @@ const Hero = ({
     //for button
     onClick
 }) => {
+
+    //For Hero Styling based on login status
+    const { user } = useContext(UserContext)
+    useEffect(() => {}, [user])
+
     return (
         <StyledHero maxWidth={maxWidth} backgroundColor={backgroundColor}>
             <StyledGridLeft>
@@ -57,7 +64,7 @@ const Hero = ({
 
             <Picture>
                 <img className="mobile" src={urlImgMobile} alt="farmer"/>
-                <img className="desktop" src={urlImgDesktop} alt="farmer"/>
+                <img className={user.firstName ? "desktop login" : "desktop"} src={urlImgDesktop} alt="farmer"/>
             </Picture>
         </StyledHero>
     )

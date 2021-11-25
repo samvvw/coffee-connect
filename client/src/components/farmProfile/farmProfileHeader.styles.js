@@ -124,6 +124,10 @@ export const HeaderMainContainer = styled.div`
             grid-column: 1/2;
             grid-row: 1/2;
         }
+
+        .h5Span {
+            padding-right: 1rem;
+        }
         & :nth-child(2) {
             /* data */
             grid-column: 1/2;
@@ -131,7 +135,8 @@ export const HeaderMainContainer = styled.div`
             flex-direction: row;
             width: fit-content;
             h5 {
-                width: max-content;
+                /* width: max-content; */
+                padding-left: 0;
             }
             div {
                 align-items: center;
@@ -143,10 +148,7 @@ export const HeaderMainContainer = styled.div`
             & :nth-child(2) {
                 width: fit-content;
                 padding-left: 1rem;
-                border-left: 1px solid gray;
-                p {
-                    padding-left: 2rem;
-                }
+                /* border-left: 1px solid gray; */
             }
         }
         & :nth-child(3) {

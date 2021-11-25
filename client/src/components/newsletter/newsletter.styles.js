@@ -13,11 +13,15 @@ export const Container = styled.div`
     border-bottom: 1px solid white;
 
     @media only screen and (min-width: ${theme.layout.desktop}){ 
-        width: 70%; 
+        width: 80%; 
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 2rem;
+    }
 
+    @media only screen and (min-width: 1000px){ 
+        width: 65%;
     }
 `
 
@@ -28,11 +32,16 @@ export const Heading = styled.h2`
     margin: 0 auto 2rem auto;
 
     @media only screen and (min-width: ${theme.layout.desktop}){ 
-        width: 420px;
+        width: 100%;
+        font-size: 2.5rem;
+    }
+
+    @media only screen and (min-width: 1000px){ 
         font-size: 3rem;
         grid-column: 1/2;
         grid-row: 1/2;
-        margin-left: 0
+        margin-left: 0;
+        width: 80%;
     }
 `
 
@@ -43,11 +52,16 @@ export const Paragraph = styled.p`
     margin: 0 auto 2rem auto;
 
     @media only screen and (min-width: ${theme.layout.desktop}){ 
-        width: 480px;
+        width: 70%;
+        margin-left: 0;
+    }
+
+    @media only screen and (min-width: 1000px){ 
         font-size: 1.125rem;
         grid-column: 1/2;
         grid-row: 2/3;
-        margin-left: 0
+        margin-left: 0;
+        width: 90%;
     }
 `
 

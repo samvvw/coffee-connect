@@ -1,5 +1,5 @@
 import { Switch, Route } from 'react-router-dom'
-
+import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
@@ -9,11 +9,13 @@ import {
     SignIn,
     Home,
     Product,
+    ProductConsumer,
     FarmDashboard,
     CoffeeMarketplace,
     AboutUs,
     ContactUs,
     FarmProfile,
+    FarmProfileConsumer,
     FarmDirectory,
     MyFarm,
     ConsumerDashboardProducts,
@@ -22,6 +24,8 @@ import {
 } from './views'
 
 function App() {
+    const [querySearch, setQuerySearch] = useState('')
+
     return (
         <div className="view-container">
             <Header />
@@ -31,10 +35,20 @@ function App() {
                     <Route path="/sign-up" component={SignUp} />
                     <Route path="/sign-in" component={SignIn} />
                     <Route path="/product" component={Product} />
-                    <Route path="/marketplace" component={CoffeeMarketplace} />
+                    <Route path="/product-detail" component={ProductConsumer} />
+                    <Route path="/marketplace">
+                        <CoffeeMarketplace
+                            querySearch={querySearch}
+                            setQuerySearch={setQuerySearch}
+                        />
+                    </Route>
                     <Route path="/about-us" component={AboutUs} />
                     <Route path="/contact-us" component={ContactUs} />
                     <Route path="/farm-profile" component={FarmProfile} />
+                    <Route
+                        path="/farm-profile-detail"
+                        component={FarmProfileConsumer}
+                    />
                     <Route path="/farm-directory" component={FarmDirectory} />
                     <Route
                         path="/consumer-dashboard-products"
@@ -52,7 +66,12 @@ function App() {
                     <PrivateRouteFarmer path="/my-farm">
                         <MyFarm />
                     </PrivateRouteFarmer>
-                    <Route path="/" exact component={Home} />
+                    <Route path="/" exact>
+                        <Home
+                            querySearch={querySearch}
+                            setQuerySearch={setQuerySearch}
+                        />
+                    </Route>
                 </Switch>
             </main>
             <Footer />

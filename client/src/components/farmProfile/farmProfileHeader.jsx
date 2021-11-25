@@ -61,14 +61,16 @@ const FarmProfileHeader = ({
                         <div>
                             <p>Origin:</p>
                             <h5>{origin}</h5>
+                            <span className="h5Span">|</span>
+                            <h5 className="h5Location">{location}</h5>
                         </div>
                         <div>
-                            <p>Location:</p>
-                            <h5>{location}</h5>
+                            {/* <p>Location:</p>
+                            <h5 className="h5Location">{location}</h5> */}
                         </div>
                     </div>
                     <div>
-                        <p>Altitude</p>
+                        <p>Altitude:</p>
                         <h5>{altitude}</h5>
                     </div>
                 </div>

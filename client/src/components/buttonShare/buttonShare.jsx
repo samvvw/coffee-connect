@@ -6,6 +6,7 @@ const ButtonShare = ({
     type = 'button',
     backgroundColor,
     textColor,
+    borderColor,
 }) => {
     return (
         <StyledButton
@@ -13,6 +14,7 @@ const ButtonShare = ({
             onClick={onClick}
             backgroundColor={backgroundColor}
             textColor={textColor}
+            borderColor={borderColor}
         >
             <ShareIcon />
             <span>Share</span>

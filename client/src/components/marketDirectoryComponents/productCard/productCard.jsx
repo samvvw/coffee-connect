@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import Favorite from '@material-ui/icons/Favorite'
@@ -8,7 +9,7 @@ import { api } from '../../../config/api'
 import { theme } from '../../../theme/theme'
 import { CardContainer } from './productCard.styles'
 
-const ProductCard = ({ data, userId }) => {
+const ProductCard = ({ data, userId, userType }) => {
     const [liked, setLiked] = useState(false)
 
     const handleLike = () => {
@@ -33,23 +34,47 @@ const ProductCard = ({ data, userId }) => {
         <CardContainer>
             <div className="image-container">
                 {data.picture.length > 0 && (
-                    <img src={data.picture[0]} alt="" />
+                    <Link
+                        to={{
+                            pathname: '/product-detail',
+                            state: {
+                                farmID: data.farmId,
+                                idProduct: data._id,
+                            },
+                        }}
+                    >
+                        <img src={data.picture[0]} alt="" />
+                    </Link>
                 )}
                 {data.picture.length === 0 && <img src={placeholder} alt="" />}
-                <div className="like-container" onClick={handleLike}>
-                    {liked ? (
-                        <Favorite
-                            style={{ fill: theme.pallette.accent2.light }}
-                        />
-                    ) : (
-                        <FavoriteBorder
-                            style={{ fill: theme.pallette.accent2.light }}
-                        />
-                    )}
-                </div>
+                {userId && userType && userType !== 'farmer' && (
+                    <div className="like-container" onClick={handleLike}>
+                        {liked ? (
+                            <Favorite
+                                style={{ fill: theme.pallette.accent2.light }}
+                            />
+                        ) : (
+                            <FavoriteBorder
+                                style={{ fill: theme.pallette.accent2.light }}
+                            />
+                        )}
+                    </div>
+                )}
             </div>
             <div className="product">
-                <p className="product__title">{data.productName}</p>
+                <p className="product__title">
+                    <Link
+                        to={{
+                            pathname: '/product-detail',
+                            state: {
+                                farmID: data.farmId,
+                                idProduct: data._id,
+                            },
+                        }}
+                    >
+                        {data.productName}
+                    </Link>
+                </p>
                 <div className="product__metadata">
                     <p className="product__metadata__location">
                         Location: <span>{data.location} </span>
@@ -67,10 +92,20 @@ const ProductCard = ({ data, userId }) => {
                     <p className="product__info__description">
                         {data.description}
                     </p>
-                    <ArrowForwardIcon
-                        className="product__info__arrow"
-                        fontSize="large"
-                    />
+                    <Link
+                        to={{
+                            pathname: '/product-detail',
+                            state: {
+                                farmID: data.farmId,
+                                idProduct: data._id,
+                            },
+                        }}
+                    >
+                        <ArrowForwardIcon
+                            className="product__info__arrow"
+                            fontSize="large"
+                        />
+                    </Link>
                 </div>
                 <div className="product__price">
                     <p>

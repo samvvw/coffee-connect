@@ -1,9 +1,9 @@
 export const SideBarData = [
     {
-        id: 1,
-        title: 'Home',
-        path: '/',
-        cName: 'nav-text',
+        // id: 1,
+        // title: 'Home',
+        // path: '/',
+        // cName: 'nav-text',
     },
     {
         id: 2,
@@ -28,5 +28,36 @@ export const SideBarData = [
         title: 'Contact Us',
         path: '/contact-us',
         cName: 'nav-text',
+    },
+]
+
+
+export const SideBarBottom = [
+    {
+        id: 1,
+        title: 'Sign up',
+        path: '/sign-up',
+        cName: 'nav-text nav-bottom',
+    },
+    {
+        id: 2,
+        title: 'Login',
+        path: '/sign-in',
+        cName: 'nav-text nav-bottom',
+    },
+]
+
+export const SideBarBottomLoggedIn = [
+    {
+        id: 1,
+        title: 'Account Settings',
+        path: '/account',
+        cName: 'nav-text nav-bottom',
+    },
+    {
+        id: 2,
+        title: 'Logout',
+        path: '#',
+        cName: 'nav-text nav-bottom',
     },
 ]

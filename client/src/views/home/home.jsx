@@ -6,8 +6,15 @@ import HowQafaWorks from '../../components/howQafaWorks/howQafaWorks'
 import MeetTheTeam from '../../components/meetTheTeam/meetTheTeam'
 import Newsletter from '../../components/newsletter/newsletter'
 import { Container, SubContainer } from './home.styles'
+import { useEffect } from 'react'
 
-const Home = () => {
+const Home = ({setQuerySearch, querySearch}) => {
+
+    useEffect(() => {
+        setQuerySearch('')
+
+    }, [setQuerySearch])
+    
     return (
         <Container>
             <Hero/>
@@ -15,7 +22,7 @@ const Home = () => {
                 <WhatsQafa />
                 <TriCardHolder/>
             </SubContainer>
-            <SearchHome />
+            <SearchHome querySearch={querySearch} setQuerySearch={setQuerySearch}/>
             <HowQafaWorks />
             <MeetTheTeam />
             <Newsletter />

@@ -1,12 +1,22 @@
 import styled from 'styled-components'
 import BookmarkIcon from '@material-ui/icons/Bookmark'
+import { Link } from 'react-router-dom'
 
 const FarmCard = (props) => {
     return (
         <article className={props.className}>
             <div className="farm-img-wrapper">
-                <img src={props.farm.image} alt={props.farm.name} />
-                <span>
+                <Link
+                    to={{
+                        pathname: '/farm-profile-detail',
+                        state: {
+                            farmID: props.farm.id,
+                        },
+                    }}
+                >
+                    <img src={props.farm.image} alt={props.farm.name} />
+                </Link>
+                <span onClick={props.handleBookmark}>
                     <BookmarkIcon />
                 </span>
             </div>

@@ -16,7 +16,7 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 2rem 0 1rem;
+        padding: 1.3rem 0 1rem;
     }
 
     .slider {
@@ -78,6 +78,7 @@ export const Container = styled.div`
         height: 0;
         width: 200px;
         outline: none;
+        margin-top: 4px;
     }
 
     .thumb--zindex-3 {
@@ -100,7 +101,7 @@ export const Container = styled.div`
         cursor: pointer;
         height: 23px;
         width: 23px;
-        margin-top: 6px;
+        margin-top: 2px;
         pointer-events: all;
         position: relative;
     }
@@ -109,12 +110,13 @@ export const Container = styled.div`
     .thumb::-moz-range-thumb {
         background-color: #f1f5f7;
         border: none;
+        border: 1px solid ${theme.pallette.black[500]};
         border-radius: 50%;
         box-shadow: 0 0 1px 1px #ced4da;
         cursor: pointer;
-        height: 23px;
-        width: 23px;
-        margin-top: 4px;
+        height: 25px;
+        width: 25px;
+        margin-top: 10px;
         pointer-events: all;
         position: relative;
     }

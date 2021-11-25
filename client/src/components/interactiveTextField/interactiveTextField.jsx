@@ -1,26 +1,41 @@
-import Button from '../button/button'
-import { theme } from '../../theme/theme'
-import { Container, IconContainer, Input } from './interactiveTextField.styles'
-
+import { Container, Input, Button, Message } from './interactiveTextField.styles'
+import { useState } from 'react';
+import axios from 'axios'
 
 const InteractiveTextField  = (props) => {
 
-    return (
-        <Container>
-            <IconContainer>
-                <Button
+    const [email, setEmail] = useState("");
+    const [messageShowHide, setMessageShowHide] = useState(false);
 
-                    title={"Subscribe"}
-                    backgroundColor={theme.pallette.secondary.c800}
-                    textColor={"#ffffff"}
-                    border="none"
-                    padding="5px 20px"
-                ></Button>
-            </IconContainer>
+    const handleEmailInput = event => {
+        setEmail(event.target.value.trim());
+    }
+
+    const handleSubmitEmail = (event, email) => {
+        event.preventDefault()
+        axios.post(`api/newsletterSubscription`, {email: email})
+        .then(result => {    
+            setMessageShowHide(true) 
+            setEmail("")
+        })
+        .catch(error => console.log(error))
+    }
+
+
+
+    return (
+        <Container onSubmit={event => handleSubmitEmail(event, email)}>
             <Input
-            type="text"
-            placeholder="john@example.com"
+                type="text"
+                placeholder="john@example.com"
+                value={email}
+                onChange={event => handleEmailInput(event)}
             />
+            <Button>Subscribe</Button>
+            {messageShowHide ? 
+                <Message>You've been added to the subscription!</Message>
+                : null
+            }
         </Container>
     )
 }

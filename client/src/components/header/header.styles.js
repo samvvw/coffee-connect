@@ -5,12 +5,15 @@ export const DesktopContainer = styled.header`
     background-color: #ffffff;
     color: #000000;
     display: flex;
-    justify-content: space-around;
+    justify-content: ${(props) =>
+        props.isHome ? 'flex-start' : 'space-between'};
+    gap: ${(props) => (props.isHome ? '3%' : '0')};
     align-items: center;
     max-width: 100%;
     width: 100%;
-    /* padding-bottom: 1rem; */
     border-bottom: 1px solid #b0bec5;
+    padding-left: 12px;
+    padding-right: 32px;
 `
 
 export const MobileContainer = styled.header`

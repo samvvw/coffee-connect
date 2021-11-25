@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState, useRef } from 'react'
 import classnames from 'classnames'
 import { Container } from './priceSlider.styles'
 
-const PriceSlider = ({ min = 0, max = 100, onChange }) => {
+const PriceSlider = ({ min = 1, max = 100, onChange }) => {
     const [minVal, setMinVal] = useState(min)
     const [maxVal, setMaxVal] = useState(max)
     const minValRef = useRef(null)
@@ -43,7 +43,7 @@ const PriceSlider = ({ min = 0, max = 100, onChange }) => {
     // Get min and max values when their state changes
     useEffect(() => {
         onChange({ min: minVal, max: maxVal })
-    }, [minVal, maxVal])
+    }, [minVal, maxVal, onChange])
 
     return (
         <Container>
@@ -51,7 +51,7 @@ const PriceSlider = ({ min = 0, max = 100, onChange }) => {
             <div className="values">
                 <span>
                     CA${minVal} - CA${maxVal}
-                    {maxVal < 1000 ? '' : '+'}
+                    {maxVal < max ? '' : '+'}
                 </span>
             </div>
             <div className="slider-container">

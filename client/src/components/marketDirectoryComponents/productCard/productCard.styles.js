@@ -26,7 +26,7 @@ export const CardContainer = styled.div`
     img {
         width: 352px;
         height: 240px;
-        object-fit: contain;
+        object-fit: cover;
         border-radius: 8px;
         cursor: pointer;
     }
@@ -36,11 +36,16 @@ export const CardContainer = styled.div`
         max-width: 100%;
 
         &__title {
-            font-weight: bold;
+            font-weight: 600;
             font-size: 1.4rem;
             max-width: 30ch;
             margin-bottom: 0.2rem;
             cursor: pointer;
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
         }
 
         &__metadata {
@@ -56,7 +61,7 @@ export const CardContainer = styled.div`
                 font-size: 0.9rem;
 
                 span {
-                    font-weight: 600;
+                    font-weight: 500;
                     font-size: 1rem;
                     color: #000000;
                 }
@@ -72,6 +77,16 @@ export const CardContainer = styled.div`
                 max-width: 40ch;
                 width: 100%;
                 font-size: 0.9rem;
+                display: -webkit-box;
+                max-width: 400px;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            a {
+                color: inherit;
+                text-decoration: none;
             }
 
             &__arrow {
@@ -87,11 +102,15 @@ export const CardContainer = styled.div`
     }
 
     @media (max-width: 1000px) {
+        max-width: 90%;
+        width: 100%;
+        margin: auto;
         flex-direction: column;
 
         img {
+            max-width: 100%;
             width: 100%;
-            height: 300px;
+            height: 200px;
             object-fit: cover;
         }
 
@@ -101,6 +120,7 @@ export const CardContainer = styled.div`
                 margin-bottom: 0;
                 padding-bottom: 0;
             }
+
             &__info {
                 display: none;
             }

@@ -21,7 +21,8 @@ export const Container = styled.div`
     }
 
     @media only screen and (min-width: ${theme.layout.desktop}) {
-        width: 760px;
+        max-width: 760px;
+        width: 80%;
     }
 `
 

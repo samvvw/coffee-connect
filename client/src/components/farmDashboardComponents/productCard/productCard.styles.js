@@ -8,6 +8,11 @@ export const Container = styled.div`
     margin: 0 auto;
 
     #imageContainer {
+        img {
+            height: 200px;
+            object-fit: cover;
+        }
+
         position: relative;
         & > :nth-child(2) {
             position: absolute;

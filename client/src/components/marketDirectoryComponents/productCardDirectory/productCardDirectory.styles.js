@@ -8,6 +8,7 @@ export const Container = styled.div`
     justify-content: space-between;
     margin-bottom: 1rem;
     gap: 1.5rem;
+    border-radius: 8px;
 
     img {
         width: 136px;
@@ -35,11 +36,16 @@ export const Container = styled.div`
         }
 
         &__title {
-            font-weight: bold;
+            font-weight: 600;
             font-size: 1.4rem;
             max-width: 30ch;
             margin-bottom: 0.2rem;
             cursor: pointer;
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
         }
 
         &__metadata {
@@ -64,19 +70,54 @@ export const Container = styled.div`
     }
 
     @media (max-width: 1000px) {
+        max-width: 310px;
+        width: 100%;
         flex-direction: column;
+        margin-left: 0;
+        margin: auto;
+        gap: 0.5rem;
+        border-radius: 8px;
 
         img {
-            width: 100%;
-            height: 300px;
+            width: 310px;
+            height: 100px;
             object-fit: cover;
+            cursor: pointer;
+            border-radius: 0;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
         }
 
         .product {
+            margin-bottom: 1rem;
+            padding: 0 0.5rem;
+
             &__metadata {
                 border-bottom: none;
                 margin-bottom: 0;
                 padding-bottom: 0;
+            }
+
+            &__title {
+                font-weight: 600;
+                font-size: 1.1rem;
+                max-width: 30ch;
+                margin-bottom: 0.2rem;
+                cursor: pointer;
+            }
+
+            & .top-container {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                padding-right: 0.7rem;
+
+                & .bookmark-container {
+                    border: 1px solid ${theme.pallette.black[200]};
+                    border-radius: 50%;
+                    padding: 0.2rem 0.33rem;
+                    cursor: pointer;
+                }
             }
         }
     }

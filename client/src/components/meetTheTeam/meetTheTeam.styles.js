@@ -23,6 +23,7 @@ export const Heading = styled.h2`
     @media only screen and (min-width: ${theme.layout.desktop}){ 
         font-size: 3rem;
         width: 760px;
+        max-width: 70%;
     }
 
 `
@@ -35,6 +36,7 @@ export const Paragraph = styled.p`
     @media only screen and (min-width: ${theme.layout.desktop}){ 
         font-size: 1.125rem;
         width: 760px;
+        max-width: 70%;
     }
 
 `
@@ -48,5 +50,6 @@ export const BoldParagraph = styled.p`
     @media only screen and (min-width: ${theme.layout.desktop}){ 
         font-size: 1.125rem;
         width: 760px;
+        max-width: 70%;
     }
 `

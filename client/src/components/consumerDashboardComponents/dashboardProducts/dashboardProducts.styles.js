@@ -1,12 +1,23 @@
 import styled from 'styled-components'
 import FavoriteIcon from '@material-ui/icons/Favorite'
+import { Link } from 'react-router-dom'
 
 const ProductCard = (props) => {
     return (
         <article className={props.className}>
             <div className="product-img-wrapper">
-                <img src={props.product.image} alt={props.product.name} />
-                <span>
+                <Link
+                    to={{
+                        pathname: '/product-detail',
+                        state: {
+                            farmID: props.product.farmId,
+                            idProduct: props.product.id,
+                        },
+                    }}
+                >
+                    <img src={props.product.image} alt={props.product.name} />
+                </Link>
+                <span onClick={props.handleLike}>
                     <FavoriteIcon />
                 </span>
             </div>
