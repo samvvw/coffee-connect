@@ -6,7 +6,7 @@ import { StyledProductDetailImages } from './productDetailImages.styles'
 import { useEffect, useState } from 'react'
 import { theme } from '../../../theme/theme'
 
-const ProductDetailImages = ({ urlsArray, width }) => {
+const ProductDetailImages = ({ urlsArray, width, farmId, productId }) => {
     const [matches, setMatches] = useState(
         window.matchMedia(`(min-width: ${theme.layout.desktop})`).matches
     )
@@ -20,7 +20,13 @@ const ProductDetailImages = ({ urlsArray, width }) => {
 
     return (
         <StyledProductDetailImages width={width}>
-            {!matches && <ProductDetailImagesCarousel urlsArray={urlsArray} />}
+            {!matches && (
+                <ProductDetailImagesCarousel
+                    urlsArray={urlsArray}
+                    farmId={farmId}
+                    productId={productId}
+                />
+            )}
 
             {/* {matches && <ProductDetailImageDynamicGrid urlsArray={urlsArray} />} */}
         </StyledProductDetailImages>
