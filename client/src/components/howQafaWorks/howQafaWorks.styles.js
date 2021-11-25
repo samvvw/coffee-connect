@@ -7,7 +7,7 @@ export const Container = styled.div`
     width: 311px;
 
     @media only screen and (min-width: ${theme.layout.desktop}){ 
-        margin: 10rem auto;
+        margin: 10rem auto 12rem auto;
         display: Grid;
         height: 400px;
         width: 70%;
@@ -20,7 +20,7 @@ export const Container = styled.div`
             display: block;
             position: absolute;
             left: 0; /* horizontal position */
-            top: -50px; /* vertical position */
+            top: -2.3vw; /* vertical position */
             width: 50px; 
             height: 2px; /* boldness */
             background-color: #FF9933; 
@@ -49,10 +49,14 @@ export const OneLine = styled.h2`
 
 
     @media only screen and (min-width: ${theme.layout.desktop}){
-        font-size: 3rem; 
+        font-size: 2.4rem; 
         width: 80%;
         grid-column: 1/2;
         grid-row: 2/3;
+    }
+
+    @media only screen and (min-width: 1200px){
+        font-size: 3rem; 
     }
 `
 
