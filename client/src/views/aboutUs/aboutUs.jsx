@@ -27,9 +27,9 @@ const AboutUS = () => {
             lastName: 'Adetola',
             role: 'Digital Product Designer - UI/UX',
             bioShort:
-                'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
+                'A self-taught product designer with an architectural design technology background',
             bioLong:
-                'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
+                'A self-taught product designer with an architectural design technology background specializing in interface design and user experience for digital products since 2013. I care a lot about using design to create clean, meaningful experiences.',
             title: 'designer',
             linkedin: 'http://linkedin.com/in/tayoadetola',
             socialNetwork: 'http://socialNetwork',
@@ -41,9 +41,9 @@ const AboutUS = () => {
             lastName: 'Arteaga',
             role: 'Front-end Developer',
             bioShort:
-                'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
+                '7 years of experience in software development with Java.',
             bioLong:
-                'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
+                '',
             title: 'developer',
             linkedin: 'http://linkedin.com/in/jharteaga',
             socialNetwork: 'https://github.com/jharteaga',
@@ -55,9 +55,9 @@ const AboutUS = () => {
             lastName: 'Behravesh',
             role: 'Digital Product Designer - UI/UX',
             bioShort:
-                'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
+                'Over 10 years of experience as a Graphic Designer and Lead designer in an advertising Agency.',
             bioLong:
-                'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
+                '',
             title: 'designer',
             linkedin: 'http://linkedin.com/in/elnazb',
             socialNetwork: 'http://socialNetwork',
@@ -69,9 +69,9 @@ const AboutUS = () => {
             lastName: 'Fajardo Talavera',
             role: 'Digital Product Designer - UI/UX',
             bioShort:
-                'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
+                '8 years of experience as a product designer and 2 years as a project manager developing VR and AR apps.',
             bioLong:
-                'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
+                '',
             title: 'designer',
             linkedin: 'http://linkedin.com/in/lilfajardo',
             socialNetwork: 'http://socialNetwork',
@@ -83,9 +83,9 @@ const AboutUS = () => {
             lastName: 'Hernandez Vega',
             role: 'Full-stack Developer',
             bioShort:
-                'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
+                '3 years of experience in software development with .Net and SQL server.',
             bioLong:
-                'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
+                '',
             title: 'developer',
             linkedin: 'http://linkedin.com/in/alerika',
             socialNetwork: 'https://github.com/alerika2018',
@@ -95,11 +95,11 @@ const AboutUS = () => {
             hoverImg: megumiHover,
             firstName: 'Megumi',
             lastName: 'Takashima',
-            role: 'Full-stack Developer, Project Manager',
+            role: 'Full-stack Developer, PM',
             bioShort:
-                'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
+                'Experience of building application with MS Excel Macro/VBA.',
             bioLong:
-                'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
+                '',
             title: 'developer',
             linkedin: 'http://linkedin.com/in/megumi-takashima',
             socialNetwork: 'https://github.com/takam3g',
@@ -111,9 +111,9 @@ const AboutUS = () => {
             lastName: 'Villegas Warren',
             role: 'Full-stack Developer',
             bioShort:
-                'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
+                'Self-taught web developer with experience of building app using React, Node.js,',
             bioLong:
-                'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
+                'Self-taught web developer with experience of building app using React, Node.js, SQL/NoSQL databases and cloud services. Background as business developer.',
             title: 'developer',
             linkedin: 'http://linkedin.com/in/samuelvw',
             socialNetwork: 'https://github.com/samvvw',

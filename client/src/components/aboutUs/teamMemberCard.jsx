@@ -46,11 +46,14 @@ const TeamMemberCard = ({ imgUrl, arrObjMemberData }) => {
                 {isbioShort
                     ? arrObjMemberData.bioLong
                     : arrObjMemberData.bioShort}
-                <span>
-                    <button type="button" onClick={toggleBio}>
-                        {isbioShort ? 'Read less' : 'Read more'}
-                    </button>
-                </span>
+                
+                {arrObjMemberData.bioLong==='' ? null :
+                    <span>
+                        <button type="button" onClick={toggleBio}>
+                            {isbioShort ? 'Read less' : 'Read more'}
+                        </button>
+                    </span>
+                }
             </p>
 
             <IconsContainer>
