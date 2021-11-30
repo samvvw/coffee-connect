@@ -16,7 +16,7 @@ export const Container = styled.div`
     }
 
     .menu-bars {
-        font-size: 2rem;
+        font-size: 3rem;
         background: none;
         padding: 0.5rem;
     }
@@ -58,6 +58,10 @@ export const Container = styled.div`
         border-bottom: none;
     }
 
+    .nav-bottom.green a {
+        color: ${theme.pallette.primary[500]}
+    } 
+
     .nav-text a {
         text-decoration: none;
         color: #000000;
@@ -90,7 +94,7 @@ export const Container = styled.div`
 
     .navbar-toggle {
         width: 100%;
-        height: 80px;
+        height: 173px;
         display: grid;
         grid-template-columns: 15% 85%;
         align-items: center;

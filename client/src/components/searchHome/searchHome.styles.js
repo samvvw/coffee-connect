@@ -24,7 +24,7 @@ export const Heading = styled.h2`
     text-align: center;
     font-size: 2rem;
     margin: 3rem auto 1rem auto;
-    width: 311px
+    width: 311px;
 
     @media only screen and (min-width: ${theme.layout.desktop}) { 
         font-size: 2vw;
