@@ -26,30 +26,26 @@ const NavBarMobile = () => {
     return (
         <Container type={user.userType}>
             <div className="navbar">
-                <Link to="#" className="menu-bars">
-                    <MenuIcon
-                        fontSize="large"
-                        style={{ fill: '#000000' }}
-                        onClick={showSideBar}
-                    />
-                </Link>
+                <MenuIcon className="menu-bars"
+                    fontSize="large"
+                    style={{ fill: '#000000' }}
+                    onClick={showSideBar}
+                />
             </div>
             <div className={sideBar ? 'nav-menu active' : 'nav-menu'}>
-                <ul className="nav-menu-items">
-                    <li className="navbar-toggle">
-                        <Link to="#" className="menu-bars">
-                            <CloseIcon
-                                fontSize="large"
-                                style={{ fill: '#000000' }}
-                                onClick={showSideBar}
-                            />                            
-                        </Link>
+                    <div className="navbar-toggle">
+                        <CloseIcon className="menu-bars"
+                            fontSize="large"
+                            style={{ fill: '#000000' }}
+                            onClick={showSideBar}
+                        />                            
                         {user.firstName ?
                             <div className="logged-in">
                                 <Link 
                                     to={user.userType === 'farmer' ?
                                     '/my-products'
-                                    : '/consumer-dashboard-products'} className="menu-bars" 
+                                    : '/consumer-dashboard-products'} 
+                                    className="menu-bars" 
                                     onClick={showSideBar}>
                                     Go to my Dashboard
                                 </Link>
@@ -61,8 +57,9 @@ const NavBarMobile = () => {
                             </div>
                             : null
                         }
-                    </li>
-
+                    </div>
+                
+                <ul className="nav-menu-items">
                     {SideBarData.map((item) => {
                         return (
                             <li
@@ -71,12 +68,13 @@ const NavBarMobile = () => {
                                 onClick={showSideBar}
                             >
                                 <Link to={item.path}>
-                                    <span>{item.title}</span>
+                                    {item.title}
                                 </Link>
                             </li>
                         )
                     })}
-                </ul>           
+                </ul>   
+
                 <ul className="nav-menu-items bottom">
                     {user.firstName ?
                         SideBarBottomLoggedIn.map((item) => {
@@ -87,7 +85,7 @@ const NavBarMobile = () => {
                                     onClick={item.id===1 ? showSideBar : handleSignOut}
                                 >
                                     <Link to={item.path}>
-                                        <span>{item.title}</span>
+                                        {item.title}
                                     </Link>
                                 </li>
                             )
@@ -101,7 +99,7 @@ const NavBarMobile = () => {
                                     onClick={showSideBar}
                                 >
                                     <Link to={item.path}>
-                                        <span>{item.title}</span>
+                                        {item.title}
                                     </Link>
                                 </li>
                             )
