@@ -1,10 +1,10 @@
 export const SideBarData = [
-    {
-        // id: 1,
-        // title: 'Home',
-        // path: '/',
-        // cName: 'nav-text',
-    },
+    // {
+    //     id: 1,
+    //     title: 'Home',
+    //     path: '/',
+    //     cName: 'nav-text',
+    // },
     {
         id: 2,
         title: 'Coffee Marketplace',
@@ -37,13 +37,13 @@ export const SideBarBottom = [
         id: 1,
         title: 'Sign up',
         path: '/sign-up',
-        cName: 'nav-text nav-bottom',
+        cName: 'nav-text nav-bottom green',
     },
     {
         id: 2,
         title: 'Login',
         path: '/sign-in',
-        cName: 'nav-text nav-bottom',
+        cName: 'nav-text nav-bottom green',
     },
 ]
 
@@ -57,7 +57,7 @@ export const SideBarBottomLoggedIn = [
     {
         id: 2,
         title: 'Logout',
-        path: '#',
-        cName: 'nav-text nav-bottom',
+        path: '/',
+        cName: 'nav-text nav-bottom green',
     },
 ]
