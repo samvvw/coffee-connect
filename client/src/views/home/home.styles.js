@@ -14,6 +14,7 @@ export const SubContainer = styled.div`
     margin: 0 auto;
 
     @media only screen and (min-width: ${theme.layout.desktop}) { 
+        width: 70%;
         background: url('${bgImg}');
         background-repeat: no-repeat;
         background-position: center 25px;
