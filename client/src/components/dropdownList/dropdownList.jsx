@@ -18,7 +18,7 @@ const DropdownList = ({ width, height, objArraySizes, setPrice }) => {
         (option) =>
             option.size > 0 && (
                 <option key={option._id} value={option._id}>
-                    {option.size}
+                    {option.size}g
                 </option>
             )
     )
