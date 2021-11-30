@@ -3,10 +3,10 @@ import Button from '../button/button'
 import { Link } from 'react-router-dom'
 import { theme } from '../../theme/theme'
 import { Container, Heading, Paragraph, BoldParagraph } from './meetTheTeam.styles'
-import homeAbout from '../../assets/images/home-about.png'
+import homeTeam from '../../assets/images/home-team.png'
 
 
-const MeetTheTeam = ({onClick, urlImg=homeAbout}) => {
+const MeetTheTeam = ({onClick, urlImg=homeTeam}) => {
     return (
         <Container>
             <Heading>Helping farmers transform</Heading>
@@ -30,7 +30,7 @@ const MeetTheTeam = ({onClick, urlImg=homeAbout}) => {
                 ></Button>
             </Link>
 
-            <Image urlImg={urlImg} border="none" padding="8rem 0 0 0"></Image>
+            <Image urlImg={urlImg} border="none" padding="1rem 0 0 0"></Image>
         </Container>
     )
 }
