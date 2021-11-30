@@ -28,7 +28,7 @@ export const Heading = styled.h2`
 
     @media only screen and (min-width: ${theme.layout.desktop}) { 
         font-size: 2vw;
-        width: 811px
+        width: 811px;
         max-width: 80%;
     }
 `
