@@ -1,15 +1,28 @@
 import AboutUsHero from '../../components/aboutUs/AboutUsHero'
 import TeamMemberCard from '../../components/aboutUs/teamMemberCard'
-import imgPlaceholder from '../../assets/images/placeholder.png'
-import imgPlaceholder2 from '../../assets/images/placeholder2.png'
-
 import { Container, CardsContainer } from './aboutUs.styles'
+import tayoDefault from '../../assets/images/aboutUs/tayo-default.png'
+import tayoHover from '../../assets/images/aboutUs/tayo-hover.png'
+import joseDefault from '../../assets/images/aboutUs/jose-default.png'
+import joseHover from '../../assets/images/aboutUs/jose-hover.png'
+import elnazDefault from '../../assets/images/aboutUs/elnaz-default.png'
+import elnazHover from '../../assets/images/aboutUs/elnaz-hover.png'
+import lilianDefault from '../../assets/images/aboutUs/lilian-default.png'
+import lilianHover from '../../assets/images/aboutUs/lilian-hover.png'
+import alejandraDefault from '../../assets/images/aboutUs/alejandra-default.png'
+import alejandraHover from '../../assets/images/aboutUs/alejandra-hover.png'
+import megumiDefault from '../../assets/images/aboutUs/megumi-default.png'
+import megumiHover from '../../assets/images/aboutUs/megumi-hover.png'
+import samuelDefault from '../../assets/images/aboutUs/samuel-default.png'
+import samuelHover from '../../assets/images/aboutUs/samuel-hover.png'
+
+
 
 const AboutUS = () => {
     const arrObjMemberData = [
         {
-            defaultImg: imgPlaceholder,
-            hoverImg: imgPlaceholder2,
+            defaultImg: tayoDefault,
+            hoverImg: tayoHover,
             firstName: 'Tayo',
             lastName: 'Adetola',
             role: 'Digital Product Designer - UI/UX',
@@ -18,12 +31,12 @@ const AboutUS = () => {
             bioLong:
                 'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
             title: 'designer',
-            linkedin: 'http://linkedin.com',
+            linkedin: 'http://linkedin.com/in/tayoadetola',
             socialNetwork: 'http://socialNetwork',
         },
         {
-            defaultImg: imgPlaceholder,
-            hoverImg: imgPlaceholder2,
+            defaultImg: joseDefault,
+            hoverImg: joseHover,
             firstName: 'Jose',
             lastName: 'Arteaga',
             role: 'Front-end Developer',
@@ -32,12 +45,12 @@ const AboutUS = () => {
             bioLong:
                 'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
             title: 'developer',
-            linkedin: 'http://linkedin.com',
-            socialNetwork: 'http://socialNetwork',
+            linkedin: 'http://linkedin.com/in/jharteaga',
+            socialNetwork: 'https://github.com/jharteaga',
         },
         {
-            defaultImg: imgPlaceholder,
-            hoverImg: imgPlaceholder2,
+            defaultImg: elnazDefault,
+            hoverImg: elnazHover,
             firstName: 'Elnaz',
             lastName: 'Behravesh',
             role: 'Digital Product Designer - UI/UX',
@@ -46,12 +59,12 @@ const AboutUS = () => {
             bioLong:
                 'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
             title: 'designer',
-            linkedin: 'http://linkedin.com',
+            linkedin: 'http://linkedin.com/in/elnazb',
             socialNetwork: 'http://socialNetwork',
         },
         {
-            defaultImg: imgPlaceholder,
-            hoverImg: imgPlaceholder2,
+            defaultImg: lilianDefault,
+            hoverImg: lilianHover,
             firstName: 'Lilian',
             lastName: 'Fajardo Talavera',
             role: 'Digital Product Designer - UI/UX',
@@ -60,12 +73,12 @@ const AboutUS = () => {
             bioLong:
                 'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
             title: 'designer',
-            linkedin: 'http://linkedin.com',
+            linkedin: 'http://linkedin.com/in/lilfajardo',
             socialNetwork: 'http://socialNetwork',
         },
         {
-            defaultImg: imgPlaceholder,
-            hoverImg: imgPlaceholder2,
+            defaultImg: alejandraDefault,
+            hoverImg: alejandraHover,
             firstName: 'Alejandra',
             lastName: 'Hernandez Vega',
             role: 'Full-stack Developer',
@@ -74,12 +87,12 @@ const AboutUS = () => {
             bioLong:
                 'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
             title: 'developer',
-            linkedin: 'http://linkedin.com',
-            socialNetwork: 'http://socialNetwork',
+            linkedin: 'http://linkedin.com/in/alerika',
+            socialNetwork: 'https://github.com/alerika2018',
         },
         {
-            defaultImg: imgPlaceholder,
-            hoverImg: imgPlaceholder2,
+            defaultImg: megumiDefault,
+            hoverImg: megumiHover,
             firstName: 'Megumi',
             lastName: 'Takashima',
             role: 'Full-stack Developer, Project Manager',
@@ -88,12 +101,12 @@ const AboutUS = () => {
             bioLong:
                 'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
             title: 'developer',
-            linkedin: 'http://linkedin.com',
-            socialNetwork: 'http://socialNetwork',
+            linkedin: 'http://linkedin.com/in/megumi-takashima',
+            socialNetwork: 'https://github.com/takam3g',
         },
         {
-            defaultImg: imgPlaceholder,
-            hoverImg: imgPlaceholder2,
+            defaultImg: samuelDefault,
+            hoverImg: samuelHover,
             firstName: 'Samuel',
             lastName: 'Villegas Warren',
             role: 'Full-stack Developer',
@@ -102,8 +115,8 @@ const AboutUS = () => {
             bioLong:
                 'Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, Mollis bibendum leo, pulvinar blandit gravida nec. Adipiscing sed pellentesque cras massa urna lectus leo, ',
             title: 'developer',
-            linkedin: 'http://linkedin.com',
-            socialNetwork: 'http://socialNetwork',
+            linkedin: 'http://linkedin.com/in/samuelvw',
+            socialNetwork: 'https://github.com/samvvw',
         },
     ]
 
@@ -115,31 +128,31 @@ const AboutUS = () => {
 
             <CardsContainer>
                 <TeamMemberCard
-                    imgUrl={imgPlaceholder}
+                    imgUrl={tayoDefault}
                     arrObjMemberData={arrObjMemberData[0]}
                 />
                 <TeamMemberCard
-                    imgUrl={imgPlaceholder}
+                    imgUrl={joseDefault}
                     arrObjMemberData={arrObjMemberData[1]}
                 />
                 <TeamMemberCard
-                    imgUrl={imgPlaceholder}
+                    imgUrl={elnazDefault}
                     arrObjMemberData={arrObjMemberData[2]}
                 />
                 <TeamMemberCard
-                    imgUrl={imgPlaceholder}
+                    imgUrl={lilianDefault}
                     arrObjMemberData={arrObjMemberData[3]}
                 />
                 <TeamMemberCard
-                    imgUrl={imgPlaceholder}
+                    imgUrl={alejandraDefault}
                     arrObjMemberData={arrObjMemberData[4]}
                 />
                 <TeamMemberCard
-                    imgUrl={imgPlaceholder}
+                    imgUrl={megumiDefault}
                     arrObjMemberData={arrObjMemberData[5]}
                 />
                 <TeamMemberCard
-                    imgUrl={imgPlaceholder}
+                    imgUrl={samuelDefault}
                     arrObjMemberData={arrObjMemberData[6]}
                 />
             </CardsContainer>
