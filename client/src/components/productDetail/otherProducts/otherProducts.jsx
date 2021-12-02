@@ -3,6 +3,7 @@ import OtherProductsBanner from './otherProductsBanner'
 import { StyledOtherProductsContainer } from './otherProducts.styles'
 
 import { useEffect, useState } from 'react'
+import { theme } from '../../../theme/theme'
 
 const OtherProducts = ({ arrUrlImage, imageWidth, arrObjProductDetails }) => {
     const [matches, setMatches] = useState(
@@ -10,8 +11,13 @@ const OtherProducts = ({ arrUrlImage, imageWidth, arrObjProductDetails }) => {
     )
 
     useEffect(() => {
-        const handler = (e) => setMatches(e.matches)
-        window.matchMedia('(min-width: 401px)').addListener(handler)
+        const mediaQuery = window.matchMedia(
+            `(min-width: ${theme.layout.desktop})`
+        )
+
+        mediaQuery.onchange = () => {
+            setMatches(mediaQuery.matches)
+        }
     }, [])
 
     return (

@@ -3,7 +3,7 @@ import { Container } from './farmProfileHero.styles'
 import { useEffect, useState } from 'react'
 import { theme } from '../../theme/theme'
 
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import ArrowBack from '@material-ui/icons/ArrowBack'
 import placeholder from '../../assets/images/placeholder.png'
@@ -22,10 +22,13 @@ const FarmProfileHero = ({ urlImage, farmName }) => {
     }
 
     useEffect(() => {
-        const handler = (e) => setMatches(e.matches)
-        window
-            .matchMedia(`(min-width: ${theme.layout.desktop})`)
-            .addListener(handler)
+        const mediaQuery = window.matchMedia(
+            `(min-width: ${theme.layout.desktop})`
+        )
+
+        mediaQuery.onchange = () => {
+            setMatches(mediaQuery.matches)
+        }
     }, [])
 
     return (

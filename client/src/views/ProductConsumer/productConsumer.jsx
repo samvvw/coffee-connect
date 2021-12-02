@@ -1,11 +1,10 @@
-// import { useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { Container } from './productConsumer.styles'
 import { theme } from '../../theme/theme'
 import placeHolder from '../../assets/images/placeholder.png'
-// import { UserContext } from '../../context/userContext/userContext'
+
 import axios from 'axios'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import ArrowBack from '@material-ui/icons/ArrowBack'
 import ProductDetailHeader from '../../components/productDetailConsumer/header/productDetailHeader'
 import ProductDetailImages from '../../components/productDetailConsumer/imagesGroup/productDetailImages'
@@ -18,9 +17,9 @@ import Map from '../../components/map/map'
 
 const ProductConsumer = (props) => {
     const history = useHistory()
-    // const { user, isTokenExpired } = useContext(UserContext)
+
     const [productData, setProductData] = useState()
-    // const [farmID, setFarmID] = useState()
+
     const [coordinates, setCoordinates] = useState()
     const [dataFarn, setDataFarn] = useState()
     const [products, setProducts] = useState()
@@ -33,10 +32,11 @@ const ProductConsumer = (props) => {
     if (props.location?.state?.farmID && props.location?.state?.idProduct) {
         idProduct = props.location.state.idProduct
         farmID = props.location.state.farmID
-    } else {
-        idProduct = '619d7d58982462c28d44851e'
-        farmID = '61970c1ca6dfef45769ee2f8'
     }
+    // else {
+    //     idProduct = '619d7d58982462c28d44851e'
+    //     farmID = '61970c1ca6dfef45769ee2f8'
+    // }
 
     const handleGoBack = () => {
         history.goBack()
@@ -58,7 +58,6 @@ const ProductConsumer = (props) => {
             axios
                 .get(`/api/farm/${farmID}/product/${idProduct}`)
                 .then((res) => {
-                    // console.log('infor of product', res.data.data)
                     setProductData(res.data.data)
 
                     const result = [
@@ -93,10 +92,13 @@ const ProductConsumer = (props) => {
     )
 
     useEffect(() => {
-        const handler = (e) => setMatches(e.matches)
-        window
-            .matchMedia(`(min-width: ${theme.layout.desktop}`)
-            .addListener(handler)
+        const mediaQuery = window.matchMedia(
+            `(min-width: ${theme.layout.desktop})`
+        )
+
+        mediaQuery.onchange = () => {
+            setMatches(mediaQuery.matches)
+        }
     }, [])
 
     return (
@@ -108,28 +110,6 @@ const ProductConsumer = (props) => {
                             <div id="headerDesktop">
                                 {matches && (
                                     <>
-                                        {/* <div id="divBannerHeader">
-                                            <div id="divLink">
-                                                <Link to="/my-products">
-                                                    <ArrowBack
-                                                        style={{
-                                                            fill: theme.pallette
-                                                                .black[400],
-                                                        }}
-                                                    />
-                                                    <p>
-                                                        My Products /
-                                                        <span>
-                                                            {'  '}
-                                                            {
-                                                                productData.productName
-                                                            }
-                                                        </span>
-                                                    </p>
-                                                </Link>
-                                            </div>
-                                        </div> */}
-
                                         <ProductDetailHeader
                                             backgroundColor="white"
                                             productName={
@@ -159,14 +139,6 @@ const ProductConsumer = (props) => {
                                                     }}
                                                 />
                                             </div>
-                                            {/* <Link to="/my-products">
-                                                <ArrowBack
-                                                    style={{
-                                                        fill: theme.pallette
-                                                            .black[400],
-                                                    }}
-                                                />
-                                            </Link> */}
                                         </div>
                                         <div>
                                             <ProductDetailImages
@@ -220,11 +192,6 @@ const ProductConsumer = (props) => {
                                         </div>
                                     </div>
                                 )}
-
-                                {/* <div>
-                                <CircleButton IconName="FavoriteFull" />
-                                <CircleButton IconName="Share" />
-                            </div> */}
                             </div>
                             {/* 1 header */}
                             <div id="header">
@@ -242,7 +209,6 @@ const ProductConsumer = (props) => {
                             {/* 3 Product detail card */}
                             <div id="detailCard">
                                 <ProductDetailCard
-                                    // width="300px"
                                     productName={
                                         productData.productName +
                                         ', ' +

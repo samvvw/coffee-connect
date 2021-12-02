@@ -22,10 +22,13 @@ const MyFarmDashboard = () => {
         window.matchMedia(`(min-width: ${theme.layout.desktop})`).matches
     )
     useEffect(() => {
-        const handler = (e) => setMatches(e.matches)
-        window
-            .matchMedia(`(min-width: ${theme.layout.desktop})`)
-            .addListener(handler)
+        const mediaQuery = window.matchMedia(
+            `(min-width: ${theme.layout.desktop})`
+        )
+
+        mediaQuery.onchange = () => {
+            setMatches(mediaQuery.matches)
+        }
     }, [])
 
     /*variables to control offcanvas - new product*/

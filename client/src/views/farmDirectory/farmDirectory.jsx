@@ -41,8 +41,11 @@ const FarmDirectory = (props) => {
     const handleOffCanvasFilter = () => setShow((prev) => !prev)
 
     useEffect(() => {
-        const handler = (e) => setMatches(e.matches)
-        window.matchMedia(`(min-width: 1000px`).addListener(handler)
+        const mediaQuery = window.matchMedia(`(min-width: 1000px)`)
+
+        mediaQuery.onchange = () => {
+            setMatches(mediaQuery.matches)
+        }
     }, [])
 
     useEffect(() => {

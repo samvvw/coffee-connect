@@ -43,13 +43,8 @@ const FarmProfileConsumer = (props) => {
     if (props.location?.state?.farmID) {
         farmID = props.location.state.farmID
     }
-    //else {
-    // farmID = '61931107a3a69e9788cba0e8'
-    //  farmID = '619ee4aa77ae0325df0f39d8'
-    //}
 
     useEffect(() => {
-        // if (Object.keys(user).length > 0) {
         axios
             .get(`/api/farm/${farmID}`)
 
@@ -81,17 +76,6 @@ const FarmProfileConsumer = (props) => {
             )
         }
     }, [description])
-
-    // const [matches, setMatches] = useState(
-    //     window.matchMedia(`(min-width: ${theme.layout.desktop})`).matches
-    // )
-
-    // useEffect(() => {
-    //     const handler = (e) => setMatches(e.matches)
-    //     window
-    //         .matchMedia(`(min-width: ${theme.layout.desktop})`)
-    //         .addListener(handler)
-    // }, [])
 
     return (
         <>
