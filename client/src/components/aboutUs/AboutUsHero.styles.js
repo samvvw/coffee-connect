@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { theme } from '../../theme/theme'
 
 export const Container = styled.div`
     width: 100%;
@@ -14,7 +15,7 @@ export const Container = styled.div`
         object-position: 50%;
     }
 
-    @media only screen and (min-width: 401px) {
+    @media only screen and (min-width: ${theme.layout.desktop}) {
         align-items: center;
 
         padding-bottom: 5rem;
@@ -45,19 +46,19 @@ export const SubContainer = styled.div`
         font-size: 1.125rem;
         font-weight: bold;
     }
-    @media only screen and (min-width: 401px) {       
-        padding-left: 15vw;
+    @media only screen and (min-width: ${theme.layout.desktop}) {       
+        padding-left: 12vw;
         
         h1 {
-            font-size: 4rem;
+            font-size: 3.5vw;
             margin-bottom: 1rem;
-            width: 756px;
+            width: 38vw;
         }
 
         p {
-            font-size: 1.5rem;
+            font-size: 1.5vw;
             position: relative;
-            width: 756px;
+            width: 38vw;
         }
 
         //short line
@@ -77,7 +78,7 @@ export const ChildContainer = styled.div`
     grid-column: ${(props) => props.gridColumn};
     grid-row: ${(props) => props.gridRows};
 
-    @media only screen and (min-width: 401px) {
+    @media only screen and (min-width: ${theme.layout.desktop}) {
         :nth-child(1) {
             grid-column: 1/2;
             grid-row: 1/2;

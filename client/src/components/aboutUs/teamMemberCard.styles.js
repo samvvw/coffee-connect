@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { theme } from '../../theme/theme'
 
 export const Container = styled.div`
     width: ${(props) => props.width || '100%'};
@@ -45,10 +46,10 @@ export const Container = styled.div`
         padding-bottom: 0.5rem;
     }
 
-    @media only screen and (min-width: 401px) {
+    @media only screen and (min-width: ${theme.layout.desktop}) {
         .team-member-image-wrapper {
-            width: 270px;
-            height: 270px;
+            width: 100%;
+            height: auto;
         }
 
         h3 span {

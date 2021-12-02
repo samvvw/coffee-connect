@@ -1,6 +1,13 @@
 import styled from 'styled-components'
+import { theme } from '../../theme/theme'
 
 export const Container = styled.div`
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
     .navbar {
         height: 80px;
         display: flex;
@@ -9,21 +16,23 @@ export const Container = styled.div`
     }
 
     .menu-bars {
-        margin-left: 0.5rem;
-        font-size: 2rem;
+        font-size: 3rem;
         background: none;
+        padding: 0.5rem;
     }
 
     .nav-menu {
         background-color: #ffffff;
-        width: 250px;
+        width: 320px;
         height: 100vh;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         position: fixed;
         top: 0;
         left: -100%;
         transition: 850ms;
+        z-index: 100000;
     }
 
     .nav-menu.active {
@@ -38,7 +47,20 @@ export const Container = styled.div`
         padding: 8px 0px 8px 0px;
         list-style: none;
         height: 60px;
+        border-top: 0.5px solid  ${theme.pallette.black[100]}
     }
+
+    .nav-text:last-child {
+        border-bottom: 0.5px solid  ${theme.pallette.black[100]}
+    }
+
+    .nav-bottom:last-child {
+        border-bottom: none;
+    }
+
+    .nav-bottom.green a {
+        color: ${theme.pallette.primary[500]}
+    } 
 
     .nav-text a {
         text-decoration: none;
@@ -58,17 +80,67 @@ export const Container = styled.div`
 
     .nav-menu-items {
         width: 100%;
+        height:100%;
+        padding: 0;
+        border-top-right-radius: 10px; 
+    }
+
+    .nav-menu-items.bottom{
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-item: stretch;
     }
 
     .navbar-toggle {
         width: 100%;
-        height: 80px;
-        display: flex;
-        justify-content: start;
+        height: 173px;
+        display: grid;
+        grid-template-columns: 15% 85%;
         align-items: center;
+        justify-content: center;
     }
 
-    span {
-        margin-left: 16px;
+    .logged-in {
+        display: grid;
+        grid-template-columns: 75% 25%;
+        align-items: center;
+        justify-content: center;
     }
+
+    .navbar-toggle a {
+        font-size: 0.8rem;
+        margin: 0 0.5rem 0 0;
+        text-align: right;
+        text-decoration: none;
+        color: ${theme.pallette.primary[500]}
+    }
+
+    .profile__badge {
+        display: grid;
+        place-items: center;
+
+        background-color: ${(props) => {
+            if (props.type === 'consumer') {
+                return theme.pallette.primary.light
+            } else {
+                return theme.pallette.secondary.light
+            }
+        }};
+
+        color: ${(props) => {
+            if (props.type === 'consumer') {
+                return theme.pallette.primary.dark
+            } else {
+                return theme.pallette.secondary.dark
+            }
+        }};
+
+        font-weight: 600;
+        font-size: 14px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
 `

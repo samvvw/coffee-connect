@@ -1,5 +1,4 @@
-import imgPlaceholder from '../../assets/images/aboutUsHero.png'
-
+import aboutUsHero from '../../assets/images/aboutUs/aboutUs-hero.png'
 import { Container, SubContainer, ChildContainer } from './AboutUsHero.styles'
 
 const AboutUsHero = () => {
@@ -7,7 +6,7 @@ const AboutUsHero = () => {
         <Container>
             <ChildContainer gridColumn="1/2" gridRow="2/3">
                 <div className="image-wrapper">
-                    <img src={imgPlaceholder} alt="" />
+                    <img src={aboutUsHero} alt="" />
                 </div>
             </ChildContainer>
             <ChildContainer gridColumn="1/2" gridRow="1/2">

@@ -1,17 +1,17 @@
 import { Container, IconsContainer } from './teamMemberCard.styles'
 
-import behance from '../../assets/images/icons/behance_icon.png'
-import git from '../../assets/images/icons/git_icon.png'
+// import behance from '../../assets/images/icons/behance_icon.png'
+// import git from '../../assets/images/icons/git_icon.png'
 import linkedin from '../../assets/images/icons/linkedin_icon.png'
 
 import { useState, useCallback } from 'react'
 
 const TeamMemberCard = ({ imgUrl, arrObjMemberData }) => {
     const title = arrObjMemberData.title
-    let icon
+    // let icon
 
-    if (title === 'designer') icon = behance
-    else icon = git
+    // if (title === 'designer') icon = behance
+    // else icon = git
 
     function useToggle(initialValue = false) {
         const [value, setValue] = useState(initialValue)
@@ -46,11 +46,14 @@ const TeamMemberCard = ({ imgUrl, arrObjMemberData }) => {
                 {isbioShort
                     ? arrObjMemberData.bioLong
                     : arrObjMemberData.bioShort}
-                <span>
-                    <button type="button" onClick={toggleBio}>
-                        {isbioShort ? 'Read less' : 'Read more'}
-                    </button>
-                </span>
+                
+                {arrObjMemberData.bioLong==='' ? null :
+                    <span>
+                        <button type="button" onClick={toggleBio}>
+                            {isbioShort ? 'Read less' : 'Read more'}
+                        </button>
+                    </span>
+                }
             </p>
 
             <IconsContainer>
@@ -61,12 +64,12 @@ const TeamMemberCard = ({ imgUrl, arrObjMemberData }) => {
                     <img src={linkedin} alt="LinkedIn" />
                 </a>
 
-                <a href={arrObjMemberData.socialNetwork}
+                {/* <a href={arrObjMemberData.socialNetwork}
                     onMouseEnter = {event => handleOnMouseEnter(event)}
                     onMouseLeave = {event => handleOnMouseLeave(event)}
                 >
                     <img src={icon} alt="social-network" />
-                </a>
+                </a> */}
             </IconsContainer>
         </Container>
     )
