@@ -49,7 +49,7 @@ const ProductCard = ({ width, height, product, farmID }) => {
                     <Label fontSize="1rem" fontWeight="Bold">
                         ${product.data.sizePrice[0].price}
                         <Label fontSize=".6rem">
-                            /{product.data.sizePrice[1].size} g
+                            /{product.data.sizePrice[0].size}g
                         </Label>
                     </Label>
                 </DetailsContainerChild>
