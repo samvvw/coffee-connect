@@ -33,10 +33,13 @@ export default function FarmDashboardMyProducts() {
         window.matchMedia(`(min-width: ${theme.layout.desktop})`).matches
     )
     useEffect(() => {
-        const handler = (e) => setMatches(e.matches)
-        window
-            .matchMedia(`(min-width: ${theme.layout.desktop})`)
-            .addListener(handler)
+        const mediaQuery = window.matchMedia(
+            `(min-width: ${theme.layout.desktop})`
+        )
+
+        mediaQuery.onchange = () => {
+            setMatches(mediaQuery.matches)
+        }
     }, [])
 
     /*Calling all products*************************/

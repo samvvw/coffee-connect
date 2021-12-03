@@ -13,12 +13,6 @@ import ProductDetailImages from '../../components/productDetail/imagesGroup/prod
 import ProductDetailCard from '../../components/productDetail/productDetailCard/productDetailCard'
 import OffCanvas from '../../components/productDetail/Offcanvas/offcanvas'
 
-// import ConnectWithFarmer from '../../components/productDetail/connectWithFarmerCard/connectWithFarmerCard'
-// import OtherProducts from '../../components/productDetail/otherProducts/otherProducts'
-
-// import Map from '../../components/map/map'
-// import CircleButton from '../../components/circleButton/circleButton'
-
 const Product = (props) => {
     const history = useHistory()
     const { user, isTokenExpired } = useContext(UserContext)
@@ -45,13 +39,6 @@ const Product = (props) => {
         }
     }, [user])
 
-    // console.log('ID', props.location.state.id)
-    // console.log('farmID', farmID)
-    // console.log(
-    //     'url:',
-    //     `/api/farm/${farmID}/product/${props.location.state.id}`
-    // )
-
     function convert(str) {
         var date = new Date(str),
             mnth = ('0' + (date.getMonth() + 1)).slice(-2),
@@ -64,7 +51,6 @@ const Product = (props) => {
             axios
                 .get(`/api/farm/${farmID}/product/${props.location.state.id}`)
                 .then((res) => {
-                    // console.log('infor of product', res.data.data)
                     setProductData(res.data.data)
                 })
                 .catch((error) => {
@@ -73,111 +59,18 @@ const Product = (props) => {
         }
     }, [user, farmID, totalProducts])
 
-    //no more than 4 images
-    // const urlsArray = [placeHolder, placeHolder, placeHolder, placeHolder]
-
-    // const objArraySizes = [
-    //     {
-    //         id: '1',
-    //         option: '340gr',
-    //     },
-    //     {
-    //         id: '2',
-    //         option: '454gr',
-    //     },
-    //     {
-    //         id: '3',
-    //         option: '680gr',
-    //     },
-    // ]
-    // const objProductValues = {
-    //     productName: 'Fire Dept. Coffe Original',
-    //     taste: 'Sweet',
-    //     roastLevel: 'Medium dark',
-    //     process: 'Dry',
-    //     variety: 'Arabica',
-    //     roastDate: ' 2/10/2021',
-    //     objPriceUnitSize: [
-    //         {
-    //             size: '340',
-    //             unit: 'gr',
-    //             price: '10us',
-    //         },
-    //         {
-    //             size: '454',
-    //             unit: 'gr',
-    //             price: '12us',
-    //         },
-    //         {
-    //             size: '680',
-    //             unit: 'gr',
-    //             price: '15us',
-    //         },
-    //     ],
-    // }
-
-    // const objProductDescription = {
-    //     coffeProcess: productData.coffeProcess,
-    //     coffeType: productData.coffeeType,
-    //     coffeVariety: productData.coffeVariety,
-    //     roast: productData.roastLevel,
-    //     taste: productData.taste,
-    //     aroma: productData.aromas,
-    //     flavor: '',
-    //     residuals: 'Sweet, Prolonged',
-    //     acidity: 'Juicy',
-    //     body: 'Creamy',
-    //     description: productData.description,
-    // }
-    // const arrObjProductDetails = [
-    //     {
-    //         productName: 'Whirlwind Coffe Co. Ethiopia',
-    //         productPrice: '18.99 CAD',
-    //         productUnit: '100gr',
-    //         productDescription: 'Yirgacheffe',
-    //     },
-    //     {
-    //         productName: 'Fire Dept. Coffe Original',
-    //         productPrice: '18.99 CAD',
-    //         productUnit: '100g',
-    //         productDescription: 'Medium Roast',
-    //     },
-    //     {
-    //         productName: 'Howler Coffee Co. Bucksaw',
-    //         productPrice: '18.99 CAD',
-    //         productUnit: '100g',
-    //         productDescription: 'Blend',
-    //     },
-    //     {
-    //         productName: 'Onyx Coffee Lab Colombia',
-    //         productPrice: '18.99',
-    //         productUnit: '100g',
-    //         productDescription: 'Aponte Village',
-    //     },
-    // ]
-
-    // const data = [
-    //     {
-    //         coordinates: [4.11, -72.93],
-    //     },
-    // ]
-    // const objMemberSince = {
-    //     imgUrl: placeHolder,
-    //     farmName: 'Finca LomaVerde',
-    //     memberSince: '2018',
-    // }
-
-    // *******************************************************
-
     const [matches, setMatches] = useState(
         window.matchMedia(`(min-width: ${theme.layout.desktop}`).matches
     )
 
     useEffect(() => {
-        const handler = (e) => setMatches(e.matches)
-        window
-            .matchMedia(`(min-width: ${theme.layout.desktop}`)
-            .addListener(handler)
+        const mediaQuery = window.matchMedia(
+            `(min-width: ${theme.layout.desktop})`
+        )
+
+        mediaQuery.onchange = () => {
+            setMatches(mediaQuery.matches)
+        }
     }, [])
 
     return (

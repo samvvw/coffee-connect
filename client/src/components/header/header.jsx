@@ -16,8 +16,11 @@ const Header = (props) => {
     )
 
     useEffect(() => {
-        const handler = (e) => setMatches(e.matches)
-        window.matchMedia('(min-width: 930px)').addListener(handler)
+        const mediaQuery = window.matchMedia(`(min-width: 930px)`)
+
+        mediaQuery.onchange = () => {
+            setMatches(mediaQuery.matches)
+        }
     }, [])
 
     useEffect(() => {

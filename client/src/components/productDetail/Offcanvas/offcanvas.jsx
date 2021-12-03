@@ -14,19 +14,17 @@ const OffCanvas = ({
     setTotalProducts,
     ...props
 }) => {
-    // const [show, setShow] = useState(false)
-
-    // const handleClose = () => setShow(false)
-    // const handleShow = () => setShow(true)
-
     const [matches, setMatches] = useState(
         window.matchMedia(`(min-width: ${theme.layout.desktop})`).matches
     )
     useEffect(() => {
-        const handler = (e) => setMatches(e.matches)
-        window
-            .matchMedia(`(min-width: ${theme.layout.desktop})`)
-            .addListener(handler)
+        const mediaQuery = window.matchMedia(
+            `(min-width: ${theme.layout.desktop})`
+        )
+
+        mediaQuery.onchange = () => {
+            setMatches(mediaQuery.matches)
+        }
     }, [])
 
     let style, styleHeader, styleTitle, styleBody
