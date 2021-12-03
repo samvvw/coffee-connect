@@ -66,8 +66,7 @@ const ProductDetailCard = ({
                 </div>
                 {price && (
                     <div>
-                        {price}
-                        <span>/100gr</span>
+                        ${price} CAD
                     </div>
                 )}
             </div>

@@ -10,10 +10,11 @@ export const Container = styled.div`
 
 
 export const SubContainer = styled.div`
-    width: 70%;
+    width: 311px;
     margin: 0 auto;
 
     @media only screen and (min-width: ${theme.layout.desktop}) { 
+        width: 70%;
         background: url('${bgImg}');
         background-repeat: no-repeat;
         background-position: center 25px;

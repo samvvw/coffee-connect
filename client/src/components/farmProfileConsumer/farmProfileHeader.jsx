@@ -1,8 +1,8 @@
-// import CircleButton from '../../circleButton/circleButton'
 import { useState, useEffect } from 'react'
 import { theme } from '../../theme/theme'
 import ButtonShare from '../../components/buttonShare/buttonShare'
-import ButtonHeart from '../../components/buttonHeart/buttonHeart'
+
+import ButtonBookMark from '../../components/buttonBookMark/buttonBookMark'
 import placeholder from '../../assets/images/placeholder.png'
 
 import {
@@ -18,16 +18,19 @@ const FarmProfileHeader = ({
     location,
     altitude,
 }) => {
-    console.log('LOGO', farmLogoUrl)
+    // console.log('LOGO', farmLogoUrl)
     const [matches, setMatches] = useState(
         window.matchMedia(`(min-width: ${theme.layout.desktop})`).matches
     )
 
     useEffect(() => {
-        const handler = (e) => setMatches(e.matches)
-        window
-            .matchMedia(`(min-width: ${theme.layout.desktop})`)
-            .addListener(handler)
+        const mediaQuery = window.matchMedia(
+            `(min-width: ${theme.layout.desktop})`
+        )
+
+        mediaQuery.onchange = () => {
+            setMatches(mediaQuery.matches)
+        }
     }, [])
     return (
         <HeaderContainer backgroundColor={backgroundColor}>
@@ -88,7 +91,10 @@ const FarmProfileHeader = ({
                             borderColor={theme.pallette.black[500]}
                             textColor={theme.pallette.black[900]}
                         ></ButtonShare>
-                        <ButtonHeart></ButtonHeart>
+                        <ButtonBookMark
+                            borderColor={theme.pallette.black[500]}
+                            textColor={theme.pallette.black[900]}
+                        />
                     </div>
                 )}
             </HeaderMainContainer>

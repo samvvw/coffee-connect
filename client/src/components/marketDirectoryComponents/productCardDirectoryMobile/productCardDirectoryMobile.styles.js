@@ -9,7 +9,7 @@ export const CardContainer = styled.div`
 
     img {
         width: 330px;
-        height: 150px;
+        height: 170px;
         object-fit: cover;
         cursor: pointer;
         border-top-left-radius: 8px;

@@ -1,9 +1,8 @@
-// import ProductDetailImageGroup from './productDetailImagesGroup'
-// import ProductDetailImageDynamicGrid from './productDetailImagesDynamicGrid'
 import ProductDetailImagesCarousel from './productDetailImagesCarousel'
 import { StyledProductDetailImages } from './productDetailImages.styles'
 
 import { useEffect, useState } from 'react'
+import { theme } from '../../../theme/theme'
 
 const ProductDetailImages = ({ urlsArray, width }) => {
     const [matches, setMatches] = useState(
@@ -11,8 +10,13 @@ const ProductDetailImages = ({ urlsArray, width }) => {
     )
 
     useEffect(() => {
-        const handler = (e) => setMatches(e.matches)
-        window.matchMedia('(min-width: 401px)').addListener(handler)
+        const mediaQuery = window.matchMedia(
+            `(min-width: ${theme.layout.desktop})`
+        )
+
+        mediaQuery.onchange = () => {
+            setMatches(mediaQuery.matches)
+        }
     }, [])
 
     return (
