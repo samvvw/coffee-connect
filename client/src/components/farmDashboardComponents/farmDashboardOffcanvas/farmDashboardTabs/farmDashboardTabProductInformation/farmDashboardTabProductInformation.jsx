@@ -737,7 +737,7 @@ const FarmDashboardTabProductInformation = ({
                                 />
                                 <span className="checkmarkRadio"></span>
                             </label>
-                            <label htmlFor="Type2">Grounded</label>
+                            <label htmlFor="Type2">Ground</label>
                         </div>
                     </div>
                 </div>
