@@ -110,7 +110,7 @@ export const CardContainer = styled.div`
         img {
             max-width: 100%;
             width: 100%;
-            height: 200px;
+            height: 300px;
             object-fit: cover;
         }
 

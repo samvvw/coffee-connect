@@ -57,7 +57,7 @@ export const Container = styled.div`
         }
 
         .products {
-            height: 55vh;
+            height: 50vh;
             overflow-y: scroll;
             flex-grow: 1;
             max-width: 100%;
@@ -88,6 +88,10 @@ export const Container = styled.div`
 
     @media (max-width: 1000px) {
         grid-template-columns: 1fr;
+
+        .main .products {
+            height: 68vh;
+        }
 
         .map-container {
             display: none;

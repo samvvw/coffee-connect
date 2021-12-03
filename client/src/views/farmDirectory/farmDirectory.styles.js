@@ -57,7 +57,7 @@ export const Container = styled.div`
         }
 
         .farms {
-            height: 55vh;
+            height: 50vh;
             overflow-y: scroll;
             flex-grow: 1;
             max-width: 100%;
@@ -82,6 +82,7 @@ export const Container = styled.div`
         .main .farms {
             margin-left: 0;
             gap: 1rem;
+            height: 68vh;
         }
 
         .map-container {
