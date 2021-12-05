@@ -61,7 +61,7 @@ const Map = ({ data, style, zoom }) => {
                     )}
                 </>
             ) : (
-                'loading...'
+                ''
             )}
         </>
     )
