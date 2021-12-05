@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { theme } from '../../theme/theme'
 
 export const Container = styled.div`
     width: 100%;
@@ -22,8 +23,17 @@ export const Container = styled.div`
             padding-bottom: 6px;
 
             &.selected {
-                color: #ff9933;
+                color: ${(props) =>
+                    props.userType === 'farmer'
+                        ? theme.pallette.secondary.c800
+                        : theme.pallette.primary[500]};
                 font-weight: bold;
+                border-bottom: 4px solid
+                    ${(props) =>
+                        props.userType === 'farmer'
+                            ? theme.pallette.secondary.c800
+                            : theme.pallette.primary[500]};
+                padding-bottom: 0.9rem;
             }
         }
     }

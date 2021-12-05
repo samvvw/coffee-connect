@@ -13,7 +13,7 @@ const LoggedNavBar = (props) => {
     return (
         <>
             {user?.userType && (
-                <Container>
+                <Container userType={user?.userType}>
                     {user?.userType === 'farmer' && (
                         <ul>
                             <li>
