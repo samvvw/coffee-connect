@@ -21,7 +21,7 @@ export const UserProvider = ({ children }) => {
 
     const signUp = async (user) => {
         try {
-            // dispatch({ type: 'LOADING' })
+            dispatch({ type: 'LOADING' })
             const response = await fetch('/api/user/sign-up', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -37,7 +37,7 @@ export const UserProvider = ({ children }) => {
                     payload: { user: decoded, token: data.token },
                 })
             }
-            // dispatch({ type: 'UNLOADING' })
+            dispatch({ type: 'UNLOADING' })
             return response
         } catch (err) {
             dispatch({ type: 'ERROR', payload: err })
@@ -47,7 +47,7 @@ export const UserProvider = ({ children }) => {
 
     const signIn = async (user) => {
         try {
-            // dispatch({ type: 'LOADING' })
+            dispatch({ type: 'LOADING' })
             const response = await fetch('/api/user/sign-in', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -63,7 +63,7 @@ export const UserProvider = ({ children }) => {
                     payload: { user: decoded, token: data.token },
                 })
             }
-            // dispatch({ type: 'UNLOADING' })
+            dispatch({ type: 'UNLOADING' })
             return response
         } catch (err) {
             dispatch({ type: 'ERROR', payload: err })

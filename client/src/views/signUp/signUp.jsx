@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { UserContext } from '../../context/userContext/userContext'
 import Button from '../../components/button/button'
@@ -11,6 +11,15 @@ const SignUp = (props) => {
     const [tabs, setTabs] = useState({ tab1: true, tab2: false })
     const [userType, setUserType] = useState('farmer')
     const { signUp, loading, error } = useContext(UserContext)
+    const [active, setActive] = useState(false)
+    const [inputValues, setInputValues] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        acceptTerms: false,
+    })
     const [errorMsgs, setErrorMsgs] = useState({
         firstName: '',
         lastName: '',
@@ -52,10 +61,6 @@ const SignUp = (props) => {
             error.lastName = 'Must be between 3 and 15 characters'
             resValidation = false
         }
-        // if (user.userName.length < 3 || user.userName.length > 15) {
-        //     error.userName = 'Must be between 3 and 15 characters'
-        //     resValidation = false
-        // }
         if (!emailRegex.test(user.email)) {
             error.email = 'Invalid email'
             resValidation = false
@@ -93,8 +98,42 @@ const SignUp = (props) => {
         }
     }
 
+    const handleChange = (e) => {
+        if (e.target.name !== 'acceptTerms')
+            setInputValues((prev) => {
+                return { ...prev, [e.target.name]: e.target.value }
+            })
+        else
+            setInputValues((prev) => {
+                return { ...prev, acceptTerms: e.target.checked }
+            })
+    }
+
+    useEffect(() => {
+        const {
+            firstName,
+            lastName,
+            email,
+            password,
+            confirmPassword,
+            acceptTerms,
+        } = inputValues
+        if (
+            firstName &&
+            lastName &&
+            email &&
+            password &&
+            confirmPassword &&
+            acceptTerms
+        ) {
+            setActive(true)
+        } else {
+            setActive(false)
+        }
+    }, [inputValues])
+
     return (
-        <Container>
+        <Container active={active}>
             <img src={HeroImage} alt="" className="sign-up-image" />
             <div className="form-container">
                 <h1>Create your Account</h1>
@@ -132,77 +171,123 @@ const SignUp = (props) => {
                     </div>
 
                     <div className="form-content">
-                        <label htmlFor="firstName">First Name</label>
+                        <div className="label-container">
+                            <label htmlFor="firstName">
+                                First Name <span>*</span>
+                            </label>
+                            <small className="error">
+                                {errorMsgs.firstName}
+                            </small>
+                        </div>
                         <input
                             type="text"
                             name="firstName"
                             id="firstName"
                             placeholder="e.g. James"
+                            onChange={(e) => handleChange(e)}
                             required
                         />
-                        <small className="error">{errorMsgs.firstName}</small>
 
-                        <label htmlFor="lastName">Last Name</label>
+                        <div className="label-container">
+                            <label htmlFor="lastName">
+                                Last Name <span>*</span>
+                            </label>
+                            <small className="error">
+                                {errorMsgs.lastName}
+                            </small>
+                        </div>
                         <input
                             type="text"
                             name="lastName"
                             id="lastName"
                             placeholder="e.g. Johnson"
+                            onChange={(e) => handleChange(e)}
                             required
                         />
-                        <small className="error">{errorMsgs.lastName}</small>
 
-                        {/* <label htmlFor="userName">Username</label>
-                        <input
-                            type="text"
-                            name="userName"
-                            id="userName"
-                            id="userName"
-                            placeholder="Your Username"
-                            required
-                        />
-                        <small className="error">{errorMsgs.userName}</small> */}
-
-                        <label htmlFor="email">Email</label>
+                        <div className="label-container">
+                            <label htmlFor="email">
+                                Email <span>*</span>
+                            </label>
+                            <small className="error">{errorMsgs.email}</small>
+                        </div>
                         <input
                             type="email"
                             name="email"
                             id="email"
                             placeholder="Email Address"
+                            onChange={(e) => handleChange(e)}
                             required
                         />
-                        <small className="error">{errorMsgs.email}</small>
 
-                        <label htmlFor="password">Password</label>
+                        <div className="label-container">
+                            <label htmlFor="password">
+                                Password <span>*</span>
+                            </label>
+                            <small className="error">
+                                {errorMsgs.password}
+                            </small>
+                        </div>
                         <input
                             type="password"
                             name="password"
                             id="password"
                             placeholder="Your Password"
+                            onChange={(e) => handleChange(e)}
                             required
                         />
-                        <small className="error">{errorMsgs.password}</small>
 
-                        <label htmlFor="confirmPassword">
-                            Confirm Password
-                        </label>
+                        <div className="label-container">
+                            <label htmlFor="confirmPassword">
+                                Confirm Password <span>*</span>
+                            </label>
+                            <small className="error">
+                                {errorMsgs.confirmPassword}
+                            </small>
+                        </div>
                         <input
                             type="password"
                             name="confirmPassword"
                             id="confirmPassword"
                             placeholder="Your Password"
+                            onChange={(e) => handleChange(e)}
                             required
                         />
-                        <small className="error">
-                            {errorMsgs.confirmPassword}
-                        </small>
+
+                        <div className="terms-container">
+                            <p>
+                                Qafa's priority is your privacy. We will never
+                                sell or give your information to third parties.
+                            </p>
+
+                            <div className="row">
+                                <label className="containerCheckbox">
+                                    <input
+                                        value="accept"
+                                        type="checkbox"
+                                        name="acceptTerms"
+                                        id="acceptTerms"
+                                        onChange={(e) => handleChange(e)}
+                                    />
+                                    <span className="checkmarkCheckbox"></span>
+                                </label>
+                                <label htmlFor="acceptTerms">
+                                    I have read and agree to Qafa's{' '}
+                                    <span>Terms of Service</span>
+                                </label>
+                            </div>
+                        </div>
 
                         {!loading && (
-                            <Button title="Create Account" type="submit" />
+                            <Button
+                                title="Create Account"
+                                type="submit"
+                                disabled={!active}
+                            />
                         )}
-                        {loading && <small>Loading...</small>}
-
-                        {/* {error && <pre>{JSON.stringify(error, null, 2)}</pre>} */}
+                        {loading && (
+                            <Button title="Loading..." type="submit" disabled />
+                        )}
                     </div>
                 </form>
             </div>

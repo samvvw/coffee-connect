@@ -19,6 +19,14 @@ export const Container = styled.div`
         display: none;
     }
 
+    .forgot-password {
+        align-self: flex-end;
+        text-decoration: underline;
+        font-size: 0.9rem;
+        color: ${theme.pallette.black[900]};
+        cursor: pointer;
+    }
+
     .form-container {
         width: 100%;
         height: 100%;
@@ -39,19 +47,34 @@ export const Container = styled.div`
             flex-direction: column;
             justify-content: center;
 
-            & label {
-                padding-bottom: 0.3rem;
-            }
+            .label-container {
+                display: flex;
+                gap: 0.2rem;
+                margin: 0;
+                padding: 0;
 
-            small {
-                color: red;
-                padding-left: 0.2rem;
-                padding-top: 0.1rem;
-                /* visibility: hidden; */
-            }
+                &:nth-of-type(2) {
+                    margin-top: 1rem;
+                }
 
-            small:nth-of-type(1) {
-                margin-bottom: 1rem;
+                & label {
+                    padding-bottom: 0.3rem;
+
+                    span {
+                        color: red;
+                    }
+                }
+
+                small {
+                    color: red;
+                    padding-left: 0.2rem;
+                    padding-top: 0.1rem;
+                    margin-bottom: 0;
+
+                    &:nth-of-type(1) {
+                        /* margin-bottom: 1rem; */
+                    }
+                }
             }
 
             & input {
@@ -67,6 +90,15 @@ export const Container = styled.div`
                 &::placeholder {
                     color: ${theme.pallette.black[200]};
                 }
+
+                &:focus {
+                    outline: 0;
+                    border: 2px solid ${theme.pallette.primary[500]};
+                }
+
+                &:nth-of-type(2) {
+                    margin-bottom: 0.5rem;
+                }
             }
 
             /* Change autocomplete styles in WebKit */
@@ -80,12 +112,20 @@ export const Container = styled.div`
             }
 
             & button {
+                font-weight: 500;
                 margin-top: 1rem;
                 align-self: center;
                 width: 100%;
-                background-color: ${theme.pallette.secondary.c800};
-                border-color: ${theme.pallette.secondary.c800};
-                color: #ffffff;
+                background-color: ${(props) =>
+                    props.active
+                        ? theme.pallette.secondary.c800
+                        : theme.pallette.secondary.veryLight};
+                border-color: ${(props) =>
+                    props.active
+                        ? theme.pallette.secondary.c800
+                        : theme.pallette.secondary.veryLight};
+                color: ${(props) =>
+                    props.active ? '#fff' : theme.pallette.secondary.dark};
             }
         }
 
