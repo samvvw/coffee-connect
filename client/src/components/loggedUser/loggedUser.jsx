@@ -50,6 +50,8 @@ const LoggedUser = ({ isHome }) => {
                             textColor={theme.pallette.primary[500]}
                             borderColor={theme.pallette.primary[500]}
                             width="71px"
+                            height="40px"
+                            padding="7px 13px 8px"
                         />
                     </NavLink>
                     <NavLink to="/sign-up">
@@ -59,6 +61,8 @@ const LoggedUser = ({ isHome }) => {
                             textColor="#ffffff"
                             borderColor={theme.pallette.secondary.c800}
                             width="109px"
+                            height="40px"
+                            padding="7px 13px 8px"
                         />
                     </NavLink>
                 </Text>
