@@ -23,4 +23,11 @@
   to = "http://ec2-54-67-56-230.us-west-1.compute.amazonaws.com/api/:splat"
   status = 200
 
+  [[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+
+
 
