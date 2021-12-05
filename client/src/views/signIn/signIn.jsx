@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useHistory, useLocation } from 'react-router-dom'
 import { UserContext } from '../../context/userContext/userContext'
@@ -12,9 +12,20 @@ const SignIn = (props) => {
     const location = useLocation()
     const [errorEmail, setErrorEmail] = useState('')
     const [errorPassword, setErrorPassword] = useState('')
+    const [inputValues, setInputValues] = useState({
+        email: '',
+        password: '',
+    })
+    const [active, setActive] = useState(false)
     const { signIn, loading, error } = useContext(UserContext)
 
     const { from } = location.state || { from: { pathname: '/' } }
+
+    const handleChange = (e) => {
+        setInputValues((prev) => {
+            return { ...prev, [e.target.name]: e.target.value }
+        })
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -36,43 +47,62 @@ const SignIn = (props) => {
         }
     }
 
+    useEffect(() => {
+        if (inputValues.email && inputValues.password) {
+            setActive(true)
+        } else {
+            setActive(false)
+        }
+    }, [inputValues])
+
     return (
-        <Container>
+        <Container active={active}>
             <img src={HeroImage} alt="" className="sign-in-image" />
-            {/* <p className="desktop-sign-up">
-                Don't have a Qafa account yet?
-                <Button
-                    title="Sign up"
-                    backgroundColor="#ffffff"
-                    textColor={theme.pallette.primary[500]}
-                    borderColor={theme.pallette.primary[500]}
-                    width="109px"
-                />
-            </p> */}
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
                     <h1>Sign in to Qafa</h1>
-                    <label htmlFor="email">Email</label>
+
+                    <div className="label-container">
+                        <label htmlFor="email">
+                            Email <span>*</span>
+                        </label>
+                        <small className="error">{errorEmail}</small>
+                    </div>
                     <input
                         type="email"
                         name="email"
                         id="email"
                         placeholder="Email Address"
+                        value={inputValues.email}
+                        onChange={(e) => handleChange(e)}
                     />
-                    <small className="error">{errorEmail}</small>
 
-                    <label htmlFor="password">Password</label>
+                    <div className="label-container">
+                        <label htmlFor="password">
+                            Password <span>*</span>
+                        </label>
+                        <small className="error">{errorPassword}</small>
+                    </div>
                     <input
                         type="password"
                         name="password"
                         id="password"
                         placeholder="Your Password"
+                        value={inputValues.password}
+                        onChange={(e) => handleChange(e)}
                     />
-                    <small className="error">{errorPassword}</small>
+                    <p className="forgot-password">Forgot password?</p>
 
-                    {!loading && <Button title="Login" type="submit" />}
-                    {loading && <small>Loading...</small>}
-                    {/* {error.ob && <pre>{JSON.stringify(error, null, 2)}</pre>} */}
+                    {!loading && (
+                        <Button
+                            title="Login"
+                            type="submit"
+                            disabled={!active}
+                        />
+                    )}
+                    {loading && (
+                        <Button title="Loading..." type="submit" disabled />
+                    )}
                 </form>
                 <p className="mobile-sign-up">
                     Don't have a Qafa account yet?{' '}

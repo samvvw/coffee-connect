@@ -255,6 +255,7 @@ const ProductConsumer = (props) => {
                                             width: '100%',
                                             height: '300px',
                                         }}
+                                        zoom={3}
                                     />
                                 )}
                             </div>
