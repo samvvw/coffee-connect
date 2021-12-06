@@ -31,7 +31,7 @@ const DropdownList = ({ width, height, objArraySizes, setPrice }) => {
             onChange={(e) => handleChange(e)}
             defaultValue=""
         >
-            <option value=""> </option>
+            <option value="">Select</option>
             {optionTemplate}
         </SelectContainer>
     )
