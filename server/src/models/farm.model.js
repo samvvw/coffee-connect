@@ -19,7 +19,7 @@ const farmSchema = new mongoose.Schema(
     {
         logo: {
             type: String,
-            default: 'Default Picture URL',
+            // default: 'Default Picture URL',
         },
         name: {
             type: String,
@@ -69,7 +69,7 @@ const farmSchema = new mongoose.Schema(
         // },
         farmPicture: {
             type: String, //As of now, picture only based on the hi-fi, if needed, use mediaSchema later
-            default: 'Default Picture URL',
+            // default: 'Default Picture URL',
         },
         certification: {
             type: [String], //As of now, pictures only based on the hi-fi, if needed, use certificationSchema later
