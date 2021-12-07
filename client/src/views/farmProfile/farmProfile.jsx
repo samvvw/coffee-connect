@@ -72,7 +72,7 @@ const FarmProfile = () => {
                     setFarmData(res)
 
                     setArrPicFarmGallery(res.data.data.gallery)
-                    console.log('res data', res)
+                    // console.log('res data', res)
                 })
                 .catch((error) => {
                     console.log('FarmProfile:', error)
