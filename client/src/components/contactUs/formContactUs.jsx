@@ -35,6 +35,7 @@ const FormContactUs = () => {
                         textColor="white"
                         type="submit"
                         hoverBackgroundColor={theme.pallette.secondary.dark}
+                        hoverBorderColor={theme.pallette.secondary.dark}
                     />
                 </div>
             </form>
