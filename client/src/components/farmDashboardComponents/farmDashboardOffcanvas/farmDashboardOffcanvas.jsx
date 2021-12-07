@@ -41,7 +41,7 @@ const OffCanvas = ({
             color: theme.pallette.primary[500],
             display: 'grid',
             gridTemplateColumns: '9fr 1fr',
-            border: '1px solid gray',
+            // border: '1px solid gray',
         }
         styleTitle = {
             textAlign: 'left',
