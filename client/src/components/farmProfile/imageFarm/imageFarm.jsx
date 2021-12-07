@@ -2,6 +2,7 @@ import { Container } from './imageFarm.styles'
 import { useContext, useState, useEffect } from 'react'
 import blankmg from '../../../assets/images/blankImg.jpg'
 import { UserContext } from '../../../context/userContext/userContext'
+import { theme } from '../../../theme/theme'
 const ImageFarm = ({
     width,
     height,
@@ -23,13 +24,22 @@ const ImageFarm = ({
     // variables to control delete button
     const [deleteCircleDisplay, setDeleteCircleDisplay] = useState(false)
 
+    // variables to control dashed border for images
+    const [imgBorder, setImgBorder] = useState({
+        border: `2px dashed ${theme.pallette.primary[500]}`,
+    })
+
     useEffect(() => {
         if (urlImage) {
             setCenteredCircleDisplay(false)
             setDeleteCircleDisplay(true)
+            setImgBorder({ border: `none` })
         } else {
             setCenteredCircleDisplay(true)
             setDeleteCircleDisplay(false)
+            setImgBorder({
+                border: `2px dashed ${theme.pallette.primary[500]}`,
+            })
         }
     }, [urlImage])
 
@@ -76,7 +86,6 @@ const ImageFarm = ({
                     res.json().then((data) => {
                         switch (fileContainerinDB) {
                             case 'gallery':
-                                console.log(data)
                                 setBgImage(
                                     data.gallery[data.gallery.length - 1].image
                                 )
@@ -100,6 +109,7 @@ const ImageFarm = ({
                     })
                     setCenteredCircleDisplay(false)
                     setDeleteCircleDisplay(true)
+                    setImgBorder({ border: `none` })
                 })
                 .catch((error) => console.log(error))
         }
@@ -109,13 +119,6 @@ const ImageFarm = ({
     const deleteFile = () => {
         const token = localStorage.getItem('token')
 
-        // const data = {
-        //     method: 'delete',
-        //     body: {
-        //         token: token,
-        //         farmLogo: bgImage
-        //     },
-        // }
         let data
 
         switch (fileContainerinDB) {
@@ -145,8 +148,6 @@ const ImageFarm = ({
                 }
                 break
             case 'logo':
-                // data.body['farmLogo'] = bgImage
-
                 data = {
                     method: 'delete',
                     headers: {
@@ -161,7 +162,6 @@ const ImageFarm = ({
                 apiUrl = `/api/farm/${farmID}/pictures`
                 break
             case 'farmCertificate':
-                // data.body['farmCertificate'] = bgImage
                 data = {
                     method: 'delete',
                     headers: {
@@ -183,10 +183,13 @@ const ImageFarm = ({
                 setCenteredCircleDisplay(true)
                 setDeleteCircleDisplay(false)
                 setBgImage(blankmg)
+                setImgBorder({
+                    border: `2px dashed ${theme.pallette.primary[500]}`,
+                })
             })
             .catch((error) => console.log(error))
     }
-
+    console.log(imgBorder)
     return (
         <Container
             width={width}
@@ -194,7 +197,7 @@ const ImageFarm = ({
             widthButton={widthButton}
             heightButton={heightButton}
         >
-            <img src={bgImage || urlImage} alt={alt} />
+            <img src={bgImage || urlImage} alt={alt} style={imgBorder} />
             {centeredCircleDisplay && (
                 <button
                     id="centeredCircle"

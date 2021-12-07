@@ -1,6 +1,7 @@
 import { Container } from './imageProduct.styles'
 import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../../context/userContext/userContext'
+import { theme } from '../../theme/theme'
 
 import blankmg from '../../assets/images/blankImg.jpg'
 const ImageProduct = ({
@@ -25,13 +26,22 @@ const ImageProduct = ({
     // variables to control delete button
     const [deleteCircleDisplay, setDeleteCircleDisplay] = useState(false)
 
+    // variables to control dashed border for images
+    const [imgBorder, setImgBorder] = useState({
+        border: `2px dashed ${theme.pallette.primary[500]}`,
+    })
+
     useEffect(() => {
         if (urlImg) {
             setCenteredCircleDisplay(false)
             setDeleteCircleDisplay(true)
+            setImgBorder({ border: `none` })
         } else {
             setCenteredCircleDisplay(true)
             setDeleteCircleDisplay(false)
+            setImgBorder({
+                border: `2px dashed ${theme.pallette.primary[500]}`,
+            })
         }
     }, [])
     const importFiles = (idContainer) => {
@@ -40,7 +50,7 @@ const ImageProduct = ({
         input.onchange = (_) => {
             // you can use this method to get file and perform respective operations
             let files = Array.from(input.files)
-            // const farmId = '61808eb787ad9fd90a35acdd'
+
             const productId = idProduct
             const token = localStorage.getItem('token')
             const form = new FormData()
@@ -56,6 +66,7 @@ const ImageProduct = ({
                     })
                     setCenteredCircleDisplay(false)
                     setDeleteCircleDisplay(true)
+                    setImgBorder({ border: `none` })
                 })
                 .catch((error) => console.log(error))
         }
@@ -75,6 +86,9 @@ const ImageProduct = ({
                 setDeleteCircleDisplay(false)
                 setBgImage(blankmg)
                 setTotalProducts((prev) => prev + 1)
+                setImgBorder({
+                    border: `2px dashed ${theme.pallette.primary[500]}`,
+                })
             })
             .catch((error) => console.log(error))
     }
@@ -85,7 +99,7 @@ const ImageProduct = ({
             widthButton={widthButton}
             heightButton={heightButton}
         >
-            <img src={bgImage || urlImg} alt={alt} />
+            <img src={bgImage || urlImg} alt={alt} style={imgBorder} />
             {centeredCircleDisplay && (
                 <button
                     id="centeredCircle"
