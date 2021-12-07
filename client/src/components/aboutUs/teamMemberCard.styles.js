@@ -72,4 +72,9 @@ export const IconsContainer = styled.div`
         width: 24px;
         height: 24px;
     }
+    
+    img:hover {
+        filter: ${(props) => props.title==='designer' ? 'invert(85%) sepia(29%) saturate(1153%) hue-rotate(336deg) brightness(101%) contrast(101%)'
+        : 'invert(38%) sepia(64%) saturate(3928%) hue-rotate(157deg) brightness(96%) contrast(101%)'};
+    }
 `

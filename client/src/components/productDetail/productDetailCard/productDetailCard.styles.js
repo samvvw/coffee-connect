@@ -9,7 +9,7 @@ export const CardContainer = styled.div`
     padding-right: 2rem;
 
     p {
-        margin-left: 0.5rem;
+        /* margin-left: 0.5rem; */
     }
     #farmProduct {
         display: none;

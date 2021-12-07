@@ -45,18 +45,54 @@ export const Container = styled.div`
             button {
                 width: 50%;
                 margin: 0 auto;
+                padding: 0.5rem;
+
+                &:hover {
+                    background-color: ${theme.pallette.secondary.dark};
+                    border-color: ${theme.pallette.secondary.dark};
+                }
             }
         }
 
         input[type='text'] {
             height: 48px;
             width: 100%;
-            border-color: ${theme.pallette.accent1.light};
+            border-width: 1px;
+            border-color: ${theme.pallette.black[400]};
+            border-radius: 4px;
+            padding-left: 0.5rem;
+
+            &:focus {
+                outline: 0;
+                border: 1px solid ${theme.pallette.primary[500]};
+            }
         }
+
         select {
             height: 48px;
             width: 100%;
-            border: 3px solid ${theme.pallette.accent1.light};
+            border-width: 1px;
+            border-color: ${theme.pallette.black[400]};
+            border-radius: 4px;
+            padding-left: 0.5rem;
+
+            &:focus {
+                outline: 0;
+                border: 1px solid ${theme.pallette.primary[500]};
+            }
+        }
+
+        textarea {
+            border-width: 1px;
+            border-color: ${theme.pallette.black[400]};
+            border-radius: 4px;
+            padding-left: 0.5rem;
+            padding-top: 0.5rem;
+
+            &:focus {
+                outline: 0;
+                border: 1px solid ${theme.pallette.primary[500]};
+            }
         }
 
         div {

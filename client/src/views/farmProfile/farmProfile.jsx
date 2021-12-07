@@ -72,7 +72,7 @@ const FarmProfile = () => {
                     setFarmData(res)
 
                     setArrPicFarmGallery(res.data.data.gallery)
-                    console.log('res data', res)
+                    // console.log('res data', res)
                 })
                 .catch((error) => {
                     console.log('FarmProfile:', error)
@@ -117,7 +117,6 @@ const FarmProfile = () => {
             color: theme.pallette.primary[500],
             display: 'grid',
             gridTemplateColumns: '9fr 1fr',
-            border: '1px solid gray',
         }
         styleTitle = {
             textAlign: 'left',

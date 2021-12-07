@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { theme } from '../../theme/theme'
 
 export const StyledButton = styled.button`
     background-color: ${(props) => props.backgroundColor || '#ffffff'};
@@ -13,5 +14,9 @@ export const StyledButton = styled.button`
     span {
         padding-left: 0.5rem;
         color: black;
+    }
+
+    &:hover > svg{
+        fill: ${theme.pallette.black[400]};
     }
 `

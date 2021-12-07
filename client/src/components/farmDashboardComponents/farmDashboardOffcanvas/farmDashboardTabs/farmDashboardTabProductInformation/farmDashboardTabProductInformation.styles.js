@@ -11,12 +11,27 @@ export const Container = styled.div`
         input[type='date'] {
             height: 48px;
             width: 100%;
-            border-color: ${theme.pallette.accent1.light};
+            border-width: 1px;
+            padding-left: 0.5rem;
+            border-color: ${theme.pallette.black[400]};
+            border-radius: 4px;
+
+            &:focus {
+                outline: 0;
+                border: 1px solid #009999;
+            }
         }
 
         textarea {
             border-color: ${theme.pallette.accent1.light};
-            padding: 1rem;
+            padding: 0.5rem 0.6rem;
+            border-color: ${theme.pallette.black[400]};
+            border-radius: 4px;
+
+            &:focus {
+                outline: 0;
+                border: 1px solid #009999;
+            }
         }
 
         #divTaste,
@@ -143,6 +158,11 @@ export const Container = styled.div`
             left: 0; */
 
             box-shadow: 0px 5px 5px 0 ${theme.pallette.black[50]} inset;
+
+            & button:hover {
+                background-color: ${theme.pallette.secondary.dark};
+                color: #fff;
+            }
         }
 
         /****************** */
@@ -289,7 +309,7 @@ export const Container = styled.div`
     @media only screen and (min-width: ${(props) =>
             props.theme.layout.desktop}) {
         form {
-            margin: 5rem auto;
+            margin: 2rem auto 3rem;
             width: 70%;
 
             #divTaste,

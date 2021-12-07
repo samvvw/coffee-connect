@@ -23,6 +23,7 @@ const ProductDetailHeader = ({
 }) => {
     const { user } = useContext(UserContext)
     const [liked, setLiked] = useState(false)
+    const [hover, setHover] = useState(false)
 
     const handleLike = () => {
         const token = localStorage.getItem('token')
@@ -54,6 +55,15 @@ const ProductDetailHeader = ({
         )
     }
 
+
+    const handleOnMouseEnter = () => {
+        setHover(true)
+    } 
+
+    const handleOnMouseLeave = () => {
+        setHover(false)
+    } 
+
     return (
         <HeaderContainer backgroundColor={backgroundColor}>
             <HeaderMainContainer>
@@ -77,17 +87,22 @@ const ProductDetailHeader = ({
                         <h5>{altitude}</h5>
                     </div>
                 </div>
-                <div id="buttons">
-                    <ButtonShare
-                        borderColor={theme.pallette.black[500]}
-                        textColor={theme.pallette.black[900]}
-                        onClick={handleShare}
-                    ></ButtonShare>
-                    <ButtonHeart
-                        onClick={handleLike}
-                        liked={liked}
-                    ></ButtonHeart>
-                </div>
+                {user.id && (
+                    <div id="buttons">
+                        <ButtonShare
+                            borderColor={theme.pallette.black[500]}
+                            textColor={theme.pallette.black[900]}
+                            onClick={handleShare}
+                        ></ButtonShare>
+                        <ButtonHeart
+                            onClick={handleLike}
+                            liked={liked}
+                            onMouseEnter = {event => handleOnMouseEnter(event)}
+                            onMouseLeave = {event => handleOnMouseLeave(event)}
+                            hover={hover}
+                        ></ButtonHeart>
+                    </div>
+                )}
             </HeaderMainContainer>
         </HeaderContainer>
     )

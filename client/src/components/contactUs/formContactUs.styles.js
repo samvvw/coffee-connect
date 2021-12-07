@@ -32,6 +32,11 @@ export const Container = styled.div`
             margin-bottom: 1.5rem;
             padding-left: 8px;
             border-radius: 4px;
+
+            &:focus {
+                outline: 0;
+                border: 1px solid #009999;
+            }
         }
         textarea {
             min-height: 150px;

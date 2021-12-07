@@ -46,6 +46,7 @@ const Hero = ({
                         onClick={onClick}
                         title={"Find your Coffee"}
                         backgroundColor={theme.pallette.primary[500]}
+                        hoverBackgroundColor={theme.pallette.primary.dark}
                         textColor="#ffffff"
                         border="none"
                         borderRadius="50px"

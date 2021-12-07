@@ -87,6 +87,10 @@ export const StyledGoToFarmer = styled.div`
     a:last-child {
         color: ${theme.pallette.secondary.c800};
         margin-left: 1vw;
+
+        &:hover {
+            color: ${theme.pallette.secondary.dark};
+        }
     }
 
     @media only screen and (min-width: ${theme.layout.desktop}) {

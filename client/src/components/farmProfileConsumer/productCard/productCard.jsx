@@ -7,8 +7,12 @@ import {
     Label,
 } from './productCard.styles'
 import { Link } from 'react-router-dom'
+import { useContext} from 'react'
+import { UserContext } from '../../../context/userContext/userContext'
 
 const ProductCard = ({ width, height, product, farmID }) => {
+    const { user } = useContext(UserContext)
+
     return (
         <Container width={width} height={height}>
             <div id="imageContainer">
@@ -28,9 +32,12 @@ const ProductCard = ({ width, height, product, farmID }) => {
                         />
                     </Link>
                 </div>
-                <div>
-                    <CircleButton IconName="FavoriteEmpty" />
-                </div>
+                {user.id && (
+                    <div>
+                        <CircleButton IconName="FavoriteEmpty" />
+                    </div>
+                )}
+
             </div>
             <DetailsContainer>
                 <DetailsContainerChild gridColumn="1/2" gridRow="1/2">

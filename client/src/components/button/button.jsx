@@ -12,7 +12,12 @@ const Button = ({
     height,
     border,
     borderRadius,
-    padding
+    padding,
+    hoverBackgroundColor,
+    hoverTextColor,
+    hoverBorderColor,
+    activeBackgroundColor,
+    activeBorderColor,
 }) => {
     return (
         <StyledButton
@@ -27,6 +32,11 @@ const Button = ({
             borderRadius={borderRadius}
             padding={padding}
             height={height}
+            hoverBackgroundColor={hoverBackgroundColor}
+            hoverTextColor={hoverTextColor}
+            hoverBorderColor={hoverBorderColor}
+            activeBackgroundColor={activeBackgroundColor}
+            activeBorderColor={activeBorderColor}
         >
             {title}
         </StyledButton>

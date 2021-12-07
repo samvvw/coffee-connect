@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { theme } from '../../theme/theme'
 
 export const Container = styled.div`
+    max-width: 100%;
     width: 100%;
     border: 1px solid #b0bec5;
     color: black;
@@ -14,7 +15,7 @@ export const Container = styled.div`
         align-items: center;
         gap: 2rem;
         padding: 1rem 0;
-        width: 50%;
+        width: 60%;
         margin: 0 auto;
 
         & li > a {

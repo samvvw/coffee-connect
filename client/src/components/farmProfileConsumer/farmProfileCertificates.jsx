@@ -8,7 +8,7 @@ const FarmProfileCertificates = ({ arrImgCertificates }) => {
     if (arrImgCertificates.length === 0) display = 'none'
     else display = 'flex'
 
-    console.log('IMAGEN!~', arrImgCertificates[0])
+    // console.log('IMAGEN!~', arrImgCertificates[0])
 
     return (
         <Container display={display}>

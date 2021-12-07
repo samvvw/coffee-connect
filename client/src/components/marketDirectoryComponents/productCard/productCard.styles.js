@@ -17,9 +17,10 @@ export const CardContainer = styled.div`
             padding: 0.2rem 0.3rem;
             border-radius: 50%;
             position: absolute;
-            top: 0;
+            top: 0.5rem;
             right: 0.5rem;
             cursor: pointer;
+            background-color: #ffffff;
         }
     }
 

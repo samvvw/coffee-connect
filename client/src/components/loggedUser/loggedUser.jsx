@@ -52,6 +52,11 @@ const LoggedUser = ({ isHome }) => {
                             width="71px"
                             height="40px"
                             padding="7px 13px 8px"
+                            hoverBackgroundColor={theme.pallette.primary.dark}
+                            hoverTextColor="#ffffff"
+                            hoverBorderColor={theme.pallette.primary.dark}
+                            activeBackgroundColor={theme.pallette.primary[500]}
+                            activeBorderColor={theme.pallette.primary[500]}
                         />
                     </NavLink>
                     <NavLink to="/sign-up">
@@ -63,6 +68,8 @@ const LoggedUser = ({ isHome }) => {
                             width="109px"
                             height="40px"
                             padding="7px 13px 8px"
+                            hoverBackgroundColor={theme.pallette.secondary.dark}
+                            hoverBorderColor={theme.pallette.secondary.dark}
                         />
                     </NavLink>
                 </Text>

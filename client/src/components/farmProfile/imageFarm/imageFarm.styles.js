@@ -11,7 +11,7 @@ export const Container = styled.div`
     img {
         width: ${(props) => props.width || '100%'};
         height: ${(props) => props.height || '100%'};
-        border: 2px dashed ${theme.pallette.primary[500]};
+        /* border: 2px dashed ${theme.pallette.primary[500]}; */
         border-radius: 4px;
         /* padding: 5px; */
         box-sizing: border-box;
