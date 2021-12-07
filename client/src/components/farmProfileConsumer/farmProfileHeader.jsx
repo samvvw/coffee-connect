@@ -74,11 +74,9 @@ const FarmProfileHeader = ({
                                 {origin}
                                 <span className="spanPipe">|</span>
                             </h5>
+                            <h5 id="h5Location">{location}</h5>
                         </div>
-                        <div>
-                            <p>Location:</p>
-                            <h5>{location}</h5>
-                        </div>
+                        <div>{/* <h5>{location}</h5> */}</div>
                     </div>
                     <div>
                         <p>Altitude:</p>
