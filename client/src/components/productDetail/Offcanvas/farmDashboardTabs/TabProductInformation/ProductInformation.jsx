@@ -124,7 +124,6 @@ const TabProductInformation = ({
             <form
                 id="newProduct"
                 method="POST"
-                //action="/api/farm/61834b3e802aa4a8e981ebdc/product"
                 onSubmit={(event) => handleSubmit(event)}
             >
                 <div id="divName">

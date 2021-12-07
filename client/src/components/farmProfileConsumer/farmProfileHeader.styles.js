@@ -114,6 +114,9 @@ export const HeaderMainContainer = styled.div`
             }
         }
 
+        #h5Location {
+            padding-left: 0.5rem;
+        }
         #divLogoName {
             display: flex;
             #divLogo {
@@ -123,12 +126,23 @@ export const HeaderMainContainer = styled.div`
             }
         }
         #divData {
-            /* width: fit-content; */
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 1fr;
+            & :nth-child(1) {
+                grid-column: 1/2;
+            }
+            & :nth-child(2) {
+                grid-column: 2/3;
+            }
         }
 
         #divButtons {
             height: 40px;
             justify-content: flex-end;
+            & :nth-child(1) {
+                margin-right: 1rem;
+            }
         }
         h4 {
             padding-top: 1rem;
@@ -141,8 +155,8 @@ export const HeaderMainContainer = styled.div`
         }
         & :nth-child(2) {
             /* data */
-            grid-column: 1/2;
-            grid-row: 2/3;
+            /* grid-column: 1/2;
+            grid-row: 2/3; */
             flex-direction: row;
             /* width: fit-content; */
             h5 {

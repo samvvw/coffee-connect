@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { theme } from '../../theme/theme'
 import ButtonShare from '../../components/buttonShare/buttonShare'
-
 import ButtonBookMark from '../../components/buttonBookMark/buttonBookMark'
 import placeholder from '../../assets/images/placeholder.png'
 
@@ -17,6 +16,10 @@ const FarmProfileHeader = ({
     origin,
     location,
     altitude,
+    farmID,
+    handleBookmark,
+    bookmark,
+    user,
 }) => {
     // console.log('LOGO', farmLogoUrl)
     const [matches, setMatches] = useState(
@@ -74,24 +77,24 @@ const FarmProfileHeader = ({
                                 {origin}
                                 <span className="spanPipe">|</span>
                             </h5>
+                            <h5 id="h5Location">{location}</h5>
                         </div>
-                        <div>
-                            <p>Location:</p>
-                            <h5>{location}</h5>
-                        </div>
+                        <div>{/* <h5>{location}</h5> */}</div>
                     </div>
                     <div>
                         <p>Altitude:</p>
                         <h5>{altitude}</h5>
                     </div>
                 </div>
-                {matches && (
+                {matches && user.id && (
                     <div id="divButtons">
                         <ButtonShare
                             borderColor={theme.pallette.black[500]}
                             textColor={theme.pallette.black[900]}
                         ></ButtonShare>
                         <ButtonBookMark
+                            onClick={() => handleBookmark(farmID)}
+                            liked={bookmark}
                             borderColor={theme.pallette.black[500]}
                             textColor={theme.pallette.black[900]}
                         />
