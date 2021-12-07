@@ -61,12 +61,6 @@ const FarmProfileConsumer = (props) => {
     // }
 
     useEffect(() => {
-        if (farmID && user.bookmarks?.includes(farmID)) {
-            setBookmark(true)
-        }
-    }, [user, farmID])
-
-    useEffect(() => {
         axios
             .get(`/api/farm/${farmID}`)
 
@@ -81,12 +75,15 @@ const FarmProfileConsumer = (props) => {
                 setArrPicFarmGallery(res.data.data.gallery)
 
                 setProducts(res.data.allProducts)
+                if (res.data.data.bookmarks.includes(user.id)) {
+                    setBookmark(true)
+                }
             })
             .catch((error) => {
                 console.log('FarmProfile:', error)
             })
         // }
-    }, [])
+    }, [user, farmID])
 
     useEffect(() => {
         if (description) {
