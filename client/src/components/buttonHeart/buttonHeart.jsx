@@ -9,6 +9,9 @@ const ButtonHeart = ({
     textColor,
     borderColor,
     liked,
+    hover,
+    onMouseEnter,
+    onMouseLeave
 }) => {
     return (
         <StyledButton
@@ -17,8 +20,11 @@ const ButtonHeart = ({
             backgroundColor={backgroundColor}
             textColor={textColor}
             borderColor={borderColor}
+            hover={hover}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
         >
-            {liked ? <Favorite /> : <FavoriteEmptyIcon />}
+            {liked || hover ? <Favorite /> : <FavoriteEmptyIcon />}
             <span>Save</span>
         </StyledButton>
     )

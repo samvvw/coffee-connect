@@ -150,6 +150,11 @@ export const Container = styled.div`
                         : theme.pallette.secondary.veryLight};
                 color: ${(props) =>
                     props.active ? '#fff' : theme.pallette.secondary.dark};
+
+                &:hover{
+                    background-color: ${(props) => props.active ? theme.pallette.secondary.dark : theme.pallette.secondary.veryLight};
+                    border-color: ${(props) => props.active ? theme.pallette.secondary.dark : theme.pallette.secondary.veryLight};
+                }
             }
 
             .terms-container {
@@ -163,6 +168,15 @@ export const Container = styled.div`
 
                 span {
                     color: ${theme.pallette.primary[500]};
+
+                    &:hover {
+                        color: ${theme.pallette.primary.dark};
+                        font-weight: bold;
+                    }
+
+                    &:active {
+                        color: ${theme.pallette.primary[500]};
+                    }
                 }
             }
 

@@ -35,6 +35,7 @@ const MeetTheTeam = ({ onClick, urlImg = homeTeam }) => {
                     textColor={'#ffffff'}
                     border="none"
                     width="80vw"
+                    hoverBackgroundColor={theme.pallette.primary.dark}
                 ></Button>
             </Link>
 

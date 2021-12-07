@@ -25,8 +25,17 @@ export const Container = styled.div`
         font-size: 0.9rem;
         color: ${theme.pallette.black[900]};
         cursor: pointer;
-    }
 
+        &:hover {
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        &:active {
+            text-decoration: underline;
+        }
+    }
+    
     .form-container {
         width: 100%;
         height: 100%;
@@ -126,6 +135,11 @@ export const Container = styled.div`
                         : theme.pallette.secondary.veryLight};
                 color: ${(props) =>
                     props.active ? '#fff' : theme.pallette.secondary.dark};
+
+                &:hover{
+                    background-color: ${(props) => props.active ? theme.pallette.secondary.dark : theme.pallette.secondary.veryLight};
+                    border-color: ${(props) => props.active ? theme.pallette.secondary.dark : theme.pallette.secondary.veryLight};
+                }
             }
         }
 
@@ -136,6 +150,15 @@ export const Container = styled.div`
                 color: ${theme.pallette.primary[500]};
                 text-decoration: none;
                 padding-left: 0.3rem;
+
+                &:hover {
+                    color: ${theme.pallette.primary.dark};
+                    font-weight: bold;
+                }
+
+                &:active {
+                    color: ${theme.pallette.primary[500]};
+                }
             }
         }
     }
