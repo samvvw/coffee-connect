@@ -27,11 +27,13 @@ export const Container = styled.div`
             justify-content: space-between;
             width: 100%;
 
-            & .bookmark-container {
+            & .bookmark-container svg {
                 border: 1px solid ${theme.pallette.black[200]};
                 border-radius: 50%;
                 padding: 0.2rem 0.33rem;
                 cursor: pointer;
+                align-items: flex-start;
+                font-size: 2.5rem;
             }
         }
 
@@ -112,11 +114,13 @@ export const Container = styled.div`
                 width: 100%;
                 padding-right: 0.7rem;
 
-                & .bookmark-container {
+                & .bookmark-container svg {
                     border: 1px solid ${theme.pallette.black[200]};
                     border-radius: 50%;
                     padding: 0.2rem 0.33rem;
                     cursor: pointer;
+                    align-items: flex-start;
+                    font-size: 2.5rem;
                 }
             }
         }

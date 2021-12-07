@@ -87,20 +87,22 @@ const ProductDetailHeader = ({
                         <h5>{altitude}</h5>
                     </div>
                 </div>
-                <div id="buttons">
-                    <ButtonShare
-                        borderColor={theme.pallette.black[500]}
-                        textColor={theme.pallette.black[900]}
-                        onClick={handleShare}
-                    ></ButtonShare>
-                    <ButtonHeart
-                        onClick={handleLike}
-                        liked={liked}
-                        onMouseEnter = {event => handleOnMouseEnter(event)}
-                        onMouseLeave = {event => handleOnMouseLeave(event)}
-                        hover={hover}
-                    ></ButtonHeart>
-                </div>
+                {user.id && (
+                    <div id="buttons">
+                        <ButtonShare
+                            borderColor={theme.pallette.black[500]}
+                            textColor={theme.pallette.black[900]}
+                            onClick={handleShare}
+                        ></ButtonShare>
+                        <ButtonHeart
+                            onClick={handleLike}
+                            liked={liked}
+                            onMouseEnter = {event => handleOnMouseEnter(event)}
+                            onMouseLeave = {event => handleOnMouseLeave(event)}
+                            hover={hover}
+                        ></ButtonHeart>
+                    </div>
+                )}
             </HeaderMainContainer>
         </HeaderContainer>
     )
