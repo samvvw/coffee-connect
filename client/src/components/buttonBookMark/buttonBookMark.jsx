@@ -9,6 +9,9 @@ const ButtonBookMark = ({
     textColor,
     borderColor,
     liked,
+    hover,
+    onMouseEnter,
+    onMouseLeave
 }) => {
     return (
         <StyledButton
@@ -17,8 +20,11 @@ const ButtonBookMark = ({
             backgroundColor={backgroundColor}
             textColor={textColor}
             borderColor={borderColor}
+            hover={hover}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
         >
-            {liked ? <BookmarkIcon /> : <BookmarkEmptyIcon />}
+            {liked || hover ? <BookmarkIcon /> : <BookmarkEmptyIcon />}
             <span>Save</span>
         </StyledButton>
     )

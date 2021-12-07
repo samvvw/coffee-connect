@@ -36,7 +36,10 @@ const TeamMemberCard = ({ imgUrl, arrObjMemberData }) => {
 
     return (
         <Container>
-            <div className="team-member-image-wrapper">
+            <div className="team-member-image-wrapper"
+                onMouseEnter = {event => handleOnMouseEnter(event)}
+                onMouseLeave = {event => handleOnMouseLeave(event)}
+            >
                 <img src={memberImg} alt={arrObjMemberData.firstName} />
             </div>
             <h3>{arrObjMemberData.firstName} <span>{arrObjMemberData.lastName}</span></h3>
