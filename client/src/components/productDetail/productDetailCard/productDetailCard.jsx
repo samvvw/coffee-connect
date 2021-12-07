@@ -50,7 +50,7 @@ const ProductDetailCard = ({
             </div>
             <div id="size">
                 <div>
-                    <p>Select size:</p>
+                    <p>Size:</p>
                 </div>
                 <div>
                     <DropdownList
@@ -64,11 +64,7 @@ const ProductDetailCard = ({
                 <div>
                     <p>Price:</p>
                 </div>
-                {price && (
-                    <div>
-                        ${price} CAD
-                    </div>
-                )}
+                {price && <div>${price} CAD</div>}
             </div>
             <div id="button">
                 <Button
