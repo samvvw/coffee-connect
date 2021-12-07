@@ -62,9 +62,14 @@ export const Container = styled.div`
         color: ${theme.pallette.primary[500]}
     } 
 
+    .nav-bottom.green a:hover {
+        color: ${theme.pallette.primary.dark}
+        font-weight: bold;
+    } 
+
     .nav-text a {
         text-decoration: none;
-        color: #000000;
+        color: ${theme.pallette.black[900]};
         font-size: 18px;
         width: 95%;
         height: 100%;
@@ -75,7 +80,8 @@ export const Container = styled.div`
     }
 
     .nav-text a:hover {
-        background-color: lightblue;
+        // background-color: lightblue;
+        font-weight: bold;
     }
 
     .nav-menu-items {
@@ -113,7 +119,12 @@ export const Container = styled.div`
         margin: 0 0.5rem 0 0;
         text-align: right;
         text-decoration: none;
-        color: ${theme.pallette.primary[500]}
+        color: ${theme.pallette.primary[500]};
+    }
+
+    .navbar-toggle a:hover {
+        color: ${theme.pallette.primary.dark};
+        font-weight: bold;
     }
 
     .profile__badge {

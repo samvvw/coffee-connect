@@ -35,6 +35,17 @@ const FarmProfileHeader = ({
             setMatches(mediaQuery.matches)
         }
     }, [])
+
+    const [hover, setHover] = useState(false)
+
+    const handleOnMouseEnter = () => {
+        setHover(true)
+    } 
+
+    const handleOnMouseLeave = () => {
+        setHover(false)
+    } 
+
     return (
         <HeaderContainer backgroundColor={backgroundColor}>
             <HeaderMainContainer>
@@ -97,6 +108,9 @@ const FarmProfileHeader = ({
                             liked={bookmark}
                             borderColor={theme.pallette.black[500]}
                             textColor={theme.pallette.black[900]}
+                            onMouseEnter = {event => handleOnMouseEnter(event)}
+                            onMouseLeave = {event => handleOnMouseLeave(event)}
+                            hover={hover}
                         />
                     </div>
                 )}

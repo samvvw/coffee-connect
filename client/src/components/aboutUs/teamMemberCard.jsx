@@ -2,7 +2,7 @@ import { Container, IconsContainer } from './teamMemberCard.styles'
 
 // import behance from '../../assets/images/icons/behance_icon.png'
 // import git from '../../assets/images/icons/git_icon.png'
-import linkedin from '../../assets/images/icons/linkedin_icon.png'
+import linkedin from '../../assets/images/icons/linkedIn-icon.svg'
 
 import { useState, useCallback } from 'react'
 
@@ -36,7 +36,10 @@ const TeamMemberCard = ({ imgUrl, arrObjMemberData }) => {
 
     return (
         <Container>
-            <div className="team-member-image-wrapper">
+            <div className="team-member-image-wrapper"
+                onMouseEnter = {event => handleOnMouseEnter(event)}
+                onMouseLeave = {event => handleOnMouseLeave(event)}
+            >
                 <img src={memberImg} alt={arrObjMemberData.firstName} />
             </div>
             <h3>{arrObjMemberData.firstName} <span>{arrObjMemberData.lastName}</span></h3>
@@ -56,7 +59,7 @@ const TeamMemberCard = ({ imgUrl, arrObjMemberData }) => {
                 }
             </p>
 
-            <IconsContainer>
+            <IconsContainer  title={title}>
                 <a href={arrObjMemberData.linkedin}
                     onMouseEnter = {event => handleOnMouseEnter(event)}
                     onMouseLeave = {event => handleOnMouseLeave(event)}

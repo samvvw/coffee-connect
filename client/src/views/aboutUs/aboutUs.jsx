@@ -21,20 +21,6 @@ import samuelHover from '../../assets/images/aboutUs/samuel-hover.png'
 const AboutUS = () => {
     const arrObjMemberData = [
         {
-            defaultImg: tayoDefault,
-            hoverImg: tayoHover,
-            firstName: 'Tayo',
-            lastName: 'Adetola',
-            role: 'Digital Product Designer - UI/UX',
-            bioShort:
-                'A self-taught product designer with an architectural design technology background',
-            bioLong:
-                'A self-taught product designer with an architectural design technology background specializing in interface design and user experience for digital products since 2013. I care a lot about using design to create clean, meaningful experiences.',
-            title: 'designer',
-            linkedin: 'http://linkedin.com/in/tayoadetola',
-            socialNetwork: 'http://socialNetwork',
-        },
-        {
             defaultImg: joseDefault,
             hoverImg: joseHover,
             firstName: 'Jose',
@@ -47,34 +33,6 @@ const AboutUS = () => {
             title: 'developer',
             linkedin: 'http://linkedin.com/in/jharteaga',
             socialNetwork: 'https://github.com/jharteaga',
-        },
-        {
-            defaultImg: elnazDefault,
-            hoverImg: elnazHover,
-            firstName: 'Elnaz',
-            lastName: 'Behravesh',
-            role: 'Digital Product Designer - UI/UX',
-            bioShort:
-                'Over 10 years of experience as a Graphic Designer and Lead designer in an advertising Agency.',
-            bioLong:
-                '',
-            title: 'designer',
-            linkedin: 'http://linkedin.com/in/elnazb',
-            socialNetwork: 'http://socialNetwork',
-        },
-        {
-            defaultImg: lilianDefault,
-            hoverImg: lilianHover,
-            firstName: 'Lilian',
-            lastName: 'Fajardo Talavera',
-            role: 'Digital Product Designer - UI/UX',
-            bioShort:
-                '8 years of experience as a product designer and 2 years as a project manager developing VR and AR apps.',
-            bioLong:
-                '',
-            title: 'designer',
-            linkedin: 'http://linkedin.com/in/lilfajardo',
-            socialNetwork: 'http://socialNetwork',
         },
         {
             defaultImg: alejandraDefault,
@@ -111,13 +69,55 @@ const AboutUS = () => {
             lastName: 'Villegas Warren',
             role: 'Full-stack Developer',
             bioShort:
-                'Self-taught web developer with experience of building app using React, Node.js,',
+                'Self-taught web developer with experience of building app',
             bioLong:
                 'Self-taught web developer with experience of building app using React, Node.js, SQL/NoSQL databases and cloud services. Background as business developer.',
             title: 'developer',
             linkedin: 'http://linkedin.com/in/samuelvw',
             socialNetwork: 'https://github.com/samvvw',
         },
+        {
+            defaultImg: tayoDefault,
+            hoverImg: tayoHover,
+            firstName: 'Tayo',
+            lastName: 'Adetola',
+            role: 'Digital Product Designer - UI/UX',
+            bioShort:
+                'A self-taught product designer with an architectural design technology background',
+            bioLong:
+                'A self-taught product designer with an architectural design technology background specializing in interface design and user experience for digital products since 2013. I care a lot about using design to create clean, meaningful experiences.',
+            title: 'designer',
+            linkedin: 'http://linkedin.com/in/tayoadetola',
+            socialNetwork: 'http://socialNetwork',
+        },
+        {
+            defaultImg: elnazDefault,
+            hoverImg: elnazHover,
+            firstName: 'Elnaz',
+            lastName: 'Behravesh',
+            role: 'Digital Product Designer - UI/UX',
+            bioShort:
+                'Over 10 years of experience as a Graphic Designer and Lead designer in an advertising Agency.',
+            bioLong:
+                '',
+            title: 'designer',
+            linkedin: 'http://linkedin.com/in/elnazb',
+            socialNetwork: 'http://socialNetwork',
+        },
+        {
+            defaultImg: lilianDefault,
+            hoverImg: lilianHover,
+            firstName: 'Lilian',
+            lastName: 'Fajardo Talavera',
+            role: 'Digital Product Designer - UI/UX',
+            bioShort:
+                '8 years of experience as a product designer and 2 years as a project manager developing VR and AR apps.',
+            bioLong:
+                '',
+            title: 'designer',
+            linkedin: 'http://linkedin.com/in/lilfajardo',
+            socialNetwork: 'http://socialNetwork',
+        }
     ]
 
     return (

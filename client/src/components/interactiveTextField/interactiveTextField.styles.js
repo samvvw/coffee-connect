@@ -7,6 +7,10 @@ export const Container = styled.form`
     width: 311px;
     margin: 0 auto;
 
+    button:hover {
+        background-color: ${theme.pallette.secondary.dark};
+    }
+
     @media only screen and (min-width: ${theme.layout.desktop}){
         width: 100%;
     }

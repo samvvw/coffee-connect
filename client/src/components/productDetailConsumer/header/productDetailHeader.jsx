@@ -23,6 +23,7 @@ const ProductDetailHeader = ({
 }) => {
     const { user } = useContext(UserContext)
     const [liked, setLiked] = useState(false)
+    const [hover, setHover] = useState(false)
 
     const handleLike = () => {
         const token = localStorage.getItem('token')
@@ -53,6 +54,15 @@ const ProductDetailHeader = ({
             `width=${width}, height=${height}, scrollbars=no, left=${left}, top=${top}`
         )
     }
+
+
+    const handleOnMouseEnter = () => {
+        setHover(true)
+    } 
+
+    const handleOnMouseLeave = () => {
+        setHover(false)
+    } 
 
     return (
         <HeaderContainer backgroundColor={backgroundColor}>
@@ -86,6 +96,9 @@ const ProductDetailHeader = ({
                     <ButtonHeart
                         onClick={handleLike}
                         liked={liked}
+                        onMouseEnter = {event => handleOnMouseEnter(event)}
+                        onMouseLeave = {event => handleOnMouseLeave(event)}
+                        hover={hover}
                     ></ButtonHeart>
                 </div>
             </HeaderMainContainer>

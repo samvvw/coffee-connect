@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { theme } from '../../theme/theme'
 
 export const Nav = styled.nav`
     display: flex;
@@ -21,5 +22,10 @@ export const MenuItem = styled.li`
         text-decoration: none;
         color: #000000;
         font-size: 1.05rem;
+
+        &:hover {
+            color: ${theme.pallette.black[900]};
+            font-weight: bold;
+        }
     }
 `
