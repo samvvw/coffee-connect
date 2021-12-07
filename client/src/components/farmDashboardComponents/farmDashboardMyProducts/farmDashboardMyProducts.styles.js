@@ -30,7 +30,13 @@ export const FarmMyProductsWrapper = styled.div.attrs({
         left: 50%;
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
+
+        button:hover {
+            background-color: ${theme.pallette.primary.dark};
+            color: #fff;
+        }
     }
+
     button {
         border-radius: 50%;
         height: 2rem;
@@ -41,8 +47,12 @@ export const FarmMyProductsWrapper = styled.div.attrs({
         font-size: 1rem;
         background-color: ${(props) => props.theme.pallette.primary[500]};
         border-color: ${theme.pallette.primary[500]};
-
         margin-right: 1rem;
+
+        &:hover {
+            background-color: ${theme.pallette.primary.dark};
+            color: #fff;
+        }
     }
     h2 {
         margin-left: 1rem;
@@ -53,6 +63,11 @@ export const FarmMyProductsWrapper = styled.div.attrs({
         margin: 0 auto;
         #divMyProducts {
             border: none;
+
+            button:hover {
+                background-color: ${theme.pallette.primary.dark};
+                color: #fff;
+            }
         }
         div {
             padding-left: 0;

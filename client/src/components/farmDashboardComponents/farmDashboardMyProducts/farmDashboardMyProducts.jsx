@@ -112,9 +112,13 @@ export default function FarmDashboardMyProducts() {
                         {matches && hasProducts && (
                             //desktop
                             <Button
-                                title="Add a new products"
+                                title="Add a new product"
                                 onClick={handleShow}
                                 width="221px"
+                                hoverBackgroundColor={
+                                    theme.pallette.primary.dark
+                                }
+                                hoverTextColor="#fff"
                             />
                         )}
                         {/* mobile */}
@@ -135,6 +139,10 @@ export default function FarmDashboardMyProducts() {
                                 title="Add a new product"
                                 onClick={handleShow}
                                 width="221px"
+                                hoverBackgroundColor={
+                                    theme.pallette.primary.dark
+                                }
+                                hoverTextColor="#fff"
                             />
                         )}
                         {/* mobile */}

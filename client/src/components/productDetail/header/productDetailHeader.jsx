@@ -52,6 +52,11 @@ const ProductDetailHeader = ({
                         borderColor={theme.pallette.secondary.c800}
                         width="50%"
                         onClick={handleShow}
+                        hoverBackgroundColor={theme.pallette.secondary.dark}
+                        hoverTextColor="#fff"
+                        hoverBorderColor={theme.pallette.secondary.dark}
+                        activeBackgroundColor={theme.pallette.secondary.dark}
+                        activeBorderColor={theme.pallette.secondary.dark}
                     ></Button>
                     {/* Buttons */}
                     {/* <ButtonShare></ButtonShare>

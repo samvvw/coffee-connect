@@ -12,13 +12,16 @@ export const StyledButton = styled.button`
     border: ${(props) => props.border || '1px solid'};
     border-color: ${(props) => props.borderColor || '#000000'};
 
-    &:hover{
-        background-color: ${(props) => props.hoverBackgroundColor || props.backgroundColor};
-        color: ${(props) => props.hoverTextColor || props.textColor };
+    &:hover {
+        background-color: ${(props) =>
+            props.hoverBackgroundColor || props.backgroundColor};
+        color: ${(props) => props.hoverTextColor || props.textColor};
         border-color: ${(props) => props.hoverBorderColor || props.borderColor};
     }
-    &:active{
-        background-color: ${(props) => props.activeBackgroundColor || props.backgroundColor};
-        border-color: ${(props) => props.activeBorderColor || props.borderColor};
+    &:active {
+        background-color: ${(props) =>
+            props.activeBackgroundColor || props.backgroundColor};
+        border-color: ${(props) =>
+            props.activeBorderColor || props.borderColor};
     }
 `

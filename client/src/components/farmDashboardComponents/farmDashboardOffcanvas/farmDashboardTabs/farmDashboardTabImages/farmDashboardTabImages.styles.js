@@ -131,12 +131,23 @@ export const Container = styled.div`
         left: 0;
 
         box-shadow: 0px 5px 5px 0 ${theme.pallette.black[50]} inset;
+
+        button {
+            border: 0;
+        }
+
+        button:disabled {
+            border: none;
+            background-color: ${theme.pallette.secondary.veryLight};
+            color: ${theme.pallette.secondary.dark};
+        }
     }
 
     @media only screen and (min-width: ${(props) =>
             props.theme.layout.desktop}) {
         h2 {
             font-size: 2rem;
+            padding-left: 1rem;
         }
         margin-top: 2rem;
         & > :nth-child(1) {
