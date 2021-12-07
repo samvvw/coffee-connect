@@ -17,7 +17,7 @@ const Button = ({
     hoverTextColor,
     hoverBorderColor,
     activeBackgroundColor,
-    activeBorderColor
+    activeBorderColor,
 }) => {
     return (
         <StyledButton

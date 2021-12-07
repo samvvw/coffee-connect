@@ -90,6 +90,10 @@ const FarmProfileHeader = ({
                             borderColor={theme.pallette.primary[500]}
                             width="148px"
                             onClick={handleShowEdit}
+                            hoverBackgroundColor={theme.pallette.primary.dark}
+                            hoverTextColor="#fff"
+                            activeBackgroundColor={theme.pallette.primary.dark}
+                            activeBorderColor={theme.pallette.primary.dark}
                         />
                     </div>
                 )}

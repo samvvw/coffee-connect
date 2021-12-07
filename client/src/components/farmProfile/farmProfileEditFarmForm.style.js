@@ -42,21 +42,59 @@ export const Container = styled.div`
         #submit {
             grid-column: 1/3;
             grid-row: 5/6;
+
             button {
                 width: 50%;
                 margin: 0 auto;
                 border: none;
+                padding: 0.6rem;
+                font-weight: 400;
+
+                &:hover {
+                    background-color: ${theme.pallette.secondary.dark};
+                    color: #fff;
+                }
             }
         }
 
         input[type='text'] {
             height: 48px;
             width: 100%;
-            border-color: ${theme.pallette.accent1.light};
+            border-width: 1px;
+            border-color: ${theme.pallette.black[400]};
+            padding-left: 0.5rem;
+            border-radius: 4px;
+
+            &:focus {
+                outline: 0;
+                border: 1px solid ${theme.pallette.primary[500]};
+            }
         }
         select {
             height: 48px;
             width: 100%;
+            padding-left: 0.5rem;
+            border-width: 1px;
+            border-color: ${theme.pallette.black[400]};
+            border-radius: 4px;
+
+            &:focus {
+                outline: 0;
+                border: 1px solid ${theme.pallette.primary[500]};
+            }
+        }
+
+        textarea {
+            padding-top: 0.5rem;
+            padding-left: 0.5rem;
+            border-radius: 4px;
+            border-width: 1px;
+            border-color: ${theme.pallette.black[400]};
+
+            &:focus {
+                outline: 0;
+                border: 1px solid ${theme.pallette.primary[500]};
+            }
         }
 
         div {

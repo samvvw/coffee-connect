@@ -27,3 +27,9 @@ body {
     min-height: 100vh;
     margin: 0;
 }
+
+.view-container main input:focus,
+.view-container main textarea:focus {
+    outline-color: #009999;
+    outline-width: 0.5px;
+}

@@ -35,7 +35,7 @@ export const Container = styled.div`
             text-decoration: underline;
         }
     }
-    
+
     .form-container {
         width: 100%;
         height: 100%;
@@ -102,7 +102,7 @@ export const Container = styled.div`
 
                 &:focus {
                     outline: 0;
-                    border: 2px solid ${theme.pallette.primary[500]};
+                    border: 1px solid ${theme.pallette.primary[500]};
                 }
 
                 &:nth-of-type(2) {
@@ -136,9 +136,15 @@ export const Container = styled.div`
                 color: ${(props) =>
                     props.active ? '#fff' : theme.pallette.secondary.dark};
 
-                &:hover{
-                    background-color: ${(props) => props.active ? theme.pallette.secondary.dark : theme.pallette.secondary.veryLight};
-                    border-color: ${(props) => props.active ? theme.pallette.secondary.dark : theme.pallette.secondary.veryLight};
+                &:hover {
+                    background-color: ${(props) =>
+                        props.active
+                            ? theme.pallette.secondary.dark
+                            : theme.pallette.secondary.veryLight};
+                    border-color: ${(props) =>
+                        props.active
+                            ? theme.pallette.secondary.dark
+                            : theme.pallette.secondary.veryLight};
                 }
             }
         }

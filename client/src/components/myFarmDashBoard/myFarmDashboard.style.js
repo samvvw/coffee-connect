@@ -33,6 +33,11 @@ export const MyFarmWrapper = styled.div`
         left: 50%;
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
+
+        button:hover {
+            background-color: ${theme.pallette.primary.dark};
+            color: #fff;
+        }
     }
 
     @media only screen and (min-width: ${(props) =>
