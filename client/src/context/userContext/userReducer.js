@@ -22,6 +22,8 @@ export const UserReducer = (state, action) => {
                     farms: action.payload.user?.farms
                         ? action.payload.user.farms
                         : [],
+                    likes: action.payload.user?.likes,
+                    bookmarks: action.payload.user?.bookmarks,
                 },
                 token: action.payload.token,
             }
@@ -43,6 +45,8 @@ export const UserReducer = (state, action) => {
                     farms: action.payload.user?.farms
                         ? action.payload.user.farms
                         : [],
+                    likes: action.payload.user?.likes,
+                    bookmarks: action.payload.user?.bookmarks,
                 },
                 token: action.payload.token,
             }
@@ -72,6 +76,8 @@ export const UserReducer = (state, action) => {
                     farms: action.payload.user?.farms
                         ? action.payload.user.farms
                         : [],
+                    likes: action.payload.user?.likes,
+                    bookmarks: action.payload.user?.bookmarks,
                 },
                 token: action.payload.token,
             }
@@ -98,6 +104,8 @@ export const UserReducer = (state, action) => {
                     farms: action.payload.user?.farms
                         ? action.payload.user.farms
                         : [],
+                    likes: action.payload.user?.likes,
+                    bookmarks: action.payload.user?.bookmarks,
                 },
                 token: action.payload.token,
             }

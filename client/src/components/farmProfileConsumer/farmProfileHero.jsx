@@ -8,7 +8,14 @@ import { useHistory } from 'react-router-dom'
 import ArrowBack from '@material-ui/icons/ArrowBack'
 import placeholder from '../../assets/images/placeholder.png'
 
-const FarmProfileHero = ({ urlImage, farmName }) => {
+const FarmProfileHero = ({
+    urlImage,
+    farmName,
+    handleBookmark,
+    bookmark,
+    farmID,
+    user,
+}) => {
     const history = useHistory()
 
     // *******************************************************
@@ -57,13 +64,18 @@ const FarmProfileHero = ({ urlImage, farmName }) => {
                 </div>
             )}
             <div id="subContainer">
-                <div id="buttons">
-                    <CircleButton
-                        IconName="BookmarkBorderIcon"
-                        buttonBgc="white"
-                    />
-                    <CircleButton IconName="Share" buttonBgc="white" />
-                </div>
+                {user.id && (
+                    <div id="buttons">
+                        <CircleButton
+                            IconName={
+                                bookmark ? 'BookmarkIcon' : 'BookmarkBorderIcon'
+                            }
+                            buttonBgc="white"
+                            onClick={() => handleBookmark(farmID)}
+                        />
+                        <CircleButton IconName="Share" buttonBgc="white" />
+                    </div>
+                )}
                 <div id="image">
                     <img
                         alt=""

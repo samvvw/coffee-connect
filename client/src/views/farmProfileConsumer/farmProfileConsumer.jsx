@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-
+import { useEffect, useState, useContext, useMemo } from 'react'
+import { UserContext } from '../../context/userContext/userContext'
 import Map from '../../components/map/map'
 import axios from 'axios'
 import MessageModal from '../../components/messageModal/messageModal'
@@ -14,10 +14,15 @@ import FarmProfileGallery from '../../components/farmProfileConsumer/farmProfile
 import { LoggedNavBar } from '../../components'
 
 import OtherProducts from '../../components/farmProfileConsumer/otherProducts'
+import { api } from '../../config/api'
 
 const FarmProfileConsumer = (props) => {
     const [farmData, setFarmData] = useState()
-
+    const { user } = useContext(UserContext)
+    const farmID = useMemo(
+        () => props.location?.state?.farmID,
+        [props.location]
+    )
     /*variables to control messages in modal*/
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
@@ -38,11 +43,28 @@ const FarmProfileConsumer = (props) => {
         '',
         '',
     ])
-    let farmID = ''
+    const [bookmark, setBookmark] = useState(false)
 
-    if (props.location?.state?.farmID) {
-        farmID = props.location.state.farmID
+    const handleBookmark = (farmId) => {
+        const token = localStorage.getItem('token')
+        axios
+            .put(`${api.farms}/${farmId}/bookmarks`, { token })
+            .then((res) => {
+                setBookmark((prevBookmark) => !prevBookmark)
+            })
+            .catch((err) => console.log(err))
     }
+    // let farmID = ''
+
+    // if (props.location?.state?.farmID) {
+    //     farmID = props.location.state.farmID
+    // }
+
+    useEffect(() => {
+        if (farmID && user.bookmarks?.includes(farmID)) {
+            setBookmark(true)
+        }
+    }, [user, farmID])
 
     useEffect(() => {
         axios
@@ -90,10 +112,17 @@ const FarmProfileConsumer = (props) => {
                             origin={farmData.data.data.origin}
                             location={farmData.data.data.location}
                             altitude={`${farmData.data.data.altitude} masl`}
+                            handleBookmark={handleBookmark}
+                            bookmark={bookmark}
+                            user={user}
                         />
                         <FarmProfileHero
+                            farmID={farmID}
                             farmName={farmData.data.data.name}
                             urlImage={farmData.data.data.farmPicture}
+                            handleBookmark={handleBookmark}
+                            bookmark={bookmark}
+                            user={user}
                         />
                         <FarmProfileDescription
                             objFarmProfile={{
