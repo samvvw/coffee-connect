@@ -55,52 +55,29 @@ const ProductDetailImagesCarousel = ({
     return (
         <div>
             <CarouselContainer>
-                <Carousel
-                    fade
-                    // className="h-100"
-                    variant="dark"
-                    activeIndex={index}
-                    onSelect={handleSelect}
-                    nextLabel={''}
-                    prevLabel={''}
-                    id="divCarousel"
-                >
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100 h-100"
-                            src={urlsArray[0]}
-                            alt=""
-                        />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100 h-100"
-                            src={urlsArray[1]}
-                            alt=""
-                        />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100 h-100"
-                            src={urlsArray[2]}
-                            alt=""
-                        />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100 h-100"
-                            src={urlsArray[3]}
-                            alt=""
-                        />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100 h-100"
-                            src={urlsArray[4]}
-                            alt=""
-                        />
-                    </Carousel.Item>
-                </Carousel>
+                {urlsArray.length === 1 ? <img src={urlsArray[0]} alt="" width="100%"/> :
+                    <Carousel
+                        fade
+                        // className="h-100"
+                        variant="dark"
+                        activeIndex={index}
+                        onSelect={handleSelect}
+                        nextLabel={''}
+                        prevLabel={''}
+                        id="divCarousel"
+                        indicators={false}
+                    >
+                        {urlsArray.map(url=>
+                            (<Carousel.Item key={url}>
+                                <img
+                                    className="d-block w-100 h-100"
+                                    src={url}
+                                    alt=""
+                                />
+                            </Carousel.Item>)
+                        )}
+                    </Carousel>
+                }
                 <div id="divCircleButtons">
                     <CircleButton
                         IconName={liked ? 'FavoriteFull' : 'FavoriteEmpty'}
