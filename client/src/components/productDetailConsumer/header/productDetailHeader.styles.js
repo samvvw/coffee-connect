@@ -90,7 +90,9 @@ export const HeaderMainContainer = styled.div`
             display: flex;
             flex-direction: row;
             margin-top: 0.3rem;
-            width: fit-content !important;
+            max-width: 70% !important;
+            width: 100% !important;
+            /* width: fit-content !important; */
             div {
                 width: fit-content;
             }

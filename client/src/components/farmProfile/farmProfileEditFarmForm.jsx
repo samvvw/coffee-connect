@@ -1,7 +1,7 @@
 import { theme } from '../../theme/theme'
 import { Container } from './farmProfileEditFarmForm.style'
 import Button from '../button/button'
-import { useState, useEffect, useContext, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import MessageModal from '../messageModal/messageModal'
@@ -39,6 +39,7 @@ const MyFarmDashboardNewFarmForm = (props) => {
                         region: country.region,
                         latlng: country.latlng,
                     })
+                    return country
                 })
 
                 function sortByKey(array, key) {

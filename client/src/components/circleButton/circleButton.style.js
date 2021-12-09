@@ -9,4 +9,8 @@ export const Button = styled.button`
     align-items: center;
     justify-content: center;
     background-color: ${(props) => props.buttonBgc || 'white'};
+
+    &:hover {
+        background: white !important;
+    }
 `
