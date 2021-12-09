@@ -53,6 +53,15 @@ export const Container = styled.div`
             margin-top: 20px;
         }
 
+        .dropdown-item {
+            color: ${theme.pallette.black[900]}
+        }
+
+        .dropdown-item:hover, .dropdown-item:active {
+            background: none;
+            font-weight: bold;
+        }
+
         #sign-out {
             color: red;
         }
