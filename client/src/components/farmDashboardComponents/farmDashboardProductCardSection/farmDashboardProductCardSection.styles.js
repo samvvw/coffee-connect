@@ -24,8 +24,8 @@ export const FarmDashboardProductCardSectionWrapper = styled.section.attrs({
         grid-template-rows: auto;
         row-gap: 2rem;
         column-gap: 3.5rem;
-        justify-content: center;
-        padding-right: 0;
-        padding-left: 0;
+        justify-content: flex-start;
+        padding-right: 2rem;
+        padding-left: 2rem;
     }
 `
