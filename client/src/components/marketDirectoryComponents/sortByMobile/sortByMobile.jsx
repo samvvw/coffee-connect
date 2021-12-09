@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { theme } from '../../../theme/theme'
+// import { theme } from '../../../theme/theme'
 import OriginCheckboxes from '../sortBy/originCheckboxes/originCheckboxes'
 import PriceSlider from '../sortBy/priceSlider/priceSlider'
 import RoastLevelCheckboxes from '../sortBy/roastLevelCheckboxes/roastLevelCheckboxes'

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
+// import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import Favorite from '@material-ui/icons/Favorite'
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
 import placeholder from '../../../assets/images/placeholder.png'
