@@ -3,7 +3,7 @@ import { Container } from './farmProfileHero.styles'
 import { useEffect, useState } from 'react'
 import { theme } from '../../theme/theme'
 import ImageFarm from './imageFarm/imageFarm'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import Pencil from '@material-ui/icons/Create'
 import ArrowBack from '@material-ui/icons/ArrowBack'
 

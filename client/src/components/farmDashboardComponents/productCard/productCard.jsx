@@ -4,7 +4,7 @@ import { Container } from './productCard.styles'
 import placeholder from '../../../assets/images/placeholder.png'
 
 const ProductCard = ({ imageHeight, width, height, objProductDetails }) => {
-    const style = { width: '100%', height: imageHeight }
+    // const style = { width: '100%', height: imageHeight }
 
     return (
         <Container width={width} height={height}>

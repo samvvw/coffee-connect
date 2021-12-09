@@ -34,6 +34,7 @@ const MyFarmDashboardNewFarmForm = () => {
                         region: country.region,
                         latlng: country.latlng,
                     })
+                    return country
                 })
 
                 function sortByKey(array, key) {
