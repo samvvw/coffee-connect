@@ -73,6 +73,11 @@ export const DashboardProductCard = styled((props) => (
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
+
+            @media (min-width: 451px) {
+                margin-right: 1.3rem;
+            }
         }
         svg {
             width: 24px;

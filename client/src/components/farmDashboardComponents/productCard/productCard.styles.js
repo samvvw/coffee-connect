@@ -3,54 +3,59 @@ import styled from 'styled-components'
 export const Container = styled.div`
     height: ${(props) => props.height};
     width: ${(props) => props.width};
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     margin: 0 auto;
+    border-radius: 8px;
+    box-sizing: border-box;
+    border: 1px solid ${({ theme }) => theme.pallette.black[100]};
+    overflow: hidden;
+    color: ${({ theme }) => theme.pallette.black[900]};
 
-    #imageContainer {
-        img {
-            height: 200px;
-            object-fit: cover;
-        }
-
+    .product-img-wrapper {
         position: relative;
-        & > :nth-child(2) {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
+        height: 216px;
+        width: 368px;
+        overflow: hidden;
 
-            justify-content: space-between;
-            //heart button
-            button {
-                background-color: white;
-                width: 2rem;
-                border-radius: 50%;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center left;
+        }
+    }
+
+    .product-content {
+        padding: 1rem;
+
+        h3 {
+            font-size: 1.125rem;
+            font-weight: bold;
+            &::first-letter {
+                text-transform: capitalize;
+            }
+        }
+        .product-properties {
+            p {
+                margin-bottom: 0.2rem;
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: ${({ theme }) => theme.pallette.black[400]};
+                span {
+                    color: ${({ theme }) => theme.pallette.black[900]};
+                }
+            }
+        }
+        .product-price {
+            margin-top: 1rem;
+            h4 {
+                font-size: 1rem;
+                font-weight: bold;
+                span {
+                    font-weight: normal;
+                }
             }
         }
     }
-`
-export const DetailsContainer = styled.div`
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, auto);
-    margin-top: 1rem;
-`
-export const DetailsContainerChild = styled.div`
-    grid-column: ${(props) => props.gridColumn};
-    grid-row: ${(props) => props.gridRow};
-    div {
-        span {
-            font-weight: bold;
-        }
-        p {
-            font-size: 0.7rem;
-            margin: 0;
-        }
-    }
-`
-export const Label = styled.label`
-    font-size: ${(props) => props.fontSize};
-    color: ${(props) => props.fontColor || '#000000'};
-    font-weight: ${(props) => props.fontWeight || 'Normal'};
 `

@@ -14,7 +14,7 @@ const ProductCard = ({
     height,
     objProductDetails,
 }) => {
-    console.log('product', urlImage)
+    // console.log('product', urlImage)
 
     return (
         <Container width={width} height={height}>
