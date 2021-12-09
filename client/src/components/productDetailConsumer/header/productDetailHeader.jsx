@@ -75,7 +75,7 @@ const ProductDetailHeader = ({
                 <div id="origin">
                     <div>
                         <div>
-                            <p>Origin1:</p>
+                            <p>Origin:</p>
                             <h5>{origin}</h5>
                         </div>
                         <div>
