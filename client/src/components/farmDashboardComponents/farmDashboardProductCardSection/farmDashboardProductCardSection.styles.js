@@ -20,9 +20,12 @@ export const FarmDashboardProductCardSectionWrapper = styled.section.attrs({
         margin: 0 auto;
         margin-bottom: 2rem;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 350px));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 330px));
         grid-template-rows: auto;
-        grid-gap: 3rem;
+        row-gap: 2rem;
+        column-gap: 3.5rem;
         justify-content: center;
+        padding-right: 0;
+        padding-left: 0;
     }
 `
