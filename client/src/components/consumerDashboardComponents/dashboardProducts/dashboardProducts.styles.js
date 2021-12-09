@@ -53,7 +53,7 @@ export const DashboardProductCard = styled((props) => (
     .product-img-wrapper {
         position: relative;
         height: 216px;
-        width: 368px;
+        /* width: 368px; */
         overflow: hidden;
         img {
             width: 100%;
@@ -73,6 +73,12 @@ export const DashboardProductCard = styled((props) => (
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
+            margin-right: 0;
+
+            @media (min-width: 451px) {
+                margin-right: 5px;
+            }
         }
         svg {
             width: 24px;

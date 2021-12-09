@@ -61,6 +61,7 @@ export const FarmMyProductsWrapper = styled.div.attrs({
             props.theme.layout.desktop}) {
         max-width: 80%;
         margin: 0 auto;
+
         #divMyProducts {
             border: none;
 
@@ -68,11 +69,18 @@ export const FarmMyProductsWrapper = styled.div.attrs({
                 background-color: ${theme.pallette.primary.dark};
                 color: #fff;
             }
+
+            h2 {
+                color: ${({ theme }) => theme.pallette.black[900]};
+            }
+
+            max-width: 1250px;
+            width: 100%;
         }
         div {
             padding-left: 0;
             padding-right: 0;
-            border-bottom: 0px solid transparent;
+            /* border-bottom: 0px solid transparent; */
             & > button {
                 font-size: 1rem;
                 padding: 1.2rem;

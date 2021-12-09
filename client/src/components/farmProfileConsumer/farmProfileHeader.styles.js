@@ -50,7 +50,7 @@ export const HeaderMainContainer = styled.div`
         padding-right: 2rem;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: start;
         width: 100%;
         height: auto;
         padding-bottom: 1rem;
@@ -58,6 +58,7 @@ export const HeaderMainContainer = styled.div`
         #divLogo {
             width: 57px;
             height: 57px;
+            margin-right: 0.5rem;
         }
         /* img {
             width: 57px;
@@ -126,6 +127,7 @@ export const HeaderMainContainer = styled.div`
             }
         }
         #divData {
+            grid-row: 2/3;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: 1fr;

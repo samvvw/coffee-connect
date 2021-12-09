@@ -48,21 +48,20 @@ const ProductDetailHeader = ({
         const height = 200
         const left = (window.screen.width - 200) / 2
         const top = (window.screen.height - 200) / 4
-        var fbpopup = window.open(
+        window.open(
             `https://www.facebook.com/sharer/sharer.php?u=https://qafa.ca/`,
             'Qafa',
             `width=${width}, height=${height}, scrollbars=no, left=${left}, top=${top}`
         )
     }
 
-
     const handleOnMouseEnter = () => {
         setHover(true)
-    } 
+    }
 
     const handleOnMouseLeave = () => {
         setHover(false)
-    } 
+    }
 
     return (
         <HeaderContainer backgroundColor={backgroundColor}>
@@ -75,7 +74,7 @@ const ProductDetailHeader = ({
                 <div id="origin">
                     <div>
                         <div>
-                            <p>Origin1:</p>
+                            <p>Origin:</p>
                             <h5>{origin}</h5>
                         </div>
                         <div>
@@ -87,7 +86,7 @@ const ProductDetailHeader = ({
                         <h5>{altitude}</h5>
                     </div>
                 </div>
-                {user.id && (
+                {user.id && user.userType === "consumer" && (
                     <div id="buttons">
                         <ButtonShare
                             borderColor={theme.pallette.black[500]}
@@ -97,8 +96,8 @@ const ProductDetailHeader = ({
                         <ButtonHeart
                             onClick={handleLike}
                             liked={liked}
-                            onMouseEnter = {event => handleOnMouseEnter(event)}
-                            onMouseLeave = {event => handleOnMouseLeave(event)}
+                            onMouseEnter={(event) => handleOnMouseEnter(event)}
+                            onMouseLeave={(event) => handleOnMouseLeave(event)}
                             hover={hover}
                         ></ButtonHeart>
                     </div>

@@ -40,11 +40,23 @@ const FarmProfileHeader = ({
 
     const handleOnMouseEnter = () => {
         setHover(true)
-    } 
+    }
 
     const handleOnMouseLeave = () => {
         setHover(false)
-    } 
+    }
+
+    const handleShare = () => {
+        const width = 200
+        const height = 200
+        const left = (window.screen.width - 200) / 2
+        const top = (window.screen.height - 200) / 4
+        window.open(
+            `https://www.facebook.com/sharer/sharer.php?u=https://qafa.ca/`,
+            'Qafa',
+            `width=${width}, height=${height}, scrollbars=no, left=${left}, top=${top}`
+        )
+    }
 
     return (
         <HeaderContainer backgroundColor={backgroundColor}>
@@ -97,19 +109,20 @@ const FarmProfileHeader = ({
                         <h5>{altitude}</h5>
                     </div>
                 </div>
-                {matches && user.id && (
+                {matches && user.id && user.userType === "consumer" && (
                     <div id="divButtons">
                         <ButtonShare
                             borderColor={theme.pallette.black[500]}
                             textColor={theme.pallette.black[900]}
+                            onClick={handleShare}
                         ></ButtonShare>
                         <ButtonBookMark
                             onClick={() => handleBookmark(farmID)}
                             liked={bookmark}
                             borderColor={theme.pallette.black[500]}
                             textColor={theme.pallette.black[900]}
-                            onMouseEnter = {event => handleOnMouseEnter(event)}
-                            onMouseLeave = {event => handleOnMouseLeave(event)}
+                            onMouseEnter={(event) => handleOnMouseEnter(event)}
+                            onMouseLeave={(event) => handleOnMouseLeave(event)}
                             hover={hover}
                         />
                     </div>

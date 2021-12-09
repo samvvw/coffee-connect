@@ -34,6 +34,7 @@ const MyFarmDashboardNewFarmForm = () => {
                         region: country.region,
                         latlng: country.latlng,
                     })
+                    return country
                 })
 
                 function sortByKey(array, key) {
@@ -72,7 +73,7 @@ const MyFarmDashboardNewFarmForm = () => {
     }, [selectedCountry])
 
     useEffect(() => {
-        console.log('selected', selected)
+        // console.log('selected', selected)
         if (selected.length > 0) {
             setSelectedOrigin(selected[0].region)
             setSelectedLatLng(selected[0].latlng)

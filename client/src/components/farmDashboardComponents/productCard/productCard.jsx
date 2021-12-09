@@ -1,19 +1,14 @@
 import { Link } from 'react-router-dom'
-import {
-    Container,
-    DetailsContainer,
-    DetailsContainerChild,
-    Label,
-} from './productCard.styles'
+import { Container } from './productCard.styles'
 
 import placeholder from '../../../assets/images/placeholder.png'
 
 const ProductCard = ({ imageHeight, width, height, objProductDetails }) => {
-    const style = { width: '100%', height: imageHeight }
+    // const style = { width: '100%', height: imageHeight }
 
     return (
         <Container width={width} height={height}>
-            <div id="imageContainer">
+            <div className="product-img-wrapper">
                 <div>
                     <Link
                         to={{
@@ -24,7 +19,7 @@ const ProductCard = ({ imageHeight, width, height, objProductDetails }) => {
                         <img
                             src={objProductDetails.urlImage || placeholder}
                             alt=""
-                            style={style}
+                            // style={style}
                         />
                     </Link>
                 </div>
@@ -32,43 +27,28 @@ const ProductCard = ({ imageHeight, width, height, objProductDetails }) => {
                     {/* <CircleButton IconName="FavoriteEmpty" onClick="" /> */}
                 </div>
             </div>
-            <DetailsContainer>
-                <DetailsContainerChild gridColumn="1/2" gridRow="1/2">
-                    <Label fontSize="1rem" fontWeight="Bold">
-                        {objProductDetails.productName}
-                    </Label>
-                </DetailsContainerChild>
-                <DetailsContainerChild gridColumn="1/2" gridRow="2/3">
-                    <div id="location">
-                        <div>
-                            <p>
-                                Location:{' '}
-                                <span>{objProductDetails.productLocation}</span>
-                                | Taste:{' '}
-                                <span>
-                                    {objProductDetails.productTaste.join()}
-                                </span>
-                            </p>
-                        </div>
-                        <div>
-                            <p>
-                                Roast Level:{' '}
-                                <span>
-                                    {objProductDetails.productRoastLevel}
-                                </span>
-                            </p>
-                        </div>
-                    </div>
-                </DetailsContainerChild>
-                <DetailsContainerChild gridColumn="1/2" gridRow="3/4">
-                    <Label fontSize="1rem" fontWeight="Bold">
-                        ${objProductDetails.productPrice}
-                        <Label fontSize=".6rem">
-                            /{objProductDetails.productUnit}g
-                        </Label>
-                    </Label>
-                </DetailsContainerChild>
-            </DetailsContainer>
+            <div className="product-content">
+                <h3>{objProductDetails.productName}</h3>
+                <div className="product-properties">
+                    <p>
+                        Location:{' '}
+                        <span>{objProductDetails.productLocation}</span> |
+                        Taste:{' '}
+                        <span>{objProductDetails.productTaste.join()}</span>
+                    </p>
+
+                    <p>
+                        Roast Level:{' '}
+                        <span>{objProductDetails.productRoastLevel}</span>
+                    </p>
+                </div>
+                <div className="product-price">
+                    <h4>
+                        ${objProductDetails.productPrice} CAD{' '}
+                        <span>/ {objProductDetails.productUnit}g</span>
+                    </h4>
+                </div>
+            </div>
         </Container>
     )
 }

@@ -41,7 +41,7 @@ const ProductDetailImagesCarousel = ({
         const height = 200
         const left = (window.screen.width - 200) / 2
         const top = (window.screen.height - 200) / 4
-        var fbpopup = window.open(
+        window.open(
             `https://www.facebook.com/sharer/sharer.php?u=https://qafa.ca/`,
             'Qafa',
             `width=${width}, height=${height}, scrollbars=no, left=${left}, top=${top}`
@@ -55,64 +55,45 @@ const ProductDetailImagesCarousel = ({
     return (
         <div>
             <CarouselContainer>
-                <Carousel
-                    fade
-                    // className="h-100"
-                    variant="dark"
-                    activeIndex={index}
-                    onSelect={handleSelect}
-                    nextLabel={''}
-                    prevLabel={''}
-                    id="divCarousel"
-                >
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100 h-100"
-                            src={urlsArray[0]}
-                            alt=""
+                {urlsArray.length === 1 ? (
+                    <img src={urlsArray[0]} alt="" width="100%" />
+                ) : (
+                    <Carousel
+                        fade
+                        // className="h-100"
+                        variant="dark"
+                        activeIndex={index}
+                        onSelect={handleSelect}
+                        nextLabel={''}
+                        prevLabel={''}
+                        id="divCarousel"
+                        indicators={false}
+                    >
+                        {urlsArray.map((url) => (
+                            <Carousel.Item key={url}>
+                                <img
+                                    className="d-block w-100 h-100"
+                                    src={url}
+                                    alt=""
+                                />
+                            </Carousel.Item>
+                        ))}
+                    </Carousel>
+                )}
+                {user.id && user.userType === 'consumer' && (
+                    <div id="divCircleButtons">
+                        <CircleButton
+                            IconName={liked ? 'FavoriteFull' : 'FavoriteEmpty'}
+                            buttonBgc="white"
+                            onClick={handleLike}
                         />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100 h-100"
-                            src={urlsArray[1]}
-                            alt=""
+                        <CircleButton
+                            IconName="Share"
+                            buttonBgc="white"
+                            onClick={handleShare}
                         />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100 h-100"
-                            src={urlsArray[2]}
-                            alt=""
-                        />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100 h-100"
-                            src={urlsArray[3]}
-                            alt=""
-                        />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100 h-100"
-                            src={urlsArray[4]}
-                            alt=""
-                        />
-                    </Carousel.Item>
-                </Carousel>
-                <div id="divCircleButtons">
-                    <CircleButton
-                        IconName={liked ? 'FavoriteFull' : 'FavoriteEmpty'}
-                        buttonBgc="white"
-                        onClick={handleLike}
-                    />
-                    <CircleButton
-                        IconName="Share"
-                        buttonBgc="white"
-                        onClick={handleShare}
-                    />
-                </div>
+                    </div>
+                )}
             </CarouselContainer>
         </div>
     )

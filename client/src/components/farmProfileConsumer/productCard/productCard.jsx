@@ -1,4 +1,5 @@
 import CircleButton from '../../circleButton/circleButton'
+import axios from 'axios'
 import placeHolder from '../../../assets/images/placeholder.png'
 import {
     Container,
@@ -7,11 +8,31 @@ import {
     Label,
 } from './productCard.styles'
 import { Link } from 'react-router-dom'
-import { useContext} from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../../context/userContext/userContext'
+import { api } from '../../../config/api'
 
 const ProductCard = ({ width, height, product, farmID }) => {
     const { user } = useContext(UserContext)
+    const [liked, setLiked] = useState(false)
+
+    const handleLike = () => {
+        const token = localStorage.getItem('token')
+        axios
+            .put(`${api.farms}/${farmID}/product/${product.data._id}/likes`, {
+                token,
+            })
+            .then((res) => {
+                setLiked((prevLiked) => !prevLiked)
+            })
+            .catch((err) => console.log(err))
+    }
+
+    useEffect(() => {
+        if (user?.id && product?.data?.likes?.includes(user?.id)) {
+            setLiked(true)
+        }
+    }, [])
 
     return (
         <Container width={width} height={height}>
@@ -32,12 +53,15 @@ const ProductCard = ({ width, height, product, farmID }) => {
                         />
                     </Link>
                 </div>
-                {user.id && (
-                    <div>
-                        <CircleButton IconName="FavoriteEmpty" />
+                {user.id && user.userType === 'consumer' && (
+                    <div onClick={handleLike}>
+                        {!liked ? (
+                            <CircleButton IconName="FavoriteEmpty" />
+                        ) : (
+                            <CircleButton IconName="FavoriteFull" />
+                        )}
                     </div>
                 )}
-
             </div>
             <DetailsContainer>
                 <DetailsContainerChild gridColumn="1/2" gridRow="1/2">
