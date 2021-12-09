@@ -55,7 +55,7 @@ const ProductCard = ({ width, height, product, farmID }) => {
                         />
                     </Link>
                 </div>
-                {user.id && (
+                {user.id && user.userType === 'consumer' && (
                     <div onClick={handleLike}>
                         {!liked ? (
                             <CircleButton IconName="FavoriteEmpty" />

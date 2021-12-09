@@ -64,7 +64,7 @@ const FarmProfileHero = ({
                 </div>
             )}
             <div id="subContainer">
-                {user.id && (
+                {user.id && user.userType === "consumer" && (
                     <div id="buttons">
                         <CircleButton
                             IconName={
