@@ -87,7 +87,7 @@ const ProductDetailHeader = ({
                         <h5>{altitude}</h5>
                     </div>
                 </div>
-                {user.id && (
+                {user.id && user.userType === "consumer" && (
                     <div id="buttons">
                         <ButtonShare
                             borderColor={theme.pallette.black[500]}

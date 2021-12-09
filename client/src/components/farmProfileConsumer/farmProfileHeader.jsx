@@ -97,7 +97,7 @@ const FarmProfileHeader = ({
                         <h5>{altitude}</h5>
                     </div>
                 </div>
-                {matches && user.id && (
+                {matches && user.id && user.userType === "consumer" && (
                     <div id="divButtons">
                         <ButtonShare
                             borderColor={theme.pallette.black[500]}

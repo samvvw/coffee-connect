@@ -78,18 +78,20 @@ const ProductDetailImagesCarousel = ({
                         )}
                     </Carousel>
                 }
-                <div id="divCircleButtons">
-                    <CircleButton
-                        IconName={liked ? 'FavoriteFull' : 'FavoriteEmpty'}
-                        buttonBgc="white"
-                        onClick={handleLike}
-                    />
-                    <CircleButton
-                        IconName="Share"
-                        buttonBgc="white"
-                        onClick={handleShare}
-                    />
-                </div>
+                {user.id && user.userType === "consumer" && (
+                    <div id="divCircleButtons">
+                        <CircleButton
+                            IconName={liked ? 'FavoriteFull' : 'FavoriteEmpty'}
+                            buttonBgc="white"
+                            onClick={handleLike}
+                        />
+                        <CircleButton
+                            IconName="Share"
+                            buttonBgc="white"
+                            onClick={handleShare}
+                        />
+                    </div>
+                )}
             </CarouselContainer>
         </div>
     )

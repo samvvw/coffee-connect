@@ -32,7 +32,7 @@ const ProductCard = ({ width, height, product, farmID }) => {
                         />
                     </Link>
                 </div>
-                {user.id && (
+                {user.id && user.userType === "consumer" && (
                     <div>
                         <CircleButton IconName="FavoriteEmpty" />
                     </div>
