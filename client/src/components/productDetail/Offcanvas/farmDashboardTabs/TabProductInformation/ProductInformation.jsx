@@ -72,7 +72,7 @@ const TabProductInformation = ({
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        console.log(`/api/farm/${body.farmId}/product/${productData._id}`, body)
+        // console.log(`/api/farm/${body.farmId}/product/${productData._id}`, body)
 
         axios
             .put(`/api/farm/${body.farmId}/product/${productData._id}`, {
@@ -106,7 +106,7 @@ const TabProductInformation = ({
                 setShow(true)
             })
             .catch((error) => {
-                console.log('ERROR!', error)
+                console.log(error)
                 setModalMessage(error)
                 setShow(true)
             })

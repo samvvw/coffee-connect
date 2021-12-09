@@ -189,7 +189,6 @@ const ImageFarm = ({
             })
             .catch((error) => console.log(error))
     }
-    console.log(imgBorder)
     return (
         <Container
             width={width}

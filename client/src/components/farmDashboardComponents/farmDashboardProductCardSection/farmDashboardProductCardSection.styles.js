@@ -5,7 +5,6 @@ export const FarmDashboardProductCardSectionWrapper = styled.section.attrs({
 })`
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     gap: 1rem;
     align-content: center;
     padding-top: 3rem;
@@ -17,12 +16,13 @@ export const FarmDashboardProductCardSectionWrapper = styled.section.attrs({
         props.theme.desktop}) { */
     @media only screen and (min-width: ${theme.layout.desktop}) {
         max-width: ${(props) => props.theme.layout.screenMaxWidth};
+        width: 100%;
         margin: 0 auto;
         margin-bottom: 2rem;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(200px, 350px));
         grid-template-rows: auto;
-        justify-items: center;
         grid-gap: 3rem;
+        justify-content: center;
     }
 `
